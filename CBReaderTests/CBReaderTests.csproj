@@ -57,6 +57,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CBookDataTests.cs" />
+    <Compile Include="CCBSutraUtilTests.cs" />
+    <Compile Include="CSpineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

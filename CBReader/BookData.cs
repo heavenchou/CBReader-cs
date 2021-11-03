@@ -38,15 +38,14 @@ namespace CBReader
 			BookEngName = new string[Count];
 
 			for(int i = 0; i < Count; i++) {
-				//string[] slItems = sBookData[i].Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-				string[] slItems = sBookData[i].Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries);
+				string[] slItems = sBookData[i].Split(',');
 
 				if(slItems.Length >= 5) {
-					ID[i] = slItems[0];
-					VolCount[i] = slItems[1];
-					VerName[i] = slItems[2];
-					BookName[i] = slItems[3];
-					BookEngName[i] = slItems[4];
+					ID[i] = slItems[0].Trim();
+					VolCount[i] = slItems[1].Trim();
+					VerName[i] = slItems[2].Trim();
+					BookName[i] = slItems[3].Trim();
+					BookEngName[i] = slItems[4].Trim();
 				}
 			}
 		}
