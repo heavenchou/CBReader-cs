@@ -23,7 +23,6 @@ namespace CBReader
 		//     123456 -> 3456
 		//     123456c -> 3456c
 		//     A0012 -> A012
-
 		public static string getStandardSutraNumberFormat(string sSutraNum)
 		{
 			if(sSutraNum == "") { return ""; }
@@ -67,7 +66,6 @@ namespace CBReader
 		// 但若第一位是非數字則保留
 		// ex. a01 -> a001
 		//     a000001 -> a001
-
 		public static string getStandardPageFormat(string sPage)
 		{
 			if(sPage == "") { return "0001"; }
@@ -99,7 +97,6 @@ namespace CBReader
 		// 超過 1 位數切掉前面的
 		// 數字則依序改成英文
 		// ex. 0 -> a , 1 -> a , 2 -> b , 3 -> c ...
-
 		public static string getStandardColFormat(string sCol)
 		{
 			if(sCol == "") { return "a"; }
@@ -124,7 +121,6 @@ namespace CBReader
 		// 超過 2 位數切掉前面的
 		// ex. 1 -> 01
 		//     123 -> 23
-
 		public static string getStandardLineFormat(string sLine)
 		{
 			if(sLine == "") { return "01"; }
@@ -135,6 +131,16 @@ namespace CBReader
 			if(iLineLen == 2) { return sLine; }
 			sLine = sLine.Substring(iLineLen - 2);
 			return sLine;
+		}
+
+		// 由頁欄行取得標準 0001a01 格式的字串
+		public static string getStandardPageColLine(String sPage, String sCol, String sLine)
+		{
+			sPage = getStandardPageFormat(sPage);
+			sCol = getStandardColFormat(sCol);
+			sLine = getStandardLineFormat(sLine);
+
+			return (sPage + sCol + sLine);
 		}
 	}
 }

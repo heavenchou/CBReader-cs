@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,14 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitList.cs" />
     <Compile Include="Bookcase.cs" />
     <Compile Include="BookData.cs" />
     <Compile Include="Catalog.cs" />
     <Compile Include="CBXML.cs" />
     <Compile Include="ErrorEnum.cs" />
+    <Compile Include="FileList.cs" />
     <Compile Include="GlobalMessage.cs" />
     <Compile Include="GlobalVal.cs" />
     <Compile Include="Highlight.cs" />
+    <Compile Include="Int2List.cs" />
+    <Compile Include="IntList.cs" />
     <Compile Include="JuanLine.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -61,17 +66,24 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainIndex.cs" />
+    <Compile Include="Monster.cs" />
     <Compile Include="NavTree.cs" />
     <Compile Include="NavXML.cs" />
     <Compile Include="NextLine.cs" />
+    <Compile Include="PostfixStack.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RendAttr.cs" />
+    <Compile Include="SearchWord.cs" />
     <Compile Include="Series.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="Spine.cs" />
     <Compile Include="StyleAttr.cs" />
     <Compile Include="SubUtil.cs" />
+    <Compile Include="WordData.cs" />
+    <Compile Include="WordIndex.cs" />
+    <Compile Include="WordTool.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>

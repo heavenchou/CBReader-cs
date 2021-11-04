@@ -67,5 +67,16 @@ namespace CBReader.Tests
             Assert.AreEqual(CCBSutraUtil.getStandardLineFormat("5"), "05");
             Assert.AreEqual(CCBSutraUtil.getStandardLineFormat("12345"), "45");
         }
+
+        [TestMethod()]
+        public void getStandardPageColLineTest()
+        {
+            Assert.AreEqual(CCBSutraUtil.getStandardPageColLine("", "", ""), "0001a01");
+            Assert.AreEqual(CCBSutraUtil.getStandardPageColLine("0123", "a", "45"), "0123a45");
+            Assert.AreEqual(CCBSutraUtil.getStandardPageColLine("123", "a", "5"), "0123a05");
+            Assert.AreEqual(CCBSutraUtil.getStandardPageColLine("123", "1", "5"), "0123a05");
+            Assert.AreEqual(CCBSutraUtil.getStandardPageColLine("12", "2", "456"), "0012b56");
+            Assert.AreEqual(CCBSutraUtil.getStandardPageColLine("12345", "b", "0"), "2345b00");
+        }
     }
 }

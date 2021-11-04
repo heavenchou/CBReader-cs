@@ -69,7 +69,7 @@ namespace CBReader
 		}
 
 		// 傳入 T, 1 , 傳回 "01" 這種標準的冊數
-		string GetNormalVolNumString(string sBook, string sVol)
+		public string GetNormalVolNumString(string sBook, string sVol)
 		{
 			int iVol = Convert.ToInt32(sVol);
 			int iVolLen = GetVolLen(sBook); // 取得指定藏經的冊數位數, 例如大正藏是 2 位數
