@@ -57,6 +57,7 @@
     <Compile Include="GlobalMessage.cs" />
     <Compile Include="GlobalVal.cs" />
     <Compile Include="Highlight.cs" />
+    <Compile Include="IniFile.cs" />
     <Compile Include="Int2List.cs" />
     <Compile Include="IntList.cs" />
     <Compile Include="JuanLine.cs" />

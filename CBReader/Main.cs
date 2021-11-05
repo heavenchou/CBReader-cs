@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,12 +21,6 @@ namespace CBReader
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CBookcase bookcase = new CBookcase(@"c:\cbeta\cbreader2x\bookcase");
-            CSeries s = bookcase.CBETA;
-            s.SearchEngine = s.getSearchEngine();
-            s.SearchEngine.Find("如是我聞", false);
-            int f = s.SearchEngine.FileFound.Total;
-            MessageBox.Show($"找到 {f} 筆");
         }
     }
 }

@@ -60,6 +60,7 @@
     <Compile Include="CCatalogTests.cs" />
     <Compile Include="CCBSutraUtilTests.cs" />
     <Compile Include="CSeriesTests.cs" />
+    <Compile Include="CSettingTests.cs" />
     <Compile Include="CSpineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
