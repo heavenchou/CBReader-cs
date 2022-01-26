@@ -59,9 +59,11 @@
     <Compile Include="CBookDataTests.cs" />
     <Compile Include="CCatalogTests.cs" />
     <Compile Include="CCBSutraUtilTests.cs" />
+    <Compile Include="CRendAttrTests.cs" />
     <Compile Include="CSeriesTests.cs" />
     <Compile Include="CSettingTests.cs" />
     <Compile Include="CSpineTests.cs" />
+    <Compile Include="CStyleAttrTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

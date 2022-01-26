@@ -28,37 +28,41 @@ namespace CBReader
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Node0");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Node2");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Node3");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
-            treeNode32,
-            treeNode33});
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Node5");
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("Node7");
-            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Node6", new System.Windows.Forms.TreeNode[] {
-            treeNode36});
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("Node4", new System.Windows.Forms.TreeNode[] {
-            treeNode35,
-            treeNode37});
-            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("Node0");
-            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("Node3");
-            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("Node2", new System.Windows.Forms.TreeNode[] {
-            treeNode40});
-            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
-            treeNode41});
-            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("Node5");
-            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("Node4", new System.Windows.Forms.TreeNode[] {
-            treeNode43});
-            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("Node6");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node2");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node3");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node5");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node7");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Node6", new System.Windows.Forms.TreeNode[] {
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Node4", new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode7});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Node0");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Node3");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Node2", new System.Windows.Forms.TreeNode[] {
+            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
+            treeNode11});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Node5");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Node4", new System.Windows.Forms.TreeNode[] {
+            treeNode13});
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Node6");
             this.btOption = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.miOption = new System.Windows.Forms.ToolStripMenuItem();
+            this.miUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.miAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.MainFunc = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel7 = new System.Windows.Forms.Panel();
             this.treeView2 = new System.Windows.Forms.TreeView();
@@ -93,7 +97,7 @@ namespace CBReader
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.button9 = new System.Windows.Forms.Button();
+            this.btGoByKeyword = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -137,7 +141,7 @@ namespace CBReader
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.label27 = new System.Windows.Forms.Label();
+            this.lbSearchMsg = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -145,7 +149,7 @@ namespace CBReader
             this.textBox17 = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnMulu = new System.Windows.Forms.Panel();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -153,14 +157,12 @@ namespace CBReader
             this.panel4 = new System.Windows.Forms.Panel();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.miOption = new System.Windows.Forms.ToolStripMenuItem();
-            this.miUpdate = new System.Windows.Forms.ToolStripMenuItem();
-            this.miAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.MainFunc.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -174,12 +176,11 @@ namespace CBReader
             this.panel11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel10.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.pnMulu.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btOption
@@ -203,8 +204,42 @@ namespace CBReader
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1112, 86);
+            this.panel1.Size = new System.Drawing.Size(1117, 86);
             this.panel1.TabIndex = 1;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miOption,
+            this.miUpdate,
+            this.miAbout});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1117, 27);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // miOption
+            // 
+            this.miOption.Name = "miOption";
+            this.miOption.Size = new System.Drawing.Size(53, 23);
+            this.miOption.Text = "設定";
+            this.miOption.Click += new System.EventHandler(this.miOption_Click);
+            // 
+            // miUpdate
+            // 
+            this.miUpdate.Name = "miUpdate";
+            this.miUpdate.Size = new System.Drawing.Size(83, 23);
+            this.miUpdate.Text = "更新檢查";
+            this.miUpdate.Click += new System.EventHandler(this.miUpdate_Click);
+            // 
+            // miAbout
+            // 
+            this.miAbout.Name = "miAbout";
+            this.miAbout.Size = new System.Drawing.Size(53, 23);
+            this.miAbout.Text = "關於";
+            this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
             // button5
             // 
@@ -244,27 +279,27 @@ namespace CBReader
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.tabControl1);
+            this.panel2.Controls.Add(this.MainFunc);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 86);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(311, 434);
+            this.panel2.Size = new System.Drawing.Size(311, 574);
             this.panel2.TabIndex = 2;
             // 
-            // tabControl1
+            // MainFunc
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.ItemSize = new System.Drawing.Size(52, 26);
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(311, 434);
-            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabControl1.TabIndex = 0;
+            this.MainFunc.Controls.Add(this.tabPage1);
+            this.MainFunc.Controls.Add(this.tabPage2);
+            this.MainFunc.Controls.Add(this.tabPage3);
+            this.MainFunc.Controls.Add(this.tabPage5);
+            this.MainFunc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainFunc.ItemSize = new System.Drawing.Size(52, 26);
+            this.MainFunc.Location = new System.Drawing.Point(0, 0);
+            this.MainFunc.Name = "MainFunc";
+            this.MainFunc.SelectedIndex = 0;
+            this.MainFunc.Size = new System.Drawing.Size(311, 574);
+            this.MainFunc.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.MainFunc.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -273,7 +308,7 @@ namespace CBReader
             this.tabPage1.Location = new System.Drawing.Point(4, 30);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(303, 400);
+            this.tabPage1.Size = new System.Drawing.Size(303, 540);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "書目";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -284,7 +319,7 @@ namespace CBReader
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(3, 60);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(297, 337);
+            this.panel7.Size = new System.Drawing.Size(297, 477);
             this.panel7.TabIndex = 1;
             // 
             // treeView2
@@ -292,27 +327,27 @@ namespace CBReader
             this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView2.Location = new System.Drawing.Point(0, 0);
             this.treeView2.Name = "treeView2";
-            treeNode31.Name = "Node0";
-            treeNode31.Text = "Node0";
-            treeNode32.Name = "Node2";
-            treeNode32.Text = "Node2";
-            treeNode33.Name = "Node3";
-            treeNode33.Text = "Node3";
-            treeNode34.Name = "Node1";
-            treeNode34.Text = "Node1";
-            treeNode35.Name = "Node5";
-            treeNode35.Text = "Node5";
-            treeNode36.Name = "Node7";
-            treeNode36.Text = "Node7";
-            treeNode37.Name = "Node6";
-            treeNode37.Text = "Node6";
-            treeNode38.Name = "Node4";
-            treeNode38.Text = "Node4";
+            treeNode1.Name = "Node0";
+            treeNode1.Text = "Node0";
+            treeNode2.Name = "Node2";
+            treeNode2.Text = "Node2";
+            treeNode3.Name = "Node3";
+            treeNode3.Text = "Node3";
+            treeNode4.Name = "Node1";
+            treeNode4.Text = "Node1";
+            treeNode5.Name = "Node5";
+            treeNode5.Text = "Node5";
+            treeNode6.Name = "Node7";
+            treeNode6.Text = "Node7";
+            treeNode7.Name = "Node6";
+            treeNode7.Text = "Node6";
+            treeNode8.Name = "Node4";
+            treeNode8.Text = "Node4";
             this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode31,
-            treeNode34,
-            treeNode38});
-            this.treeView2.Size = new System.Drawing.Size(297, 337);
+            treeNode1,
+            treeNode4,
+            treeNode8});
+            this.treeView2.Size = new System.Drawing.Size(297, 477);
             this.treeView2.TabIndex = 0;
             // 
             // panel6
@@ -332,6 +367,7 @@ namespace CBReader
             this.button6.TabIndex = 0;
             this.button6.Text = "主目錄";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // tabPage2
             // 
@@ -341,7 +377,7 @@ namespace CBReader
             this.tabPage2.Location = new System.Drawing.Point(4, 30);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(303, 408);
+            this.tabPage2.Size = new System.Drawing.Size(303, 540);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "經目";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -352,7 +388,7 @@ namespace CBReader
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel12.Location = new System.Drawing.Point(3, 230);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(297, 175);
+            this.panel12.Size = new System.Drawing.Size(297, 307);
             this.panel12.TabIndex = 3;
             // 
             // dataGridView2
@@ -371,7 +407,7 @@ namespace CBReader
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 27;
-            this.dataGridView2.Size = new System.Drawing.Size(297, 175);
+            this.dataGridView2.Size = new System.Drawing.Size(297, 307);
             this.dataGridView2.TabIndex = 8;
             // 
             // dataGridViewTextBoxColumn2
@@ -584,14 +620,14 @@ namespace CBReader
             this.tabPage3.Location = new System.Drawing.Point(4, 30);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(303, 408);
+            this.tabPage3.Size = new System.Drawing.Size(303, 540);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "到";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // panel9
             // 
-            this.panel9.Controls.Add(this.button9);
+            this.panel9.Controls.Add(this.btGoByKeyword);
             this.panel9.Controls.Add(this.label24);
             this.panel9.Controls.Add(this.label23);
             this.panel9.Controls.Add(this.label22);
@@ -625,17 +661,18 @@ namespace CBReader
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(3, 3);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(297, 402);
+            this.panel9.Size = new System.Drawing.Size(297, 534);
             this.panel9.TabIndex = 1;
             // 
-            // button9
+            // btGoByKeyword
             // 
-            this.button9.Location = new System.Drawing.Point(216, 400);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(62, 31);
-            this.button9.TabIndex = 31;
-            this.button9.Text = "Go";
-            this.button9.UseVisualStyleBackColor = true;
+            this.btGoByKeyword.Location = new System.Drawing.Point(216, 400);
+            this.btGoByKeyword.Name = "btGoByKeyword";
+            this.btGoByKeyword.Size = new System.Drawing.Size(62, 31);
+            this.btGoByKeyword.TabIndex = 31;
+            this.btGoByKeyword.Text = "Go";
+            this.btGoByKeyword.UseVisualStyleBackColor = true;
+            this.btGoByKeyword.Click += new System.EventHandler(this.btGoByKeyword_Click);
             // 
             // label24
             // 
@@ -893,7 +930,7 @@ namespace CBReader
             this.tabPage5.Location = new System.Drawing.Point(4, 30);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(303, 408);
+            this.tabPage5.Size = new System.Drawing.Size(303, 540);
             this.tabPage5.TabIndex = 3;
             this.tabPage5.Text = "檢索";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -904,7 +941,7 @@ namespace CBReader
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel11.Location = new System.Drawing.Point(3, 201);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(297, 204);
+            this.panel11.Size = new System.Drawing.Size(297, 336);
             this.panel11.TabIndex = 3;
             // 
             // dataGridView1
@@ -924,7 +961,7 @@ namespace CBReader
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(297, 204);
+            this.dataGridView1.Size = new System.Drawing.Size(297, 336);
             this.dataGridView1.TabIndex = 7;
             // 
             // Column1
@@ -994,7 +1031,7 @@ namespace CBReader
             // 
             // panel10
             // 
-            this.panel10.Controls.Add(this.label27);
+            this.panel10.Controls.Add(this.lbSearchMsg);
             this.panel10.Controls.Add(this.button11);
             this.panel10.Controls.Add(this.button10);
             this.panel10.Controls.Add(this.checkBox2);
@@ -1007,14 +1044,14 @@ namespace CBReader
             this.panel10.Size = new System.Drawing.Size(297, 195);
             this.panel10.TabIndex = 1;
             // 
-            // label27
+            // lbSearchMsg
             // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(14, 172);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(108, 20);
-            this.label27.TabIndex = 18;
-            this.label27.Text = "共找到 0 筆";
+            this.lbSearchMsg.AutoSize = true;
+            this.lbSearchMsg.Location = new System.Drawing.Point(14, 172);
+            this.lbSearchMsg.Name = "lbSearchMsg";
+            this.lbSearchMsg.Size = new System.Drawing.Size(108, 20);
+            this.lbSearchMsg.TabIndex = 18;
+            this.lbSearchMsg.Text = "共找到 0 筆";
             // 
             // button11
             // 
@@ -1076,45 +1113,45 @@ namespace CBReader
             // 
             this.splitter1.Location = new System.Drawing.Point(311, 86);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 434);
+            this.splitter1.Size = new System.Drawing.Size(3, 574);
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
             // 
-            // panel3
+            // pnMulu
             // 
-            this.panel3.Controls.Add(this.treeView1);
-            this.panel3.Controls.Add(this.panel5);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(314, 86);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(197, 434);
-            this.panel3.TabIndex = 4;
+            this.pnMulu.Controls.Add(this.treeView1);
+            this.pnMulu.Controls.Add(this.panel5);
+            this.pnMulu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnMulu.Location = new System.Drawing.Point(314, 86);
+            this.pnMulu.Name = "pnMulu";
+            this.pnMulu.Size = new System.Drawing.Size(197, 574);
+            this.pnMulu.TabIndex = 4;
             // 
             // treeView1
             // 
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 28);
             this.treeView1.Name = "treeView1";
-            treeNode39.Name = "Node0";
-            treeNode39.Text = "Node0";
-            treeNode40.Name = "Node3";
-            treeNode40.Text = "Node3";
-            treeNode41.Name = "Node2";
-            treeNode41.Text = "Node2";
-            treeNode42.Name = "Node1";
-            treeNode42.Text = "Node1";
-            treeNode43.Name = "Node5";
-            treeNode43.Text = "Node5";
-            treeNode44.Name = "Node4";
-            treeNode44.Text = "Node4";
-            treeNode45.Name = "Node6";
-            treeNode45.Text = "Node6";
+            treeNode9.Name = "Node0";
+            treeNode9.Text = "Node0";
+            treeNode10.Name = "Node3";
+            treeNode10.Text = "Node3";
+            treeNode11.Name = "Node2";
+            treeNode11.Text = "Node2";
+            treeNode12.Name = "Node1";
+            treeNode12.Text = "Node1";
+            treeNode13.Name = "Node5";
+            treeNode13.Text = "Node5";
+            treeNode14.Name = "Node4";
+            treeNode14.Text = "Node4";
+            treeNode15.Name = "Node6";
+            treeNode15.Text = "Node6";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode39,
-            treeNode42,
-            treeNode44,
-            treeNode45});
-            this.treeView1.Size = new System.Drawing.Size(197, 406);
+            treeNode9,
+            treeNode12,
+            treeNode14,
+            treeNode15});
+            this.treeView1.Size = new System.Drawing.Size(197, 546);
             this.treeView1.TabIndex = 2;
             // 
             // panel5
@@ -1140,7 +1177,7 @@ namespace CBReader
             // 
             this.splitter2.Location = new System.Drawing.Point(511, 86);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 434);
+            this.splitter2.Size = new System.Drawing.Size(3, 574);
             this.splitter2.TabIndex = 5;
             this.splitter2.TabStop = false;
             // 
@@ -1150,7 +1187,7 @@ namespace CBReader
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(514, 86);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(598, 434);
+            this.panel4.Size = new System.Drawing.Size(603, 574);
             this.panel4.TabIndex = 6;
             // 
             // tabControl2
@@ -1162,82 +1199,52 @@ namespace CBReader
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(598, 434);
+            this.tabControl2.Size = new System.Drawing.Size(603, 574);
             this.tabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl2.TabIndex = 0;
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.webBrowser1);
+            this.tabPage4.Controls.Add(this.webBrowser);
             this.tabPage4.Location = new System.Drawing.Point(4, 5);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(590, 425);
+            this.tabPage4.Size = new System.Drawing.Size(595, 565);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // webBrowser1
+            // webBrowser
             // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(3, 3);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(24, 27);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(584, 419);
-            this.webBrowser1.TabIndex = 0;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miOption,
-            this.miUpdate,
-            this.miAbout});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1112, 28);
-            this.menuStrip1.TabIndex = 5;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // miOption
-            // 
-            this.miOption.Name = "miOption";
-            this.miOption.Size = new System.Drawing.Size(53, 24);
-            this.miOption.Text = "設定";
-            this.miOption.Click += new System.EventHandler(this.miOption_Click);
-            // 
-            // miUpdate
-            // 
-            this.miUpdate.Name = "miUpdate";
-            this.miUpdate.Size = new System.Drawing.Size(83, 24);
-            this.miUpdate.Text = "更新檢查";
-            this.miUpdate.Click += new System.EventHandler(this.miUpdate_Click);
-            // 
-            // miAbout
-            // 
-            this.miAbout.Name = "miAbout";
-            this.miAbout.Size = new System.Drawing.Size(53, 24);
-            this.miAbout.Text = "關於";
-            this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
+            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser.Location = new System.Drawing.Point(3, 3);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(24, 27);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(589, 559);
+            this.webBrowser.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1112, 520);
+            this.ClientSize = new System.Drawing.Size(1117, 660);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.splitter2);
-            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.pnMulu);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("新細明體", 12F);
             this.Name = "MainForm";
             this.Text = "CBReader";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.MainFunc.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
@@ -1254,14 +1261,12 @@ namespace CBReader
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
-            this.panel3.ResumeLayout(false);
+            this.pnMulu.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1271,20 +1276,20 @@ namespace CBReader
         private System.Windows.Forms.Button btOption;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl MainFunc;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnMulu;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
@@ -1354,8 +1359,8 @@ namespace CBReader
         private System.Windows.Forms.CheckBox cbSearchRange;
         private System.Windows.Forms.TextBox textBox17;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button btGoByKeyword;
+        private System.Windows.Forms.Label lbSearchMsg;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
@@ -1375,6 +1380,7 @@ namespace CBReader
         private System.Windows.Forms.ToolStripMenuItem miOption;
         private System.Windows.Forms.ToolStripMenuItem miUpdate;
         private System.Windows.Forms.ToolStripMenuItem miAbout;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 

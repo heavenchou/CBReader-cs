@@ -134,13 +134,27 @@ namespace CBReader
 		}
 
 		// 由頁欄行取得標準 0001a01 格式的字串
-		public static string getStandardPageColLine(String sPage, String sCol, String sLine)
+		public static string getStandardPageColLine(string sPage, string sCol, string sLine)
 		{
 			sPage = getStandardPageFormat(sPage);
 			sCol = getStandardColFormat(sCol);
 			sLine = getStandardLineFormat(sLine);
 
 			return (sPage + sCol + sLine);
+		}
+
+		// 經名要移除 (第X卷)
+		public static string CutJuanAfterSutraName(string sName)
+		{
+			if (sName.Contains("(第")) {
+				int iPos = sName.IndexOf("(第");
+				int iPos2 = sName.IndexOf("卷)");
+				// (第 x 卷) 必須在最後
+				if (iPos2 == sName.Length - 2) {
+					sName = sName.Substring(0, iPos);
+				}
+			}
+			return sName;
 		}
 	}
 }

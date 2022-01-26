@@ -18,7 +18,7 @@ namespace Monster
 
         int FileHintCount = 0;          // 找到有資料的檔案的數量, 例如有 5 個檔案有找到, 此數值為 5
         CPostfixStack PostfixStack;     // 運算用的
-        string SearchSentence = "";     // 主要搜尋的字串
+        public string SearchSentence = "";     // 主要搜尋的字串
         string OKSentence;              // 已經分析過的, 例如 佛陀 & 阿難 變成 S&S
         int MaxSearchWordNum = 0;       // 檢索詞中最多可出現的字串數,   "佛陀 & 阿羅漢" 就算 2 個
 

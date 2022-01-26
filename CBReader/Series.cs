@@ -46,8 +46,8 @@ namespace CBReader
 		{
 			// 本書的目錄
 			Dir = sDir;
-			if (Dir.Last() != '/') {
-				Dir += "/"; 
+			if (Dir.Last() != '\\') {
+				Dir += @"\"; 
 			}
 			if(!Directory.Exists(Dir)) {
 				throw new Exception($"書籍目錄不存在：{Dir}");
