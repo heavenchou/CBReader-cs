@@ -261,10 +261,13 @@ namespace CBReader
 
         private void btGoByKeyword_Click(object sender, EventArgs e)
         {
+            bool bFindOK = Bookcase.CBETA.SearchEngine.Find("阿難", false);
+
+
             string sFile = @"C:\CBETA\CBReader2X\Bookcase\CBETA\xml\T\T01\T01n0001_001.xml";
             // sFile = @"C:\CBETA\CBReader2X\Bookcase\CBETA\xml\J\J20\J20nB098_001.xml";
             //string sFile = @"CB01n0001_001.xml";
-            ShowCBXML(sFile);
+            ShowCBXML(sFile, true, Bookcase.CBETA);
         }
 
         private void button6_Click(object sender, EventArgs e)

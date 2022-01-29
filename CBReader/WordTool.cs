@@ -159,7 +159,7 @@ namespace Monster
 				if(iEnd == -1) { 
 					return 1; 
 				} else {
-					string s = wtIndex.Substring(1, iEnd+1);	// 第一個 & 先不取
+					string s = wtIndex.Substring(1, iEnd);	// 第一個 & 先不取
 					int iPos = s.IndexOf('&');
 					if(iPos >= 0) { return 1; }	// 還有 & , 表示有雙重 & 就不是 &...;
 					if(iEnd > 50) { return 1; } // 太長也不是
@@ -187,6 +187,61 @@ namespace Monster
 					}
 				}
 				return wtIndex.Length;
+			} else {
+				// 一般文字
+				return 1;
+			}
+		}
+
+
+		public static int GetFirstTokenLength(string wtIndex, int pIndex, bool bIsTag, bool bIsAlpha, bool bIsDes)
+		{
+			if (pIndex >= wtIndex.Length) { return 0; }
+			// 取出一個字或一個標記
+			if (wtIndex[pIndex] >= 0xD800 && wtIndex[pIndex] <= 0xDFFF) {
+				// 處理 Ext-B 以上的 Unicode
+				return 2;
+			} else if (wtIndex[pIndex] == '<' && bIsTag == true) {
+				// 若是格式為 XML 或 HTML 才要處理標記
+				int iEnd = wtIndex.IndexOf('>', pIndex);
+				if (iEnd == -1) {
+					return 1;       // 結束了還沒遇到 > 標記, 所以還是傳回 <
+				} else {
+					return iEnd - pIndex + 1;    // 標記
+				}
+			} else if (wtIndex[pIndex] == '&') {   // &.....;
+				int iEnd = wtIndex.IndexOf(';', pIndex);
+				if (iEnd == -1) {
+					return 1;
+				} else {
+					string s = wtIndex.Substring(pIndex + 1, iEnd - pIndex);  // 第一個 & 先不取
+					int iPos = s.IndexOf('&');
+					if (iPos >= 0) { return 1; }    // 還有 & , 表示有雙重 & 就不是 &...;
+					if (iEnd > 50) { return 1; } // 太長也不是
+					return iEnd - pIndex + 1;
+				}
+			} else if (wtIndex[pIndex] == '[' && bIsDes == true) {
+				// 傳回組字式
+				for (int i = pIndex; i < wtIndex.Length; i++) {
+					// 數字或英文就不是組字式了
+					if (GetWordType(wtIndex[i]) == EWordType.wtAlpha) {
+						return 1;
+					} else if (GetWordType(wtIndex[i]) == EWordType.wtNumber) {
+						return 1;
+					}
+					// 太長也不是組字式
+					if (i - pIndex > 100) { return 1; }
+					if (wtIndex[i] == ']') { return i - pIndex + 1; }
+				}
+				return 1;   // 結束了還沒遇到 ] 標記, 所以還是傳回 [
+			} else if ((GetWordType(wtIndex[pIndex]) == EWordType.wtAlpha) && bIsAlpha == true) {
+				// 一組英文字, 要找到非英文字才算中止
+				for (int i = pIndex; i < wtIndex.Length; i++) {
+					if (GetWordType(wtIndex[i]) != EWordType.wtAlpha) {
+						return i - pIndex;
+					}
+				}
+				return wtIndex.Length - pIndex;
 			} else {
 				// 一般文字
 				return 1;

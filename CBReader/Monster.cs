@@ -11,15 +11,15 @@ namespace Monster
         string FileListFileName;        // file list 檔名
         string WordIndexFileName;       // word index 檔名
         string MainIndexFileName;       // 主要的 index 的檔名
-        string OpPatten = "()&,+*-";    // 運算用的 Patten
+        public string OpPatten = "()&,+*-";    // 運算用的 Patten
 
-        List<string> SearchWordList;    // 存放每一個檢索的詞, 日後塗色會用到
+        public List<string> SearchWordList;    // 存放每一個檢索的詞, 日後塗色會用到
         public CIntList FileFound;      // 存放每一檔找到的數量
 
         int FileHintCount = 0;          // 找到有資料的檔案的數量, 例如有 5 個檔案有找到, 此數值為 5
         CPostfixStack PostfixStack;     // 運算用的
         public string SearchSentence = "";     // 主要搜尋的字串
-        string OKSentence;              // 已經分析過的, 例如 佛陀 & 阿難 變成 S&S
+        public string OKSentence;              // 已經分析過的, 例如 佛陀 & 阿難 變成 S&S
         int MaxSearchWordNum = 0;       // 檢索詞中最多可出現的字串數,   "佛陀 & 阿羅漢" 就算 2 個
 
         List<CSearchWord> swWord;       // 每一個檢索字串的指標, 最多 20 個, 例如 "佛陀 & 阿羅漢" 就算 2 個

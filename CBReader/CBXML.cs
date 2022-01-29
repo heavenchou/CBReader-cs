@@ -141,7 +141,7 @@ namespace CBReader
             HTMLText += MakeHTMLHead(); // 先產生 html 的 head
 
             // 是否有塗色? 有就表示有檢索字串
-            if(bShowHighlight) {
+            if (bShowHighlight) {
                 // 加上搜尋字串的 <div>
                 // 把搜尋字串中的 ? 換成 ⍰
                 string s = Series.SearchEngine.SearchSentence;
