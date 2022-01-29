@@ -412,7 +412,9 @@ namespace CBReader
 
             // 讀取缺字
             XmlNode NodeGaijis = Document.DocumentElement["teiHeader"]["encodingDesc"]["charDecl"];
-            ReadGaiji(NodeGaijis); // 讀取缺字
+            if (NodeGaijis != null) {
+                ReadGaiji(NodeGaijis); // 讀取缺字
+            }
 
             // 檢查是不是 AI 標點
             XmlNode NodeEdition = Document.DocumentElement["teiHeader"]["encodingDesc"]["editorialDecl"]["punctuation"];
@@ -3695,7 +3697,7 @@ namespace CBReader
                 long listLength;
                 NodeGaijis->get_length(&listLength);
             */
-
+            
             for (int i = 0; i < NodeGaijis.ChildNodes.Count; i++) {
                 XmlNode NodeGaiji = NodeGaijis.ChildNodes[i];
 

@@ -28,29 +28,8 @@ namespace CBReader
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node2");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node3");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node5");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node7");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Node6", new System.Windows.Forms.TreeNode[] {
-            treeNode6});
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Node4", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Node0");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Node3");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Node2", new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
-            treeNode11});
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Node5");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Node4", new System.Windows.Forms.TreeNode[] {
-            treeNode13});
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Node6");
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btOption = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -59,15 +38,15 @@ namespace CBReader
             this.miAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btMuluWidthSwitch = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.MainFunc = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.treeView2 = new System.Windows.Forms.TreeView();
+            this.tvNavTree = new System.Windows.Forms.TreeView();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btOpenNav = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel12 = new System.Windows.Forms.Panel();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
@@ -144,13 +123,13 @@ namespace CBReader
             this.lbSearchMsg = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.cbSearchThisSutra = new System.Windows.Forms.CheckBox();
             this.cbSearchRange = new System.Windows.Forms.CheckBox();
             this.textBox17 = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnMulu = new System.Windows.Forms.Panel();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.tvMuluTree = new System.Windows.Forms.TreeView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.splitter2 = new System.Windows.Forms.Splitter();
@@ -159,6 +138,7 @@ namespace CBReader
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -198,7 +178,7 @@ namespace CBReader
             this.panel1.Controls.Add(this.menuStrip1);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.btMuluWidthSwitch);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.btOption);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -216,28 +196,28 @@ namespace CBReader
             this.miAbout});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1117, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(1117, 30);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // miOption
             // 
             this.miOption.Name = "miOption";
-            this.miOption.Size = new System.Drawing.Size(53, 23);
+            this.miOption.Size = new System.Drawing.Size(53, 26);
             this.miOption.Text = "設定";
             this.miOption.Click += new System.EventHandler(this.miOption_Click);
             // 
             // miUpdate
             // 
             this.miUpdate.Name = "miUpdate";
-            this.miUpdate.Size = new System.Drawing.Size(83, 23);
+            this.miUpdate.Size = new System.Drawing.Size(83, 26);
             this.miUpdate.Text = "更新檢查";
             this.miUpdate.Click += new System.EventHandler(this.miUpdate_Click);
             // 
             // miAbout
             // 
             this.miAbout.Name = "miAbout";
-            this.miAbout.Size = new System.Drawing.Size(53, 23);
+            this.miAbout.Size = new System.Drawing.Size(53, 26);
             this.miAbout.Text = "關於";
             this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
@@ -259,14 +239,15 @@ namespace CBReader
             this.button4.Text = "上一卷/篇章";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btMuluWidthSwitch
             // 
-            this.button3.Location = new System.Drawing.Point(255, 30);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(112, 38);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "目次>>";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btMuluWidthSwitch.Location = new System.Drawing.Point(255, 30);
+            this.btMuluWidthSwitch.Name = "btMuluWidthSwitch";
+            this.btMuluWidthSwitch.Size = new System.Drawing.Size(112, 38);
+            this.btMuluWidthSwitch.TabIndex = 2;
+            this.btMuluWidthSwitch.Text = "目次>>";
+            this.btMuluWidthSwitch.UseVisualStyleBackColor = true;
+            this.btMuluWidthSwitch.Click += new System.EventHandler(this.btMuluWidthSwitch_Click);
             // 
             // button2
             // 
@@ -315,59 +296,45 @@ namespace CBReader
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.treeView2);
+            this.panel7.Controls.Add(this.tvNavTree);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(3, 60);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(297, 477);
             this.panel7.TabIndex = 1;
             // 
-            // treeView2
+            // tvNavTree
             // 
-            this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView2.Location = new System.Drawing.Point(0, 0);
-            this.treeView2.Name = "treeView2";
-            treeNode1.Name = "Node0";
-            treeNode1.Text = "Node0";
-            treeNode2.Name = "Node2";
-            treeNode2.Text = "Node2";
-            treeNode3.Name = "Node3";
-            treeNode3.Text = "Node3";
-            treeNode4.Name = "Node1";
-            treeNode4.Text = "Node1";
-            treeNode5.Name = "Node5";
-            treeNode5.Text = "Node5";
-            treeNode6.Name = "Node7";
-            treeNode6.Text = "Node7";
-            treeNode7.Name = "Node6";
-            treeNode7.Text = "Node6";
-            treeNode8.Name = "Node4";
-            treeNode8.Text = "Node4";
-            this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode4,
-            treeNode8});
-            this.treeView2.Size = new System.Drawing.Size(297, 477);
-            this.treeView2.TabIndex = 0;
+            this.tvNavTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvNavTree.HideSelection = false;
+            this.tvNavTree.ImageIndex = 0;
+            this.tvNavTree.ImageList = this.imageList1;
+            this.tvNavTree.Location = new System.Drawing.Point(0, 0);
+            this.tvNavTree.Name = "tvNavTree";
+            this.tvNavTree.SelectedImageKey = "openbook.ico";
+            this.tvNavTree.ShowNodeToolTips = true;
+            this.tvNavTree.Size = new System.Drawing.Size(297, 477);
+            this.tvNavTree.TabIndex = 0;
+            this.tvNavTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvNavTree_AfterSelect);
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.button6);
+            this.panel6.Controls.Add(this.btOpenNav);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(3, 3);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(297, 57);
             this.panel6.TabIndex = 0;
             // 
-            // button6
+            // btOpenNav
             // 
-            this.button6.Location = new System.Drawing.Point(7, 13);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(86, 34);
-            this.button6.TabIndex = 0;
-            this.button6.Text = "主目錄";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.btOpenNav.Location = new System.Drawing.Point(7, 13);
+            this.btOpenNav.Name = "btOpenNav";
+            this.btOpenNav.Size = new System.Drawing.Size(86, 34);
+            this.btOpenNav.TabIndex = 0;
+            this.btOpenNav.Text = "主目錄";
+            this.btOpenNav.UseVisualStyleBackColor = true;
+            this.btOpenNav.Click += new System.EventHandler(this.btOpenNav_Click);
             // 
             // tabPage2
             // 
@@ -1034,7 +1001,7 @@ namespace CBReader
             this.panel10.Controls.Add(this.lbSearchMsg);
             this.panel10.Controls.Add(this.button11);
             this.panel10.Controls.Add(this.button10);
-            this.panel10.Controls.Add(this.checkBox2);
+            this.panel10.Controls.Add(this.cbSearchThisSutra);
             this.panel10.Controls.Add(this.cbSearchRange);
             this.panel10.Controls.Add(this.textBox17);
             this.panel10.Controls.Add(this.label26);
@@ -1071,16 +1038,16 @@ namespace CBReader
             this.button10.Text = "Go";
             this.button10.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // cbSearchThisSutra
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Enabled = false;
-            this.checkBox2.Location = new System.Drawing.Point(18, 128);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(131, 24);
-            this.checkBox2.TabIndex = 15;
-            this.checkBox2.Text = "檢索本經：";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.cbSearchThisSutra.AutoSize = true;
+            this.cbSearchThisSutra.Enabled = false;
+            this.cbSearchThisSutra.Location = new System.Drawing.Point(18, 128);
+            this.cbSearchThisSutra.Name = "cbSearchThisSutra";
+            this.cbSearchThisSutra.Size = new System.Drawing.Size(131, 24);
+            this.cbSearchThisSutra.TabIndex = 15;
+            this.cbSearchThisSutra.Text = "檢索本經：";
+            this.cbSearchThisSutra.UseVisualStyleBackColor = true;
             // 
             // cbSearchRange
             // 
@@ -1119,7 +1086,7 @@ namespace CBReader
             // 
             // pnMulu
             // 
-            this.pnMulu.Controls.Add(this.treeView1);
+            this.pnMulu.Controls.Add(this.tvMuluTree);
             this.pnMulu.Controls.Add(this.panel5);
             this.pnMulu.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnMulu.Location = new System.Drawing.Point(314, 86);
@@ -1127,32 +1094,14 @@ namespace CBReader
             this.pnMulu.Size = new System.Drawing.Size(197, 574);
             this.pnMulu.TabIndex = 4;
             // 
-            // treeView1
+            // tvMuluTree
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(0, 28);
-            this.treeView1.Name = "treeView1";
-            treeNode9.Name = "Node0";
-            treeNode9.Text = "Node0";
-            treeNode10.Name = "Node3";
-            treeNode10.Text = "Node3";
-            treeNode11.Name = "Node2";
-            treeNode11.Text = "Node2";
-            treeNode12.Name = "Node1";
-            treeNode12.Text = "Node1";
-            treeNode13.Name = "Node5";
-            treeNode13.Text = "Node5";
-            treeNode14.Name = "Node4";
-            treeNode14.Text = "Node4";
-            treeNode15.Name = "Node6";
-            treeNode15.Text = "Node6";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode12,
-            treeNode14,
-            treeNode15});
-            this.treeView1.Size = new System.Drawing.Size(197, 546);
-            this.treeView1.TabIndex = 2;
+            this.tvMuluTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvMuluTree.Location = new System.Drawing.Point(0, 28);
+            this.tvMuluTree.Name = "tvMuluTree";
+            this.tvMuluTree.Size = new System.Drawing.Size(197, 546);
+            this.tvMuluTree.TabIndex = 2;
+            this.tvMuluTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvNavTree_AfterSelect);
             // 
             // panel5
             // 
@@ -1223,6 +1172,15 @@ namespace CBReader
             this.webBrowser.Size = new System.Drawing.Size(589, 559);
             this.webBrowser.TabIndex = 0;
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "closebook.ico");
+            this.imageList1.Images.SetKeyName(1, "openbook.ico");
+            this.imageList1.Images.SetKeyName(2, "page.ico");
+            this.imageList1.Images.SetKeyName(3, "page_green.ico");
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -1283,7 +1241,7 @@ namespace CBReader
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel pnMulu;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView tvMuluTree;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Panel panel4;
@@ -1292,7 +1250,7 @@ namespace CBReader
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btMuluWidthSwitch;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel7;
@@ -1304,10 +1262,10 @@ namespace CBReader
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Splitter splitter4;
         private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btOpenNav;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.TreeView treeView2;
+        private System.Windows.Forms.TreeView tvNavTree;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
@@ -1355,7 +1313,7 @@ namespace CBReader
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox cbSearchThisSutra;
         private System.Windows.Forms.CheckBox cbSearchRange;
         private System.Windows.Forms.TextBox textBox17;
         private System.Windows.Forms.Label label26;
@@ -1381,6 +1339,7 @@ namespace CBReader
         private System.Windows.Forms.ToolStripMenuItem miUpdate;
         private System.Windows.Forms.ToolStripMenuItem miAbout;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 

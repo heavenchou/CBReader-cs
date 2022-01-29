@@ -75,7 +75,7 @@ namespace CBReader
 			}
 
 			// 載入全文檢索
-			LoadSearchEngine();
+			//LoadSearchEngine();
 			if (SearchEngine_CB != null) {
 				SearchEngine = SearchEngine_CB;
 			} else {
