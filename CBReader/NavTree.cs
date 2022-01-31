@@ -50,7 +50,7 @@ namespace CBReader
 
 				if (iThisLevel == 0) {
 					tvItem = TreeViewAddItem(TreeView.Nodes, nItem);
-				} else { 
+				} else {
 					tvItem = TreeViewAddItem(ParentItem.Nodes, nItem);
 				}
 
@@ -64,18 +64,20 @@ namespace CBReader
 		{
 			TreeNode newItem = new TreeNode();
 			newItem.Text = nItem.Title;       // 標題
-			// newItem->TagString = nItem->URL;    // URL
-			newItem.Tag = nItem;	// nItem->Type;         // Type
-			
-			if (nItem.Type == ENavItemType.nit_Title)
+											  // newItem->TagString = nItem->URL;    // URL
+			newItem.Tag = nItem;    // nItem->Type;         // Type
+
+			if (nItem.Type == ENavItemType.nit_Title) {
 				newItem.ImageIndex = 0;        // 目錄
-			else if (nItem.Type == ENavItemType.nit_NavLink)
+			} else if (nItem.Type == ENavItemType.nit_NavLink) {
 				newItem.ImageIndex = 1;        // 另一個目錄
-			else if (nItem.Type == ENavItemType.nit_CBLink)
+			} else if (nItem.Type == ENavItemType.nit_CBLink) {
 				newItem.ImageIndex = 3;        // CBETA 經文
-			else if (nItem.Type == ENavItemType.nit_NormalLink)
+			} else if (nItem.Type == ENavItemType.nit_NormalLink) {
 				newItem.ImageIndex = 2;        // 一般經文
+			}
 			
+			newItem.SelectedImageIndex = newItem.ImageIndex;
 			tvItem.Add(newItem);
 			return newItem;
 		}

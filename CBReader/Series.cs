@@ -75,7 +75,7 @@ namespace CBReader
 			}
 
 			// 載入全文檢索
-			//LoadSearchEngine();
+			LoadSearchEngine();
 			if (SearchEngine_CB != null) {
 				SearchEngine = SearchEngine_CB;
 			} else {
@@ -180,11 +180,11 @@ namespace CBReader
 			int iIndex = JuanLine.CBGetSpineIndexByVolPageColLine(sBook, sVol, sPage, sCol, sLine);
 			if(iIndex == -1) { return ""; }
 
-			String sFileName = Spine.CBGetFileNameBySpineIndex(iIndex);
+			string sFileName = Spine.CBGetFileNameBySpineIndex(iIndex);
 
-			// 檔名要補上 #p0001a01 這種格式的位置	???? (為什麼用 sLine 來判斷?)
-			if(sLine != "") {
-				string sPageLine = CCBSutraUtil.getStandardPageColLine(sPage, sCol, sLine);
+			// 檔名要補上 #p0001a01 這種格式的位置
+			string sPageLine = CCBSutraUtil.getStandardPageColLine(sPage, sCol, sLine);
+			if(sPageLine != "") {
 				sFileName += "#p" + sPageLine;
 			}
 			return sFileName;

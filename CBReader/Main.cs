@@ -64,6 +64,9 @@ namespace CBReader
 
             MainFunc.SelectedIndex = 0;
             pnMulu.Width = 0;  // 書目先縮到最小
+            cbFindSutraBookId.SelectedIndex = 0;
+            cbGoBookBookId.SelectedIndex = 0;
+            cbGoSutraBookId.SelectedIndex = 0;
 
             //sgTextSearch->OnKeyDown = sgTextSearchKeyDown;
             //sgFindSutra->OnKeyDown = sgFindSutraKeyDown;
@@ -302,9 +305,9 @@ namespace CBReader
                 this.Text = sCaption;
 
                 // 將經名後面的 （上中下一二三......十）移除
-                //????sName = CCBSutraUtil.CutNumberAfterSutraName(sName);
+                sName = CCBSutraUtil.CutNumberAfterSutraName(sName);
                 cbSearchThisSutra.Text = "檢索本經：" + sName;
-                //????cbSearchThisSutraChange(this);  // 設定檢索本經的相關資料
+                cbSearchThisSutraChange();  // 設定檢索本經的相關資料
             }
 
             // 檢索本經
@@ -344,9 +347,40 @@ namespace CBReader
         {
 	        if(pnMulu.Width == 0)  {
                 pnMulu.Width = MuluWidth;
+                btMuluWidthSwitch.Text = "<<目次";
             } else {
 		        MuluWidth = pnMulu.Width;
                 pnMulu.Width = 0;
+                btMuluWidthSwitch.Text = "目次>>";
+            }
+        }
+
+        // 檢索本經
+        void cbSearchThisSutraChange()
+        {
+            if (cbSearchThisSutra.Checked) {
+                // 設定檢索此經
+                if (SpineID == -1) {
+                    cbSearchThisSutra.Checked = false;
+                    return;
+                }
+
+                if (cbSearchRange.Visible) {
+                    cbSearchRange.Checked = false;
+                }
+
+                // 取出本經
+                string sThisBookId = Bookcase.CBETA.Spine.BookID[SpineID];
+                string sThisSutra = Bookcase.CBETA.Spine.Sutra[SpineID];
+
+                if (Bookcase.CBETA.SearchEngine_CB != null) {
+                    Bookcase.CBETA.SearchEngine_CB.BuildFileList.NoneSearch();
+                    Bookcase.CBETA.SearchEngine_CB.BuildFileList.SearchThisSutra(sThisBookId, sThisSutra);
+                }
+                if (Bookcase.CBETA.SearchEngine_orig != null) {
+                    Bookcase.CBETA.SearchEngine_orig.BuildFileList.NoneSearch();
+                    Bookcase.CBETA.SearchEngine_orig.BuildFileList.SearchThisSutra(sThisBookId, sThisSutra);
+                }
             }
         }
 
@@ -381,23 +415,6 @@ namespace CBReader
         {
             updateForm.ShowDialog();
         }
-
-        private void btGoByKeyword_Click(object sender, EventArgs e)
-        {
-            //bool bFindOK = Bookcase.CBETA.SearchEngine.Find("(阿難 * 侍者) + 利他", false);
-
-            string sFile = @"C:\CBETA\CBReader2X\Bookcase\CBETA\xml\T\T01\T01n0001_001.xml";
-            // sFile = @"C:\CBETA\CBReader2X\Bookcase\CBETA\xml\J\J20\J20nB098_001.xml";
-            //string sFile = @"CB01n0001_001.xml";
-            //ShowCBXML(sFile, true, Bookcase.CBETA);
-            ShowCBXML(sFile);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void MainForm_Shown(object sender, EventArgs e)
         {
             InitialData();
@@ -474,6 +491,476 @@ namespace CBReader
         private void btMuluWidthSwitch_Click(object sender, EventArgs e)
         {
             btMuluWidthSwitchClick();
+        }
+
+        // 上一卷
+        private void btPrevJuan_Click(object sender, EventArgs e)
+        {
+            if (SpineID == -1) {
+                return;
+            }
+            if (SpineID > 0) {
+                // 檢查是不是同一經
+                string sThisSutra = Bookcase.CBETA.Spine.Sutra[SpineID];
+                string sPrevSutra = Bookcase.CBETA.Spine.Sutra[SpineID - 1];
+                if (sThisSutra == sPrevSutra) {
+                    string sFile = Bookcase.CBETA.Spine.CBGetFileNameBySpineIndex(SpineID - 1);
+                    ShowCBXML(sFile);
+                    return;
+                }
+            }
+
+            MessageBox.Show("目前已是第一卷/篇章。");
+        }
+
+        // 下一卷
+        private void btNextJuan_Click(object sender, EventArgs e)
+        {
+            if (SpineID == -1) {
+                return;
+            }
+            if ((SpineID + 1) < Bookcase.CBETA.Spine.Files.Length) {
+                // 檢查是不是同一經
+                string sThisSutra = Bookcase.CBETA.Spine.Sutra[SpineID];
+                string sNextSutra = Bookcase.CBETA.Spine.Sutra[SpineID + 1];
+                if (sThisSutra == sNextSutra) {
+                    string sFile = Bookcase.CBETA.Spine.CBGetFileNameBySpineIndex(SpineID + 1);
+                    ShowCBXML(sFile);
+                    return;
+                }
+            }
+
+            MessageBox.Show("目前已是最後一卷/篇章。");
+        }
+        private void btNavWidthSwitch_Click(object sender, EventArgs e)
+        {
+            if (pnNav.Width == 0) {
+                pnNav.Width = NavWidth;
+                btNavWidthSwitch.Text = "<<主功能";
+            } else {
+                NavWidth = pnNav.Width;
+                pnNav.Width = 0;
+                btNavWidthSwitch.Text = "主功能>>";
+            }
+        }
+
+        private void btFindSutra_Click(object sender, EventArgs e)
+        {
+            if (edFindSutraSutraName.Text == CGlobalVal.DebugString) {
+                CGlobalVal.IsDebug = true;
+                edFindSutraSutraName.Text = "";
+
+                //???? wmiDebug->Visible = true;
+
+                return;
+            }
+            string sBook = cbFindSutraBookId.Text;
+            if (cbFindSutraBookId.SelectedIndex == 0) {
+                sBook = "";
+            } else {
+                int iPos = sBook.IndexOf(" ");
+                sBook = sBook.Remove(iPos);
+            }
+            string sVolFrom = edFindSutraVolFrom.Text;
+            string sVolTo = edFindSutraVolTo.Text;
+            string sSutraFrom = edFindSutraSutraFrom.Text;
+            string sSutraTo = edFindSutraSutraTo.Text;
+            string sSutraName = edFindSutraSutraName.Text;
+            string sByline = edFindSutraByline.Text;
+
+            // 先用 CBETA 版 ???
+            // 逐一搜尋目錄
+            //if(IsSelectedBook())
+            {
+                // 先用 CBETA 版 ???
+                // CSeries * Series = (CSeries *) Bookcase->Books->Items[SelectedBook];
+                CSeries Series = Bookcase.CBETA;
+                CCatalog Catalog = Series.Catalog;
+                
+                // 逐一檢查
+                sgFindSutra.SuspendLayout();
+                int iGridIndex = 0;
+                sgFindSutra.Rows.Clear();
+                sgFindSutra.RowCount = 10;
+                for (int i = 0; i < Catalog.ID.Length; i++) {
+                    // 找藏經
+                    if (sBook != "") {
+                        if (Catalog.ID[i] != sBook) {
+                            continue;
+                        }
+                    }
+                    // 找冊數
+                    if (sVolFrom != "") {
+                        if (Convert.ToInt32(Catalog.Vol[i]) < Convert.ToInt32(sVolFrom)) {
+                            continue;
+                        }
+                    }
+                    // 找冊數
+                    if (sVolTo != "") {
+                        if (Convert.ToInt32(Catalog.Vol[i]) > Convert.ToInt32(sVolTo)) {
+                            continue;
+                        }
+                    }
+                    // 找經號
+                    if (sSutraFrom != "") {
+                        // 經號標準化
+                        sSutraFrom = CCBSutraUtil.getStandardSutraNumberFormat(sSutraFrom);
+                        string sSutra = CCBSutraUtil.getStandardSutraNumberFormat(Catalog.SutraNum[i]);
+                        sSutraFrom = sSutraFrom.ToLower();
+                        sSutra = sSutra.ToLower();
+                        if (string.Compare(sSutra, sSutraFrom) < 0) {
+                            continue;
+                        }
+                    }
+                    // 找經號
+                    if (sSutraTo != "") {
+                        // 經號標準化
+                        sSutraTo = CCBSutraUtil.getStandardSutraNumberFormat(sSutraTo);
+                        String sSutra = CCBSutraUtil.getStandardSutraNumberFormat(Catalog.SutraNum[i]);
+                        sSutraTo = sSutraTo.ToLower();
+                        sSutra = sSutra.ToLower();
+                        if (sSutraTo.Length == 4 && sSutra.Length == 5) {
+                            sSutraTo += "z";
+                        }
+                        if (string.Compare(sSutra, sSutraTo) > 0) {
+                            continue;
+                        }
+                    }
+                    // 找經名
+                    if (sSutraName != "") {
+                        if (Catalog.SutraName[i].IndexOf(sSutraName) < 0) {
+                            continue;
+                        }
+                    }
+                    // 找譯者
+                    if (sByline != "") {
+                        if (Catalog.Byline[i].IndexOf(sByline) < 0) {
+                            continue;
+                        }
+                    }
+
+                    // 找到了
+
+                    sgFindSutra[0,iGridIndex].Value = Catalog.ID[i];
+                    sgFindSutra[1,iGridIndex].Value = Catalog.Vol[i];
+                    sgFindSutra[2,iGridIndex].Value = Catalog.SutraNum[i];
+                    sgFindSutra[3,iGridIndex].Value = Catalog.SutraName[i];
+                    sgFindSutra[4,iGridIndex].Value = Catalog.JuanNum[i];
+                    sgFindSutra[5,iGridIndex].Value = Catalog.Part[i];
+                    sgFindSutra[6,iGridIndex].Value = Catalog.Byline[i];
+                    sgFindSutra[7,iGridIndex].Value = i;
+                    iGridIndex++;
+
+                    if (iGridIndex >= sgFindSutra.RowCount - 1) {
+                        sgFindSutra.RowCount += 10;
+                    }
+                }
+                sgFindSutra.RowCount = iGridIndex;
+                sgFindSutra.ResumeLayout();
+
+                lbFindSutraCount.Text = $"共找到 {iGridIndex} 筆";
+                if (iGridIndex == 0) {
+                    MessageBox.Show("沒有滿足此條件的資料");
+                }
+            }
+        }
+
+        private void sgFindSutra_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) {
+                return;
+            }
+            if(sgFindSutra[7, e.RowIndex].Value == null) {
+                return ;
+            }
+
+            int iIndex = Convert.ToInt32(sgFindSutra[7,e.RowIndex].Value);
+
+            CCatalog cbCatalog = Bookcase.CBETA.Catalog;
+            string sBookID = cbCatalog.ID[iIndex];
+            string sVol = cbCatalog.Vol[iIndex];
+            string sSutra = cbCatalog.SutraNum[iIndex];
+
+            string sFile = Bookcase.CBETA.CBGetFileNameBySutraNumJuan(sBookID, sVol, sSutra);
+            ShowCBXML(sFile);
+        }
+
+        // 由經卷頁欄行呈現經文
+        private void btGoSutra_Click(object sender, EventArgs e)
+        {
+            string sBook = cbGoSutraBookId.Text;
+
+            int iPos = sBook.IndexOf(" ");
+            sBook = sBook.Remove(iPos);
+
+            string sSutraNum = edGoSutraSutraNum.Text;
+            string sJuan = edGoSutraJuan.Text;
+            string sPage = edGoSutraPage.Text;
+            string sCol = edGoSutraCol.Text;
+            string sLine = edGoSutraLine.Text;
+
+            if (sCol == "1") { sCol = "a"; }
+            else if (sCol == "2") { sCol = "b"; }
+            else if (sCol == "3") { sCol = "c"; }
+            else if (sCol == "4") { sCol = "d"; }
+            else if (sCol == "5") { sCol = "e"; }
+            else if (sCol == "6") { sCol = "f"; }
+            else if (sCol == "7") { sCol = "g"; }
+            else if (sCol == "8") { sCol = "h"; }
+            else if (sCol == "9") { sCol = "i"; }
+
+            CSeries csCBETA = Bookcase.CBETA;
+
+            string sFile = csCBETA.CBGetFileNameBySutraNumJuan(sBook, "", sSutraNum, sJuan, sPage, sCol, sLine);
+            ShowCBXML(sFile);
+        }
+        
+        // 由冊頁欄行呈現經文
+        private void btGoBook_Click(object sender, EventArgs e)
+        {
+            string sBook = cbGoBookBookId.Text;
+
+            int iPos = sBook.IndexOf(" ");
+            sBook = sBook.Remove(iPos);
+
+            string sVol = edGoBookVol.Text;
+            string sPage = edGoBookPage.Text;
+            string sCol = edGoBookCol.Text;
+            string sLine = edGoBookLine.Text;
+
+            if (sCol == "1") { sCol = "a"; }
+            else if (sCol == "2") { sCol = "b"; }
+            else if (sCol == "3") { sCol = "c"; }
+            else if (sCol == "4") { sCol = "d"; }
+            else if (sCol == "5") { sCol = "e"; }
+            else if (sCol == "6") { sCol = "f"; }
+            else if (sCol == "7") { sCol = "g"; }
+            else if (sCol == "8") { sCol = "h"; }
+            else if (sCol == "9") { sCol = "i"; }
+
+            CSeries csCBETA = Bookcase.CBETA;
+
+            string sFile = csCBETA.CBGetFileNameByVolPageColLine(sBook, sVol, sPage, sCol, sLine);
+            ShowCBXML(sFile);
+        }
+
+        private void btGoByKeyword_Click(object sender, EventArgs e)
+        {
+            // 判斷各種直接前往指定經文的方法
+            // 1. 行首 T01n0001_p0001a01
+            // 2. 引用複製 T01,no.1,p.1,b5
+            // 3. 特定的代碼, 例如 : SN1.1
+
+            MatchCollection reMatch;
+            GroupCollection reGroup;
+
+            string sKey = edGoByKeyword.Text;
+            // T01n0001_p0001a01
+            string sPatten = @"([A-Z]+)(\d+)n.{5}p(.{4})(.)(\d\d)";
+
+            reMatch = Regex.Matches(sKey, sPatten);
+            if (reMatch.Count == 0) {
+                // (CBETA, T01, no. 1, p. 23c20-21)  , 新版
+                // (CBETA, T01, no. 1, p. 23, c20-21) , 舊版
+                sPatten = @"([A-Z]+)(\d+)\s*,\s*no\.\s*.+?,\s*pp?\.\s*(\S+?)(?:\s*,\s*)?([a-z])(\d+)";
+                reMatch = Regex.Matches(sKey, sPatten);
+            }
+
+            if (reMatch.Count > 0) {
+                reGroup = reMatch[0].Groups;
+
+                string sBook = reGroup[1].Value;
+                string sVol = reGroup[2].Value;
+                string sPage = reGroup[3].Value;
+                string sField = reGroup[4].Value;
+                string sLine = reGroup[5].Value;
+
+                CSeries csCBETA = Bookcase.CBETA;
+
+                string sFile = csCBETA.CBGetFileNameByVolPageColLine(sBook, sVol, sPage, sField, sLine);
+                ShowCBXML(sFile);
+            }
+        }
+
+        private void btTextSearch_Click(object sender, EventArgs e)
+        {
+            SearchSentence = edTextSearch.Text;
+
+            // 去除頭尾的萬用字元
+            SearchSentence = SearchSentence.Trim('?');
+
+            if (SearchSentence == "") {
+                return;    // 沒輸入
+            }
+
+            //RememberWord(cbSearchWord);		// 將查詢的字存起來
+            //UpdateSearchHistory = true;
+
+            //SearchSentenceOrig = cbSearchWord->Text;        // 最原始的檢索句字, 可能包含 unicode
+
+
+            // 改變滑鼠
+            Cursor csOldCursor = Cursor;
+            Cursor = Cursors.WaitCursor;
+
+            DateTime t1 = DateTime.Now;
+            bool bHasRange = false;     // 有範圍就要設定
+            if (cbSearchRange.Checked || cbSearchThisSutra.Checked) {
+                bHasRange = true;
+            }
+
+            // 選擇全文檢索引擎, 若某一方為 0 , 則選另一方 (全 0 就不管了)
+            //SetSearchEngine();
+            SearchEngine = Bookcase.CBETA.getSearchEngine();
+            if(SearchEngine == null) {
+                MessageBox.Show("沒有可用的全文檢索引擎");
+                return;
+            }
+
+            CCatalog Catalog = Bookcase.CBETA.Catalog;
+            CSpine Spine = Bookcase.CBETA.Spine;
+            bool bFindOK = SearchEngine.Find(SearchSentence, bHasRange);      // 在找囉.........................................
+            DateTime t2 = DateTime.Now;
+
+            int iFoundCount = SearchEngine.FileFound.Total;
+
+            // 秀出找到幾個的訊息
+
+            string timeDiff = string.Format("{0:#0.###}",(t2 - t1).TotalSeconds);
+
+            lbSearchMsg.Text = $"找到 {iFoundCount} 筆，共花時間：{timeDiff} 秒";
+
+            int iTotalSearchFileNum = 0;
+            bool bShowAll = false;
+            int iMaxSearchNum = 0;
+
+            if (bFindOK) {
+                SearchWordList.Clear();
+                for (int i = 0; i < SearchEngine.SearchWordList.Count; i++)
+                    SearchWordList.Add(SearchEngine.SearchWordList[i]);  // 存起查詢的詞
+
+                // 先檢查有沒有超過限制
+
+                for (int i = 0; i < SearchEngine.BuildFileList.FileCount; i++) {
+                    if (SearchEngine.FileFound.Ints[i] > 0) {
+                        iTotalSearchFileNum++;
+                    }
+                }
+
+                // 將結果放入 list 列表中
+            }
+
+            sgTextSearch.SuspendLayout();
+            int iGridIndex = 0;
+            sgTextSearch.Rows.Clear();
+            sgTextSearch.RowCount = 10;
+
+            for (int i = 0; i < SearchEngine.BuildFileList.FileCount; i++) {
+                // 找到了
+                if (SearchEngine.FileFound.Ints[i] > 0) {
+                    string sSutraNum = SearchEngine.BuildFileList.SutraNum[i];        // 取得經號
+                    string sBook = SearchEngine.BuildFileList.Book[i];
+                    int iVol = SearchEngine.BuildFileList.VolNum[i];
+
+                    // 這裡可能找到 T220 第 600 卷, 卻傳回 T05 而不是 T07
+                    // 有待改進處理 ????
+                    if (i > 720) {
+                        int j = 0;
+                        j++;
+                    }
+                    int iCatalogIndex = Catalog.FindIndexBySutraNum(sBook, iVol, sSutraNum);   // 取得 TripitakaMenu 的編號
+
+                    // 找到了
+
+                    // 經名要移除 (第X卷)
+                    string sSutraName = CCBSutraUtil.CutJuanAfterSutraName(Catalog.SutraName[iCatalogIndex]);
+
+                    sgTextSearch[0,iGridIndex].Value = SearchEngine.FileFound.Ints[i];
+                    sgTextSearch[1, iGridIndex].Value = Catalog.ID[iCatalogIndex];
+                    sgTextSearch[2, iGridIndex].Value = Spine.VolNum[i];
+                    sgTextSearch[3, iGridIndex].Value = Catalog.SutraNum[iCatalogIndex];
+                    sgTextSearch[4, iGridIndex].Value = sSutraName;
+                    sgTextSearch[5, iGridIndex].Value = SearchEngine.BuildFileList.JuanNum[i];
+                    sgTextSearch[6, iGridIndex].Value = Catalog.Part[iCatalogIndex];
+                    sgTextSearch[7, iGridIndex].Value = Catalog.Byline[iCatalogIndex];
+                    sgTextSearch[8, iGridIndex].Value = i;
+                    iGridIndex++;
+
+                    if (iGridIndex >= sgTextSearch.RowCount - 1)
+                        sgTextSearch.RowCount += 10;
+                }
+            }
+
+            sgTextSearch.RowCount = iGridIndex;
+            sgTextSearch.ResumeLayout(false);
+
+            // 還原滑鼠
+            Cursor = csOldCursor;
+
+            if (bFindOK) {
+                if (sgTextSearch.RowCount == 0) {
+                    MessageBox.Show("找不到任何資料");
+                }
+            } else {
+                MessageBox.Show("查詢字串語法有問題，請再檢查看看。");
+            }
+        }
+
+        // 秀出全文檢索的布林運算符號
+        private void btBoolean_Click(object sender, EventArgs e)
+        {
+            cmBoolean.Show(btBoolean, 0, btBoolean.Height + 2);
+        }
+
+        private void miNear_Click(object sender, EventArgs e)
+        {
+            edTextSearch.Text = edTextSearch.Text + "+";
+        }
+
+        private void miBefore_Click(object sender, EventArgs e)
+        {
+            edTextSearch.Text = edTextSearch.Text + "*";
+        }
+
+        private void miAnd_Click(object sender, EventArgs e)
+        {
+            edTextSearch.Text = edTextSearch.Text + "&";
+        }
+
+        private void miOr_Click(object sender, EventArgs e)
+        {
+            edTextSearch.Text = edTextSearch.Text + ",";
+        }
+
+        private void miExclude_Click(object sender, EventArgs e)
+        {
+            edTextSearch.Text = edTextSearch.Text + "-";
+        }
+
+        private void miAny_Click(object sender, EventArgs e)
+        {
+            edTextSearch.Text = edTextSearch.Text + "?";
+        }
+
+        private void sgTextSearch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) {
+                return;
+            }
+            if (sgTextSearch[8, e.RowIndex].Value == null) {
+                return;
+            }
+
+            int iIndex = Convert.ToInt32(sgTextSearch[8, e.RowIndex].Value);
+
+            string sFile = Bookcase.CBETA.Spine.Files[iIndex];
+            // 要塗色
+            ShowCBXML(sFile, true, Bookcase.CBETA);
+        }
+
+        private void cbSearchThisSutra_CheckedChanged(object sender, EventArgs e)
+        {
+            cbSearchThisSutraChange();
         }
     }
 }

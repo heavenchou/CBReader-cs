@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CBReader
@@ -153,6 +154,23 @@ namespace CBReader
 				if (iPos2 == sName.Length - 2) {
 					sName = sName.Substring(0, iPos);
 				}
+			}
+			return sName;
+		}
+
+		// 將經名後面的 （上中下一二三......十）移除
+		static public string CutNumberAfterSutraName(string sName)
+		{
+			if(sName.Contains("（")) {
+				// 華雨集（一）... 是不同經
+				if (sName.Contains("華雨集（")) {
+					return sName;
+				}
+				// 日記（八）（含墨蹟、函札、法語、編後贅語）
+				if (sName == "日記（八）（含墨蹟、函札、法語、編後贅語）") {
+					return "日記";
+				}
+				sName = Regex.Replace(sName, $"（[上中下一二三四五六七八九十、]+）$", "");
 			}
 			return sName;
 		}

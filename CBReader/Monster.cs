@@ -25,7 +25,7 @@ namespace Monster
         List<CSearchWord> swWord;       // 每一個檢索字串的指標, 最多 20 個, 例如 "佛陀 & 阿羅漢" 就算 2 個
 
         // 底下三個都改成對外公開的
-        CFileList BuildFileList;        // build file list;
+        public CFileList BuildFileList;        // build file list;
         CWordIndex WordIndex;           // build file list;
         CMainIndex MainIndex;           // Last index file
     

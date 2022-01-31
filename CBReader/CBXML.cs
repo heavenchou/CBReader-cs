@@ -1261,7 +1261,7 @@ namespace CBReader
                     string sUnicode = "";
                     string sBig5 = "";
 
-                    if (SD2char.ContainsKey(sCBCode)) {
+                    if (SD2uni.ContainsKey(sCBCode)) {
                         sUnicode = SD2uni[sCBCode];     // 悉曇
                     }
                     if (SD2big5.ContainsKey(sCBCode)) {
