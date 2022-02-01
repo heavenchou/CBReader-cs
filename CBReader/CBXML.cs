@@ -173,11 +173,11 @@ namespace CBReader
             if(sLink != "") {
                 HTMLText += @"<script>
                 location.href='#" + sLink + @"';
-                </script>\n";
+                </script>";
             } else if(bShowHighlight) {
                 HTMLText += @"<script>
                 location.href='#Search_0_1';
-                </script>\n";
+                </script>";
             }
 
             HTMLText += "\n</body>\n</html>";

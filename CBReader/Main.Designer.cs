@@ -207,7 +207,7 @@ namespace CBReader
             this.miAbout});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1117, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1117, 27);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -234,9 +234,9 @@ namespace CBReader
             // 
             // btNextJuan
             // 
-            this.btNextJuan.Location = new System.Drawing.Point(521, 30);
+            this.btNextJuan.Location = new System.Drawing.Point(504, 30);
             this.btNextJuan.Name = "btNextJuan";
-            this.btNextJuan.Size = new System.Drawing.Size(139, 38);
+            this.btNextJuan.Size = new System.Drawing.Size(123, 38);
             this.btNextJuan.TabIndex = 4;
             this.btNextJuan.Text = "下一卷/篇章";
             this.btNextJuan.UseVisualStyleBackColor = true;
@@ -246,7 +246,7 @@ namespace CBReader
             // 
             this.btPrevJuan.Location = new System.Drawing.Point(375, 30);
             this.btPrevJuan.Name = "btPrevJuan";
-            this.btPrevJuan.Size = new System.Drawing.Size(139, 38);
+            this.btPrevJuan.Size = new System.Drawing.Size(123, 38);
             this.btPrevJuan.TabIndex = 3;
             this.btPrevJuan.Text = "上一卷/篇章";
             this.btPrevJuan.UseVisualStyleBackColor = true;

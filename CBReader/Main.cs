@@ -24,7 +24,7 @@ namespace CBReader
 
         int SelectedBook = -1;   // 目前選中的書, -1 表示還沒選
 
-        CBookcase Bookcase; // 書櫃
+        public CBookcase Bookcase; // 書櫃
         CNavTree NavTree; // 導覽文件 (暫時的, 日後會放在 Serial 物件中 ???)
         CNavTree MuluTree; // 單經導覽文件 (暫時的, 日後會放在 Serial 物件中 ???)
 
@@ -390,9 +390,14 @@ namespace CBReader
 
         private void cbSearchRange_CheckedChanged(object sender, EventArgs e)
         {
-            if(cbSearchRange.Checked) {
+            if (cbSearchRange.Checked) {
                 // 設定檢索範圍
-                searchrangeForm.ShowDialog();
+                var result = searchrangeForm.ShowDialog();
+                if(result == DialogResult.Cancel) {
+                    cbSearchRange.Checked = false;
+                } else {
+                    cbSearchThisSutra.Checked = false;
+                }
             }
         }
 
