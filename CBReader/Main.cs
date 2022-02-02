@@ -20,7 +20,7 @@ namespace CBReader
         OptionForm optionForm;
         SearchRangeForm searchrangeForm;
         UpdateForm updateForm;
-        CSetting Setting; // 設定檔
+        public CSetting Setting; // 設定檔
 
         int SelectedBook = -1;   // 目前選中的書, -1 表示還沒選
 
@@ -42,25 +42,24 @@ namespace CBReader
         {
             InitializeComponent();
 
-            Setting = new CSetting("");
-            InitializeForms();  // 初始其它的 Form
-
-            // 判斷是不是西蓮淨苑 SLReader 專用
-            // CheckSeeland(); ????
-
             // 設定目錄初值
             CGlobalVal.initialPath();
             // 將 IE 設定到 IE 11 (如果沒 IE 11 的如何?)
             SetPermissions(11001);
+
+            // 取得設定檔並讀取所有設定
+            Setting = new CSetting(CGlobalVal.SettingFile);
+
+            InitializeForms();  // 初始其它的 Form
+
+            // 判斷是不是西蓮淨苑 SLReader 專用
+            // CheckSeeland(); ????
             
             // 刪去舊版
             string sOld = CGlobalVal.MyHomePath + ".tmp";
             if (File.Exists(sOld)) {
                 File.Delete(sOld);
             }
-
-            // 取得設定檔並讀取所有設定
-            Setting = new CSetting(CGlobalVal.SettingFile);
 
             MainFunc.SelectedIndex = 0;
             pnMulu.Width = 0;  // 書目先縮到最小
