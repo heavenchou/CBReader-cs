@@ -18,5 +18,15 @@ namespace CBReader
             InitializeComponent();
             mainForm = main;
         }
+
+        private void llbCBETAWeb_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.cbeta.org/copyright.php");
+        }
+
+        private void llbCBETAEmail_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("mailto:service@cbeta.org");
+        }
     }
 }
