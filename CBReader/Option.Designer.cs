@@ -138,7 +138,7 @@ namespace CBReader
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox4.Size = new System.Drawing.Size(282, 107);
-            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "畫面呈現";
             // 
@@ -170,7 +170,7 @@ namespace CBReader
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(282, 370);
-            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "缺字格式";
             // 
@@ -180,7 +180,7 @@ namespace CBReader
             this.cbGaijiUseNormal.Location = new System.Drawing.Point(28, 62);
             this.cbGaijiUseNormal.Name = "cbGaijiUseNormal";
             this.cbGaijiUseNormal.Size = new System.Drawing.Size(131, 24);
-            this.cbGaijiUseNormal.TabIndex = 8;
+            this.cbGaijiUseNormal.TabIndex = 1;
             this.cbGaijiUseNormal.Text = "使用通用字";
             this.cbGaijiUseNormal.UseVisualStyleBackColor = true;
             // 
@@ -190,7 +190,7 @@ namespace CBReader
             this.cbGaijiUseUniExt.Location = new System.Drawing.Point(28, 31);
             this.cbGaijiUseUniExt.Name = "cbGaijiUseUniExt";
             this.cbGaijiUseUniExt.Size = new System.Drawing.Size(168, 24);
-            this.cbGaijiUseUniExt.TabIndex = 7;
+            this.cbGaijiUseUniExt.TabIndex = 0;
             this.cbGaijiUseUniExt.Text = "使用 Unicode Ext";
             this.cbGaijiUseUniExt.UseVisualStyleBackColor = true;
             // 
@@ -283,7 +283,7 @@ namespace CBReader
             this.cbShowCollation.Location = new System.Drawing.Point(25, 31);
             this.cbShowCollation.Name = "cbShowCollation";
             this.cbShowCollation.Size = new System.Drawing.Size(151, 24);
-            this.cbShowCollation.TabIndex = 6;
+            this.cbShowCollation.TabIndex = 0;
             this.cbShowCollation.Text = "呈現校注符號";
             this.cbShowCollation.UseVisualStyleBackColor = true;
             // 
@@ -402,8 +402,10 @@ namespace CBReader
             // 
             // OptionForm
             // 
+            this.AcceptButton = this.btOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btCancel;
             this.ClientSize = new System.Drawing.Size(639, 623);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

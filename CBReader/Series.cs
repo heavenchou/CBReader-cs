@@ -9,13 +9,6 @@ using System.Xml;
 
 namespace CBReader
 {
-	// 檢索引擎的版本
-	public enum ESearchEngineType
-    {
-		Orig,	// 原書版本
-		CBETA	// CBETA 版
-    }
-
 	public class CSeries
 	{
 		public string Dir = "";				// 本書的目錄
@@ -232,14 +225,14 @@ namespace CBReader
 		}
 
 		// 選擇全文檢索引擎, 要傳入希望的版本, 預設 CBETA
-		public CMonster getSearchEngine(ESearchEngineType searchType = ESearchEngineType.CBETA)
+		public CMonster getSearchEngine(ECollationType corrType = ECollationType.CBETA)
 		{
 			// 選擇全文檢索引擎, 若某一方為 0 , 則選另一方 (全 0 就不管了)
 			if(SearchEngine_CB == null) {
 				SearchEngine = SearchEngine_orig;	// 原書索引
 			} else if(SearchEngine_orig == null) {
 				SearchEngine = SearchEngine_CB;		// CBETA 索引
-			} else if(searchType == ESearchEngineType.CBETA) {
+			} else if(corrType == ECollationType.CBETA) {
 				SearchEngine = SearchEngine_CB;		// CBETA 索引
 			} else {
 				SearchEngine = SearchEngine_orig;	// 原書索引

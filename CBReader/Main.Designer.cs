@@ -61,6 +61,8 @@ namespace CBReader
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.btMainFuncNarrow = new System.Windows.Forms.Button();
+            this.btMainFuncWide = new System.Windows.Forms.Button();
             this.btFindSutra = new System.Windows.Forms.Button();
             this.lbFindSutraCount = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -124,6 +126,8 @@ namespace CBReader
             this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.lbSearchMsg = new System.Windows.Forms.Label();
             this.btBoolean = new System.Windows.Forms.Button();
             this.btTextSearch = new System.Windows.Forms.Button();
@@ -149,6 +153,8 @@ namespace CBReader
             this.miOr = new System.Windows.Forms.ToolStripMenuItem();
             this.miExclude = new System.Windows.Forms.ToolStripMenuItem();
             this.miAny = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.pnNav.SuspendLayout();
@@ -234,11 +240,11 @@ namespace CBReader
             // 
             // btNextJuan
             // 
-            this.btNextJuan.Location = new System.Drawing.Point(504, 30);
+            this.btNextJuan.Location = new System.Drawing.Point(528, 30);
             this.btNextJuan.Name = "btNextJuan";
-            this.btNextJuan.Size = new System.Drawing.Size(123, 38);
+            this.btNextJuan.Size = new System.Drawing.Size(147, 38);
             this.btNextJuan.TabIndex = 4;
-            this.btNextJuan.Text = "下一卷/篇章";
+            this.btNextJuan.Text = "下一卷/篇章 ▼";
             this.btNextJuan.UseVisualStyleBackColor = true;
             this.btNextJuan.Click += new System.EventHandler(this.btNextJuan_Click);
             // 
@@ -246,9 +252,9 @@ namespace CBReader
             // 
             this.btPrevJuan.Location = new System.Drawing.Point(375, 30);
             this.btPrevJuan.Name = "btPrevJuan";
-            this.btPrevJuan.Size = new System.Drawing.Size(123, 38);
+            this.btPrevJuan.Size = new System.Drawing.Size(147, 38);
             this.btPrevJuan.TabIndex = 3;
-            this.btPrevJuan.Text = "上一卷/篇章";
+            this.btPrevJuan.Text = "上一卷/篇章 ▲";
             this.btPrevJuan.UseVisualStyleBackColor = true;
             this.btPrevJuan.Click += new System.EventHandler(this.btPrevJuan_Click);
             // 
@@ -258,7 +264,7 @@ namespace CBReader
             this.btMuluWidthSwitch.Name = "btMuluWidthSwitch";
             this.btMuluWidthSwitch.Size = new System.Drawing.Size(112, 38);
             this.btMuluWidthSwitch.TabIndex = 2;
-            this.btMuluWidthSwitch.Text = "目次>>";
+            this.btMuluWidthSwitch.Text = "目次 ►";
             this.btMuluWidthSwitch.UseVisualStyleBackColor = true;
             this.btMuluWidthSwitch.Click += new System.EventHandler(this.btMuluWidthSwitch_Click);
             // 
@@ -268,7 +274,7 @@ namespace CBReader
             this.btNavWidthSwitch.Name = "btNavWidthSwitch";
             this.btNavWidthSwitch.Size = new System.Drawing.Size(112, 38);
             this.btNavWidthSwitch.TabIndex = 1;
-            this.btNavWidthSwitch.Text = "<< 主功能";
+            this.btNavWidthSwitch.Text = "◄ 主功能";
             this.btNavWidthSwitch.UseVisualStyleBackColor = true;
             this.btNavWidthSwitch.Click += new System.EventHandler(this.btNavWidthSwitch_Click);
             // 
@@ -295,6 +301,7 @@ namespace CBReader
             this.MainFunc.Size = new System.Drawing.Size(340, 574);
             this.MainFunc.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.MainFunc.TabIndex = 0;
+            this.MainFunc.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // tabPage1
             // 
@@ -329,8 +336,9 @@ namespace CBReader
             this.tvNavTree.SelectedImageKey = "openbook.ico";
             this.tvNavTree.ShowNodeToolTips = true;
             this.tvNavTree.Size = new System.Drawing.Size(326, 477);
-            this.tvNavTree.TabIndex = 0;
-            this.tvNavTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvNavTree_AfterSelect);
+            this.tvNavTree.TabIndex = 1;
+            this.tvNavTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvNavTree_KeyDown);
+            this.tvNavTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tvNavTree_MouseDoubleClick);
             // 
             // imageList1
             // 
@@ -385,7 +393,10 @@ namespace CBReader
             // sgFindSutra
             // 
             this.sgFindSutra.AllowUserToAddRows = false;
-            this.sgFindSutra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.sgFindSutra.AllowUserToDeleteRows = false;
+            this.sgFindSutra.AllowUserToResizeRows = false;
+            this.sgFindSutra.ColumnHeadersHeight = 29;
+            this.sgFindSutra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.sgFindSutra.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
@@ -408,6 +419,7 @@ namespace CBReader
             this.sgFindSutra.Size = new System.Drawing.Size(326, 307);
             this.sgFindSutra.TabIndex = 8;
             this.sgFindSutra.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sgFindSutra_CellDoubleClick);
+            this.sgFindSutra.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sgFindSutra_KeyDown);
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -415,7 +427,7 @@ namespace CBReader
             this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 39;
+            this.dataGridViewTextBoxColumn2.Width = 40;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -423,7 +435,7 @@ namespace CBReader
             this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 39;
+            this.dataGridViewTextBoxColumn3.Width = 40;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -431,7 +443,7 @@ namespace CBReader
             this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 39;
+            this.dataGridViewTextBoxColumn4.Width = 55;
             // 
             // Column5
             // 
@@ -439,7 +451,7 @@ namespace CBReader
             this.Column5.MinimumWidth = 6;
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
-            this.Column5.Width = 125;
+            this.Column5.Width = 150;
             // 
             // Column10
             // 
@@ -447,7 +459,7 @@ namespace CBReader
             this.Column10.MinimumWidth = 6;
             this.Column10.Name = "Column10";
             this.Column10.ReadOnly = true;
-            this.Column10.Width = 125;
+            this.Column10.Width = 40;
             // 
             // Column11
             // 
@@ -455,7 +467,7 @@ namespace CBReader
             this.Column11.MinimumWidth = 6;
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
-            this.Column11.Width = 39;
+            this.Column11.Width = 70;
             // 
             // Column12
             // 
@@ -463,7 +475,7 @@ namespace CBReader
             this.Column12.MinimumWidth = 6;
             this.Column12.Name = "Column12";
             this.Column12.ReadOnly = true;
-            this.Column12.Width = 125;
+            this.Column12.Width = 150;
             // 
             // Column13
             // 
@@ -486,6 +498,8 @@ namespace CBReader
             // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.btMainFuncNarrow);
+            this.panel8.Controls.Add(this.btMainFuncWide);
             this.panel8.Controls.Add(this.btFindSutra);
             this.panel8.Controls.Add(this.lbFindSutraCount);
             this.panel8.Controls.Add(this.label8);
@@ -508,12 +522,38 @@ namespace CBReader
             this.panel8.Size = new System.Drawing.Size(326, 224);
             this.panel8.TabIndex = 1;
             // 
+            // btMainFuncNarrow
+            // 
+            this.btMainFuncNarrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btMainFuncNarrow.Font = new System.Drawing.Font("細明體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btMainFuncNarrow.Location = new System.Drawing.Point(260, 193);
+            this.btMainFuncNarrow.Name = "btMainFuncNarrow";
+            this.btMainFuncNarrow.Size = new System.Drawing.Size(31, 25);
+            this.btMainFuncNarrow.TabIndex = 16;
+            this.btMainFuncNarrow.TabStop = false;
+            this.btMainFuncNarrow.Text = "◀";
+            this.btMainFuncNarrow.UseVisualStyleBackColor = true;
+            this.btMainFuncNarrow.Click += new System.EventHandler(this.btMainFuncNarrow_Click);
+            // 
+            // btMainFuncWide
+            // 
+            this.btMainFuncWide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btMainFuncWide.Font = new System.Drawing.Font("新細明體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btMainFuncWide.Location = new System.Drawing.Point(292, 193);
+            this.btMainFuncWide.Name = "btMainFuncWide";
+            this.btMainFuncWide.Size = new System.Drawing.Size(31, 25);
+            this.btMainFuncWide.TabIndex = 15;
+            this.btMainFuncWide.TabStop = false;
+            this.btMainFuncWide.Text = "▶";
+            this.btMainFuncWide.UseVisualStyleBackColor = true;
+            this.btMainFuncWide.Click += new System.EventHandler(this.btMainFuncWide_Click);
+            // 
             // btFindSutra
             // 
             this.btFindSutra.Location = new System.Drawing.Point(284, 12);
             this.btFindSutra.Name = "btFindSutra";
             this.btFindSutra.Size = new System.Drawing.Size(29, 28);
-            this.btFindSutra.TabIndex = 15;
+            this.btFindSutra.TabIndex = 7;
             this.btFindSutra.Text = "🔍";
             this.btFindSutra.UseVisualStyleBackColor = true;
             this.btFindSutra.Click += new System.EventHandler(this.btFindSutra_Click);
@@ -596,6 +636,8 @@ namespace CBReader
             this.edFindSutraByline.Name = "edFindSutraByline";
             this.edFindSutraByline.Size = new System.Drawing.Size(203, 31);
             this.edFindSutraByline.TabIndex = 6;
+            this.edFindSutraByline.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
+            this.edFindSutraByline.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edFindSutraSutraName
             // 
@@ -603,6 +645,8 @@ namespace CBReader
             this.edFindSutraSutraName.Name = "edFindSutraSutraName";
             this.edFindSutraSutraName.Size = new System.Drawing.Size(203, 31);
             this.edFindSutraSutraName.TabIndex = 5;
+            this.edFindSutraSutraName.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
+            this.edFindSutraSutraName.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edFindSutraSutraTo
             // 
@@ -610,6 +654,8 @@ namespace CBReader
             this.edFindSutraSutraTo.Name = "edFindSutraSutraTo";
             this.edFindSutraSutraTo.Size = new System.Drawing.Size(81, 31);
             this.edFindSutraSutraTo.TabIndex = 4;
+            this.edFindSutraSutraTo.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
+            this.edFindSutraSutraTo.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edFindSutraSutraFrom
             // 
@@ -617,6 +663,8 @@ namespace CBReader
             this.edFindSutraSutraFrom.Name = "edFindSutraSutraFrom";
             this.edFindSutraSutraFrom.Size = new System.Drawing.Size(81, 31);
             this.edFindSutraSutraFrom.TabIndex = 3;
+            this.edFindSutraSutraFrom.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
+            this.edFindSutraSutraFrom.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edFindSutraVolTo
             // 
@@ -624,6 +672,8 @@ namespace CBReader
             this.edFindSutraVolTo.Name = "edFindSutraVolTo";
             this.edFindSutraVolTo.Size = new System.Drawing.Size(81, 31);
             this.edFindSutraVolTo.TabIndex = 2;
+            this.edFindSutraVolTo.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
+            this.edFindSutraVolTo.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edFindSutraVolFrom
             // 
@@ -631,6 +681,8 @@ namespace CBReader
             this.edFindSutraVolFrom.Name = "edFindSutraVolFrom";
             this.edFindSutraVolFrom.Size = new System.Drawing.Size(81, 31);
             this.edFindSutraVolFrom.TabIndex = 1;
+            this.edFindSutraVolFrom.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
+            this.edFindSutraVolFrom.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // cbFindSutraBookId
             // 
@@ -668,6 +720,8 @@ namespace CBReader
             this.cbFindSutraBookId.Name = "cbFindSutraBookId";
             this.cbFindSutraBookId.Size = new System.Drawing.Size(203, 28);
             this.cbFindSutraBookId.TabIndex = 0;
+            this.cbFindSutraBookId.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
+            this.cbFindSutraBookId.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // tabPage3
             // 
@@ -682,6 +736,8 @@ namespace CBReader
             // 
             // panel9
             // 
+            this.panel9.Controls.Add(this.panel3);
+            this.panel9.Controls.Add(this.panel2);
             this.panel9.Controls.Add(this.btGoByKeyword);
             this.panel9.Controls.Add(this.label24);
             this.panel9.Controls.Add(this.label23);
@@ -721,10 +777,10 @@ namespace CBReader
             // 
             // btGoByKeyword
             // 
-            this.btGoByKeyword.Location = new System.Drawing.Point(216, 400);
+            this.btGoByKeyword.Location = new System.Drawing.Point(214, 410);
             this.btGoByKeyword.Name = "btGoByKeyword";
             this.btGoByKeyword.Size = new System.Drawing.Size(62, 31);
-            this.btGoByKeyword.TabIndex = 31;
+            this.btGoByKeyword.TabIndex = 14;
             this.btGoByKeyword.Text = "Go";
             this.btGoByKeyword.UseVisualStyleBackColor = true;
             this.btGoByKeyword.Click += new System.EventHandler(this.btGoByKeyword_Click);
@@ -732,7 +788,7 @@ namespace CBReader
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(7, 470);
+            this.label24.Location = new System.Drawing.Point(5, 480);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(179, 20);
             this.label24.TabIndex = 30;
@@ -741,7 +797,7 @@ namespace CBReader
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(7, 440);
+            this.label23.Location = new System.Drawing.Point(5, 450);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(197, 20);
             this.label23.TabIndex = 29;
@@ -750,7 +806,7 @@ namespace CBReader
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(7, 377);
+            this.label22.Location = new System.Drawing.Point(5, 387);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(129, 20);
             this.label22.TabIndex = 28;
@@ -759,7 +815,7 @@ namespace CBReader
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(154, 297);
+            this.label21.Location = new System.Drawing.Point(152, 299);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(49, 20);
             this.label21.TabIndex = 27;
@@ -768,7 +824,7 @@ namespace CBReader
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(27, 297);
+            this.label20.Location = new System.Drawing.Point(25, 299);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(29, 20);
             this.label20.TabIndex = 26;
@@ -777,7 +833,7 @@ namespace CBReader
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(154, 260);
+            this.label19.Location = new System.Drawing.Point(152, 262);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(49, 20);
             this.label19.TabIndex = 25;
@@ -786,7 +842,7 @@ namespace CBReader
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(7, 260);
+            this.label18.Location = new System.Drawing.Point(5, 262);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(49, 20);
             this.label18.TabIndex = 24;
@@ -795,7 +851,7 @@ namespace CBReader
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(7, 221);
+            this.label17.Location = new System.Drawing.Point(5, 223);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(49, 20);
             this.label17.TabIndex = 23;
@@ -804,7 +860,7 @@ namespace CBReader
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(7, 190);
+            this.label16.Location = new System.Drawing.Point(5, 192);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(89, 20);
             this.label16.TabIndex = 22;
@@ -878,14 +934,14 @@ namespace CBReader
             this.btGoSutra.Location = new System.Drawing.Point(216, 142);
             this.btGoSutra.Name = "btGoSutra";
             this.btGoSutra.Size = new System.Drawing.Size(62, 31);
-            this.btGoSutra.TabIndex = 13;
+            this.btGoSutra.TabIndex = 6;
             this.btGoSutra.Text = "Go";
             this.btGoSutra.UseVisualStyleBackColor = true;
             this.btGoSutra.Click += new System.EventHandler(this.btGoSutra_Click);
             // 
             // btGoBook
             // 
-            this.btGoBook.Location = new System.Drawing.Point(216, 331);
+            this.btGoBook.Location = new System.Drawing.Point(214, 333);
             this.btGoBook.Name = "btGoBook";
             this.btGoBook.Size = new System.Drawing.Size(62, 31);
             this.btGoBook.TabIndex = 12;
@@ -895,73 +951,93 @@ namespace CBReader
             // 
             // edGoByKeyword
             // 
-            this.edGoByKeyword.Location = new System.Drawing.Point(11, 400);
+            this.edGoByKeyword.Location = new System.Drawing.Point(9, 410);
             this.edGoByKeyword.Name = "edGoByKeyword";
             this.edGoByKeyword.Size = new System.Drawing.Size(199, 31);
-            this.edGoByKeyword.TabIndex = 11;
+            this.edGoByKeyword.TabIndex = 13;
+            this.edGoByKeyword.Enter += new System.EventHandler(this.edGoByKeyword_Enter);
+            this.edGoByKeyword.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edGoBookLine
             // 
-            this.edGoBookLine.Location = new System.Drawing.Point(216, 294);
+            this.edGoBookLine.Location = new System.Drawing.Point(214, 296);
             this.edGoBookLine.Name = "edGoBookLine";
             this.edGoBookLine.Size = new System.Drawing.Size(62, 31);
-            this.edGoBookLine.TabIndex = 10;
+            this.edGoBookLine.TabIndex = 11;
+            this.edGoBookLine.Enter += new System.EventHandler(this.edGoBookVol_Enter);
+            this.edGoBookLine.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edGoBookCol
             // 
-            this.edGoBookCol.Location = new System.Drawing.Point(62, 294);
+            this.edGoBookCol.Location = new System.Drawing.Point(60, 296);
             this.edGoBookCol.Name = "edGoBookCol";
             this.edGoBookCol.Size = new System.Drawing.Size(68, 31);
-            this.edGoBookCol.TabIndex = 9;
+            this.edGoBookCol.TabIndex = 10;
+            this.edGoBookCol.Enter += new System.EventHandler(this.edGoBookVol_Enter);
+            this.edGoBookCol.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edGoBookPage
             // 
-            this.edGoBookPage.Location = new System.Drawing.Point(216, 257);
+            this.edGoBookPage.Location = new System.Drawing.Point(214, 259);
             this.edGoBookPage.Name = "edGoBookPage";
             this.edGoBookPage.Size = new System.Drawing.Size(62, 31);
-            this.edGoBookPage.TabIndex = 8;
+            this.edGoBookPage.TabIndex = 9;
+            this.edGoBookPage.Enter += new System.EventHandler(this.edGoBookVol_Enter);
+            this.edGoBookPage.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edGoBookVol
             // 
-            this.edGoBookVol.Location = new System.Drawing.Point(62, 257);
+            this.edGoBookVol.Location = new System.Drawing.Point(60, 259);
             this.edGoBookVol.Name = "edGoBookVol";
             this.edGoBookVol.Size = new System.Drawing.Size(68, 31);
-            this.edGoBookVol.TabIndex = 7;
+            this.edGoBookVol.TabIndex = 8;
+            this.edGoBookVol.Enter += new System.EventHandler(this.edGoBookVol_Enter);
+            this.edGoBookVol.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edGoSutraLine
             // 
             this.edGoSutraLine.Location = new System.Drawing.Point(62, 142);
             this.edGoSutraLine.Name = "edGoSutraLine";
             this.edGoSutraLine.Size = new System.Drawing.Size(68, 31);
-            this.edGoSutraLine.TabIndex = 6;
+            this.edGoSutraLine.TabIndex = 5;
+            this.edGoSutraLine.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
+            this.edGoSutraLine.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edGoSutraCol
             // 
             this.edGoSutraCol.Location = new System.Drawing.Point(216, 105);
             this.edGoSutraCol.Name = "edGoSutraCol";
             this.edGoSutraCol.Size = new System.Drawing.Size(62, 31);
-            this.edGoSutraCol.TabIndex = 5;
+            this.edGoSutraCol.TabIndex = 4;
+            this.edGoSutraCol.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
+            this.edGoSutraCol.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edGoSutraPage
             // 
             this.edGoSutraPage.Location = new System.Drawing.Point(62, 105);
             this.edGoSutraPage.Name = "edGoSutraPage";
             this.edGoSutraPage.Size = new System.Drawing.Size(68, 31);
-            this.edGoSutraPage.TabIndex = 4;
+            this.edGoSutraPage.TabIndex = 3;
+            this.edGoSutraPage.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
+            this.edGoSutraPage.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edGoSutraJuan
             // 
             this.edGoSutraJuan.Location = new System.Drawing.Point(216, 68);
             this.edGoSutraJuan.Name = "edGoSutraJuan";
             this.edGoSutraJuan.Size = new System.Drawing.Size(62, 31);
-            this.edGoSutraJuan.TabIndex = 3;
+            this.edGoSutraJuan.TabIndex = 2;
+            this.edGoSutraJuan.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
+            this.edGoSutraJuan.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edGoSutraSutraNum
             // 
             this.edGoSutraSutraNum.Location = new System.Drawing.Point(62, 68);
             this.edGoSutraSutraNum.Name = "edGoSutraSutraNum";
             this.edGoSutraSutraNum.Size = new System.Drawing.Size(68, 31);
-            this.edGoSutraSutraNum.TabIndex = 2;
+            this.edGoSutraSutraNum.TabIndex = 1;
+            this.edGoSutraSutraNum.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
+            this.edGoSutraSutraNum.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // cbGoBookBookId
             // 
@@ -993,10 +1069,12 @@ namespace CBReader
             "Y  印順法師佛學著作集",
             "LC 呂澂佛學著作集",
             "TX 太虛大師全書"});
-            this.cbGoBookBookId.Location = new System.Drawing.Point(62, 221);
+            this.cbGoBookBookId.Location = new System.Drawing.Point(60, 223);
             this.cbGoBookBookId.Name = "cbGoBookBookId";
             this.cbGoBookBookId.Size = new System.Drawing.Size(216, 28);
-            this.cbGoBookBookId.TabIndex = 1;
+            this.cbGoBookBookId.TabIndex = 7;
+            this.cbGoBookBookId.Enter += new System.EventHandler(this.edGoBookVol_Enter);
+            this.cbGoBookBookId.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // cbGoSutraBookId
             // 
@@ -1033,6 +1111,8 @@ namespace CBReader
             this.cbGoSutraBookId.Name = "cbGoSutraBookId";
             this.cbGoSutraBookId.Size = new System.Drawing.Size(216, 28);
             this.cbGoSutraBookId.TabIndex = 0;
+            this.cbGoSutraBookId.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
+            this.cbGoSutraBookId.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // tabPage5
             // 
@@ -1060,7 +1140,9 @@ namespace CBReader
             // 
             this.sgTextSearch.AllowUserToAddRows = false;
             this.sgTextSearch.AllowUserToDeleteRows = false;
-            this.sgTextSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.sgTextSearch.AllowUserToResizeRows = false;
+            this.sgTextSearch.ColumnHeadersHeight = 29;
+            this.sgTextSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.sgTextSearch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
@@ -1074,6 +1156,7 @@ namespace CBReader
             this.sgTextSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sgTextSearch.GridColor = System.Drawing.SystemColors.ControlLight;
             this.sgTextSearch.Location = new System.Drawing.Point(0, 0);
+            this.sgTextSearch.MultiSelect = false;
             this.sgTextSearch.Name = "sgTextSearch";
             this.sgTextSearch.ReadOnly = true;
             this.sgTextSearch.RowHeadersVisible = false;
@@ -1081,8 +1164,9 @@ namespace CBReader
             this.sgTextSearch.RowTemplate.Height = 27;
             this.sgTextSearch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.sgTextSearch.Size = new System.Drawing.Size(326, 336);
-            this.sgTextSearch.TabIndex = 7;
+            this.sgTextSearch.TabIndex = 6;
             this.sgTextSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sgTextSearch_CellDoubleClick);
+            this.sgTextSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sgTextSearch_KeyDown);
             // 
             // Column1
             // 
@@ -1090,7 +1174,7 @@ namespace CBReader
             this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
-            this.Column1.Width = 80;
+            this.Column1.Width = 40;
             // 
             // Column2
             // 
@@ -1114,7 +1198,7 @@ namespace CBReader
             this.Column4.MinimumWidth = 6;
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
-            this.Column4.Width = 40;
+            this.Column4.Width = 55;
             // 
             // Column6
             // 
@@ -1122,7 +1206,7 @@ namespace CBReader
             this.Column6.MinimumWidth = 6;
             this.Column6.Name = "Column6";
             this.Column6.ReadOnly = true;
-            this.Column6.Width = 125;
+            this.Column6.Width = 150;
             // 
             // Column7
             // 
@@ -1130,7 +1214,7 @@ namespace CBReader
             this.Column7.MinimumWidth = 6;
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
-            this.Column7.Width = 125;
+            this.Column7.Width = 40;
             // 
             // Column8
             // 
@@ -1138,7 +1222,7 @@ namespace CBReader
             this.Column8.MinimumWidth = 6;
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
-            this.Column8.Width = 125;
+            this.Column8.Width = 70;
             // 
             // Column9
             // 
@@ -1146,7 +1230,7 @@ namespace CBReader
             this.Column9.MinimumWidth = 6;
             this.Column9.Name = "Column9";
             this.Column9.ReadOnly = true;
-            this.Column9.Width = 125;
+            this.Column9.Width = 150;
             // 
             // Column14
             // 
@@ -1168,6 +1252,8 @@ namespace CBReader
             // 
             // panel10
             // 
+            this.panel10.Controls.Add(this.button1);
+            this.panel10.Controls.Add(this.button2);
             this.panel10.Controls.Add(this.lbSearchMsg);
             this.panel10.Controls.Add(this.btBoolean);
             this.panel10.Controls.Add(this.btTextSearch);
@@ -1181,6 +1267,32 @@ namespace CBReader
             this.panel10.Size = new System.Drawing.Size(326, 195);
             this.panel10.TabIndex = 1;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Font = new System.Drawing.Font("細明體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(265, 164);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(29, 25);
+            this.button1.TabIndex = 20;
+            this.button1.TabStop = false;
+            this.button1.Text = "◀";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btMainFuncNarrow_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Font = new System.Drawing.Font("新細明體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(294, 164);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(29, 25);
+            this.button2.TabIndex = 19;
+            this.button2.TabStop = false;
+            this.button2.Text = "▶";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btMainFuncWide_Click);
+            // 
             // lbSearchMsg
             // 
             this.lbSearchMsg.AutoSize = true;
@@ -1192,20 +1304,20 @@ namespace CBReader
             // 
             // btBoolean
             // 
-            this.btBoolean.Location = new System.Drawing.Point(229, 86);
+            this.btBoolean.Location = new System.Drawing.Point(265, 86);
             this.btBoolean.Name = "btBoolean";
             this.btBoolean.Size = new System.Drawing.Size(35, 36);
-            this.btBoolean.TabIndex = 17;
+            this.btBoolean.TabIndex = 5;
             this.btBoolean.Text = "▷";
             this.btBoolean.UseVisualStyleBackColor = true;
             this.btBoolean.Click += new System.EventHandler(this.btBoolean_Click);
             // 
             // btTextSearch
             // 
-            this.btTextSearch.Location = new System.Drawing.Point(229, 49);
+            this.btTextSearch.Location = new System.Drawing.Point(265, 49);
             this.btTextSearch.Name = "btTextSearch";
             this.btTextSearch.Size = new System.Drawing.Size(35, 31);
-            this.btTextSearch.TabIndex = 16;
+            this.btTextSearch.TabIndex = 2;
             this.btTextSearch.Text = "🔍";
             this.btTextSearch.UseVisualStyleBackColor = true;
             this.btTextSearch.Click += new System.EventHandler(this.btTextSearch_Click);
@@ -1217,10 +1329,12 @@ namespace CBReader
             this.cbSearchThisSutra.Location = new System.Drawing.Point(18, 128);
             this.cbSearchThisSutra.Name = "cbSearchThisSutra";
             this.cbSearchThisSutra.Size = new System.Drawing.Size(131, 24);
-            this.cbSearchThisSutra.TabIndex = 15;
+            this.cbSearchThisSutra.TabIndex = 4;
             this.cbSearchThisSutra.Text = "檢索本經：";
             this.cbSearchThisSutra.UseVisualStyleBackColor = true;
             this.cbSearchThisSutra.CheckedChanged += new System.EventHandler(this.cbSearchThisSutra_CheckedChanged);
+            this.cbSearchThisSutra.Enter += new System.EventHandler(this.edTextSearch_Enter);
+            this.cbSearchThisSutra.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // cbSearchRange
             // 
@@ -1228,17 +1342,21 @@ namespace CBReader
             this.cbSearchRange.Location = new System.Drawing.Point(18, 98);
             this.cbSearchRange.Name = "cbSearchRange";
             this.cbSearchRange.Size = new System.Drawing.Size(151, 24);
-            this.cbSearchRange.TabIndex = 14;
+            this.cbSearchRange.TabIndex = 3;
             this.cbSearchRange.Text = "指定檢索範圍";
             this.cbSearchRange.UseVisualStyleBackColor = true;
             this.cbSearchRange.CheckedChanged += new System.EventHandler(this.cbSearchRange_CheckedChanged);
+            this.cbSearchRange.Enter += new System.EventHandler(this.edTextSearch_Enter);
+            this.cbSearchRange.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // edTextSearch
             // 
             this.edTextSearch.Location = new System.Drawing.Point(18, 49);
             this.edTextSearch.Name = "edTextSearch";
-            this.edTextSearch.Size = new System.Drawing.Size(204, 31);
-            this.edTextSearch.TabIndex = 13;
+            this.edTextSearch.Size = new System.Drawing.Size(241, 31);
+            this.edTextSearch.TabIndex = 1;
+            this.edTextSearch.Enter += new System.EventHandler(this.edTextSearch_Enter);
+            this.edTextSearch.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
             // label26
             // 
@@ -1275,7 +1393,8 @@ namespace CBReader
             this.tvMuluTree.Name = "tvMuluTree";
             this.tvMuluTree.Size = new System.Drawing.Size(197, 546);
             this.tvMuluTree.TabIndex = 2;
-            this.tvMuluTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvNavTree_AfterSelect);
+            this.tvMuluTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvNavTree_KeyDown);
+            this.tvMuluTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tvNavTree_MouseDoubleClick);
             // 
             // panel5
             // 
@@ -1401,6 +1520,26 @@ namespace CBReader
             this.miAny.Text = "? Any";
             this.miAny.Click += new System.EventHandler(this.miAny_Click);
             // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.LightGray;
+            this.panel2.Location = new System.Drawing.Point(5, 179);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(315, 10);
+            this.panel2.TabIndex = 31;
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.BackColor = System.Drawing.Color.LightGray;
+            this.panel3.Location = new System.Drawing.Point(5, 370);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(315, 10);
+            this.panel3.TabIndex = 32;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -1414,7 +1553,8 @@ namespace CBReader
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("新細明體", 12F);
             this.Name = "MainForm";
-            this.Text = "CBReader";
+            this.Text = "CBReader 毘舍離版";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.panel1.ResumeLayout(false);
@@ -1547,6 +1687,13 @@ namespace CBReader
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button btFindSutra;
+        private System.Windows.Forms.ContextMenuStrip cmBoolean;
+        private System.Windows.Forms.ToolStripMenuItem miNear;
+        private System.Windows.Forms.ToolStripMenuItem miBefore;
+        private System.Windows.Forms.ToolStripMenuItem miAnd;
+        private System.Windows.Forms.ToolStripMenuItem miOr;
+        private System.Windows.Forms.ToolStripMenuItem miExclude;
+        private System.Windows.Forms.ToolStripMenuItem miAny;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
@@ -1564,13 +1711,12 @@ namespace CBReader
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.ContextMenuStrip cmBoolean;
-        private System.Windows.Forms.ToolStripMenuItem miNear;
-        private System.Windows.Forms.ToolStripMenuItem miBefore;
-        private System.Windows.Forms.ToolStripMenuItem miAnd;
-        private System.Windows.Forms.ToolStripMenuItem miOr;
-        private System.Windows.Forms.ToolStripMenuItem miExclude;
-        private System.Windows.Forms.ToolStripMenuItem miAny;
+        private System.Windows.Forms.Button btMainFuncNarrow;
+        private System.Windows.Forms.Button btMainFuncWide;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
     }
 }
 

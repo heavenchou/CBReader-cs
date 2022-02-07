@@ -20,6 +20,8 @@ namespace CBReader
             HideTabHeader();
             listBox.SelectedIndex = 0;
             tabControl.SelectedTab = tpBulei;
+            tabControl.Top -= 1;
+            tabControl.Height += 5;
         }
 
         void HideTabHeader()
@@ -86,6 +88,7 @@ namespace CBReader
             } else {
                 tabControl.SelectedTab = tpBook;
             }
+            listBox.Focus();
         }
 
         private void btOK_Click(object sender, EventArgs e)
@@ -118,6 +121,50 @@ namespace CBReader
             } else {
                 // 處理原書
                 TreeViewCheckAll(tvBook, false);
+            }
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab == tpBulei) {
+                listBox.SelectedIndex = 0;
+            } else {
+                listBox.SelectedIndex = 1;
+            }
+            tabControl.Focus();
+        }
+
+        private void tvBulei_DoubleClick(object sender, EventArgs e)
+        {
+            if (tvBulei.SelectedNode != null) {
+                tvBulei.SelectedNode.Checked = !tvBulei.SelectedNode.Checked;
+            }
+        }
+
+        private void tvBook_DoubleClick(object sender, EventArgs e)
+        {
+            if (tvBook.SelectedNode != null) {
+                tvBook.SelectedNode.Checked = !tvBook.SelectedNode.Checked;
+            }
+        }
+
+        private void tvBulei_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 32 || e.KeyChar == 13) {
+                if (tvBulei.SelectedNode != null) {
+                    tvBulei.SelectedNode.Checked = !tvBulei.SelectedNode.Checked;
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void tvBook_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 32 || e.KeyChar == 13) {
+                if (tvBook.SelectedNode != null) {
+                    tvBook.SelectedNode.Checked = !tvBook.SelectedNode.Checked;
+                    e.Handled = true;
+                }
             }
         }
     }

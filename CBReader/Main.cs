@@ -6,6 +6,8 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -36,7 +38,7 @@ namespace CBReader
         int SpineID;    // 目前開啟的檔案, 用來處理上一卷和下一卷用的
 
         int NavWidth;   // 目錄區的寬度
-        int MuluWidth  = 200;  // 書目區的寬度
+        int MuluWidth = 200;  // 書目區的寬度
 
         public MainForm()
         {
@@ -54,7 +56,7 @@ namespace CBReader
 
             // 判斷是不是西蓮淨苑 SLReader 專用
             // CheckSeeland(); ????
-            
+
             // 刪去舊版
             string sOld = CGlobalVal.MyHomePath + ".tmp";
             if (File.Exists(sOld)) {
@@ -84,35 +86,35 @@ namespace CBReader
             updateForm = new UpdateForm(this);
         }
 
-		// 初始資料
-		void InitialData()
+        // 初始資料
+        void InitialData()
         {
-	        // 取得 Bookcase 所有資料區
-	        // 載入書櫃
+            // 取得 Bookcase 所有資料區
+            // 載入書櫃
 
-		    string sBookcasePath = "";
+            string sBookcasePath = "";
 
-		    // Bookcase 目錄處理原則
-		    // 1. Windows 在主程式所在目錄底下去找 Bookcase 子目錄
-		    // 2. Mac 有二個優先順序
-		    //    3.1 /User/xxx/Library/CBETA/Bookcase
-		    //    3.2 /Library/CBETA/Bookcase
-		    // 3. 上面若沒有, 則找 Setting->BookcaseFullDir
-		    // 4. 以上若都沒有, 則由使用者尋找, 找到後存在 Setting->BookcaseFullDir
+            // Bookcase 目錄處理原則
+            // 1. Windows 在主程式所在目錄底下去找 Bookcase 子目錄
+            // 2. Mac 有二個優先順序
+            //    3.1 /User/xxx/Library/CBETA/Bookcase
+            //    3.2 /Library/CBETA/Bookcase
+            // 3. 上面若沒有, 則找 Setting->BookcaseFullDir
+            // 4. 以上若都沒有, 則由使用者尋找, 找到後存在 Setting->BookcaseFullDir
 
-		    sBookcasePath = CGlobalVal.pathAddSlash(CGlobalVal.MyFullPath + Setting.BookcasePath);
+            sBookcasePath = CGlobalVal.pathAddSlash(CGlobalVal.MyFullPath + Setting.BookcasePath);
 
-	        // 都沒有就查設定
-	        if(!Directory.Exists(sBookcasePath))  {
-		        if(Setting.BookcaseFullPath != "") {
-			        sBookcasePath = Setting.BookcaseFullPath;
-		        }
-	        }
+            // 都沒有就查設定
+            if (!Directory.Exists(sBookcasePath)) {
+                if (Setting.BookcaseFullPath != "") {
+                    sBookcasePath = Setting.BookcaseFullPath;
+                }
+            }
 
-	        // 都沒有就詢問使用者
-	        if (!Directory.Exists(sBookcasePath)) {
+            // 都沒有就詢問使用者
+            if (!Directory.Exists(sBookcasePath)) {
 
-	            MessageBox.Show("沒有找到您的 Bookcase 書櫃目錄，請手動選擇目錄所在位置。");
+                MessageBox.Show("沒有找到您的 Bookcase 書櫃目錄，請手動選擇目錄所在位置。");
                 // 使用指定目錄
 
                 folderBrowserDialog1.Description = "選擇 Bookcase 目錄所在位置";
@@ -121,8 +123,8 @@ namespace CBReader
                     sBookcasePath = folderBrowserDialog1.SelectedPath;
                 }
 
-	            Setting.BookcaseFullPath = sBookcasePath;
-	            Setting.SaveToFile();
+                Setting.BookcaseFullPath = sBookcasePath;
+                Setting.SaveToFile();
             }
 
             Bookcase = new CBookcase(sBookcasePath);
@@ -130,13 +132,13 @@ namespace CBReader
             // 在書櫃選擇叢書
             int iBookcaseCount = Bookcase.Books.Count;
             if (iBookcaseCount == 0) {
-	            CGlobalMessage.push("書櫃中一本書都沒有");
+                CGlobalMessage.push("書櫃中一本書都沒有");
             }
             // else if(iBookcaseCount == 1)
             else {
-	            // 只有一本書就直接開了
-	            // OpenBookcase(0); // ???? 暫時取消, 這一版要直接開啟 CBETA
-	            OpenCBETABook();    // ???? 取消上面, 因為這一版要直接開啟 CBETA
+                // 只有一本書就直接開了
+                // OpenBookcase(0); // ???? 暫時取消, 這一版要直接開啟 CBETA
+                OpenCBETABook();    // ???? 取消上面, 因為這一版要直接開啟 CBETA
             }
 
             //???? MuluTree = 0;
@@ -145,9 +147,13 @@ namespace CBReader
             SpineID = -1;   // 初值表示沒開啟
 
             if (iBookcaseCount != 0) {
-	            string URL = "file://" + Bookcase.CBETA.Dir + "help/index.htm";
+                string URL = "file://" + Bookcase.CBETA.Dir + "help/index.htm";
                 webBrowser.Navigate(URL);
             }
+
+            Text = Text + " v" + CGlobalVal.Version;
+            Text = Text.Remove(Text.LastIndexOf('.'));
+            Text = Text.Remove(Text.LastIndexOf('.'));
 
             // 西蓮淨苑 SLReader 專用
             // 檢索範圍要加上西蓮
@@ -175,13 +181,13 @@ namespace CBReader
         // 開啟指定的書櫃
         void OpenBookcase(int iID)
         {
-	        if(iID == SelectedBook) return;	// 同一本, 不要重開
-	        if(iID == -1) return;   	// 沒選書
+            if (iID == SelectedBook) return;    // 同一本, 不要重開
+            if (iID == -1) return;      // 沒選書
 
-	        SelectedBook = iID;
+            SelectedBook = iID;
 
-	        // 載入叢書的起始目錄
-	        CSeries s = Bookcase.Books[iID];
+            // 載入叢書的起始目錄
+            CSeries s = Bookcase.Books[iID];
             NavTree = new CNavTree(s.Dir + s.NavFile);
             NavTree.SaveToTreeView(tvNavTree);
         }
@@ -189,12 +195,12 @@ namespace CBReader
         // 開啟CBETA書櫃
         void OpenCBETABook()
         {
-	        for(int i=0; i<Bookcase.Books.Count; i++) {
-		        if(Bookcase.Books[i] == Bookcase.CBETA) {
-			        // 找到 CBETA 了
-			        OpenBookcase(i);
-			        return;
-		        }
+            for (int i = 0; i < Bookcase.Books.Count; i++) {
+                if (Bookcase.Books[i] == Bookcase.CBETA) {
+                    // 找到 CBETA 了
+                    OpenBookcase(i);
+                    return;
+                }
             }
             MessageBox.Show("找不到 CBETA 資料");
             return;
@@ -212,7 +218,7 @@ namespace CBReader
 
             var ieVer = Microsoft.Win32.Registry.GetValue(sFeatureBrowserEmulation, sKey, "0");
             string sIEVer = ieVer.ToString();
-            if(sIEVer != iIE.ToString()) {
+            if (sIEVer != iIE.ToString()) {
                 Microsoft.Win32.Registry.SetValue(sFeatureBrowserEmulation, sKey, iIE);
             }
         }
@@ -220,9 +226,9 @@ namespace CBReader
         // 將檔案載入導覽樹
         void LoadNavTree(string sFile)
         {
-	        if(NavTree != null && NavTree.XMLFile == sFile) return;
+            if (NavTree != null && NavTree.XMLFile == sFile) return;
 
-	        NavTree = new CNavTree(sFile);
+            NavTree = new CNavTree(sFile);
             NavTree.SaveToTreeView(tvNavTree);
         }
 
@@ -270,7 +276,7 @@ namespace CBReader
             }
 
             // 產生目錄
-            
+
             string sMulu = sFile.Replace("XML", "toc");
             int iLen = sMulu.Length;
             sMulu = sMulu.Substring(0, iLen - 8); // 扣掉最後的 _001.xml
@@ -297,7 +303,7 @@ namespace CBReader
 
                 // 經名移除 (第X卷-第x卷)
                 sName = CCBSutraUtil.CutJuanAfterSutraName(sName);
-                sJuan = sJuan.TrimStart('0'); 
+                sJuan = sJuan.TrimStart('0');
                 sSutra = sSutra.TrimStart('0');
                 string sCaption = CGlobalVal.ProgramTitle + "《" + sName + "》"
                         + sVol + ", No. " + sSutra + ", 卷/篇章" + sJuan;
@@ -320,19 +326,18 @@ namespace CBReader
                 return;
             }
 
-	        MuluTree = new CNavTree(sFile);
+            MuluTree = new CNavTree(sFile);
             MuluTree.SaveToTreeView(tvMuluTree);
 
-	        // 展開第一層
+            // 展開第一層
 
-	        for(int i = 1; i < tvMuluTree.GetNodeCount(false); i++)
-	        {
-		        try {
-			        tvMuluTree.Nodes[i].Expand();
+            for (int i = 0; i < tvMuluTree.GetNodeCount(false); i++) {
+                try {
+                    tvMuluTree.Nodes[i].Expand();
                 } catch {
                     // 忽略...
                 }
-	        }
+            }
             tvMuluTree.SelectedNode = tvMuluTree.Nodes[0];
 
             // 檢查書目區是不是縮到最小
@@ -344,13 +349,13 @@ namespace CBReader
 
         void btMuluWidthSwitchClick()
         {
-	        if(pnMulu.Width == 0)  {
+            if (pnMulu.Width == 0) {
                 pnMulu.Width = MuluWidth;
-                btMuluWidthSwitch.Text = "<<目次";
+                btMuluWidthSwitch.Text = "◄ 目次";
             } else {
-		        MuluWidth = pnMulu.Width;
+                MuluWidth = pnMulu.Width;
                 pnMulu.Width = 0;
-                btMuluWidthSwitch.Text = "目次>>";
+                btMuluWidthSwitch.Text = "目次 ►";
             }
         }
 
@@ -381,6 +386,68 @@ namespace CBReader
                     Bookcase.CBETA.SearchEngine_orig.BuildFileList.SearchThisSutra(sThisBookId, sThisSutra);
                 }
             }
+        }
+
+        // 檢查有沒有更新程式, bShowNoUpdate : 沒更新時要不要秀訊息
+        void CheckUpdate(bool bShowNoUpdate)
+        {
+            return;
+
+	        // 取得資料版本
+	        string sDataVer = Bookcase.CBETA.Version;
+
+            updateForm.CheckUpdate(CGlobalVal.Version, sDataVer, bShowNoUpdate);
+
+	        if(!updateForm.IsUpdate)    // 有更新就不要修改更新日期
+	        {
+                Setting.LastUpdateChk = DateTime.Today.ToString("yyyyMMdd");
+		        Setting.SaveToFile();
+            }
+        }
+
+        // 切換目錄樹中的折疊
+        void ToggleTreeViewItem(TreeNode tvItem)
+        {
+            // 如果有子層, 就切換展開或閉合狀態
+            if (tvItem.GetNodeCount(false) > 0) {
+                if (tvItem.IsExpanded) {
+                    tvItem.Collapse();
+                } else {
+                    tvItem.Expand();
+                }
+            }
+        }
+
+        // 開啟目錄樹中的經文或另一層目錄
+        void OpenTreeViewItem(TreeNode tvItem)
+        {
+            // Item
+            SNavItem item = (SNavItem)tvItem.Tag;
+            string sURL = item.URL;
+            // ???? 這行取巧, 日後要拿掉
+            // 因為從單經書目點選時, 有時沒有開啟 SelectedBook
+            if (SelectedBook < 0) {
+                SelectedBook = 0;
+            }
+            CSeries sSeries = Bookcase.Books[SelectedBook];
+            var iType = item.Type;
+            tvNavTree.Cursor = Cursors.WaitCursor;
+
+            // 一般連結
+            if (iType == ENavItemType.nit_NormalLink) {
+                if (sURL.Substring(0, 4) == "http") {
+                    webBrowser.Navigate(sURL);
+                } else {
+                    webBrowser.Navigate("file://" + sSeries.Dir + sURL);
+                }
+            } else if (iType == ENavItemType.nit_NavLink) {
+                // 目錄連結
+                LoadNavTree(sSeries.Dir + sURL);
+            } else if (iType == ENavItemType.nit_CBLink) {
+                // CBETA 經文
+                ShowCBXML(sURL);
+            }
+            tvNavTree.Cursor = Cursors.Default;
         }
 
         // =====================================================
@@ -417,72 +484,22 @@ namespace CBReader
 
         private void miUpdate_Click(object sender, EventArgs e)
         {
-            updateForm.ShowDialog();
+            CheckUpdate(true);  // true 表示沒有更新要秀訊息
         }
         private void MainForm_Shown(object sender, EventArgs e)
         {
             InitialData();
 
             // 檢查更新
-            string sToday = "";//???? GetTodayString();
+            string sToday = DateTime.Today.ToString("yyyyMMdd");
             if (sToday != Setting.LastUpdateChk) { 
-                //???? CheckUpdate();   // 檢查更新
+                CheckUpdate(false);   // 檢查更新 (false : 沒更新就不用秀訊息)
             }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             SetPermissions(7000); // 設定為 IE 7
-        }
-
-        // NavTree Item 點二下的作用
-        // Item->TagString 儲存 URL
-        // Item->Tag 儲存 Type
-        // Item->TagObject 儲存 SNavItem
-        private void tvNavTree_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            // Item
-            TreeNode tvItem = e.Node;
-            SNavItem item = (SNavItem)tvItem.Tag;
-            string sURL = item.URL;
-            // ???? 這行取巧, 日後要拿掉
-            // 因為從單經書目點選時, 有時沒有開啟 SelectedBook
-            if (SelectedBook < 0) SelectedBook = 0;
-            CSeries sSeries = Bookcase.Books[SelectedBook];
-
-            if (sURL == "")  // 沒有 URL
-            {
-                // 如果有子層, 就切換展開或閉合狀態
-                if (tvItem.GetNodeCount(false) > 0) {
-                    if (tvItem.IsExpanded) {
-                        tvItem.Collapse();
-                    } else {
-                        tvItem.Expand();
-                    }
-                }
-                return;
-            }
-
-            var iType = item.Type;
-
-            // 一般連結
-            tvNavTree.Cursor = Cursors.WaitCursor;
-
-            if (iType == ENavItemType.nit_NormalLink) {
-                if (sURL.Substring(0, 4) == "http")
-                    webBrowser.Navigate(sURL);
-                else
-                    webBrowser.Navigate("file://" + sSeries.Dir + sURL);
-            }
-            // 目錄連結
-            else if (iType == ENavItemType.nit_NavLink) {
-                LoadNavTree(sSeries.Dir + sURL);
-            }
-            // CBETA 經文
-            else if (iType == ENavItemType.nit_CBLink) {
-                ShowCBXML(sURL);
-            }
-            tvNavTree.Cursor = Cursors.Default;
         }
 
         private void btOpenNav_Click(object sender, EventArgs e)
@@ -513,7 +530,6 @@ namespace CBReader
                     return;
                 }
             }
-
             MessageBox.Show("目前已是第一卷/篇章。");
         }
 
@@ -533,18 +549,18 @@ namespace CBReader
                     return;
                 }
             }
-
             MessageBox.Show("目前已是最後一卷/篇章。");
         }
+
         private void btNavWidthSwitch_Click(object sender, EventArgs e)
         {
             if (pnNav.Width == 0) {
                 pnNav.Width = NavWidth;
-                btNavWidthSwitch.Text = "<<主功能";
+                btNavWidthSwitch.Text = "◄ 主功能";
             } else {
                 NavWidth = pnNav.Width;
                 pnNav.Width = 0;
-                btNavWidthSwitch.Text = "主功能>>";
+                btNavWidthSwitch.Text = "主功能 ►";
             }
         }
 
@@ -677,9 +693,26 @@ namespace CBReader
             if(sgFindSutra[7, e.RowIndex].Value == null) {
                 return ;
             }
-
             int iIndex = Convert.ToInt32(sgFindSutra[7,e.RowIndex].Value);
+            ShowSutraByCatalogIndex(iIndex);
+        }
 
+        private void sgFindSutra_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                if (sgFindSutra.SelectedRows.Count != 0) {
+                    int iRow = sgFindSutra.SelectedRows[0].Index;
+                    int iIndex = Convert.ToInt32(sgFindSutra[7, iRow].Value);
+                    ShowSutraByCatalogIndex(iIndex);
+                }
+                // 表示略過控制項的預設處理，這樣 GridView 就不會自動跳到下一筆了
+                e.Handled = true;
+            }  
+        }
+
+        // sgFindSutra 開啟的經文
+        void ShowSutraByCatalogIndex(int iIndex)
+        {
             CCatalog cbCatalog = Bookcase.CBETA.Catalog;
             string sBookID = cbCatalog.ID[iIndex];
             string sVol = cbCatalog.Vol[iIndex];
@@ -814,8 +847,7 @@ namespace CBReader
             }
 
             // 選擇全文檢索引擎, 若某一方為 0 , 則選另一方 (全 0 就不管了)
-            //SetSearchEngine();
-            SearchEngine = Bookcase.CBETA.getSearchEngine();
+            SearchEngine = Bookcase.CBETA.getSearchEngine(Setting.CollationType);
             if(SearchEngine == null) {
                 MessageBox.Show("沒有可用的全文檢索引擎");
                 return;
@@ -954,17 +986,102 @@ namespace CBReader
             if (sgTextSearch[8, e.RowIndex].Value == null) {
                 return;
             }
-
             int iIndex = Convert.ToInt32(sgTextSearch[8, e.RowIndex].Value);
-
             string sFile = Bookcase.CBETA.Spine.Files[iIndex];
             // 要塗色
             ShowCBXML(sFile, true, Bookcase.CBETA);
         }
 
+        private void sgTextSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                if(sgTextSearch.SelectedRows.Count > 0) {
+                    int iRow = sgTextSearch.SelectedRows[0].Index;
+                    int iIndex = Convert.ToInt32(sgTextSearch[8, iRow].Value);
+                    string sFile = Bookcase.CBETA.Spine.Files[iIndex];
+                    // 要塗色
+                    ShowCBXML(sFile, true, Bookcase.CBETA);
+                    e.Handled = true;
+                }
+            }
+        }
+
+
         private void cbSearchThisSutra_CheckedChanged(object sender, EventArgs e)
         {
             cbSearchThisSutraChange();
+        }
+
+
+        private void tvNavTree_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            TreeView treeView = sender as TreeView;
+            TreeNode tvItem = treeView.GetNodeAt(e.X, e.Y);
+            if(tvItem == null) { return; }
+            if(tvItem != treeView.SelectedNode) { return; }
+            OpenTreeViewItem(tvItem);
+        }
+
+        private void tvNavTree_KeyDown(object sender, KeyEventArgs e)
+        {
+            TreeView treeView = sender as TreeView;
+            if (e.KeyCode == Keys.Enter) {
+                TreeNode tvItem = treeView.SelectedNode;
+                if (tvItem != null) {
+                    SNavItem item = (SNavItem)tvItem.Tag;
+                    string sURL = item.URL;
+
+                    // 不能用有沒有 URL 來判斷是不是目錄，有些目錄也是有 URL，在書目區即是如此
+
+                    if (tvItem.Nodes.Count > 0) {
+                        ToggleTreeViewItem(tvItem);
+                    }
+                    if (sURL != "") {
+                        // 開啟經文
+                        OpenTreeViewItem(tvItem);
+                    }
+                }
+            }
+        }
+
+        private void edFindSutraVolFrom_Enter(object sender, EventArgs e)
+        {
+            AcceptButton = btFindSutra;
+        }
+
+        private void edGoSutraSutraNum_Enter(object sender, EventArgs e)
+        {
+            AcceptButton = btGoSutra;
+        }
+
+        private void edFindSutraVolFrom_Leave(object sender, EventArgs e)
+        {
+            AcceptButton = null;
+        }
+
+        private void edGoBookVol_Enter(object sender, EventArgs e)
+        {
+            AcceptButton = btGoBook;
+        }
+
+        private void edGoByKeyword_Enter(object sender, EventArgs e)
+        {
+            AcceptButton = btGoByKeyword;
+        }
+
+        private void edTextSearch_Enter(object sender, EventArgs e)
+        {
+            AcceptButton = btTextSearch;
+        }
+
+        private void btMainFuncWide_Click(object sender, EventArgs e)
+        {
+            pnNav.Width = 600;
+        }
+
+        private void btMainFuncNarrow_Click(object sender, EventArgs e)
+        {
+            pnNav.Width = 380;
         }
     }
 }
