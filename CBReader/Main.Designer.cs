@@ -155,6 +155,8 @@ namespace CBReader
             this.miOr = new System.Windows.Forms.ToolStripMenuItem();
             this.miExclude = new System.Windows.Forms.ToolStripMenuItem();
             this.miAny = new System.Windows.Forms.ToolStripMenuItem();
+            this.miAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.miCreateHtml = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.pnMainFunc.SuspendLayout();
@@ -211,10 +213,11 @@ namespace CBReader
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miOption,
             this.miUpdate,
-            this.miAbout});
+            this.miAbout,
+            this.miAdmin});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(865, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(865, 27);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1603,6 +1606,22 @@ namespace CBReader
             this.miAny.Text = "? Any";
             this.miAny.Click += new System.EventHandler(this.miAny_Click);
             // 
+            // miAdmin
+            // 
+            this.miAdmin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miCreateHtml});
+            this.miAdmin.Name = "miAdmin";
+            this.miAdmin.Size = new System.Drawing.Size(105, 23);
+            this.miAdmin.Text = "Heaven專用";
+            this.miAdmin.Visible = false;
+            // 
+            // miCreateHtml
+            // 
+            this.miCreateHtml.Name = "miCreateHtml";
+            this.miCreateHtml.Size = new System.Drawing.Size(224, 26);
+            this.miCreateHtml.Text = "批量產生HTML";
+            this.miCreateHtml.Click += new System.EventHandler(this.miCreateHtml_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1781,6 +1800,8 @@ namespace CBReader
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ToolStripMenuItem miAdmin;
+        private System.Windows.Forms.ToolStripMenuItem miCreateHtml;
     }
 }
 

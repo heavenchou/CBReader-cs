@@ -643,9 +643,7 @@ namespace CBReader
             if (edFindSutraSutraName.Text == CGlobalVal.DebugString) {
                 CGlobalVal.IsDebug = true;
                 edFindSutraSutraName.Text = "";
-
-                //???? wmiDebug->Visible = true;
-
+                miAdmin.Visible = true;
                 return;
             }
             string sBook = cbFindSutraBookId.Text;
@@ -1201,6 +1199,12 @@ namespace CBReader
         private void edGoBookPage_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void miCreateHtml_Click(object sender, EventArgs e)
+        {
+            CreateHtml createhtmlForm = new CreateHtml(this);
+            createhtmlForm.Show();
         }
     }
 }

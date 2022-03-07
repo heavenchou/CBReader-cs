@@ -78,6 +78,12 @@
     <Compile Include="BookData.cs" />
     <Compile Include="Catalog.cs" />
     <Compile Include="CBXML.cs" />
+    <Compile Include="CreateHtml.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateHtml.Designer.cs">
+      <DependentUpon>CreateHtml.cs</DependentUpon>
+    </Compile>
     <Compile Include="ErrorEnum.cs" />
     <Compile Include="FileList.cs" />
     <Compile Include="GlobalMessage.cs" />
@@ -131,6 +137,9 @@
     <Compile Include="WordTool.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateHtml.resx">
+      <DependentUpon>CreateHtml.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
