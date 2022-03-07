@@ -137,11 +137,14 @@ namespace CBReader
 		// 由頁欄行取得標準 0001a01 格式的字串
 		public static string getStandardPageColLine(string sPage, string sCol, string sLine)
 		{
-			sPage = getStandardPageFormat(sPage);
-			sCol = getStandardColFormat(sCol);
-			sLine = getStandardLineFormat(sLine);
-
-			return (sPage + sCol + sLine);
+			if (sPage != "" || sCol != "" || sLine != "") {
+				sPage = getStandardPageFormat(sPage);
+				sCol = getStandardColFormat(sCol);
+				sLine = getStandardLineFormat(sLine);
+				return (sPage + sCol + sLine);
+			} else {
+				return "";
+            }
 		}
 
 		// 經名要移除 (第X卷)

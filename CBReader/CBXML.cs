@@ -758,7 +758,7 @@ namespace CBReader
             CRendAttr myRend = new CRendAttr(sRend);
             CStyleAttr myStyle = new CStyleAttr(sStyle);
             string sNewStyle = myRend.NewStyle + myStyle.NewStyle;
-            string sNewClass = myRend.NewClass + myStyle.NewStyle;  //???? 為什麼是 newstyle
+            string sNewClass = myRend.NewClass;
             if (sNewStyle != "") {
                 sNewStyle = " style='" + sNewStyle + "'";
             }
@@ -2070,7 +2070,7 @@ namespace CBReader
             // 原本整段的空格是用空格. 例如 : <lg rend="margin-left:1"> , 2014 之前的版本是每一行前面都加上一個空格. 不過折行就不會空格了.
             // 2016 就改成用段落 <p class="lg" style="margin-left:1em;"> , 因此每一行前面就不用加空格.
             // 不過因此 copy 再貼在純文字, 就會少了行首的空格.
-            // 至於引用複製, 就要在原本行首的空格加上 <spane data-space="1"> 表示空一格, 到時再用引用複製來還原一個空格.
+            // 至於引用複製, 就要在原本行首的空格加上 <span data-space="1"> 表示空一格, 到時再用引用複製來還原一個空格.
         */
 
         /*

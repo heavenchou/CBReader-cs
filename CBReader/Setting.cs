@@ -166,8 +166,8 @@ namespace CBReader
         public int NearNum = 30;                // 全文檢索 Near 的字距
         public int BeforeNum = 30;              // 全文檢索 Before 的字距
         public int MaxSearchNum = 500;           // 輸出最多的筆數, 0 表示不設限
-                                                 ////bool OverSearchWarn = true;        // 超出全文檢索檔案數的限制時, 是否提出警告?
-                                                 ////bool RMPunctuationWarn = true;     // 移除使用者輸入檢索字串中的標點時，是否提出警告訊息？
+        //bool OverSearchWarn = true;        // 超出全文檢索檔案數的限制時, 是否提出警告?
+        //bool RMPunctuationWarn = true;     // 移除使用者輸入檢索字串中的標點時，是否提出警告訊息？
 
         // 引用複製模式
 

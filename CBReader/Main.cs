@@ -52,6 +52,9 @@ namespace CBReader
             // 取得設定檔並讀取所有設定
             Setting = new CSetting(CGlobalVal.SettingFile);
 
+            // 載入環境
+            LoadEnvironment();
+
             InitializeForms();  // 初始其它的 Form
 
             // 判斷是不是西蓮淨苑 SLReader 專用
@@ -251,6 +254,10 @@ namespace CBReader
             if (iPos >= 0) {
                 sLink = sFile.Substring(iPos + 1);
                 sFile = sFile.Substring(0, iPos);
+                if (sFile == "") {
+                    MessageBox.Show("沒有找到正確檔案");
+                    return;
+                }
             }
 
             string sXMLFile = Bookcase.CBETA.Dir + sFile;
@@ -391,7 +398,7 @@ namespace CBReader
         // 檢查有沒有更新程式, bShowNoUpdate : 沒更新時要不要秀訊息
         void CheckUpdate(bool bShowNoUpdate)
         {
-            return;
+            //return;
 
 	        // 取得資料版本
 	        string sDataVer = Bookcase.CBETA.Version;
@@ -450,6 +457,69 @@ namespace CBReader
             tvNavTree.Cursor = Cursors.Default;
         }
 
+        // 載入環境
+        void LoadEnvironment()
+        {
+            CIniFile iniFile = new CIniFile(Setting.SettingFile);
+            string Section;
+
+            // Ini file 結構是
+            // [section]
+            // Ident = Value
+
+            Section = "MainForm";
+
+            pnMainFunc.Width = iniFile.ReadInteger(Section, "FunMenuWidth", pnMainFunc.Width);
+            MuluWidth = iniFile.ReadInteger(Section, "MuluWidth", MuluWidth);
+
+            // 欄寬
+            Section = "ColumnWidth";
+
+            // 經目搜尋的欄寬
+            for(int i=0; i<7; i++) {
+                sgFindSutra.Columns[i].Width = iniFile.ReadInteger(Section, $"FindSutraC{i}", sgFindSutra.Columns[i].Width);
+            }
+            // 全文檢索的欄寬
+            for (int i = 0; i < 8; i++) {
+                sgTextSearch.Columns[i].Width = iniFile.ReadInteger(Section, $"TextSearchC{i}", sgTextSearch.Columns[i].Width);
+            }
+
+        }
+
+        // 儲存環境
+        void SaveEnvironment()
+        {
+            CIniFile iniFile = new CIniFile(Setting.SettingFile);
+            string Section;
+
+            // Ini file 結構是
+            // [section]
+            // Ident = Value
+
+            Section = "MainForm";
+
+            iniFile.WriteInteger(Section, "FunMenuWidth", pnMainFunc.Width);
+            if (pnMulu.Width > 0) {
+                iniFile.WriteInteger(Section, "MuluWidth", pnMulu.Width);
+            } else {
+                iniFile.WriteInteger(Section, "MuluWidth", MuluWidth);
+            }
+
+            // 欄寬
+            Section = "ColumnWidth";
+
+            // 經目搜尋的欄寬
+            for (int i = 0; i < 7; i++) {
+                iniFile.WriteInteger(Section, $"FindSutraC{i}", sgFindSutra.Columns[i].Width);
+            }
+            // 全文檢索的欄寬
+            for (int i = 0; i < 8; i++) {
+                iniFile.WriteInteger(Section, $"TextSearchC{i}", sgTextSearch.Columns[i].Width);
+            }
+
+
+        }
+
         // =====================================================
         // 元件函式
         // =====================================================
@@ -490,6 +560,7 @@ namespace CBReader
         {
             InitialData();
 
+
             // 檢查更新
             string sToday = DateTime.Today.ToString("yyyyMMdd");
             if (sToday != Setting.LastUpdateChk) { 
@@ -500,6 +571,9 @@ namespace CBReader
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             SetPermissions(7000); // 設定為 IE 7
+
+            // 儲存環境
+            SaveEnvironment();
         }
 
         private void btOpenNav_Click(object sender, EventArgs e)
@@ -554,12 +628,12 @@ namespace CBReader
 
         private void btNavWidthSwitch_Click(object sender, EventArgs e)
         {
-            if (pnNav.Width == 0) {
-                pnNav.Width = NavWidth;
+            if (pnMainFunc.Width == 0) {
+                pnMainFunc.Width = NavWidth;
                 btNavWidthSwitch.Text = "◄ 主功能";
             } else {
-                NavWidth = pnNav.Width;
-                pnNav.Width = 0;
+                NavWidth = pnMainFunc.Width;
+                pnMainFunc.Width = 0;
                 btNavWidthSwitch.Text = "主功能 ►";
             }
         }
@@ -1076,12 +1150,57 @@ namespace CBReader
 
         private void btMainFuncWide_Click(object sender, EventArgs e)
         {
-            pnNav.Width = 600;
+            pnMainFunc.Width = 600;
         }
 
         private void btMainFuncNarrow_Click(object sender, EventArgs e)
         {
-            pnNav.Width = 380;
+            pnMainFunc.Width = 380;
+        }
+
+        private void edGoBookVol_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void edGoSutraLine_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void edGoSutraPage_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void edGoSutraSutraNum_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void edGoSutraCol_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void edGoSutraJuan_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void edGoBookCol_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void edGoBookLine_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void edGoBookPage_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -74,19 +74,19 @@ namespace CBReader
             this.panel1.Controls.Add(this.btOK);
             this.panel1.Controls.Add(this.btSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 544);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Location = new System.Drawing.Point(0, 537);
+            this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(639, 79);
+            this.panel1.Size = new System.Drawing.Size(620, 76);
             this.panel1.TabIndex = 0;
             // 
             // btCancel
             // 
             this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btCancel.Location = new System.Drawing.Point(514, 19);
-            this.btCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btCancel.Location = new System.Drawing.Point(510, 20);
+            this.btCancel.Margin = new System.Windows.Forms.Padding(5);
             this.btCancel.Name = "btCancel";
-            this.btCancel.Size = new System.Drawing.Size(94, 42);
+            this.btCancel.Size = new System.Drawing.Size(88, 42);
             this.btCancel.TabIndex = 2;
             this.btCancel.Text = "取消";
             this.btCancel.UseVisualStyleBackColor = true;
@@ -94,10 +94,10 @@ namespace CBReader
             // btOK
             // 
             this.btOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btOK.Location = new System.Drawing.Point(321, 19);
-            this.btOK.Margin = new System.Windows.Forms.Padding(4);
+            this.btOK.Location = new System.Drawing.Point(286, 20);
+            this.btOK.Margin = new System.Windows.Forms.Padding(5);
             this.btOK.Name = "btOK";
-            this.btOK.Size = new System.Drawing.Size(94, 42);
+            this.btOK.Size = new System.Drawing.Size(88, 42);
             this.btOK.TabIndex = 0;
             this.btOK.Text = "確定";
             this.btOK.UseVisualStyleBackColor = true;
@@ -106,10 +106,10 @@ namespace CBReader
             // btSave
             // 
             this.btSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btSave.Location = new System.Drawing.Point(189, 19);
-            this.btSave.Margin = new System.Windows.Forms.Padding(4);
+            this.btSave.Location = new System.Drawing.Point(172, 20);
+            this.btSave.Margin = new System.Windows.Forms.Padding(5);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(94, 42);
+            this.btSave.Size = new System.Drawing.Size(88, 42);
             this.btSave.TabIndex = 1;
             this.btSave.Text = "儲存";
             this.btSave.UseVisualStyleBackColor = true;
@@ -124,37 +124,39 @@ namespace CBReader
             this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(639, 544);
+            this.panel2.Size = new System.Drawing.Size(620, 537);
             this.panel2.TabIndex = 1;
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.edCSSFileName);
             this.groupBox4.Controls.Add(this.cbUseCSSFile);
-            this.groupBox4.Location = new System.Drawing.Point(326, 414);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Location = new System.Drawing.Point(286, 396);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Size = new System.Drawing.Size(282, 107);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox4.Size = new System.Drawing.Size(312, 122);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "畫面呈現";
             // 
             // edCSSFileName
             // 
-            this.edCSSFileName.Location = new System.Drawing.Point(29, 62);
+            this.edCSSFileName.Location = new System.Drawing.Point(34, 73);
+            this.edCSSFileName.Margin = new System.Windows.Forms.Padding(4);
             this.edCSSFileName.Name = "edCSSFileName";
-            this.edCSSFileName.Size = new System.Drawing.Size(231, 31);
+            this.edCSSFileName.Size = new System.Drawing.Size(248, 34);
             this.edCSSFileName.TabIndex = 10;
             // 
             // cbUseCSSFile
             // 
             this.cbUseCSSFile.AutoSize = true;
-            this.cbUseCSSFile.Location = new System.Drawing.Point(28, 31);
+            this.cbUseCSSFile.Location = new System.Drawing.Point(34, 36);
+            this.cbUseCSSFile.Margin = new System.Windows.Forms.Padding(4);
             this.cbUseCSSFile.Name = "cbUseCSSFile";
-            this.cbUseCSSFile.Size = new System.Drawing.Size(194, 24);
+            this.cbUseCSSFile.Size = new System.Drawing.Size(199, 29);
             this.cbUseCSSFile.TabIndex = 9;
             this.cbUseCSSFile.Text = "增加自訂 CSS 檔案";
             this.cbUseCSSFile.UseVisualStyleBackColor = true;
@@ -165,11 +167,11 @@ namespace CBReader
             this.groupBox3.Controls.Add(this.cbGaijiUseUniExt);
             this.groupBox3.Controls.Add(this.groupBox7);
             this.groupBox3.Controls.Add(this.groupBox6);
-            this.groupBox3.Location = new System.Drawing.Point(326, 28);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Location = new System.Drawing.Point(286, 14);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(282, 370);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox3.Size = new System.Drawing.Size(312, 362);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "缺字格式";
@@ -177,9 +179,10 @@ namespace CBReader
             // cbGaijiUseNormal
             // 
             this.cbGaijiUseNormal.AutoSize = true;
-            this.cbGaijiUseNormal.Location = new System.Drawing.Point(28, 62);
+            this.cbGaijiUseNormal.Location = new System.Drawing.Point(34, 73);
+            this.cbGaijiUseNormal.Margin = new System.Windows.Forms.Padding(4);
             this.cbGaijiUseNormal.Name = "cbGaijiUseNormal";
-            this.cbGaijiUseNormal.Size = new System.Drawing.Size(131, 24);
+            this.cbGaijiUseNormal.Size = new System.Drawing.Size(134, 29);
             this.cbGaijiUseNormal.TabIndex = 1;
             this.cbGaijiUseNormal.Text = "使用通用字";
             this.cbGaijiUseNormal.UseVisualStyleBackColor = true;
@@ -187,9 +190,10 @@ namespace CBReader
             // cbGaijiUseUniExt
             // 
             this.cbGaijiUseUniExt.AutoSize = true;
-            this.cbGaijiUseUniExt.Location = new System.Drawing.Point(28, 31);
+            this.cbGaijiUseUniExt.Location = new System.Drawing.Point(34, 36);
+            this.cbGaijiUseUniExt.Margin = new System.Windows.Forms.Padding(4);
             this.cbGaijiUseUniExt.Name = "cbGaijiUseUniExt";
-            this.cbGaijiUseUniExt.Size = new System.Drawing.Size(168, 24);
+            this.cbGaijiUseUniExt.Size = new System.Drawing.Size(191, 29);
             this.cbGaijiUseUniExt.TabIndex = 0;
             this.cbGaijiUseUniExt.Text = "使用 Unicode Ext";
             this.cbGaijiUseUniExt.UseVisualStyleBackColor = true;
@@ -198,11 +202,11 @@ namespace CBReader
             // 
             this.groupBox7.Controls.Add(this.rbGaijiImageFirst);
             this.groupBox7.Controls.Add(this.rbGaijiDesFirst);
-            this.groupBox7.Location = new System.Drawing.Point(28, 237);
-            this.groupBox7.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox7.Location = new System.Drawing.Point(34, 226);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox7.Size = new System.Drawing.Size(232, 116);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox7.Size = new System.Drawing.Size(248, 111);
             this.groupBox7.TabIndex = 4;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "無 Unicode 及通用字時";
@@ -210,9 +214,10 @@ namespace CBReader
             // rbGaijiImageFirst
             // 
             this.rbGaijiImageFirst.AutoSize = true;
-            this.rbGaijiImageFirst.Location = new System.Drawing.Point(19, 74);
+            this.rbGaijiImageFirst.Location = new System.Drawing.Point(23, 73);
+            this.rbGaijiImageFirst.Margin = new System.Windows.Forms.Padding(4);
             this.rbGaijiImageFirst.Name = "rbGaijiImageFirst";
-            this.rbGaijiImageFirst.Size = new System.Drawing.Size(70, 24);
+            this.rbGaijiImageFirst.Size = new System.Drawing.Size(73, 29);
             this.rbGaijiImageFirst.TabIndex = 5;
             this.rbGaijiImageFirst.TabStop = true;
             this.rbGaijiImageFirst.Text = "圖檔";
@@ -221,9 +226,10 @@ namespace CBReader
             // rbGaijiDesFirst
             // 
             this.rbGaijiDesFirst.AutoSize = true;
-            this.rbGaijiDesFirst.Location = new System.Drawing.Point(19, 31);
+            this.rbGaijiDesFirst.Location = new System.Drawing.Point(23, 36);
+            this.rbGaijiDesFirst.Margin = new System.Windows.Forms.Padding(4);
             this.rbGaijiDesFirst.Name = "rbGaijiDesFirst";
-            this.rbGaijiDesFirst.Size = new System.Drawing.Size(90, 24);
+            this.rbGaijiDesFirst.Size = new System.Drawing.Size(93, 29);
             this.rbGaijiDesFirst.TabIndex = 4;
             this.rbGaijiDesFirst.TabStop = true;
             this.rbGaijiDesFirst.Text = "組字式";
@@ -233,11 +239,11 @@ namespace CBReader
             // 
             this.groupBox6.Controls.Add(this.rbGaijiNormalFirst);
             this.groupBox6.Controls.Add(this.rbGaijiUniExtFirst);
-            this.groupBox6.Location = new System.Drawing.Point(28, 110);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox6.Location = new System.Drawing.Point(34, 111);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox6.Size = new System.Drawing.Size(232, 110);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox6.Size = new System.Drawing.Size(248, 105);
             this.groupBox6.TabIndex = 3;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "何者優先";
@@ -245,9 +251,10 @@ namespace CBReader
             // rbGaijiNormalFirst
             // 
             this.rbGaijiNormalFirst.AutoSize = true;
-            this.rbGaijiNormalFirst.Location = new System.Drawing.Point(19, 68);
+            this.rbGaijiNormalFirst.Location = new System.Drawing.Point(23, 73);
+            this.rbGaijiNormalFirst.Margin = new System.Windows.Forms.Padding(4);
             this.rbGaijiNormalFirst.Name = "rbGaijiNormalFirst";
-            this.rbGaijiNormalFirst.Size = new System.Drawing.Size(90, 24);
+            this.rbGaijiNormalFirst.Size = new System.Drawing.Size(93, 29);
             this.rbGaijiNormalFirst.TabIndex = 3;
             this.rbGaijiNormalFirst.TabStop = true;
             this.rbGaijiNormalFirst.Text = "通用字";
@@ -256,9 +263,10 @@ namespace CBReader
             // rbGaijiUniExtFirst
             // 
             this.rbGaijiUniExtFirst.AutoSize = true;
-            this.rbGaijiUniExtFirst.Location = new System.Drawing.Point(19, 31);
+            this.rbGaijiUniExtFirst.Location = new System.Drawing.Point(23, 36);
+            this.rbGaijiUniExtFirst.Margin = new System.Windows.Forms.Padding(4);
             this.rbGaijiUniExtFirst.Name = "rbGaijiUniExtFirst";
-            this.rbGaijiUniExtFirst.Size = new System.Drawing.Size(122, 24);
+            this.rbGaijiUniExtFirst.Size = new System.Drawing.Size(145, 29);
             this.rbGaijiUniExtFirst.TabIndex = 2;
             this.rbGaijiUniExtFirst.TabStop = true;
             this.rbGaijiUniExtFirst.Text = "Unicode Ext";
@@ -268,11 +276,11 @@ namespace CBReader
             // 
             this.groupBox2.Controls.Add(this.cbShowCollation);
             this.groupBox2.Controls.Add(this.groupBox5);
-            this.groupBox2.Location = new System.Drawing.Point(28, 309);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Location = new System.Drawing.Point(14, 307);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(255, 212);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox2.Size = new System.Drawing.Size(246, 211);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "校注格式";
@@ -280,9 +288,10 @@ namespace CBReader
             // cbShowCollation
             // 
             this.cbShowCollation.AutoSize = true;
-            this.cbShowCollation.Location = new System.Drawing.Point(25, 31);
+            this.cbShowCollation.Location = new System.Drawing.Point(30, 36);
+            this.cbShowCollation.Margin = new System.Windows.Forms.Padding(4);
             this.cbShowCollation.Name = "cbShowCollation";
-            this.cbShowCollation.Size = new System.Drawing.Size(151, 24);
+            this.cbShowCollation.Size = new System.Drawing.Size(154, 29);
             this.cbShowCollation.TabIndex = 0;
             this.cbShowCollation.Text = "呈現校注符號";
             this.cbShowCollation.UseVisualStyleBackColor = true;
@@ -291,11 +300,11 @@ namespace CBReader
             // 
             this.groupBox5.Controls.Add(this.rbCBETACollation);
             this.groupBox5.Controls.Add(this.rbOrigCollation);
-            this.groupBox5.Location = new System.Drawing.Point(25, 73);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox5.Location = new System.Drawing.Point(30, 74);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox5.Size = new System.Drawing.Size(191, 114);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox5.Size = new System.Drawing.Size(199, 116);
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "校注選擇";
@@ -303,9 +312,10 @@ namespace CBReader
             // rbCBETACollation
             // 
             this.rbCBETACollation.AutoSize = true;
-            this.rbCBETACollation.Location = new System.Drawing.Point(16, 72);
+            this.rbCBETACollation.Location = new System.Drawing.Point(25, 71);
+            this.rbCBETACollation.Margin = new System.Windows.Forms.Padding(4);
             this.rbCBETACollation.Name = "rbCBETACollation";
-            this.rbCBETACollation.Size = new System.Drawing.Size(157, 24);
+            this.rbCBETACollation.Size = new System.Drawing.Size(159, 29);
             this.rbCBETACollation.TabIndex = 1;
             this.rbCBETACollation.TabStop = true;
             this.rbCBETACollation.Text = "CBETA 版校注";
@@ -314,9 +324,10 @@ namespace CBReader
             // rbOrigCollation
             // 
             this.rbOrigCollation.AutoSize = true;
-            this.rbOrigCollation.Location = new System.Drawing.Point(16, 32);
+            this.rbOrigCollation.Location = new System.Drawing.Point(25, 36);
+            this.rbOrigCollation.Margin = new System.Windows.Forms.Padding(4);
             this.rbOrigCollation.Name = "rbOrigCollation";
-            this.rbOrigCollation.Size = new System.Drawing.Size(110, 24);
+            this.rbOrigCollation.Size = new System.Drawing.Size(113, 29);
             this.rbOrigCollation.TabIndex = 0;
             this.rbOrigCollation.TabStop = true;
             this.rbOrigCollation.Text = "原書校注";
@@ -330,11 +341,11 @@ namespace CBReader
             this.groupBox1.Controls.Add(this.cbShowPunc);
             this.groupBox1.Controls.Add(this.cbShowLineHead);
             this.groupBox1.Controls.Add(this.cbShowLineFormat);
-            this.groupBox1.Location = new System.Drawing.Point(28, 28);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(14, 14);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(255, 253);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox1.Size = new System.Drawing.Size(246, 262);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "經文格式";
@@ -342,9 +353,10 @@ namespace CBReader
             // cbVerticalMode
             // 
             this.cbVerticalMode.AutoSize = true;
-            this.cbVerticalMode.Location = new System.Drawing.Point(25, 218);
+            this.cbVerticalMode.Location = new System.Drawing.Point(30, 224);
+            this.cbVerticalMode.Margin = new System.Windows.Forms.Padding(4);
             this.cbVerticalMode.Name = "cbVerticalMode";
-            this.cbVerticalMode.Size = new System.Drawing.Size(71, 24);
+            this.cbVerticalMode.Size = new System.Drawing.Size(74, 29);
             this.cbVerticalMode.TabIndex = 5;
             this.cbVerticalMode.Text = "直排";
             this.cbVerticalMode.UseVisualStyleBackColor = true;
@@ -352,9 +364,10 @@ namespace CBReader
             // cbNoShowAIPunc
             // 
             this.cbNoShowAIPunc.AutoSize = true;
-            this.cbNoShowAIPunc.Location = new System.Drawing.Point(54, 179);
+            this.cbNoShowAIPunc.Location = new System.Drawing.Point(55, 187);
+            this.cbNoShowAIPunc.Margin = new System.Windows.Forms.Padding(4);
             this.cbNoShowAIPunc.Name = "cbNoShowAIPunc";
-            this.cbNoShowAIPunc.Size = new System.Drawing.Size(161, 24);
+            this.cbNoShowAIPunc.Size = new System.Drawing.Size(164, 29);
             this.cbNoShowAIPunc.TabIndex = 4;
             this.cbNoShowAIPunc.Text = "不呈現 AI 標點";
             this.cbNoShowAIPunc.UseVisualStyleBackColor = true;
@@ -362,9 +375,10 @@ namespace CBReader
             // cbNoShowLgPunc
             // 
             this.cbNoShowLgPunc.AutoSize = true;
-            this.cbNoShowLgPunc.Location = new System.Drawing.Point(54, 149);
+            this.cbNoShowLgPunc.Location = new System.Drawing.Point(55, 150);
+            this.cbNoShowLgPunc.Margin = new System.Windows.Forms.Padding(4);
             this.cbNoShowLgPunc.Name = "cbNoShowLgPunc";
-            this.cbNoShowLgPunc.Size = new System.Drawing.Size(171, 24);
+            this.cbNoShowLgPunc.Size = new System.Drawing.Size(174, 29);
             this.cbNoShowLgPunc.TabIndex = 3;
             this.cbNoShowLgPunc.Text = "不呈現偈頌標點";
             this.cbNoShowLgPunc.UseVisualStyleBackColor = true;
@@ -372,9 +386,10 @@ namespace CBReader
             // cbShowPunc
             // 
             this.cbShowPunc.AutoSize = true;
-            this.cbShowPunc.Location = new System.Drawing.Point(25, 110);
+            this.cbShowPunc.Location = new System.Drawing.Point(30, 113);
+            this.cbShowPunc.Margin = new System.Windows.Forms.Padding(4);
             this.cbShowPunc.Name = "cbShowPunc";
-            this.cbShowPunc.Size = new System.Drawing.Size(151, 24);
+            this.cbShowPunc.Size = new System.Drawing.Size(154, 29);
             this.cbShowPunc.TabIndex = 2;
             this.cbShowPunc.Text = "顯示標點符號";
             this.cbShowPunc.UseVisualStyleBackColor = true;
@@ -383,9 +398,10 @@ namespace CBReader
             // cbShowLineHead
             // 
             this.cbShowLineHead.AutoSize = true;
-            this.cbShowLineHead.Location = new System.Drawing.Point(25, 71);
+            this.cbShowLineHead.Location = new System.Drawing.Point(30, 76);
+            this.cbShowLineHead.Margin = new System.Windows.Forms.Padding(4);
             this.cbShowLineHead.Name = "cbShowLineHead";
-            this.cbShowLineHead.Size = new System.Drawing.Size(211, 24);
+            this.cbShowLineHead.Size = new System.Drawing.Size(214, 29);
             this.cbShowLineHead.TabIndex = 1;
             this.cbShowLineHead.Text = "加上「頁、欄、行」";
             this.cbShowLineHead.UseVisualStyleBackColor = true;
@@ -393,9 +409,10 @@ namespace CBReader
             // cbShowLineFormat
             // 
             this.cbShowLineFormat.AutoSize = true;
-            this.cbShowLineFormat.Location = new System.Drawing.Point(25, 31);
+            this.cbShowLineFormat.Location = new System.Drawing.Point(30, 39);
+            this.cbShowLineFormat.Margin = new System.Windows.Forms.Padding(4);
             this.cbShowLineFormat.Name = "cbShowLineFormat";
-            this.cbShowLineFormat.Size = new System.Drawing.Size(171, 24);
+            this.cbShowLineFormat.Size = new System.Drawing.Size(174, 29);
             this.cbShowLineFormat.TabIndex = 0;
             this.cbShowLineFormat.Text = "依原書格式呈現";
             this.cbShowLineFormat.UseVisualStyleBackColor = true;
@@ -403,14 +420,14 @@ namespace CBReader
             // OptionForm
             // 
             this.AcceptButton = this.btOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.btCancel;
-            this.ClientSize = new System.Drawing.Size(639, 623);
+            this.ClientSize = new System.Drawing.Size(620, 613);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "OptionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "設定";

@@ -156,9 +156,9 @@ namespace CBReader
 		public string CBGetFileNameBySutraNumJuan(string sBookID, string sVol, string sSutraNum, string sJuan = "", string sPage = "", String sCol = "", string sLine = "")
 		{
 			string sFileName = Spine.CBGetFileNameBySutraNumJuan(sBookID, sVol, sSutraNum, sJuan);
-			// 檔名要補上 #p0001a01 這種格式的位置	???? (為什麼用 sLine 來判斷?)
-			if(sLine != "") {
-				string sPageLine = CCBSutraUtil.getStandardPageColLine(sPage, sCol, sLine);
+			// 檔名要補上 #p0001a01 這種格式的位置
+			string sPageLine = CCBSutraUtil.getStandardPageColLine(sPage, sCol, sLine);
+			if(sPageLine != "") {
 				sFileName += "#p" + sPageLine;
 			}
 			return sFileName;
