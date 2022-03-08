@@ -142,9 +142,9 @@ namespace CBReader
             this.label5.Location = new System.Drawing.Point(14, 119);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(375, 25);
+            this.label5.Size = new System.Drawing.Size(369, 25);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Copyright (C) Heaven Chou 2001-2022";
+            this.label5.Text = "Copyright © 2001-2022 Heaven Chou";
             // 
             // label3
             // 
@@ -153,9 +153,9 @@ namespace CBReader
             this.label3.Location = new System.Drawing.Point(14, 87);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(311, 25);
+            this.label3.Size = new System.Drawing.Size(305, 25);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Copyright (C) CBETA 1998-2022";
+            this.label3.Text = "Copyright © 1998-2022 CBETA";
             // 
             // label2
             // 
@@ -175,9 +175,9 @@ namespace CBReader
             this.label1.Location = new System.Drawing.Point(14, 12);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(314, 25);
+            this.label1.Size = new System.Drawing.Size(316, 25);
             this.label1.TabIndex = 0;
-            this.label1.Text = "CBReader 2X V0.7　2022-02-07";
+            this.label1.Text = "CBReader 2X  v0.7　2022-03-09";
             // 
             // panel4
             // 

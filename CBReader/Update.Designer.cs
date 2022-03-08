@@ -29,6 +29,7 @@ namespace CBReader
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateForm));
             this.Memo = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btUpdate = new System.Windows.Forms.Button();
@@ -76,7 +77,7 @@ namespace CBReader
             // 
             // btUpdate
             // 
-            this.btUpdate.Location = new System.Drawing.Point(14, 80);
+            this.btUpdate.Location = new System.Drawing.Point(16, 80);
             this.btUpdate.Name = "btUpdate";
             this.btUpdate.Size = new System.Drawing.Size(143, 55);
             this.btUpdate.TabIndex = 3;
@@ -195,6 +196,7 @@ namespace CBReader
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "UpdateForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -36,6 +36,8 @@ namespace CBReader
             this.miOption = new System.Windows.Forms.ToolStripMenuItem();
             this.miUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.miAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.miAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.miCreateHtml = new System.Windows.Forms.ToolStripMenuItem();
             this.btNextJuan = new System.Windows.Forms.Button();
             this.btPrevJuan = new System.Windows.Forms.Button();
             this.btMuluWidthSwitch = new System.Windows.Forms.Button();
@@ -155,8 +157,6 @@ namespace CBReader
             this.miOr = new System.Windows.Forms.ToolStripMenuItem();
             this.miExclude = new System.Windows.Forms.ToolStripMenuItem();
             this.miAny = new System.Windows.Forms.ToolStripMenuItem();
-            this.miAdmin = new System.Windows.Forms.ToolStripMenuItem();
-            this.miCreateHtml = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.pnMainFunc.SuspendLayout();
@@ -217,30 +217,46 @@ namespace CBReader
             this.miAdmin});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(865, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(865, 30);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // miOption
             // 
             this.miOption.Name = "miOption";
-            this.miOption.Size = new System.Drawing.Size(53, 24);
+            this.miOption.Size = new System.Drawing.Size(53, 23);
             this.miOption.Text = "設定";
             this.miOption.Click += new System.EventHandler(this.miOption_Click);
             // 
             // miUpdate
             // 
             this.miUpdate.Name = "miUpdate";
-            this.miUpdate.Size = new System.Drawing.Size(83, 24);
+            this.miUpdate.Size = new System.Drawing.Size(83, 23);
             this.miUpdate.Text = "更新檢查";
             this.miUpdate.Click += new System.EventHandler(this.miUpdate_Click);
             // 
             // miAbout
             // 
             this.miAbout.Name = "miAbout";
-            this.miAbout.Size = new System.Drawing.Size(53, 24);
+            this.miAbout.Size = new System.Drawing.Size(53, 23);
             this.miAbout.Text = "關於";
             this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
+            // 
+            // miAdmin
+            // 
+            this.miAdmin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miCreateHtml});
+            this.miAdmin.Name = "miAdmin";
+            this.miAdmin.Size = new System.Drawing.Size(105, 23);
+            this.miAdmin.Text = "Heaven專用";
+            this.miAdmin.Visible = false;
+            // 
+            // miCreateHtml
+            // 
+            this.miCreateHtml.Name = "miCreateHtml";
+            this.miCreateHtml.Size = new System.Drawing.Size(193, 26);
+            this.miCreateHtml.Text = "批量產生HTML";
+            this.miCreateHtml.Click += new System.EventHandler(this.miCreateHtml_Click);
             // 
             // btNextJuan
             // 
@@ -691,7 +707,7 @@ namespace CBReader
             // edFindSutraVolTo
             // 
             this.edFindSutraVolTo.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edFindSutraVolTo.Location = new System.Drawing.Point(84, 51);
+            this.edFindSutraVolTo.Location = new System.Drawing.Point(230, 51);
             this.edFindSutraVolTo.Name = "edFindSutraVolTo";
             this.edFindSutraVolTo.Size = new System.Drawing.Size(82, 34);
             this.edFindSutraVolTo.TabIndex = 2;
@@ -701,7 +717,7 @@ namespace CBReader
             // edFindSutraVolFrom
             // 
             this.edFindSutraVolFrom.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edFindSutraVolFrom.Location = new System.Drawing.Point(230, 54);
+            this.edFindSutraVolFrom.Location = new System.Drawing.Point(84, 51);
             this.edFindSutraVolFrom.Name = "edFindSutraVolFrom";
             this.edFindSutraVolFrom.Size = new System.Drawing.Size(82, 34);
             this.edFindSutraVolFrom.TabIndex = 1;
@@ -848,9 +864,9 @@ namespace CBReader
             this.label23.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label23.Location = new System.Drawing.Point(5, 483);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(249, 25);
+            this.label23.Size = new System.Drawing.Size(259, 25);
             this.label23.TabIndex = 29;
-            this.label23.Text = "例1:T01n0001_p0001a01";
+            this.label23.Text = "例1 : T01n0001_p0001a01";
             // 
             // label22
             // 
@@ -1605,22 +1621,6 @@ namespace CBReader
             this.miAny.Size = new System.Drawing.Size(141, 24);
             this.miAny.Text = "? Any";
             this.miAny.Click += new System.EventHandler(this.miAny_Click);
-            // 
-            // miAdmin
-            // 
-            this.miAdmin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miCreateHtml});
-            this.miAdmin.Name = "miAdmin";
-            this.miAdmin.Size = new System.Drawing.Size(105, 23);
-            this.miAdmin.Text = "Heaven專用";
-            this.miAdmin.Visible = false;
-            // 
-            // miCreateHtml
-            // 
-            this.miCreateHtml.Name = "miCreateHtml";
-            this.miCreateHtml.Size = new System.Drawing.Size(224, 26);
-            this.miCreateHtml.Text = "批量產生HTML";
-            this.miCreateHtml.Click += new System.EventHandler(this.miCreateHtml_Click);
             // 
             // MainForm
             // 

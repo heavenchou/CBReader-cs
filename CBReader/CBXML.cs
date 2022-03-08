@@ -234,162 +234,150 @@ namespace CBReader
             sSiddamFile = sSiddamFile.Replace("\\", "/");
             string sRanjanaFile = sSiddamFile.Replace("Siddam.otf", "Ranjana.otf");
 
-            var sHtml = @"
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset = 'utf-8'>
-                <title>";
-
-            sHtml += BookId + SutraId + " " + SutraName;
-
-            sHtml += $@"</title>
-            <script src='{sJqueryFile}'></script>
-            <script src='{JSFile}'></script>
-            <style type='text/css'>
-                @font-face {{
-                    font-family: CBFont;
-                    src: local('Times New Roman'), local(MingLiU), local(細明體), local(PMingLiU), local(新細明體), local(NSimSun), local(SimSun), local('Songti TC');
-                }}
-                @font-face {{
-                    font-family: CBFont;
-                    unicode-range: U+2500-25ff;
-                    src: local(MingLiU), local(細明體), local(NSimSun), local('Songti TC');
-                }}
-                @font-face {{
-                    font-family: siddam;
-                    src: local(siddam), url('{sSiddamFile}');
-                }}
-                @font-face {{
-                    font-family: Ranjana;
-                    src: local(Ranjana), url('{sRanjanaFile}');
-                }}";
+            var sHtml = $@"<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>{BookId}{SutraId} {SutraName}</title>
+    <script src='{sJqueryFile}'></script>
+    <script src='{JSFile}'></script>
+    <style type='text/css'>
+        @font-face {{
+            font-family: CBFont;
+            src: local('Times New Roman'), local(MingLiU), local(細明體), local(PMingLiU), local(新細明體), local(NSimSun), local(SimSun), local('Songti TC');
+        }}
+        @font-face {{
+            font-family: CBFont;
+            unicode-range: U+2500-25ff;
+            src: local(MingLiU), local(細明體), local(NSimSun), local('Songti TC');
+        }}
+        @font-face {{
+            font-family: siddam;
+            src: local(siddam), url('{sSiddamFile}');
+        }}
+        @font-face {{
+            font-family: Ranjana;
+            src: local(Ranjana), url('{sRanjanaFile}');
+        }}";
             sHtml += @"
-                body { background:#DDF1DC; font-weight: normal; line-height:26px; color:#000000; font-size:21px; font-family:CBFont;}
-                #AIPuncRemind {color:#ffffff; background: #d80000;}
-                a.SearchWord0 {color:#0000ff; background: #ffff66;}
-                a.SearchWord1 {color:#0000ff; background: #a0ffff;}
-                a.SearchWord2 {color:#0000ff; background: #99ff99;}
-                a.SearchWord3 {color:#0000ff; background: #ff9999;}
-                a.SearchWord4 {color:#0000ff; background: #ff66ff;}
-                span.guess1 {background: #fff0a0;}
-                span.guess2 {background: #ffd080;}
-                span.guess3 {background: #ffb060;}
-                span.guess4 {background: #ff9040;}
-                a.hover    {color:#0000ff;}
-                a:visited     {color:#0000ff;}
-                a:link        {color:#0000ff;}
-                a:active    {color:#0000ff;}
-                .foreign    {font-family:'Times New Roman', 'Gandhari Unicode';}
-                .preformat    {font-family:細明體,MingLiU,NSimSun,'Songti TC'; font-size:21px;}
-                .preformat .foreign    {font-family:'Courier New'; font-size:17.5px;}
-                .gaiji {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C';}
-                .siddam {font-family:siddam;}
-                .juannum {color:#008000; font-size:21px;}
-                .juanname {color:#0000FF; font-weight: bold; font-size:24px;}
-                .xu {color:#0000A0; font-size:21px;}
-                .w {color:#0000A0; font-size:21px;}
-                .div-orig {font-weight: bold;}
-                .byline {color:#408080; font-size:21px;}
-                .headname {color:#0000A0; font-weight: bold; font-size:24px;}
-                .headname2 {color:#0000A0; font-weight: bold; font-size:24px;}
-                .headname3 {color:#0000A0; font-weight: bold; font-size:24px;}
-                .headname4 {color:#0000A0; font-weight: bold; font-size:24px;}
-                .linehead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';}
-                .parahead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';}
-                .pts_head {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';}
-                .lg {color:#008040; font-size:21px;}
-                .corr {color:#FF0000; }
-                .note {color:#9F5000; font-size:18px;}
-                table {border-collapse: collapse; margin: 20px;}
-            ";
+        body { background:#DDF1DC; font-weight: normal; line-height:26px; color:#000000; font-size:21px; font-family:CBFont;}
+        #AIPuncRemind {color:#ffffff; background: #d80000;}
+        a.SearchWord0 {color:#0000ff; background: #ffff66;}
+        a.SearchWord1 {color:#0000ff; background: #a0ffff;}
+        a.SearchWord2 {color:#0000ff; background: #99ff99;}
+        a.SearchWord3 {color:#0000ff; background: #ff9999;}
+        a.SearchWord4 {color:#0000ff; background: #ff66ff;}
+        span.guess1 {background: #fff0a0;}
+        span.guess2 {background: #ffd080;}
+        span.guess3 {background: #ffb060;}
+        span.guess4 {background: #ff9040;}
+        a.hover   {color:#0000ff;}
+        a:visited {color:#0000ff;}
+        a:link    {color:#0000ff;}
+        a:active  {color:#0000ff;}
+        .foreign  {font-family:'Times New Roman', 'Gandhari Unicode';}
+        .preformat {font-family:細明體,MingLiU,NSimSun,'Songti TC'; font-size:21px;}
+        .preformat .foreign {font-family:'Courier New'; font-size:17.5px;}
+        .gaiji {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C';}
+        .juannum  {color:#008000; font-size:21px;}
+        .juanname {color:#0000FF; font-weight: bold; font-size:24px;}
+        .xu {color:#0000A0; font-size:21px;}
+        .w {color:#0000A0; font-size:21px;}
+        .div-orig {font-weight: bold;}
+        .byline {color:#408080; font-size:21px;}
+        .headname  {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname2 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname3 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname4 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .linehead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';}
+        .parahead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';}
+        .pts_head {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';}
+        .lg {color:#008040; font-size:21px;}
+        .corr {color:#FF0000; }
+        .note {color:#9F5000; font-size:18px;}
+        table {border-collapse: collapse; margin: 20px;}";
 
             if(Setting.VerticalMode)
-                sHtml += "		body {writing-mode: tb-rl;}\n";
+                sHtml += "      body {writing-mode: tb-rl;}\n";
 
             // 行首格式
             if(Setting.ShowLineFormat) {
                 // 原書
                 sHtml += @"
-                    div {display:inline;}
-                    p {display:inline;}
-                    br.lb_br {display:inline;}
-                    br.para_br {display:none;}
-                    p.juannum {display:inline; margin-left:0em;}
-                    p.headname2 {display:inline; margin-left:0em;}
-                    p.headname3 {display:inline; margin-left:0em;}
-                    p.headname4 {display:inline; margin-left:0em;}
-                    p.byline {display:inline; margin-left:0em;}
-                    table {border-style: none;}
-                    td {padding: 0px;}
-                    span.line_space {display:inline;}
-                    span.para_space {display:none;}
-                ";
+        div {display:inline;}
+        p {display:inline;}
+        br.lb_br {display:inline;}
+        br.para_br  {display:none;}
+        p.juannum   {display:inline; margin-left:0em;}
+        p.headname2 {display:inline; margin-left:0em;}
+        p.headname3 {display:inline; margin-left:0em;}
+        p.headname4 {display:inline; margin-left:0em;}
+        p.byline    {display:inline; margin-left:0em;}
+        table {border-style: none;}
+        td {padding: 0px;}
+        span.line_space {display:inline;}
+        span.para_space {display:none;}";
             } else {
                 // 段落格式
                 sHtml += @"
-                    div {display:block;}
-                    p {display:block;}
-                    br.lb_br {display:none;}
-                    br.para_br {display:inline;}
-                    p.juannum {display:block; margin-left:2em;}
-                    p.headname2 {display:block; margin-left:2em;}
-                    p.headname3 {display:block; margin-left:3em;}
-                    p.headname4 {display:block; margin-left:4em;}
-                    p.byline {display:block; text-align:right;}
-                    table {border-style:solid; border-collapse:collapse;}
-                    td {padding: 0.5em;}
-                    td.pl-1 {padding-left: 1.5em;}
-                    td.pl-2 {padding-left: 2.5em;}
-                    td.pl-3 {padding-left: 3.5em;}
-                    td.pl-4 {padding-left: 4.5em;}
-                    td.pl-5 {padding-left: 5.5em;}
-                    td.pl-6 {padding-left: 6.5em;}
-                    td.pl-7 {padding-left: 7.5em;}
-                    td.pl-8 {padding-left: 8.5em;}
-                    span.line_space {display:none;}
-                    span.para_space {display:inline;}
-                ";
+        div {display:block;}
+        p {display:block;}
+        br.lb_br {display:none;}
+        br.para_br {display:inline;}
+        p.juannum   {display:block; margin-left:2em;}
+        p.headname2 {display:block; margin-left:2em;}
+        p.headname3 {display:block; margin-left:3em;}
+        p.headname4 {display:block; margin-left:4em;}
+        p.byline    {display:block; text-align:right;}
+        table {border-style:solid; border-collapse:collapse;}
+        td {padding: 0.5em;}
+        td.pl-1 {padding-left: 1.5em;}
+        td.pl-2 {padding-left: 2.5em;}
+        td.pl-3 {padding-left: 3.5em;}
+        td.pl-4 {padding-left: 4.5em;}
+        td.pl-5 {padding-left: 5.5em;}
+        td.pl-6 {padding-left: 6.5em;}
+        td.pl-7 {padding-left: 7.5em;}
+        td.pl-8 {padding-left: 8.5em;}
+        span.line_space {display:none;}
+        span.para_space {display:inline;}";
             }
 
             // 校勘呈現
             if(Setting.ShowCollation == false) {
                 sHtml += @"
-                    .note_orig {display:none;}
-                    .note_mod {display:none;}
-                    .note_add {display:none;}
-                    .note_star {display:none;}
-                    .note_star_removed {display:none;}
-                ";
+        .note_orig {display:none;}
+        .note_mod  {display:none;}
+        .note_add  {display:none;}
+        .note_star {display:none;}
+        .note_star_removed {display:none;}";
 
             } else if(Setting.CollationType == ECollationType.Orig) {
                 sHtml += @"
-                    .note_mod {display:none;}
-                    .note_orig {display:inline;}
-                    .note_add {display:none;}
-                    .note_star {display:inline;}
-                    .note_star_removed {display:inline;}
-                ";
+        .note_mod  {display:none;}
+        .note_orig {display:inline;}
+        .note_add  {display:none;}
+        .note_star {display:inline;}
+        .note_star_removed {display:inline;}";
 
             } else if(Setting.CollationType == ECollationType.CBETA) {
 
                 sHtml += @"
-                    .note_orig {display:none;}
-                    .note_mod {display:inline;}
-                    .note_add {display:inline;}
-                    .note_star {display:inline;}
-                    .note_star_removed {display:none;}
-                ";
+        .note_orig {display:none;}
+        .note_mod  {display:inline;}
+        .note_add  {display:inline;}
+        .note_star {display:inline;}
+        .note_star_removed {display:none;}";
             }
-            sHtml += "</style>\n";
+            sHtml += "\n    </style>\n";
 
             // 自訂 CSS
             if(Setting.UseCSSFile) {
-                sHtml += $"<link rel=stylesheet type='text/css' href='{Setting.CSSFileName}'>\n";
+                sHtml += $"    <link rel=stylesheet type='text/css' href='{Setting.CSSFileName}'>\n";
             }
 
             sHtml += $@"</head>
-                    <body data-sutraname='{SutraName}' data-juan='{JuanNum}' data-totaljuan='{TotalJuan}'";
+<body data-sutraname='{SutraName}' data-juan='{JuanNum}' data-totaljuan='{TotalJuan}'";
 
             // data-notetype 用來判斷目前是呈現何種校註
             if(Setting.ShowCollation == false) {
@@ -527,6 +515,12 @@ namespace CBReader
                         sHtml = RemovePunc(sHtml);
                     }
                 }
+            } else if(nodetype == XmlNodeType.Whitespace) {
+                sHtml = node.Value;
+                sHtml = sHtml.Replace("\r\n", "");
+                sHtml = sHtml.Replace("\r", "");
+                sHtml = sHtml.Replace("\n", "");
+                sHtml = sHtml.Replace("\t", "");
             }
             return sHtml;
         }
@@ -1332,10 +1326,10 @@ namespace CBReader
             string sURL = GetAttr(node, "url");
             if (sURL != "") {
                 string sPicOrigFile = SerialPath + sURL.Replace("../", "");
-                //string sPicFile = ExpandFileName(sPicOrigFile);
+                string sPicFile = sPicOrigFile.Replace('/', '\\');
 
                 sHtml += "<img src='";
-                sHtml += sPicOrigFile;
+                sHtml += sPicFile;
                 sHtml += "'>";
 
                 // 以下放棄, 前一個文字因為 svg 圖檔無法被連結, 只能連出去
@@ -1768,7 +1762,7 @@ namespace CBReader
 
             // Debug
 
-            if (sN == "0755c15") {
+            if (sN == "0196a09") {
                 int deb = 10;
                 deb++;
                 IsDebug = true;
@@ -3075,7 +3069,7 @@ namespace CBReader
                 if (sCRef.StartsWith("PTS")) {
                     string sPage = sCRef;
                     int iPos = sPage.LastIndexOf(".");  // 找到最後.的位置
-                    sPage.Remove(0, iPos + 1);   // 最後一個數字, 也就是頁碼
+                    sPage = sPage.Remove(0, iPos + 1);   // 最後一個數字, 也就是頁碼
 
                     // 隱藏的加要寫? 可能是引用複製要用的吧, 我也忘了....
                     if (Setting.ShowLineHead) {

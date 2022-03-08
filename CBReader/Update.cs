@@ -21,7 +21,7 @@ namespace CBReader
 		string DestFile;
 
 		string ServerURL = "http://www.cbeta.org/cbreader/update.php?";  // 要檢查更新的網頁目錄
-		bool UseLocalhostURL = true;  // 使用 localhost 的測試網址
+		bool UseLocalhostURL = false;  // 使用 localhost 的測試網址
 		string LocalhostURL = "http://localhost/cbreader/update.php?";    // 內部測試的網址
 
 		// 二個版本
@@ -57,7 +57,6 @@ namespace CBReader
 		// 檢查需不需要更新, 傳入 cbreader 版本, 資料版本, 以及要不要回應目前是最新的 (手動更新才需要)
 		public void CheckUpdate(string sCBRVer, string sDataVer, bool bShowNoUpdate)
         {
-			return;
 			IsShowMessage = bShowNoUpdate;
 
 			// 判斷有沒有更新, 如果有更新, 就不修改更新時期,

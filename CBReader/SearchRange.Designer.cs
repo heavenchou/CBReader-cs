@@ -75,6 +75,7 @@ namespace CBReader
             System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("Y 印順法師佛學著作集");
             System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("ZS 正史佛教資料類編");
             System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("ZW 藏外佛教文獻");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchRangeForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.listBox = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -101,7 +102,7 @@ namespace CBReader
             this.panel1.Controls.Add(this.listBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(190, 741);
             this.panel1.TabIndex = 0;
@@ -129,7 +130,7 @@ namespace CBReader
             this.panel2.Controls.Add(this.btOK);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(642, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(185, 741);
             this.panel2.TabIndex = 1;
@@ -137,7 +138,7 @@ namespace CBReader
             // btUnCheckAll
             // 
             this.btUnCheckAll.Location = new System.Drawing.Point(24, 269);
-            this.btUnCheckAll.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btUnCheckAll.Margin = new System.Windows.Forms.Padding(5);
             this.btUnCheckAll.Name = "btUnCheckAll";
             this.btUnCheckAll.Size = new System.Drawing.Size(145, 59);
             this.btUnCheckAll.TabIndex = 7;
@@ -148,7 +149,7 @@ namespace CBReader
             // btCheckAll
             // 
             this.btCheckAll.Location = new System.Drawing.Point(24, 200);
-            this.btCheckAll.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btCheckAll.Margin = new System.Windows.Forms.Padding(5);
             this.btCheckAll.Name = "btCheckAll";
             this.btCheckAll.Size = new System.Drawing.Size(145, 59);
             this.btCheckAll.TabIndex = 6;
@@ -160,7 +161,7 @@ namespace CBReader
             // 
             this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btCancel.Location = new System.Drawing.Point(24, 105);
-            this.btCancel.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btCancel.Margin = new System.Windows.Forms.Padding(5);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(145, 59);
             this.btCancel.TabIndex = 5;
@@ -171,7 +172,7 @@ namespace CBReader
             // 
             this.btOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btOK.Location = new System.Drawing.Point(24, 38);
-            this.btOK.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btOK.Margin = new System.Windows.Forms.Padding(5);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(145, 59);
             this.btOK.TabIndex = 4;
@@ -184,7 +185,7 @@ namespace CBReader
             this.panel3.Controls.Add(this.tabControl);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(190, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.panel3.Margin = new System.Windows.Forms.Padding(5);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(452, 741);
             this.panel3.TabIndex = 2;
@@ -194,7 +195,7 @@ namespace CBReader
             this.tabControl.Controls.Add(this.tpBulei);
             this.tabControl.Controls.Add(this.tpBook);
             this.tabControl.Location = new System.Drawing.Point(5, 0);
-            this.tabControl.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(5);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(437, 750);
@@ -205,9 +206,9 @@ namespace CBReader
             // 
             this.tpBulei.Controls.Add(this.tvBulei);
             this.tpBulei.Location = new System.Drawing.Point(4, 34);
-            this.tpBulei.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tpBulei.Margin = new System.Windows.Forms.Padding(5);
             this.tpBulei.Name = "tpBulei";
-            this.tpBulei.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tpBulei.Padding = new System.Windows.Forms.Padding(5);
             this.tpBulei.Size = new System.Drawing.Size(429, 712);
             this.tpBulei.TabIndex = 0;
             this.tpBulei.Text = "tabPage1";
@@ -219,7 +220,7 @@ namespace CBReader
             this.tvBulei.FullRowSelect = true;
             this.tvBulei.HideSelection = false;
             this.tvBulei.Location = new System.Drawing.Point(10, 10);
-            this.tvBulei.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tvBulei.Margin = new System.Windows.Forms.Padding(5);
             this.tvBulei.Name = "tvBulei";
             treeNode1.Name = "Node0";
             treeNode1.Text = "阿含部類";
@@ -301,9 +302,9 @@ namespace CBReader
             // 
             this.tpBook.Controls.Add(this.tvBook);
             this.tpBook.Location = new System.Drawing.Point(4, 34);
-            this.tpBook.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tpBook.Margin = new System.Windows.Forms.Padding(5);
             this.tpBook.Name = "tpBook";
-            this.tpBook.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tpBook.Padding = new System.Windows.Forms.Padding(5);
             this.tpBook.Size = new System.Drawing.Size(429, 712);
             this.tpBook.TabIndex = 1;
             this.tpBook.Text = "tabPage2";
@@ -314,7 +315,7 @@ namespace CBReader
             this.tvBook.CheckBoxes = true;
             this.tvBook.FullRowSelect = true;
             this.tvBook.Location = new System.Drawing.Point(10, 10);
-            this.tvBook.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tvBook.Margin = new System.Windows.Forms.Padding(5);
             this.tvBook.Name = "tvBook";
             treeNode24.Name = "Node1";
             treeNode24.Text = "T 大正新脩大藏經";
@@ -406,7 +407,8 @@ namespace CBReader
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "SearchRangeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "設定檢索範圍";
