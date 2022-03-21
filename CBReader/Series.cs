@@ -51,7 +51,9 @@ namespace CBReader
 			string sMeta = Dir + "index.xml";
 
 			if(!File.Exists(sMeta)) {
-				throw new Exception($"後設文件不存在：{sMeta}");
+				//throw new Exception($"後設文件不存在：{sMeta}");
+				CGlobalMessage.push($"後設文件不存在：{sMeta}");
+				return;
 			}
 
 			LoadMetaData(sMeta);
@@ -243,6 +245,12 @@ namespace CBReader
 		// 釋放全文檢索引擎
 		public void FreeSearchEngine()
 		{
+			if (SearchEngine_orig != null) {
+				SearchEngine_orig.Close();
+			}
+			if (SearchEngine_CB != null) {
+				SearchEngine_CB.Close();
+			}
 			SearchEngine_orig = null;
 			SearchEngine_CB = null;
 			SearchEngine = null;

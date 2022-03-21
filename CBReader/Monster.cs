@@ -50,6 +50,13 @@ namespace Monster
             FileFound = new CIntList(BuildFileList.FileCount);	// 存放每一檔找到的結果
         }
 
+        public void Close()
+        {
+            if(MainIndex != null) {
+                MainIndex.FileStream.Close();
+            }
+        }
+
         // 尋找一個字串, 應該要傳回一個檔案串, 表示哪些檔案有
         // 若運算失敗, 傳回 false
         public bool Find(string sSentence, bool bHasSearchRange)

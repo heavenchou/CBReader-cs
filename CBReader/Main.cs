@@ -61,7 +61,7 @@ namespace CBReader
             // CheckSeeland(); ????
 
             // 刪去舊版
-            string sOld = CGlobalVal.MyHomePath + ".tmp";
+            string sOld = CGlobalVal.MyFullPath + "CBReader_old.exe";
             if (File.Exists(sOld)) {
                 File.Delete(sOld);
             }
@@ -74,6 +74,7 @@ namespace CBReader
 
             //sgTextSearch->OnKeyDown = sgTextSearchKeyDown;
             //sgFindSutra->OnKeyDown = sgFindSutraKeyDown;
+
         }
 
         // =====================================================
@@ -130,18 +131,23 @@ namespace CBReader
                 Setting.SaveToFile();
             }
 
-            Bookcase = new CBookcase(sBookcasePath);
+            int iBookcaseCount = 0;
+            try {
+                Bookcase = new CBookcase(sBookcasePath);
 
-            // 在書櫃選擇叢書
-            int iBookcaseCount = Bookcase.Books.Count;
-            if (iBookcaseCount == 0) {
-                CGlobalMessage.push("書櫃中一本書都沒有");
-            }
-            // else if(iBookcaseCount == 1)
-            else {
-                // 只有一本書就直接開了
-                // OpenBookcase(0); // ???? 暫時取消, 這一版要直接開啟 CBETA
-                OpenCBETABook();    // ???? 取消上面, 因為這一版要直接開啟 CBETA
+                // 在書櫃選擇叢書
+                iBookcaseCount = Bookcase.Books.Count;
+                if (iBookcaseCount == 0) {
+                    CGlobalMessage.push("書櫃中一本書都沒有");
+                }
+                // else if(iBookcaseCount == 1)
+                else {
+                    // 只有一本書就直接開了
+                    // OpenBookcase(0); // ???? 暫時取消, 這一版要直接開啟 CBETA
+                    OpenCBETABook();    // ???? 取消上面, 因為這一版要直接開啟 CBETA
+                }
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message);
             }
 
             //???? MuluTree = 0;
@@ -398,7 +404,9 @@ namespace CBReader
         // 檢查有沒有更新程式, bShowNoUpdate : 沒更新時要不要秀訊息
         void CheckUpdate(bool bShowNoUpdate)
         {
-            //return;
+            if(Bookcase == null) {
+                return;
+            }
 
 	        // 取得資料版本
 	        string sDataVer = Bookcase.CBETA.Version;
@@ -516,8 +524,16 @@ namespace CBReader
             for (int i = 0; i < 8; i++) {
                 iniFile.WriteInteger(Section, $"TextSearchC{i}", sgTextSearch.Columns[i].Width);
             }
+        }
 
+        // 清除暫存目錄的檔案
+        void DeleteTempFile()
+        {
+            var tmpDir = new DirectoryInfo(CGlobalVal.MyTempPath);
 
+            foreach (var file in tmpDir.GetFiles()) {
+                file.Delete();
+            }
         }
 
         // =====================================================
@@ -554,17 +570,28 @@ namespace CBReader
 
         private void miUpdate_Click(object sender, EventArgs e)
         {
-            CheckUpdate(true);  // true 表示沒有更新要秀訊息
+            if (updateForm.Visible) {
+                updateForm.Focus();
+            } else {
+                CheckUpdate(true);  // true 表示沒有更新要秀訊息，也表示更新機率是 100%
+            }
         }
+
         private void MainForm_Shown(object sender, EventArgs e)
         {
             InitialData();
-
 
             // 檢查更新
             string sToday = DateTime.Today.ToString("yyyyMMdd");
             if (sToday != Setting.LastUpdateChk) { 
                 CheckUpdate(false);   // 檢查更新 (false : 沒更新就不用秀訊息)
+            }
+
+            // 逐一秀出錯誤訊息
+            string sErrorMsg = CGlobalMessage.pop();
+            while (sErrorMsg != "") {
+                MessageBox.Show(sErrorMsg);
+                sErrorMsg = CGlobalMessage.pop();
             }
         }
 
@@ -574,6 +601,14 @@ namespace CBReader
 
             // 儲存環境
             SaveEnvironment();
+
+            // 清除暫存目錄的檔案
+            DeleteTempFile();
+
+            // 更新後自動重啟
+            if(CGlobalVal.restart) {
+                Application.Restart();
+            }
         }
 
         private void btOpenNav_Click(object sender, EventArgs e)
@@ -1205,6 +1240,31 @@ namespace CBReader
         {
             CreateHtml createhtmlForm = new CreateHtml(this);
             createhtmlForm.Show();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(updateForm.IsDownloadOK) {
+                // 下載更新檔案完成，但是尚未更新
+                var result = MessageBox.Show("已下載更新檔案，尚未進行更新，確定要結束嗎？", "確定要結束程式？", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(result != DialogResult.Yes) {
+                    e.Cancel = true;
+                    updateForm.Focus();
+                }
+            }
+            if(updateForm.IsDownloading) {
+                // 正在下載更新檔
+                var result = MessageBox.Show("正在下載更新檔案，確定要結束嗎？", "確定要結束程式？", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result != DialogResult.Yes) {
+                    e.Cancel = true;
+                    updateForm.Focus();
+                }
+            }
+        }
+
+        private void miLocalUpdateURL_Click(object sender, EventArgs e)
+        {
+            updateForm.UseLocalhostURL = true;
         }
     }
 }

@@ -28,6 +28,7 @@ namespace CBReader
 
         // 更新
         static public string updateString = "";   // 更新時取得的字串
+        static public bool restart = false;       // 如果要重新啟動程式，就設為 true
 
         // 設定目錄初值
         static public void initialPath()
@@ -52,7 +53,7 @@ namespace CBReader
             if (!Directory.Exists(MySettingPath)) {
                 Directory.CreateDirectory(MySettingPath);
             }
-            MySettingPath = MyHomePath + "CBReader2X\\";
+            MySettingPath = MySettingPath + "CBReader2X\\";
             if (!Directory.Exists(MySettingPath)) {
                 Directory.CreateDirectory(MySettingPath);
             }

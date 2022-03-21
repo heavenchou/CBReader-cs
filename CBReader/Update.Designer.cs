@@ -77,11 +77,12 @@ namespace CBReader
             // 
             // btUpdate
             // 
+            this.btUpdate.Enabled = false;
             this.btUpdate.Location = new System.Drawing.Point(16, 80);
             this.btUpdate.Name = "btUpdate";
             this.btUpdate.Size = new System.Drawing.Size(143, 55);
             this.btUpdate.TabIndex = 3;
-            this.btUpdate.Text = "🆕 更新";
+            this.btUpdate.Text = "🆕 更新及重啟";
             this.btUpdate.UseVisualStyleBackColor = true;
             this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
             // 

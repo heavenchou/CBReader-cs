@@ -93,10 +93,11 @@ namespace Monster
                 if(iIndex >= 0)     // 此字有在索引檔中
                 {
                     int iOffset = WordIndex.WordOffset[iIndex];
-                    if(iIndex == WordIndex.WordCount - 1)                  // 最後一筆
-                        iBufferSize = (int) MainIndex.Size - iOffset;
-                    else
+                    if (iIndex == WordIndex.WordCount - 1) {                  // 最後一筆
+                        iBufferSize = (int)MainIndex.Size - iOffset;
+                    } else {
                         iBufferSize = WordIndex.WordOffset[iIndex + 1] - iOffset;  // ???? 有待檢查最後一筆
+                    }
                     WordData[i].Initial(iOffset, iBufferSize);
                 } else {         // 此字不在索引檔中
                     WordData[i].ZeroIt();       // 建一個全部都是 0 的 worddata
@@ -129,6 +130,7 @@ namespace Monster
                 for(int i = 0; i < WordData[0].WordCount[iFileNum]; i++)    // 先用最笨的方法, 由第一個 token 的串列, 每一個都去試
                 {
                     iHead = WordData[0].WordPos[iFileNum][i]; // 第一個的位置
+
                     iLastHead = iHead;
 
                     int iFound = 1;         // 如果只找一個字, 就是找到了.

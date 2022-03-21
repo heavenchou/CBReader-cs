@@ -9,7 +9,7 @@ namespace Monster
 {
     public class CMainIndex
     {
-        public FileStream FileStream;            // 主索引檔
+        public FileStream FileStream = null;            // 主索引檔
         public string FileName;
         public long Size = 0;
 
@@ -21,6 +21,13 @@ namespace Monster
             }
             FileStream = new FileStream(FileName, FileMode.Open, FileAccess.Read);
             Size = FileStream.Length;
+        }
+
+        ~CMainIndex()
+        {
+            if(FileStream != null) {
+                FileStream.Close();
+            }
         }
     }
 }

@@ -6,7 +6,9 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,10 +20,10 @@ namespace CBReader
         MainForm mainForm;
 		FileStream fileStream;	// 共用的 fileStream，要給 Timer 看的。
 
-		string DestFile;
+		// string DestFile;
 
 		string ServerURL = "http://www.cbeta.org/cbreader/update.php?";  // 要檢查更新的網頁目錄
-		bool UseLocalhostURL = false;  // 使用 localhost 的測試網址
+		public bool UseLocalhostURL = false;  // 使用 localhost 的測試網址
 		string LocalhostURL = "http://localhost/cbreader/update.php?";    // 內部測試的網址
 
 		// 二個版本
@@ -38,6 +40,7 @@ namespace CBReader
 		// 這樣才能再次執行時, 再次檢查有沒有更新的更新
 		public bool IsUpdate = false;
 		public bool IsDownloading = false;	// 是否正在下載
+		public bool IsDownloadOK = false;	// 是否下載完成
 
 		List<string> slReceive = new List<string>(); // 接收網頁訊息
 
@@ -55,13 +58,10 @@ namespace CBReader
 		}
 
 		// 檢查需不需要更新, 傳入 cbreader 版本, 資料版本, 以及要不要回應目前是最新的 (手動更新才需要)
+		// 若要不要回應是 true, 表示是使用者指定更新，因此更新機率是 100，不要隨機了
 		public void CheckUpdate(string sCBRVer, string sDataVer, bool bShowNoUpdate)
         {
 			IsShowMessage = bShowNoUpdate;
-
-			// 判斷有沒有更新, 如果有更新, 就不修改更新時期,
-			// 這樣才能再次執行時, 再次檢查有沒有更新的更新
-			IsUpdate = false;
 
 			// 傳過去的版本格式 ?cbr=0.1.0.0&data=0.1.0.0
 			// 作業系統 &os=win
@@ -79,13 +79,33 @@ namespace CBReader
 				MessageBox.Show(sURL);
 			}
 
+			// 一定要秀回應，也表示一定要判斷能不能更新，不考慮機率
+			if(IsShowMessage) {
+				sURL += "&rand=100";
+			}
+
 			try {
 				//sURL = "https://www.cbeta.org/cbreader/update.php?cbr=0.5.5.0&data=0.5.4.0&os=win";
 				string responseBody = httpClient.GetStringAsync(sURL).Result;
 				slReceive.Clear();
 				slReceive = responseBody.Split('\n').ToList();
 			} catch (HttpRequestException e) {
-				MessageBox.Show(e.Message);
+				if (IsShowMessage) {
+					MessageBox.Show(e.Message);
+				}
+				return;
+			} catch (AggregateException ae) {
+				if (IsShowMessage) {
+					foreach (Exception ex in ae.InnerExceptions) {
+						MessageBox.Show(ex.Message);
+					}
+				}
+				return;
+			} catch (Exception e) {
+				if (IsShowMessage) {
+					MessageBox.Show(e.Message);
+				}
+				return;
 			}
 
 			// 判斷是不是更新資料檔
@@ -100,9 +120,10 @@ namespace CBReader
 				}
 			} else if (sStr1.StartsWith("message=")) {
 
-				var result = MessageBox.Show("發現更新檔案，您要進行更新嗎？更新後請立刻重新開啟本程式，以確保程式與資料能正確搭配。", "進行更新", MessageBoxButtons.YesNoCancel);
+				var result = MessageBox.Show("發現有更新檔案，您要進行更新嗎？\n\n更新後會自動重啟程式。", "是否進行更新？", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 				if (result == DialogResult.Yes) {
+					IsUpdate = true;
 					Show();
 				} else {
 					if (CGlobalVal.IsDebug) {
@@ -119,6 +140,7 @@ namespace CBReader
 		async Task Download()
         {
 			for (int i = 0; i < updateSource.Count; i++) {
+				lbMessage.Text = $"下載中... ({i+1}/{updateSource.Count})";
 				using (HttpClient httpClient = new HttpClient()) {
 					try {
 						var requestUri = updateSource[i];
@@ -142,7 +164,6 @@ namespace CBReader
 					}
 				}
 			}
-			MessageBox.Show("檔案下載完成，已可執行更新作業，更新期間無法操作");
 		}
 
 		// 由 http 網址取得最後的檔名
@@ -156,9 +177,44 @@ namespace CBReader
 			}
         }
 
+		// 若已存在的檔案不想被覆蓋，overwrite 可設為 false
+		void UnzipToDirectory(string zipFile, string outDir, bool overwrite = true)
+		{
+			using (ZipArchive archive = ZipFile.OpenRead(zipFile)) {
+				progressBar1.Maximum = archive.Entries.Count;
+				progressBar1.Value = 0;
+				foreach (ZipArchiveEntry file in archive.Entries) {
+					// file.Name == "" 表示 file 為目錄
+					if (file.Name == "") {
+						string desPath = Path.Combine(outDir, file.FullName);
+
+						// 目錄不存在就要建立
+						if (!Directory.Exists(desPath)) {
+							Directory.CreateDirectory(desPath);
+						}
+					} else {
+						// file 為檔案
+						string desFileName = Path.Combine(outDir, file.FullName);
+
+						// 可覆寫就直接解壓縮
+						if (overwrite) {
+							file.ExtractToFile(desFileName, overwrite);
+						} else {
+							// 不可覆寫就要先判斷檔案是否存在，不存在才解壓縮
+							if (!File.Exists(desFileName)) {
+								file.ExtractToFile(desFileName);
+							}
+						}
+					}
+					progressBar1.Value++;
+					Application.DoEvents();
+				}
+			}
+		}
+
 		// 元件事件 =========================================
 
-        private void UpdateForm_Shown(object sender, EventArgs e)
+		private void UpdateForm_Shown(object sender, EventArgs e)
         {
 			string sMsg = slReceive[0];
 			sMsg = sMsg.Remove(0, 8);  // 移除 "message="
@@ -182,11 +238,17 @@ namespace CBReader
 		// 開始下載
         private async void btDownload_Click(object sender, EventArgs e)
         {
-			IsUpdate = true;    // 表示有更新, 不要修改更新日期
+			if (IsDownloading) {
+				return;
+			}
 			IsDownloading = true;
 
 			// 開始下載
 			lbMessage.Text = "下載中...";
+
+			updateDest.Clear();
+			updateSource.Clear();
+			updateFilename.Clear();
 
 			for (int i = 1; i < slReceive.Count; i++) {
 				// 來源
@@ -206,6 +268,8 @@ namespace CBReader
 						if (cbUseChinaServer.Checked) {
 							sSource = sSource.Replace("archive.cbeta.org/cbreader", 
 								                      "archive.cbetaonline.cn/download");
+							sSource = sSource.Replace("archive.cbeta.org/download",
+													  "archive.cbetaonline.cn/download");
 						}
 
 						if (CGlobalVal.IsDebug) {
@@ -223,6 +287,17 @@ namespace CBReader
 				}
 			}
 			await Download();
+
+			lbMessage.Text = "下載完成";
+			IsDownloading = false;
+			IsDownloadOK = true;
+			btUpdate.Enabled = true;
+			btDownload.Enabled = false;
+			btUpdate.Focus();
+			var result = MessageBox.Show("更新檔案下載完成。\n\n按下「是」會自動進行更新及重啟程式，更新期間無法操作 CBReader。", "是否立刻更新？", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			if (result == DialogResult.Yes) {
+				btUpdate_Click(this, null);
+			}
 		}
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -236,28 +311,37 @@ namespace CBReader
 		// 更新檔案，也就是逐一解壓縮
         private void btUpdate_Click(object sender, EventArgs e)
         {
-			//TopMost = true;
-
+			TopMost = true;
+			mainForm.Bookcase.CBETA.FreeSearchEngine();
 			for (int i = 0; i < updateFilename.Count; i++) {
+				lbMessage.Text = $"更新中... ({i+1}/{updateFilename.Count})";
 				string zipFile = CGlobalVal.MyTempPath + updateFilename[i];
 				if (updateDest[i] == "bookcase") {
 					// 解壓縮到 bookcase 目錄
-					ZipFile.ExtractToDirectory(zipFile, mainForm.Bookcase.BookcaseDir);
+					// ZipFile.ExtractToDirectory(zipFile, mainForm.Bookcase.BookcaseDir);
+					UnzipToDirectory(zipFile, mainForm.Bookcase.BookcaseDir);
 				} else {
 					// 解壓縮到主程式目錄
 					string exeFile = CGlobalVal.MyFullPath + "CBReader.exe";
 					string oldFile = CGlobalVal.MyFullPath + "CBReader_old.exe";
-					//Directory.Move(exeFile, oldFile);
+					if (File.Exists(oldFile)) {
+						File.Delete(oldFile);
+                    }
 					File.Move(exeFile, oldFile);
-					ZipFile.ExtractToDirectory(zipFile, CGlobalVal.MyFullPath);
+					//ZipFile.ExtractToDirectory(zipFile, CGlobalVal.MyFullPath);
+					UnzipToDirectory(zipFile, CGlobalVal.MyFullPath);
 				}
             }
+			lbMessage.Text = "更新完成";
+			IsDownloadOK = false;
+			MessageBox.Show("更新完成，按下「確定」後會重啟程式。");
+			CGlobalVal.restart = true;
+			mainForm.Close();
         }
 
         private void UpdateForm_FormClosing(object sender, FormClosingEventArgs e)
         {
 			e.Cancel = true;
-			Hide();
         }
     }
 }

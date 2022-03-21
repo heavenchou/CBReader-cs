@@ -71,7 +71,7 @@ namespace CBReader.Tests
         [TestMethod()]
         public void getStandardPageColLineTest()
         {
-            Assert.AreEqual(CCBSutraUtil.getStandardPageColLine("", "", ""), "0001a01");
+            Assert.AreEqual(CCBSutraUtil.getStandardPageColLine("", "", ""), "");
             Assert.AreEqual(CCBSutraUtil.getStandardPageColLine("0123", "a", "45"), "0123a45");
             Assert.AreEqual(CCBSutraUtil.getStandardPageColLine("123", "a", "5"), "0123a05");
             Assert.AreEqual(CCBSutraUtil.getStandardPageColLine("123", "1", "5"), "0123a05");
