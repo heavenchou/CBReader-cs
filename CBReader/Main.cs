@@ -164,6 +164,7 @@ namespace CBReader
                 webBrowser.Navigate(URL);
             }
 
+            Text = CGlobalVal.ProgramName;
             Text = Text + " v" + CGlobalVal.Version;
             Text = Text.Remove(Text.LastIndexOf('.'));
             if (Text.Last() == '0') {

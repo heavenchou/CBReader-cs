@@ -43,6 +43,8 @@ namespace CBReader
             cbShowCollation.Checked = Setting.ShowCollation;
             cbShowCollationCF.Checked = Setting.ShowCollationCF;
 
+            cbShowCollationCF.Enabled = cbShowCollation.Checked;      // 若不呈現校注, 就不出現 "呈現參考資料" 的選項
+
             // 校勘格式
             if (Setting.CollationType == ECollationType.Orig) rbOrigCollation.Checked = true;
             else if (Setting.CollationType == ECollationType.CBETA) rbCBETACollation.Checked = true;
