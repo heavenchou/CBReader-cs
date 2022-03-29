@@ -269,7 +269,7 @@ namespace CBReader
 
 						if (StrHas(HTMLSource, pPoint, "P.")) {  // 南傳有 [P.nn] 的 PTS 頁碼
 							pPoint += 2;
-						} else if (HTMLSource[pPoint] == 'A') {              // CBETA 自訂校註是 [Axx]
+						} else if (HTMLSource[pPoint] == 'A') {              // CBETA 自訂校注是 [Axx]
 							pPoint++;
 						}
 

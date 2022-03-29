@@ -41,6 +41,8 @@ namespace CBReader
             cbVerticalMode.Checked = Setting.VerticalMode;
 
             cbShowCollation.Checked = Setting.ShowCollation;
+            cbShowCollationCF.Checked = Setting.ShowCollationCF;
+
             // 校勘格式
             if (Setting.CollationType == ECollationType.Orig) rbOrigCollation.Checked = true;
             else if (Setting.CollationType == ECollationType.CBETA) rbCBETACollation.Checked = true;
@@ -234,6 +236,7 @@ namespace CBReader
 
             Setting.VerticalMode = cbVerticalMode.Checked;
             Setting.ShowCollation = cbShowCollation.Checked;
+            Setting.ShowCollationCF = cbShowCollationCF.Checked;
             // 校勘格式
             if (rbOrigCollation.Checked) Setting.CollationType = ECollationType.Orig;
             else if (rbCBETACollation.Checked) Setting.CollationType = ECollationType.CBETA;
@@ -421,6 +424,11 @@ namespace CBReader
         {
             cbNoShowLgPunc.Enabled = cbShowPunc.Checked;
             cbNoShowAIPunc.Enabled = cbShowPunc.Checked;
+        }
+
+        private void cbShowCollation_CheckedChanged(object sender, EventArgs e)
+        {
+            cbShowCollationCF.Enabled = cbShowCollation.Checked;
         }
     }
 }

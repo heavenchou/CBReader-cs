@@ -58,6 +58,7 @@ namespace CBReader
             this.cbShowPunc = new System.Windows.Forms.CheckBox();
             this.cbShowLineHead = new System.Windows.Forms.CheckBox();
             this.cbShowLineFormat = new System.Windows.Forms.CheckBox();
+            this.cbShowCollationCF = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -275,13 +276,14 @@ namespace CBReader
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbShowCollationCF);
             this.groupBox2.Controls.Add(this.cbShowCollation);
             this.groupBox2.Controls.Add(this.groupBox5);
-            this.groupBox2.Location = new System.Drawing.Point(14, 307);
+            this.groupBox2.Location = new System.Drawing.Point(14, 292);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox2.Size = new System.Drawing.Size(246, 211);
+            this.groupBox2.Size = new System.Drawing.Size(262, 226);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "校注格式";
@@ -296,16 +298,17 @@ namespace CBReader
             this.cbShowCollation.TabIndex = 0;
             this.cbShowCollation.Text = "呈現校注符號";
             this.cbShowCollation.UseVisualStyleBackColor = true;
+            this.cbShowCollation.CheckedChanged += new System.EventHandler(this.cbShowCollation_CheckedChanged);
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.rbCBETACollation);
             this.groupBox5.Controls.Add(this.rbOrigCollation);
-            this.groupBox5.Location = new System.Drawing.Point(30, 74);
+            this.groupBox5.Location = new System.Drawing.Point(30, 104);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox5.Size = new System.Drawing.Size(199, 116);
+            this.groupBox5.Size = new System.Drawing.Size(199, 106);
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "校注選擇";
@@ -313,7 +316,7 @@ namespace CBReader
             // rbCBETACollation
             // 
             this.rbCBETACollation.AutoSize = true;
-            this.rbCBETACollation.Location = new System.Drawing.Point(25, 71);
+            this.rbCBETACollation.Location = new System.Drawing.Point(25, 67);
             this.rbCBETACollation.Margin = new System.Windows.Forms.Padding(4);
             this.rbCBETACollation.Name = "rbCBETACollation";
             this.rbCBETACollation.Size = new System.Drawing.Size(159, 29);
@@ -325,7 +328,7 @@ namespace CBReader
             // rbOrigCollation
             // 
             this.rbOrigCollation.AutoSize = true;
-            this.rbOrigCollation.Location = new System.Drawing.Point(25, 36);
+            this.rbOrigCollation.Location = new System.Drawing.Point(25, 30);
             this.rbOrigCollation.Margin = new System.Windows.Forms.Padding(4);
             this.rbOrigCollation.Name = "rbOrigCollation";
             this.rbOrigCollation.Size = new System.Drawing.Size(113, 29);
@@ -346,7 +349,7 @@ namespace CBReader
             this.groupBox1.Margin = new System.Windows.Forms.Padding(5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox1.Size = new System.Drawing.Size(246, 262);
+            this.groupBox1.Size = new System.Drawing.Size(262, 262);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "經文格式";
@@ -418,6 +421,16 @@ namespace CBReader
             this.cbShowLineFormat.Text = "依原書格式呈現";
             this.cbShowLineFormat.UseVisualStyleBackColor = true;
             // 
+            // cbShowCollationCF
+            // 
+            this.cbShowCollationCF.AutoSize = true;
+            this.cbShowCollationCF.Location = new System.Drawing.Point(55, 67);
+            this.cbShowCollationCF.Name = "cbShowCollationCF";
+            this.cbShowCollationCF.Size = new System.Drawing.Size(194, 29);
+            this.cbShowCollationCF.TabIndex = 3;
+            this.cbShowCollationCF.Text = "呈現校注參考資訊";
+            this.cbShowCollationCF.UseVisualStyleBackColor = true;
+            // 
             // OptionForm
             // 
             this.AcceptButton = this.btOK;
@@ -485,5 +498,6 @@ namespace CBReader
         private System.Windows.Forms.RadioButton rbGaijiDesFirst;
         private System.Windows.Forms.RadioButton rbGaijiNormalFirst;
         private System.Windows.Forms.RadioButton rbGaijiUniExtFirst;
+        private System.Windows.Forms.CheckBox cbShowCollationCF;
     }
 }

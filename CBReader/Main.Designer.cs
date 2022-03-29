@@ -38,6 +38,7 @@ namespace CBReader
             this.miAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.miAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.miCreateHtml = new System.Windows.Forms.ToolStripMenuItem();
+            this.miLocalUpdateURL = new System.Windows.Forms.ToolStripMenuItem();
             this.btNextJuan = new System.Windows.Forms.Button();
             this.btPrevJuan = new System.Windows.Forms.Button();
             this.btMuluWidthSwitch = new System.Windows.Forms.Button();
@@ -157,7 +158,6 @@ namespace CBReader
             this.miOr = new System.Windows.Forms.ToolStripMenuItem();
             this.miExclude = new System.Windows.Forms.ToolStripMenuItem();
             this.miAny = new System.Windows.Forms.ToolStripMenuItem();
-            this.miLocalUpdateURL = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.pnMainFunc.SuspendLayout();
@@ -218,28 +218,28 @@ namespace CBReader
             this.miAdmin});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(865, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(865, 27);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // miOption
             // 
             this.miOption.Name = "miOption";
-            this.miOption.Size = new System.Drawing.Size(53, 24);
+            this.miOption.Size = new System.Drawing.Size(53, 23);
             this.miOption.Text = "設定";
             this.miOption.Click += new System.EventHandler(this.miOption_Click);
             // 
             // miUpdate
             // 
             this.miUpdate.Name = "miUpdate";
-            this.miUpdate.Size = new System.Drawing.Size(83, 24);
+            this.miUpdate.Size = new System.Drawing.Size(83, 23);
             this.miUpdate.Text = "更新檢查";
             this.miUpdate.Click += new System.EventHandler(this.miUpdate_Click);
             // 
             // miAbout
             // 
             this.miAbout.Name = "miAbout";
-            this.miAbout.Size = new System.Drawing.Size(53, 24);
+            this.miAbout.Size = new System.Drawing.Size(53, 23);
             this.miAbout.Text = "關於";
             this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
@@ -249,16 +249,23 @@ namespace CBReader
             this.miCreateHtml,
             this.miLocalUpdateURL});
             this.miAdmin.Name = "miAdmin";
-            this.miAdmin.Size = new System.Drawing.Size(105, 24);
+            this.miAdmin.Size = new System.Drawing.Size(105, 23);
             this.miAdmin.Text = "Heaven專用";
             this.miAdmin.Visible = false;
             // 
             // miCreateHtml
             // 
             this.miCreateHtml.Name = "miCreateHtml";
-            this.miCreateHtml.Size = new System.Drawing.Size(224, 26);
+            this.miCreateHtml.Size = new System.Drawing.Size(222, 26);
             this.miCreateHtml.Text = "批量產生HTML";
             this.miCreateHtml.Click += new System.EventHandler(this.miCreateHtml_Click);
+            // 
+            // miLocalUpdateURL
+            // 
+            this.miLocalUpdateURL.Name = "miLocalUpdateURL";
+            this.miLocalUpdateURL.Size = new System.Drawing.Size(222, 26);
+            this.miLocalUpdateURL.Text = "使用 local 更新網址";
+            this.miLocalUpdateURL.Click += new System.EventHandler(this.miLocalUpdateURL_Click);
             // 
             // btNextJuan
             // 
@@ -1623,13 +1630,6 @@ namespace CBReader
             this.miAny.Size = new System.Drawing.Size(141, 24);
             this.miAny.Text = "? Any";
             this.miAny.Click += new System.EventHandler(this.miAny_Click);
-            // 
-            // miLocalUpdateURL
-            // 
-            this.miLocalUpdateURL.Name = "miLocalUpdateURL";
-            this.miLocalUpdateURL.Size = new System.Drawing.Size(224, 26);
-            this.miLocalUpdateURL.Text = "使用 local 更新網址";
-            this.miLocalUpdateURL.Click += new System.EventHandler(this.miLocalUpdateURL_Click);
             // 
             // MainForm
             // 

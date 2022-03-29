@@ -17,7 +17,7 @@ namespace CBReader
         // MARK: Private 私人成員變數
         string XMLFile = ""; // XML 檔名
         string HTMLText = "";	// HTML 的結果
-        string HTMLCollation = "";    // HTML 校註
+        string HTMLCollation = "";    // HTML 校注
         CSetting Setting;       // 呈現用的設定
         string JSFile = "";  	// javascript 的位置
 
@@ -74,11 +74,17 @@ namespace CBReader
         bool InMulu = false;			// 在 <cb:mulu>...</cb:mulu> 的範圍內, 文字則不呈現,
         bool InMuluPin = false;         // 在 <cb:mulu>...</cb:mulu> 的範圍內, 而且是 "品" , 則文字不呈現, 但要記錄至 MuluLabel
 
-        int NoteAddNum = 0;			// 自訂校註 <note type="add" 的流水號, 由 1 開始
+        int NoteAddNum = 0;			// 自訂校注 <note type="add" 的流水號, 由 1 開始
         Dictionary<string, int> mpNoteAddNum = new Dictionary<string, int>();	// 由 id 找出 流水號, 沒有就設定一個
         Dictionary<string, int> mpNoteStarNum = new Dictionary<string, int>(); // 記錄每一個 id 有多少個星號了
 
         CNextLine NextLine = new CNextLine();     // 用來處理隔行 <tt> 的物件
+
+        // 若有 <note type="cf1">XXX</note><note type="cf2">YYY</note>
+        // 則 NoteCF = "XXX; YYY"
+        // 在校注會呈現 (cf. XXX; YYY)
+        // 例：(cf. 楊郁文《阿含辭典》編輯體例說明 (大) 1,6a4,a7; K17n0647_p0820a22)
+        string NoteCF = "";
 
         // =========================
         // MARK: public 公開成員變數
@@ -170,17 +176,19 @@ namespace CBReader
             HTMLText += HTMLCollation;
             HTMLText += "</div>\n";
 
-            if(sLink != "") {
-                HTMLText += @"<script>
-                location.href='#" + sLink + @"';
-                </script>";
-            } else if(bShowHighlight) {
-                HTMLText += @"<script>
-                location.href='#Search_0_1';
-                </script>";
+            HTMLText += "<script>\n";
+            // 是否呈現校注 cf
+            if(Setting.ShowCollationCF) {
+                HTMLText += "\tShowCollationCF = true;\n";
+            } else {
+                HTMLText += "\tShowCollationCF = false;\n";
             }
-
-            HTMLText += "\n</body>\n</html>";
+            if (sLink != "") {
+                HTMLText += $"\tlocation.href='#{sLink}';\n";
+            } else if(bShowHighlight) {
+                HTMLText += "\tlocation.href='#Search_0_1';\n";
+            }
+            HTMLText += "</script>\n</body>\n</html>";
         }
         
         // 由經名取得一切相關資訊
@@ -369,7 +377,15 @@ namespace CBReader
         .note_star {display:inline;}
         .note_star_removed {display:none;}";
             }
-            sHtml += "\n    </style>\n";
+            // 校勘 cf 呈現
+            if (Setting.ShowCollationCF == true) {
+                sHtml += @"
+        .note_cf {display:inline;}";
+            } else {
+                sHtml += @"
+        .note_cf {display:none;}";
+            }
+                sHtml += "\n    </style>\n";
 
             // 自訂 CSS
             if(Setting.UseCSSFile) {
@@ -379,7 +395,7 @@ namespace CBReader
             sHtml += $@"</head>
 <body data-sutraname='{SutraName}' data-juan='{JuanNum}' data-totaljuan='{TotalJuan}'";
 
-            // data-notetype 用來判斷目前是呈現何種校註
+            // data-notetype 用來判斷目前是呈現何種校注
             if(Setting.ShowCollation == false) {
                 sHtml += " data-notetype='none'";
             } else if(Setting.CollationType == ECollationType.Orig) {
@@ -501,7 +517,7 @@ namespace CBReader
                 sHtml = sHtml.Replace("\n", "");
                 sHtml = sHtml.Replace("\t", "");
                 // xml 有 &amp; &lt;, 轉成 html 預設是 & < , CBR 程式讓 html 依然保持 &amp; &lt;
-                // 實際呈現會自動轉成 & <, 但引用複製需要處理校註的部份
+                // 實際呈現會自動轉成 & <, 但引用複製需要處理校注的部份
                 // 所以只有 note_text 要處理 &amp; &lt; , text 不用處理
                 sHtml = sHtml.Replace("&", "&amp;");
                 sHtml = sHtml.Replace("<", "&lt;");
@@ -641,9 +657,9 @@ namespace CBReader
                 HTMLCollation += "</div>\n";
             } else {
                 // 這裡要注意順序
-                // 1. 先處理校註區的 <div id="txt_note_app_xxxx">
-                // 2. 進行 parseChild , 這裡面會處理校註區 lem ,rdg 的內容
-                // 3. 再加上校註區的 </div>
+                // 1. 先處理校注區的 <div id="txt_note_app_xxxx">
+                // 2. 進行 parseChild , 這裡面會處理校注區 lem ,rdg 的內容
+                // 3. 再加上校注區的 </div>
 
                 // 底下幾個順序不要錯亂, 尤其二個 HTMLCollation 要夾著 parseChild(Node)
                 HTMLCollation += "<div id='txt_note_app_" + sId + "'>\n";
@@ -1523,7 +1539,7 @@ namespace CBReader
                 // 第一個, 或在行首, 就要依 list 數量 * 2 來空格
                 if (ItemNum[ListCount] == 1 || sPreNodeName == "lb" || sPreChildNodeName == "list") {
                     //itemX63p0502b0319 是特例
-                    // 在切換校註呈現時如何處理? 待研究 ????
+                    // 在切換校注呈現時如何處理? 待研究 ????
                     //if(Setting.CorrSelect == 0 && sItemId == "itemX63p0502b0319"){}
                     //else
                     if (Setting.ShowLineFormat) {
@@ -1533,7 +1549,7 @@ namespace CBReader
                     }
                 } else {
                     // 這幾組在呈現修訂用字時不空格
-                    // 在切換校註呈現時如何處理? 待研究 ????
+                    // 在切換校注呈現時如何處理? 待研究 ????
                     /*
                     if(Setting.CorrSelect == 0)
                     {
@@ -1961,7 +1977,7 @@ namespace CBReader
 
         XML 原始標記  : <lem wit="【大】">長安</lem>
         HTML 經文轉成 : 長安
-        HTML 校註轉成 : <div type="lem" data-wit="【大】">長安</div>
+        HTML 校注轉成 : <div type="lem" data-wit="【大】">長安</div>
 
         有原始版的 lem 或 rdg 還要轉出一行, 讓 javascript 好處理
 				        <div type="orig">XXX</div>
@@ -1978,27 +1994,30 @@ namespace CBReader
             string sWit = GetAttr(node, "wit");
 
             bool bShowLemText = true;
-            bool bLemIsOrig = false;   // 判斷 lem 是否是原始校註
+            bool bLemIsOrig = false;   // 判斷 lem 是否是原始校注
 
             if (sWit.IndexOf(BookVerName) >= 0) {
                 bLemIsOrig = true;
             }
 
-            // 選擇原書校註, 但 lem 不是原始校註, 就不呈現文字
+            // 選擇原書校注, 但 lem 不是原始校注, 就不呈現文字
             if (Setting.CollationType == ECollationType.Orig) {
                 if (bLemIsOrig == false) {
                     bShowLemText = false;
                 }
             }
 
+            NoteCF = "";    // 先清空
             string sLemText = parseChild(node); // 處理內容
 
-            if (bShowLemText) sHtml += sLemText;
+            if (bShowLemText) {
+                sHtml += sLemText;
+            }
 
-            // 記錄到校註區
+            // 記錄到校注區
 
             // 有些有 type 屬性要處理 : T18n0848 : <rdg resp="Taisho" wit="【丙】" type="variantRemark">乘</rdg>
-            // ???? (lem , rdg 都要處理, 但大概是呈現全部校註文字的表格才會用上吧)
+            // ???? (lem , rdg 都要處理, 但大概是呈現全部校注文字的表格才會用上吧)
 
             string sLemTag = "";
             if (bLemIsOrig) {
@@ -2010,6 +2029,19 @@ namespace CBReader
                             sWit + "'>" + sLemText + "</div>\n";
 
             HTMLCollation += sLemTag;
+
+            // 處理 NoteCF
+            // <lem> 裡面有 <note type="cf1">XXX</note><note type="cf2">YYY</note>
+            // NoteCF = "XXX; YYY; "
+            // 移掉最後的 "; "
+            // 在標記加入 <div type='cf'>XXX; YYY</div>
+
+            if (NoteCF != "") {
+                NoteCF = NoteCF.Substring(0, NoteCF.Length - 2);
+                string sNoteCFTag = $"\t<div type='cf'>{NoteCF}</div>\n";
+                HTMLCollation += sNoteCFTag;
+            }
+
             return sHtml;
         }
 
@@ -2461,7 +2493,7 @@ namespace CBReader
                 // 2. 缺字會加上 <span class="gaiji">...</span>
                 // 3. 缺字的 <!--gaiji,缽,1[金*本],2&#Xxxxx;,3-->
 
-                // 同時要注意, 若在校註中, 目錄的內容會不會跑到校註中? (舊版CBR會把文字送到校註中)
+                // 同時要注意, 若在校注中, 目錄的內容會不會跑到校注中? (舊版CBR會把文字送到校注中)
                 // MuluLabel 的處理也要注意, 這大概是在 lb 會處理????
 
                 string sMulu = parseChild(node); // 處理內容
@@ -2736,6 +2768,12 @@ namespace CBReader
                             "' onclick='return ShowCollation($(this));'>[＊]</a>";
                 sHtml += sTmp;
             }
+            else if(sType.Substring(0, 2) == "cf") {
+                string cf = parseChild(node);
+                if (cf != "") {
+                    NoteCF += $"{cf}; ";
+                }
+            }
 
             // parseChild(node); // 處理內容
 
@@ -2839,8 +2877,8 @@ namespace CBReader
 
             // 處理 <p....>
             if (iSpecialType > 0) {
-                // iSpecialType > 0 只會出現在校註
-                // ???? 出現在校註需要把 p 換成 span 嗎？
+                // iSpecialType > 0 只會出現在校注
+                // ???? 出現在校注需要把 p 換成 span 嗎？
                 sHtml += "<p style='text-indent: ";
                 sHtml += iTextIndent.ToString();
                 sHtml += "em; margin-left: ";
@@ -2995,7 +3033,7 @@ namespace CBReader
 
         XML 原始標記  : <rdg resp="Taisho" wit="【宋】"><space quantity="0"/></rdg>
         HTML 經文轉成 : (空的, 沒有字)
-        HTML 校註轉成 : <div type="rdg" data-wit="【宋】">長安</div>
+        HTML 校注轉成 : <div type="rdg" data-wit="【宋】">長安</div>
 
         有原始版的 lem 或 rdg 還要轉出一行, 讓 javascript 好處理
 				        <div type="orig">XXX</div>
@@ -3013,12 +3051,12 @@ namespace CBReader
             string sType = GetAttr(node, "type");
 
             bool bShowRdgText = false;
-            bool bRdgIsOrig = false;   // 判斷 lem 是否是原始校註
+            bool bRdgIsOrig = false;   // 判斷 lem 是否是原始校注
 
             if (sWit.Contains(BookVerName) && sType != "correctionRemark" && sType != "variantRemark")
                 bRdgIsOrig = true;
 
-            // 選擇原書校註, 且 rdg 是原始校註, 才呈現文字
+            // 選擇原書校注, 且 rdg 是原始校注, 才呈現文字
             if (Setting.CollationType == ECollationType.Orig) {
                 if (bRdgIsOrig == true) {
                     bShowRdgText = true;
@@ -3031,7 +3069,7 @@ namespace CBReader
                 sHtml += sRdgText;
             }
 
-            // 記錄到校註區
+            // 記錄到校注區
 
 
             string sRdgTag = "";

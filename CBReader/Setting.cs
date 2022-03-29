@@ -36,6 +36,7 @@ namespace CBReader
         public bool ShowLineFormat = false;    // 是否依大正藏切行
         public bool ShowLineHead = false;      // 是否行首加上行首資訊
         public bool ShowCollation = true;     // 顯示校勘資料
+        public bool ShowCollationCF = true;        // 呈現校注中的 cf 資訊
 
         public bool VerticalMode = false;      // 垂直顯示
         public bool ShowPunc = true;          // 呈現標點與段落
@@ -46,6 +47,7 @@ namespace CBReader
         // 校勘格式
 
         public ECollationType CollationType = ECollationType.CBETA;      // 校勘格式 0:原書, 1:CBETA
+        
 
         // 經文呈現的顏色, 背景
 
@@ -225,6 +227,7 @@ namespace CBReader
             NoShowAIPunc = iniFile.ReadBool(Section, "NoShowAIPunc", NoShowAIPunc);
             VerticalMode = iniFile.ReadBool(Section, "VerticalMode", VerticalMode);
             ShowCollation = iniFile.ReadBool(Section, "ShowCollation", ShowCollation);
+            ShowCollationCF = iniFile.ReadBool(Section, "ShowCollationCF", ShowCollationCF);
             CollationType = (ECollationType) (iniFile.ReadInteger(Section, "CollationType", (int) CollationType));
 
             // 缺字處理
@@ -293,6 +296,7 @@ namespace CBReader
             iniFile.WriteBool(Section, "NoShowAIPunc", NoShowAIPunc);
             iniFile.WriteBool(Section, "VerticalMode", VerticalMode);
             iniFile.WriteBool(Section, "ShowCollation", ShowCollation);
+            iniFile.WriteBool(Section, "ShowCollationCF", ShowCollationCF);
             iniFile.WriteInteger(Section, "CollationType", (int) CollationType);
 
             // 缺字處理

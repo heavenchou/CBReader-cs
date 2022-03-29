@@ -37,7 +37,7 @@ namespace CBReader
 
         int SpineID;    // 目前開啟的檔案, 用來處理上一卷和下一卷用的
 
-        int NavWidth;   // 目錄區的寬度
+        int NavWidth = 380;   // 目錄區的寬度
         int MuluWidth = 200;  // 書目區的寬度
 
         public MainForm()
@@ -62,8 +62,12 @@ namespace CBReader
 
             // 刪去舊版
             string sOld = CGlobalVal.MyFullPath + "CBReader_old.exe";
+            string sOld2 = CGlobalVal.MyFullPath + "CBReader.exe.tmp";
             if (File.Exists(sOld)) {
                 File.Delete(sOld);
+            }
+            if (File.Exists(sOld2)) {
+                File.Delete(sOld2);
             }
 
             MainFunc.SelectedIndex = 0;
@@ -162,7 +166,9 @@ namespace CBReader
 
             Text = Text + " v" + CGlobalVal.Version;
             Text = Text.Remove(Text.LastIndexOf('.'));
-            Text = Text.Remove(Text.LastIndexOf('.'));
+            if (Text.Last() == '0') {
+                Text = Text.Remove(Text.LastIndexOf('.'));
+            }
 
             // 西蓮淨苑 SLReader 專用
             // 檢索範圍要加上西蓮
