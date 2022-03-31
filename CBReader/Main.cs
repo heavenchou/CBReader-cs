@@ -58,7 +58,9 @@ namespace CBReader
             InitializeForms();  // 初始其它的 Form
 
             // 判斷是不是西蓮淨苑 SLReader 專用
-            // CheckSeeland(); ????
+            if (CGlobalVal.ApplicationTitle == "SLReader") {
+                SeeLandView();  // 西蓮畫面
+            }
 
             // 刪去舊版
             string sOld = CGlobalVal.MyFullPath + "CBReader_old.exe";
@@ -164,7 +166,7 @@ namespace CBReader
                 webBrowser.Navigate(URL);
             }
 
-            Text = CGlobalVal.ProgramName;
+            Text = CGlobalVal.ProgramTitle;
             Text = Text + " v" + CGlobalVal.Version;
             Text = Text.Remove(Text.LastIndexOf('.'));
             if (Text.Last() == '0') {
@@ -173,25 +175,30 @@ namespace CBReader
 
             // 西蓮淨苑 SLReader 專用
             // 檢索範圍要加上西蓮
-            /*
-            if (Application->Title == u"SLReader")
-	            {
-	            // 版本末碼為 1 的表示全部西蓮, 就不用做檢索範圍了
-	            if (*Version.LastChar() != '1') {
-		            TTreeViewItem* newItem1 = new TTreeViewItem(fmSearchRange->tvBook);
-		            newItem1->Text = u"DA 道安法師著作全集";   // 標題
-		            fmSearchRange->tvBook->AddObject(newItem1);
+        }
+        
+        // 西蓮畫面
+        void SeeLandView()
+        {
+            lbFindSutraBookId.Text = "叢書";
+            lbGoSutraBookId.Text = "叢書";
+            lbGoBookBookId.Text = "叢書";
 
-		            TTreeViewItem* newItem2 = new TTreeViewItem(fmSearchRange->tvBook);
-		            newItem2->Text = u"ZY 智諭法師著作全集";   // 標題
-		            fmSearchRange->tvBook->AddObject(newItem2);
+            lbFindSutraSutraFrom.Text = "編號從";
+            lbGoSutraSutraNum.Text = "編號";
+            lbFindSutraSutraName.Text = "著作";
 
-		            TTreeViewItem* newItem3 = new TTreeViewItem(fmSearchRange->tvBook);
-		            newItem3->Text = u"HM 惠敏法師蓮風集";   // 標題
-		            fmSearchRange->tvBook->AddObject(newItem3);
-	            }
-            }
-            */
+            sgFindSutra.Columns[0].HeaderText = "叢書";
+            sgFindSutra.Columns[2].HeaderText = "編號";
+            sgFindSutra.Columns[3].HeaderText = "著作";
+            sgFindSutra.Columns[5].Visible = false;
+
+            sgTextSearch.Columns[1].HeaderText = "叢書";
+            sgTextSearch.Columns[3].HeaderText = "編號";
+            sgTextSearch.Columns[4].HeaderText = "著作";
+            sgTextSearch.Columns[6].Visible = false;
+
+            cbSearchRange.Visible = false;  // 全文檢索範圍
         }
 
         // 開啟指定的書櫃
@@ -325,7 +332,7 @@ namespace CBReader
                 sName = CCBSutraUtil.CutJuanAfterSutraName(sName);
                 sJuan = sJuan.TrimStart('0');
                 sSutra = sSutra.TrimStart('0');
-                string sCaption = CGlobalVal.ProgramTitle + "《" + sName + "》"
+                string sCaption = Bookcase.CBETA.Title + "《" + sName + "》"
                         + sVol + ", No. " + sSutra + ", 卷/篇章" + sJuan;
                 this.Text = sCaption;
 
@@ -425,6 +432,26 @@ namespace CBReader
                 Setting.LastUpdateChk = DateTime.Today.ToString("yyyyMMdd");
 		        Setting.SaveToFile();
             }
+        }
+
+        // 將各藏經放入下拉選單中
+        void InitialComboBoxData()
+        {
+            cbFindSutraBookId.Items.Clear();
+            cbGoSutraBookId.Items.Clear();
+            cbGoBookBookId.Items.Clear();
+            if(Bookcase != null) {
+                cbFindSutraBookId.Items.Add("   全部");
+                for (int i = 0; i < Bookcase.CBETA.BookData.Count; i++) {
+                    string sItem = Bookcase.CBETA.BookData.ID[i] + " " + Bookcase.CBETA.BookData.BookName[i];
+                    cbFindSutraBookId.Items.Add(sItem);
+                    cbGoSutraBookId.Items.Add(sItem);
+                    cbGoBookBookId.Items.Add(sItem);
+                }
+            }
+            cbFindSutraBookId.SelectedIndex = 0;
+            cbGoSutraBookId.SelectedIndex = 0;
+            cbGoBookBookId.SelectedIndex = 0;
         }
 
         // 切換目錄樹中的折疊
@@ -600,6 +627,9 @@ namespace CBReader
                 MessageBox.Show(sErrorMsg);
                 sErrorMsg = CGlobalMessage.pop();
             }
+
+            // 將各藏經放入下拉選單中
+            InitialComboBoxData();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

@@ -71,10 +71,10 @@ namespace CBReader
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbFindSutraSutraName = new System.Windows.Forms.Label();
+            this.lbFindSutraSutraFrom = new System.Windows.Forms.Label();
+            this.lbFindSutraVolFrom = new System.Windows.Forms.Label();
+            this.lbFindSutraBookId = new System.Windows.Forms.Label();
             this.edFindSutraByline = new System.Windows.Forms.TextBox();
             this.edFindSutraSutraName = new System.Windows.Forms.TextBox();
             this.edFindSutraSutraTo = new System.Windows.Forms.TextBox();
@@ -94,14 +94,14 @@ namespace CBReader
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
+            this.lbGoBookBookId = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lbGoSutraSutraNum = new System.Windows.Forms.Label();
+            this.lbGoSutraBookId = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btGoSutra = new System.Windows.Forms.Button();
             this.btGoBook = new System.Windows.Forms.Button();
@@ -225,21 +225,21 @@ namespace CBReader
             // miOption
             // 
             this.miOption.Name = "miOption";
-            this.miOption.Size = new System.Drawing.Size(53, 26);
+            this.miOption.Size = new System.Drawing.Size(53, 23);
             this.miOption.Text = "設定";
             this.miOption.Click += new System.EventHandler(this.miOption_Click);
             // 
             // miUpdate
             // 
             this.miUpdate.Name = "miUpdate";
-            this.miUpdate.Size = new System.Drawing.Size(83, 26);
+            this.miUpdate.Size = new System.Drawing.Size(83, 23);
             this.miUpdate.Text = "更新檢查";
             this.miUpdate.Click += new System.EventHandler(this.miUpdate_Click);
             // 
             // miAbout
             // 
             this.miAbout.Name = "miAbout";
-            this.miAbout.Size = new System.Drawing.Size(53, 26);
+            this.miAbout.Size = new System.Drawing.Size(53, 23);
             this.miAbout.Text = "關於";
             this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
@@ -539,10 +539,10 @@ namespace CBReader
             this.panel8.Controls.Add(this.label8);
             this.panel8.Controls.Add(this.label7);
             this.panel8.Controls.Add(this.label6);
-            this.panel8.Controls.Add(this.label5);
-            this.panel8.Controls.Add(this.label4);
-            this.panel8.Controls.Add(this.label3);
-            this.panel8.Controls.Add(this.label2);
+            this.panel8.Controls.Add(this.lbFindSutraSutraName);
+            this.panel8.Controls.Add(this.lbFindSutraSutraFrom);
+            this.panel8.Controls.Add(this.lbFindSutraVolFrom);
+            this.panel8.Controls.Add(this.lbFindSutraBookId);
             this.panel8.Controls.Add(this.edFindSutraByline);
             this.panel8.Controls.Add(this.edFindSutraSutraName);
             this.panel8.Controls.Add(this.edFindSutraSutraTo);
@@ -633,45 +633,45 @@ namespace CBReader
             this.label6.TabIndex = 11;
             this.label6.Text = "作譯者";
             // 
-            // label5
+            // lbFindSutraSutraName
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(6, 134);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 25);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "經名";
+            this.lbFindSutraSutraName.AutoSize = true;
+            this.lbFindSutraSutraName.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbFindSutraSutraName.Location = new System.Drawing.Point(6, 134);
+            this.lbFindSutraSutraName.Name = "lbFindSutraSutraName";
+            this.lbFindSutraSutraName.Size = new System.Drawing.Size(52, 25);
+            this.lbFindSutraSutraName.TabIndex = 10;
+            this.lbFindSutraSutraName.Text = "經名";
             // 
-            // label4
+            // lbFindSutraSutraFrom
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(6, 94);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 25);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "經號從";
+            this.lbFindSutraSutraFrom.AutoSize = true;
+            this.lbFindSutraSutraFrom.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbFindSutraSutraFrom.Location = new System.Drawing.Point(6, 94);
+            this.lbFindSutraSutraFrom.Name = "lbFindSutraSutraFrom";
+            this.lbFindSutraSutraFrom.Size = new System.Drawing.Size(72, 25);
+            this.lbFindSutraSutraFrom.TabIndex = 9;
+            this.lbFindSutraSutraFrom.Text = "經號從";
             // 
-            // label3
+            // lbFindSutraVolFrom
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(6, 54);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 25);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "冊數從";
+            this.lbFindSutraVolFrom.AutoSize = true;
+            this.lbFindSutraVolFrom.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbFindSutraVolFrom.Location = new System.Drawing.Point(6, 54);
+            this.lbFindSutraVolFrom.Name = "lbFindSutraVolFrom";
+            this.lbFindSutraVolFrom.Size = new System.Drawing.Size(72, 25);
+            this.lbFindSutraVolFrom.TabIndex = 8;
+            this.lbFindSutraVolFrom.Text = "冊數從";
             // 
-            // label2
+            // lbFindSutraBookId
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(6, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 25);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "藏經";
+            this.lbFindSutraBookId.AutoSize = true;
+            this.lbFindSutraBookId.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbFindSutraBookId.Location = new System.Drawing.Point(6, 15);
+            this.lbFindSutraBookId.Name = "lbFindSutraBookId";
+            this.lbFindSutraBookId.Size = new System.Drawing.Size(52, 25);
+            this.lbFindSutraBookId.TabIndex = 7;
+            this.lbFindSutraBookId.Text = "藏經";
             // 
             // edFindSutraByline
             // 
@@ -795,14 +795,14 @@ namespace CBReader
             this.panel9.Controls.Add(this.label20);
             this.panel9.Controls.Add(this.label19);
             this.panel9.Controls.Add(this.label18);
-            this.panel9.Controls.Add(this.label17);
+            this.panel9.Controls.Add(this.lbGoBookBookId);
             this.panel9.Controls.Add(this.label16);
             this.panel9.Controls.Add(this.label15);
             this.panel9.Controls.Add(this.label14);
             this.panel9.Controls.Add(this.label13);
             this.panel9.Controls.Add(this.label12);
-            this.panel9.Controls.Add(this.label11);
-            this.panel9.Controls.Add(this.label10);
+            this.panel9.Controls.Add(this.lbGoSutraSutraNum);
+            this.panel9.Controls.Add(this.lbGoSutraBookId);
             this.panel9.Controls.Add(this.label9);
             this.panel9.Controls.Add(this.btGoSutra);
             this.panel9.Controls.Add(this.btGoBook);
@@ -927,15 +927,15 @@ namespace CBReader
             this.label18.TabIndex = 24;
             this.label18.Text = "冊數";
             // 
-            // label17
+            // lbGoBookBookId
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label17.Location = new System.Drawing.Point(5, 235);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(52, 25);
-            this.label17.TabIndex = 23;
-            this.label17.Text = "藏經";
+            this.lbGoBookBookId.AutoSize = true;
+            this.lbGoBookBookId.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbGoBookBookId.Location = new System.Drawing.Point(5, 235);
+            this.lbGoBookBookId.Name = "lbGoBookBookId";
+            this.lbGoBookBookId.Size = new System.Drawing.Size(52, 25);
+            this.lbGoBookBookId.TabIndex = 23;
+            this.lbGoBookBookId.Text = "藏經";
             // 
             // label16
             // 
@@ -987,25 +987,25 @@ namespace CBReader
             this.label12.TabIndex = 18;
             this.label12.Text = "頁數";
             // 
-            // label11
+            // lbGoSutraSutraNum
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label11.Location = new System.Drawing.Point(7, 74);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(52, 25);
-            this.label11.TabIndex = 17;
-            this.label11.Text = "經號";
+            this.lbGoSutraSutraNum.AutoSize = true;
+            this.lbGoSutraSutraNum.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbGoSutraSutraNum.Location = new System.Drawing.Point(7, 74);
+            this.lbGoSutraSutraNum.Name = "lbGoSutraSutraNum";
+            this.lbGoSutraSutraNum.Size = new System.Drawing.Size(52, 25);
+            this.lbGoSutraSutraNum.TabIndex = 17;
+            this.lbGoSutraSutraNum.Text = "經號";
             // 
-            // label10
+            // lbGoSutraBookId
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label10.Location = new System.Drawing.Point(7, 35);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(52, 25);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "藏經";
+            this.lbGoSutraBookId.AutoSize = true;
+            this.lbGoSutraBookId.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbGoSutraBookId.Location = new System.Drawing.Point(7, 35);
+            this.lbGoSutraBookId.Name = "lbGoSutraBookId";
+            this.lbGoSutraBookId.Size = new System.Drawing.Size(52, 25);
+            this.lbGoSutraBookId.TabIndex = 16;
+            this.lbGoSutraBookId.Text = "藏經";
             // 
             // label9
             // 
@@ -1724,10 +1724,10 @@ namespace CBReader
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbFindSutraSutraName;
+        private System.Windows.Forms.Label lbFindSutraSutraFrom;
+        private System.Windows.Forms.Label lbFindSutraVolFrom;
+        private System.Windows.Forms.Label lbFindSutraBookId;
         private System.Windows.Forms.TextBox edFindSutraByline;
         private System.Windows.Forms.TextBox edFindSutraSutraName;
         private System.Windows.Forms.TextBox edFindSutraSutraTo;
@@ -1742,14 +1742,14 @@ namespace CBReader
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lbGoBookBookId;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lbGoSutraSutraNum;
+        private System.Windows.Forms.Label lbGoSutraBookId;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btGoSutra;
         private System.Windows.Forms.Button btGoBook;

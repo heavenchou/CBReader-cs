@@ -50,7 +50,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>cbeta.ico</ApplicationIcon>
+    <ApplicationIcon>seeland.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationFramework" />
@@ -191,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="cbeta.ico" />
+    <Content Include="seeland.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
