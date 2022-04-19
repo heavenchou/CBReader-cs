@@ -234,7 +234,7 @@ namespace CBReader
 
 					// 處理缺字
 					if (StrHas(HTMLSource, pPoint, "<span class='gaiji'")) {
-						AnalysisGiajiTag(pPoint, pDesPoint, pUniPoint, ref iDesLen, ref iUniLen); // 處理缺字標記
+						AnalysisGiajiTag(ref pPoint, ref pDesPoint, ref pUniPoint, ref iDesLen, ref iUniLen); // 處理缺字標記
 					}
 
 					// 1.遇到標記, 要額外處理
@@ -765,7 +765,12 @@ namespace CBReader
 		}
 
 		// 分析一個 <span class="gaiji"....> 標記
-		void AnalysisGiajiTag(int pPoint, int pDesPoint, int pUniPoint, ref int iDesLen, ref int iUniLen)
+		// pPoint 是目前分析的位置，傳進來時是在 < 位置，最後會在 > 位置，這其實是以整個經文的位置來計算位移
+		// pDesPoint 是組字式 data-des="[組字式]" 的 [ 位置
+		// pUniPoint 是unicode data-uni="xy" 的 x 位置 （因為有時 Unicode 佔二個長度以上）
+		// iDesLen 是組字式長度
+		// iUniLen 是 unicode 長度
+		void AnalysisGiajiTag(ref int pPoint, ref int pDesPoint, ref int pUniPoint, ref int iDesLen, ref int iUniLen)
 		{
 			// <span class="gaiji" data-des="[組字式]" data-uni="xx" data-nor="xx" data-noruni="xx">
 
@@ -778,7 +783,7 @@ namespace CBReader
 				pTmp++;
 			}
 			string sTag = HTMLSource.Substring(pPoint, iTagLen);
-			pPoint = pTmp + 1;
+			int pEnd = pTmp + 1;	// > 結束後的下一個位置
 
 			int iPos;
 			// 先找有沒有組字式
@@ -786,25 +791,28 @@ namespace CBReader
 			iDesLen = 0;
 			pDesPoint = 0;
 			if (iPos >= 0) {
-				pDesPoint = iPos + 10;  // 指到組字式的 [ 字
+				pDesPoint = iPos + 10;  // 指到組字式的 [ 字，這是相對於 sTag 的位置
 				pTmp = pDesPoint;
 				while (sTag[pTmp] != '\'') {
 					iDesLen = iDesLen + 1;
 					pTmp++;
 				}
+				pDesPoint += pPoint;	// 加上 pPoint 就是相對於整個經文的位置
 			}
 			// 再找有沒有 Unicode
 			iPos = sTag.IndexOf("data-uni");
 			iUniLen = 0;
 			pUniPoint = 0;
 			if (iPos >= 0) {
-				pUniPoint = iPos + 10;  // 指到 Unicode
+				pUniPoint = iPos + 10;  // 指到 Unicode，這是相對於 sTag 的位置
 				pTmp = pUniPoint;
 				while (sTag[pTmp] != '\'') {
 					iUniLen = iUniLen + 1;
 					pTmp++;
 				}
+				pUniPoint += pPoint;    // 加上 pPoint 就是相對於整個經文的位置
 			}
+			pPoint = pEnd;
 		}
 
 		bool StrHas(string s1, int p1, string s2)

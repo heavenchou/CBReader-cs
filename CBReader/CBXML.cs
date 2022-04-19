@@ -270,6 +270,7 @@ namespace CBReader
             sHtml += @"
         body { background:#DDF1DC; font-weight: normal; line-height:26px; color:#000000; font-size:21px; font-family:CBFont;}
         #AIPuncRemind {color:#ffffff; background: #d80000;}
+        #SearchHead {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C';}
         a.SearchWord0 {color:#0000ff; background: #ffff66;}
         a.SearchWord1 {color:#0000ff; background: #a0ffff;}
         a.SearchWord2 {color:#0000ff; background: #99ff99;}

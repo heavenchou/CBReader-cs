@@ -158,6 +158,7 @@ namespace CBReader
             this.miOr = new System.Windows.Forms.ToolStripMenuItem();
             this.miExclude = new System.Windows.Forms.ToolStripMenuItem();
             this.miAny = new System.Windows.Forms.ToolStripMenuItem();
+            this.edUnicode = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.pnMainFunc.SuspendLayout();
@@ -218,28 +219,28 @@ namespace CBReader
             this.miAdmin});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(865, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(865, 28);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // miOption
             // 
             this.miOption.Name = "miOption";
-            this.miOption.Size = new System.Drawing.Size(53, 23);
+            this.miOption.Size = new System.Drawing.Size(53, 26);
             this.miOption.Text = "設定";
             this.miOption.Click += new System.EventHandler(this.miOption_Click);
             // 
             // miUpdate
             // 
             this.miUpdate.Name = "miUpdate";
-            this.miUpdate.Size = new System.Drawing.Size(83, 23);
+            this.miUpdate.Size = new System.Drawing.Size(83, 26);
             this.miUpdate.Text = "更新檢查";
             this.miUpdate.Click += new System.EventHandler(this.miUpdate_Click);
             // 
             // miAbout
             // 
             this.miAbout.Name = "miAbout";
-            this.miAbout.Size = new System.Drawing.Size(53, 23);
+            this.miAbout.Size = new System.Drawing.Size(53, 26);
             this.miAbout.Text = "關於";
             this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
@@ -1361,6 +1362,7 @@ namespace CBReader
             // 
             // panel10
             // 
+            this.panel10.Controls.Add(this.edUnicode);
             this.panel10.Controls.Add(this.button1);
             this.panel10.Controls.Add(this.button2);
             this.panel10.Controls.Add(this.lbSearchMsg);
@@ -1460,10 +1462,12 @@ namespace CBReader
             // 
             // edTextSearch
             // 
+            this.edTextSearch.Font = new System.Drawing.Font("Hanazono Mincho C Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.edTextSearch.Location = new System.Drawing.Point(11, 38);
             this.edTextSearch.Name = "edTextSearch";
-            this.edTextSearch.Size = new System.Drawing.Size(248, 34);
+            this.edTextSearch.Size = new System.Drawing.Size(248, 28);
             this.edTextSearch.TabIndex = 1;
+            this.edTextSearch.TextChanged += new System.EventHandler(this.edTextSearch_TextChanged);
             this.edTextSearch.Enter += new System.EventHandler(this.edTextSearch_Enter);
             this.edTextSearch.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
@@ -1630,6 +1634,15 @@ namespace CBReader
             this.miAny.Size = new System.Drawing.Size(141, 24);
             this.miAny.Text = "? Any";
             this.miAny.Click += new System.EventHandler(this.miAny_Click);
+            // 
+            // edUnicode
+            // 
+            this.edUnicode.Font = new System.Drawing.Font("Hanazono Mincho C Regular", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.edUnicode.Location = new System.Drawing.Point(104, 4);
+            this.edUnicode.Name = "edUnicode";
+            this.edUnicode.Size = new System.Drawing.Size(91, 31);
+            this.edUnicode.TabIndex = 21;
+            this.edUnicode.Visible = false;
             // 
             // MainForm
             // 
@@ -1813,6 +1826,7 @@ namespace CBReader
         private System.Windows.Forms.ToolStripMenuItem miAdmin;
         private System.Windows.Forms.ToolStripMenuItem miCreateHtml;
         private System.Windows.Forms.ToolStripMenuItem miLocalUpdateURL;
+        private System.Windows.Forms.TextBox edUnicode;
     }
 }
 

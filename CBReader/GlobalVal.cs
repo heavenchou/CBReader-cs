@@ -9,21 +9,21 @@ namespace CBReader
 {
     static public class CGlobalVal
     {
-        // 更新版本注意事項, 要改底下資訊, 還有 project 的版本
+        // 更新版本注意事項, 要改底下資訊, 還有 project 的版本，icon
         // 還有 About 畫面的版本與日期資料
 
         // CBETA 版
-        /*
+        ///*
         static public string ProgramTitle = "CBReader 毘舍離版";
         static public string ApplicationTitle = "CBReader";
-        static public string Version = "0.7.1.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
-        */
+        static public string Version = "0.7.2.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
+        //*/
 
         // 西蓮淨苑版
         // 西蓮版要改 "SLReader", 版本號碼等
         // 也要記得換 icon
 
-        //*
+        /*
         static public string ProgramTitle = "SLReader 毘舍離版";
         static public string ApplicationTitle = "SLReader";
         static public string Version = "0.7.1.1";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA

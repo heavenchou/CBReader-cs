@@ -53,7 +53,7 @@ namespace CBReader
             Setting = new CSetting(CGlobalVal.SettingFile);
 
             // 載入環境
-            LoadEnvironment();
+            //LoadEnvironment();
 
             InitializeForms();  // 初始其它的 Form
 
@@ -75,8 +75,8 @@ namespace CBReader
             MainFunc.SelectedIndex = 0;
             pnMulu.Width = 0;  // 書目先縮到最小
             cbFindSutraBookId.SelectedIndex = 0;
-            cbGoBookBookId.SelectedIndex = 0;
-            cbGoSutraBookId.SelectedIndex = 0;
+            //cbGoBookBookId.SelectedIndex = 0;
+            //cbGoSutraBookId.SelectedIndex = 0;
 
             //sgTextSearch->OnKeyDown = sgTextSearchKeyDown;
             //sgFindSutra->OnKeyDown = sgFindSutraKeyDown;
@@ -514,6 +514,10 @@ namespace CBReader
             pnMainFunc.Width = iniFile.ReadInteger(Section, "FunMenuWidth", pnMainFunc.Width);
             MuluWidth = iniFile.ReadInteger(Section, "MuluWidth", MuluWidth);
 
+            // 記錄最後選擇的藏經
+            cbGoBookBookId.SelectedIndex = iniFile.ReadInteger(Section, "GoBookBookIdIndex", 0);
+            cbGoSutraBookId.SelectedIndex = iniFile.ReadInteger(Section, "GoSutraBookIdIndex", 0);
+
             // 欄寬
             Section = "ColumnWidth";
 
@@ -546,6 +550,9 @@ namespace CBReader
             } else {
                 iniFile.WriteInteger(Section, "MuluWidth", MuluWidth);
             }
+            // 記錄最後選擇的藏經
+            iniFile.WriteInteger(Section, "GoBookBookIdIndex", cbGoBookBookId.SelectedIndex);
+            iniFile.WriteInteger(Section, "GoSutraBookIdIndex", cbGoSutraBookId.SelectedIndex);
 
             // 欄寬
             Section = "ColumnWidth";
@@ -630,6 +637,9 @@ namespace CBReader
 
             // 將各藏經放入下拉選單中
             InitialComboBoxData();
+
+            // 載入環境
+            LoadEnvironment();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -1302,6 +1312,21 @@ namespace CBReader
         private void miLocalUpdateURL_Click(object sender, EventArgs e)
         {
             updateForm.UseLocalhostURL = true;
+        }
+
+        private void edTextSearch_TextChanged(object sender, EventArgs e)
+        {
+            // 檢查有沒有新的 unicode E, F，有就換字型
+            // 2B820 (D86E DC20)～2CEA1 (D873 DEA1)：𫤀𬨀 CJK Extension E 擴展 E 區 (Unicode 8.0)
+            // 2CEB0 (D873 DEB0)～2EBE0 (D87A DFE0)：𭄣𮠀 CJK Extension F 擴展 F 區 (Unicode 10.0)
+            string s = edTextSearch.Text;
+            for (int i = 0; i < s.Length; i++) {
+                if ((s[i] == 0xD86E && s[i+1] >= 0xDC20) || (s[i] > 0xD86E && s[i] < 0xD87A)) {
+                    edTextSearch.Font = edUnicode.Font;
+                    return;
+                }
+            }
+            edTextSearch.Font = edFindSutraByline.Font;
         }
     }
 }
