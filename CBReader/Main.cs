@@ -1319,6 +1319,7 @@ namespace CBReader
             // 檢查有沒有新的 unicode E, F，有就換字型
             // 2B820 (D86E DC20)～2CEA1 (D873 DEA1)：𫤀𬨀 CJK Extension E 擴展 E 區 (Unicode 8.0)
             // 2CEB0 (D873 DEB0)～2EBE0 (D87A DFE0)：𭄣𮠀 CJK Extension F 擴展 F 區 (Unicode 10.0)
+            // 30000 (D880 DC00)～3134A (D884 DF4A)：𰀀𱍊 CJK Extension F 擴展 G 區 (Unicode 13.0)
             string s = edTextSearch.Text;
             for (int i = 0; i < s.Length; i++) {
                 if ((s[i] == 0xD86E && s[i+1] >= 0xDC20) || (s[i] > 0xD86E && s[i] < 0xD87A)) {

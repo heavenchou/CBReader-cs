@@ -270,7 +270,7 @@ namespace CBReader
             sHtml += @"
         body { background:#DDF1DC; font-weight: normal; line-height:26px; color:#000000; font-size:21px; font-family:CBFont;}
         #AIPuncRemind {color:#ffffff; background: #d80000;}
-        #SearchHead {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C';}
+        #SearchHead {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C','TH-Tshyn-P1';}
         a.SearchWord0 {color:#0000ff; background: #ffff66;}
         a.SearchWord1 {color:#0000ff; background: #a0ffff;}
         a.SearchWord2 {color:#0000ff; background: #99ff99;}
@@ -287,7 +287,7 @@ namespace CBReader
         .foreign  {font-family:'Times New Roman', 'Gandhari Unicode';}
         .preformat {font-family:細明體,MingLiU,NSimSun,'Songti TC'; font-size:21px;}
         .preformat .foreign {font-family:'Courier New'; font-size:17.5px;}
-        .gaiji {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C';}
+        .gaiji {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C','TH-Tshyn-P1';}
         .juannum  {color:#008000; font-size:21px;}
         .juanname {color:#0000FF; font-weight: bold; font-size:24px;}
         .xu {color:#0000A0; font-size:21px;}

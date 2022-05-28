@@ -16,7 +16,7 @@ namespace CBReader
         ///*
         static public string ProgramTitle = "CBReader 毘舍離版";
         static public string ApplicationTitle = "CBReader";
-        static public string Version = "0.7.2.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
+        static public string Version = "0.7.3.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
         //*/
 
         // 西蓮淨苑版

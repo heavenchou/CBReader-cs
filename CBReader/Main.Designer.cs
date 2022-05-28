@@ -54,14 +54,6 @@ namespace CBReader
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel12 = new System.Windows.Forms.Panel();
             this.sgFindSutra = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.panel8 = new System.Windows.Forms.Panel();
             this.btMainFuncNarrow = new System.Windows.Forms.Button();
@@ -120,17 +112,9 @@ namespace CBReader
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panel11 = new System.Windows.Forms.Panel();
             this.sgTextSearch = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.edUnicode = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.lbSearchMsg = new System.Windows.Forms.Label();
@@ -158,7 +142,23 @@ namespace CBReader
             this.miOr = new System.Windows.Forms.ToolStripMenuItem();
             this.miExclude = new System.Windows.Forms.ToolStripMenuItem();
             this.miAny = new System.Windows.Forms.ToolStripMenuItem();
-            this.edUnicode = new System.Windows.Forms.TextBox();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.pnMainFunc.SuspendLayout();
@@ -219,7 +219,7 @@ namespace CBReader
             this.miAdmin});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(865, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(865, 30);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -456,71 +456,6 @@ namespace CBReader
             this.sgFindSutra.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sgFindSutra_CellDoubleClick);
             this.sgFindSutra.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sgFindSutra_KeyDown);
             // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "藏";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 40;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "冊";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 40;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "經";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 55;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "經名";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 150;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "卷/篇章";
-            this.Column10.MinimumWidth = 6;
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Width = 40;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "部";
-            this.Column11.MinimumWidth = 6;
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Width = 70;
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "作譯者";
-            this.Column12.MinimumWidth = 6;
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
-            this.Column12.Width = 150;
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "id";
-            this.Column13.MinimumWidth = 6;
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            this.Column13.Visible = false;
-            this.Column13.Width = 125;
-            // 
             // splitter3
             // 
             this.splitter3.Cursor = System.Windows.Forms.Cursors.VSplit;
@@ -642,7 +577,7 @@ namespace CBReader
             this.lbFindSutraSutraName.Name = "lbFindSutraSutraName";
             this.lbFindSutraSutraName.Size = new System.Drawing.Size(52, 25);
             this.lbFindSutraSutraName.TabIndex = 10;
-            this.lbFindSutraSutraName.Text = "經名";
+            this.lbFindSutraSutraName.Text = "題名";
             // 
             // lbFindSutraSutraFrom
             // 
@@ -652,7 +587,7 @@ namespace CBReader
             this.lbFindSutraSutraFrom.Name = "lbFindSutraSutraFrom";
             this.lbFindSutraSutraFrom.Size = new System.Drawing.Size(72, 25);
             this.lbFindSutraSutraFrom.TabIndex = 9;
-            this.lbFindSutraSutraFrom.Text = "經號從";
+            this.lbFindSutraSutraFrom.Text = "編號從";
             // 
             // lbFindSutraVolFrom
             // 
@@ -672,7 +607,7 @@ namespace CBReader
             this.lbFindSutraBookId.Name = "lbFindSutraBookId";
             this.lbFindSutraBookId.Size = new System.Drawing.Size(52, 25);
             this.lbFindSutraBookId.TabIndex = 7;
-            this.lbFindSutraBookId.Text = "藏經";
+            this.lbFindSutraBookId.Text = "佛典";
             // 
             // edFindSutraByline
             // 
@@ -886,7 +821,7 @@ namespace CBReader
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(132, 25);
             this.label22.TabIndex = 28;
-            this.label22.Text = "前往指定經文";
+            this.label22.Text = "前往指定行首";
             // 
             // label21
             // 
@@ -936,7 +871,7 @@ namespace CBReader
             this.lbGoBookBookId.Name = "lbGoBookBookId";
             this.lbGoBookBookId.Size = new System.Drawing.Size(52, 25);
             this.lbGoBookBookId.TabIndex = 23;
-            this.lbGoBookBookId.Text = "藏經";
+            this.lbGoBookBookId.Text = "佛典";
             // 
             // label16
             // 
@@ -996,7 +931,7 @@ namespace CBReader
             this.lbGoSutraSutraNum.Name = "lbGoSutraSutraNum";
             this.lbGoSutraSutraNum.Size = new System.Drawing.Size(52, 25);
             this.lbGoSutraSutraNum.TabIndex = 17;
-            this.lbGoSutraSutraNum.Text = "經號";
+            this.lbGoSutraSutraNum.Text = "編號";
             // 
             // lbGoSutraBookId
             // 
@@ -1006,7 +941,7 @@ namespace CBReader
             this.lbGoSutraBookId.Name = "lbGoSutraBookId";
             this.lbGoSutraBookId.Size = new System.Drawing.Size(52, 25);
             this.lbGoSutraBookId.TabIndex = 16;
-            this.lbGoSutraBookId.Text = "藏經";
+            this.lbGoSutraBookId.Text = "佛典";
             // 
             // label9
             // 
@@ -1278,79 +1213,6 @@ namespace CBReader
             this.sgTextSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sgTextSearch_CellDoubleClick);
             this.sgTextSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sgTextSearch_KeyDown);
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "筆數";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 40;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "藏";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 40;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "冊";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 40;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "經";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 55;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "經名";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 150;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "卷/篇章";
-            this.Column7.MinimumWidth = 6;
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Width = 40;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "部";
-            this.Column8.MinimumWidth = 6;
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Width = 70;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "作譯者";
-            this.Column9.MinimumWidth = 6;
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Width = 150;
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "id";
-            this.Column14.MinimumWidth = 6;
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
-            this.Column14.Visible = false;
-            this.Column14.Width = 125;
-            // 
             // splitter4
             // 
             this.splitter4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1377,6 +1239,15 @@ namespace CBReader
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(350, 175);
             this.panel10.TabIndex = 1;
+            // 
+            // edUnicode
+            // 
+            this.edUnicode.Font = new System.Drawing.Font("Hanazono Mincho C Regular", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.edUnicode.Location = new System.Drawing.Point(104, 4);
+            this.edUnicode.Name = "edUnicode";
+            this.edUnicode.Size = new System.Drawing.Size(91, 31);
+            this.edUnicode.TabIndex = 21;
+            this.edUnicode.Visible = false;
             // 
             // button1
             // 
@@ -1635,14 +1506,143 @@ namespace CBReader
             this.miAny.Text = "? Any";
             this.miAny.Click += new System.EventHandler(this.miAny_Click);
             // 
-            // edUnicode
+            // Column1
             // 
-            this.edUnicode.Font = new System.Drawing.Font("Hanazono Mincho C Regular", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.edUnicode.Location = new System.Drawing.Point(104, 4);
-            this.edUnicode.Name = "edUnicode";
-            this.edUnicode.Size = new System.Drawing.Size(91, 31);
-            this.edUnicode.TabIndex = 21;
-            this.edUnicode.Visible = false;
+            this.Column1.HeaderText = "筆數";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 40;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "佛典";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 40;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "冊數";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 40;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "編號";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 55;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "佛典題名";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 150;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "卷/篇章";
+            this.Column7.MinimumWidth = 6;
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 40;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "部";
+            this.Column8.MinimumWidth = 6;
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 70;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "作譯者";
+            this.Column9.MinimumWidth = 6;
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Width = 150;
+            // 
+            // Column14
+            // 
+            this.Column14.HeaderText = "id";
+            this.Column14.MinimumWidth = 6;
+            this.Column14.Name = "Column14";
+            this.Column14.ReadOnly = true;
+            this.Column14.Visible = false;
+            this.Column14.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "佛典";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "冊數";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "編號";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 55;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "佛典題名";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 150;
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "卷/篇章";
+            this.Column10.MinimumWidth = 6;
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Width = 40;
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "部";
+            this.Column11.MinimumWidth = 6;
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Width = 70;
+            // 
+            // Column12
+            // 
+            this.Column12.HeaderText = "作譯者";
+            this.Column12.MinimumWidth = 6;
+            this.Column12.Name = "Column12";
+            this.Column12.ReadOnly = true;
+            this.Column12.Width = 150;
+            // 
+            // Column13
+            // 
+            this.Column13.HeaderText = "id";
+            this.Column13.MinimumWidth = 6;
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
+            this.Column13.Visible = false;
+            this.Column13.Width = 125;
             // 
             // MainForm
             // 
@@ -1800,6 +1800,16 @@ namespace CBReader
         private System.Windows.Forms.ToolStripMenuItem miOr;
         private System.Windows.Forms.ToolStripMenuItem miExclude;
         private System.Windows.Forms.ToolStripMenuItem miAny;
+        private System.Windows.Forms.Button btMainFuncNarrow;
+        private System.Windows.Forms.Button btMainFuncWide;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ToolStripMenuItem miAdmin;
+        private System.Windows.Forms.ToolStripMenuItem miCreateHtml;
+        private System.Windows.Forms.ToolStripMenuItem miLocalUpdateURL;
+        private System.Windows.Forms.TextBox edUnicode;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
@@ -1817,16 +1827,6 @@ namespace CBReader
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.Button btMainFuncNarrow;
-        private System.Windows.Forms.Button btMainFuncWide;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.ToolStripMenuItem miAdmin;
-        private System.Windows.Forms.ToolStripMenuItem miCreateHtml;
-        private System.Windows.Forms.ToolStripMenuItem miLocalUpdateURL;
-        private System.Windows.Forms.TextBox edUnicode;
     }
 }
 
