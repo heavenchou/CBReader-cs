@@ -2008,6 +2008,7 @@ namespace CBReader
                 }
             }
 
+            string NoteCFOld = NoteCF;
             NoteCF = "";    // 先清空
             string sLemText = parseChild(node); // 處理內容
 
@@ -2042,7 +2043,7 @@ namespace CBReader
                 string sNoteCFTag = $"\t<div type='cf'>{NoteCF}</div>\n";
                 HTMLCollation += sNoteCFTag;
             }
-
+            NoteCF = NoteCFOld;
             return sHtml;
         }
 
