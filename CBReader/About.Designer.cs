@@ -177,7 +177,7 @@ namespace CBReader
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(333, 25);
             this.label1.TabIndex = 0;
-            this.label1.Text = "CBReader 2X  v0.7.3　2022-06-10";
+            this.label1.Text = "CBReader 2X  v0.7.3　2022-07-08";
             // 
             // panel4
             // 
