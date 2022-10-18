@@ -890,6 +890,12 @@ namespace CBReader
             string sCol = edGoSutraCol.Text;
             string sLine = edGoSutraLine.Text;
 
+            if (sSutraNum == "") {
+                MessageBox.Show("請輸入經號");
+                edGoSutraSutraNum.Focus();
+                return;
+            }
+
             if (sCol == "1") { sCol = "a"; }
             else if (sCol == "2") { sCol = "b"; }
             else if (sCol == "3") { sCol = "c"; }
@@ -918,6 +924,12 @@ namespace CBReader
             string sPage = edGoBookPage.Text;
             string sCol = edGoBookCol.Text;
             string sLine = edGoBookLine.Text;
+
+            if(sVol == "") {
+                MessageBox.Show("請輸入冊數");
+                edGoBookVol.Focus();
+                return;
+            }
 
             if (sCol == "1") { sCol = "a"; }
             else if (sCol == "2") { sCol = "b"; }
@@ -1328,6 +1340,36 @@ namespace CBReader
                 }
             }
             edTextSearch.Font = edFindSutraByline.Font;
+        }
+
+        private void sgFindSutra_Scroll(object sender, ScrollEventArgs e)
+        {
+            sgFindSutra.Refresh();
+        }
+
+        private void sgTextSearch_Scroll(object sender, ScrollEventArgs e)
+        {
+            sgTextSearch.Refresh();
+        }
+
+        private void toolTip1_Draw(object sender, DrawToolTipEventArgs e)
+        {
+            /*
+            e.DrawBackground();
+            e.DrawBorder();
+            e.DrawText();
+            */
+
+            // Draw the standard background.
+
+            e.DrawBackground();
+            e.DrawBorder();
+
+            // Specify custom text formatting flags.
+            TextFormatFlags sf = TextFormatFlags.VerticalCenter |
+                                 TextFormatFlags.NoFullWidthCharacterBreak;
+            // Draw the standard text with customized formatting options.
+            e.DrawText(sf);
         }
     }
 }

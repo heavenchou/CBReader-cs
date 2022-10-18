@@ -648,11 +648,12 @@ namespace CBReader
                 else if (Setting.CollationType == ECollationType.CBETA) { sDisplay = "none"; }
 
                 // 底下幾個順序不要錯亂, 尤其二個 HTMLCollation 要夾著 parseChild(Node)
-                HTMLCollation += "<div id='txt_note_app_" + sCorresp + "'>\n";
+                HTMLCollation += "<div id='txt_note_app_" + sId + "'>\n";
                 sHtml += "<a id='note_star_" + sCorresp + "' class='note_star_removed' "
                        + "href='' style='display:" + sDisplay
                        + "' onclick='return ShowCollation($(this));'>[＊]</a>";
-                sHtml += "<span id='note_app_" + sCorresp + "' class='note_app'>"
+                //sHtml += "<span id='note_app_" + sCorresp + "' class='note_app'>"
+                sHtml += "<span id='note_app_" + sId + "' class='note_app'>"
                       + parseChild(node) // 處理內容, 裡面的資料也會存在 HTMLCollation 中
                       + "</span>";
                 HTMLCollation += "</div>\n";
