@@ -13,9 +13,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace CBReader
 {
+    // 為了讓程式可以接收 javascript 的呼叫
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public partial class MainForm : Form
     {
         AboutForm aboutForm;
@@ -43,6 +46,8 @@ namespace CBReader
         public MainForm()
         {
             InitializeComponent();
+            // javascript 指令碼可存取的物件，this 是目前的 Form
+            webBrowser.ObjectForScripting = this;
 
             // 設定目錄初值
             CGlobalVal.initialPath();
@@ -1370,6 +1375,12 @@ namespace CBReader
                                  TextFormatFlags.NoFullWidthCharacterBreak;
             // Draw the standard text with customized formatting options.
             e.DrawText(sf);
+        }
+
+        // javascript 呼叫的函式
+        public void openNoteKey(string url)
+        {
+            Process.Start(url);
         }
     }
 }

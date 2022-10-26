@@ -652,7 +652,6 @@ namespace CBReader
                 sHtml += "<a id='note_star_" + sCorresp + "' class='note_star_removed' "
                        + "href='' style='display:" + sDisplay
                        + "' onclick='return ShowCollation($(this));'>[＊]</a>";
-                //sHtml += "<span id='note_app_" + sCorresp + "' class='note_app'>"
                 sHtml += "<span id='note_app_" + sId + "' class='note_app'>"
                       + parseChild(node) // 處理內容, 裡面的資料也會存在 HTMLCollation 中
                       + "</span>";
@@ -2626,12 +2625,18 @@ namespace CBReader
             string sPlace = GetAttr(node, "place");
             string sId = GetAttr(node, "n");
             string sRend = GetAttr(node, "rend");
+            string sNoteKey = GetAttr(node, "note_key");
             string sIdNum = ""; // 0001001a 取得 1a
 
             // rend="hide" 直接取消處理, 目前只出現在 Y 和 TX
 
             if (sRend == "hide") {
                 return "";
+            }
+            
+            // note_key 處理成屬性
+            if (sNoteKey != "") {
+                sNoteKey = " note_key='" + sNoteKey + "'";
             }
 
             // 沒有 Type 的情況
@@ -2714,7 +2719,7 @@ namespace CBReader
                 string sNoteText = parseChild(node);
                 InNoteMod = false;
 
-                HTMLCollation += "<div id='txt_note_mod_" + sId + "'>" + sNoteText + "</div>\n";
+                HTMLCollation += "<div id='txt_note_mod_" + sId + "'" + sNoteKey + ">" + sNoteText + "</div>\n";
 
                 //string sIdNormal = sId.SubString0(0,7); // 取出標準的 ID, 因為有些有 abc...
 
@@ -2747,7 +2752,7 @@ namespace CBReader
                 string sNoteText = parseChild(node);
                 InNoteAdd = false;
                 // <div id="txt_note_orig_0001001">校勘內容</div>
-                HTMLCollation += "<div id='txt_note_add_A" + sIdNum + "'>" + sNoteText + "</div>\n";
+                HTMLCollation += "<div id='txt_note_add_A" + sIdNum + "'" + sNoteKey + ">" + sNoteText + "</div>\n";
             }
             // 2018 新增加的版本 <note type="authorial" ...
             // Y13n0013 }<lb n="0303a11" ed="Y"/>
