@@ -1347,16 +1347,7 @@ namespace CBReader
             edTextSearch.Font = edFindSutraByline.Font;
         }
 
-        private void sgFindSutra_Scroll(object sender, ScrollEventArgs e)
-        {
-            sgFindSutra.Refresh();
-        }
-
-        private void sgTextSearch_Scroll(object sender, ScrollEventArgs e)
-        {
-            sgTextSearch.Refresh();
-        }
-
+        // 自訂 tooltip 的畫面
         private void toolTip1_Draw(object sender, DrawToolTipEventArgs e)
         {
             /*

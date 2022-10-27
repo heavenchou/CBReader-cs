@@ -463,7 +463,6 @@ namespace CBReader
             this.sgFindSutra.Size = new System.Drawing.Size(350, 312);
             this.sgFindSutra.TabIndex = 8;
             this.sgFindSutra.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sgFindSutra_CellDoubleClick);
-            this.sgFindSutra.Scroll += new System.Windows.Forms.ScrollEventHandler(this.sgFindSutra_Scroll);
             this.sgFindSutra.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sgFindSutra_KeyDown);
             // 
             // dataGridViewTextBoxColumn2
@@ -1337,7 +1336,6 @@ namespace CBReader
             this.sgTextSearch.Size = new System.Drawing.Size(350, 383);
             this.sgTextSearch.TabIndex = 6;
             this.sgTextSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sgTextSearch_CellDoubleClick);
-            this.sgTextSearch.Scroll += new System.Windows.Forms.ScrollEventHandler(this.sgTextSearch_Scroll);
             this.sgTextSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sgTextSearch_KeyDown);
             // 
             // Column1
