@@ -16,7 +16,7 @@ namespace CBReader
         ///*
         static public string ProgramTitle = "CBReader 毘舍離版";
         static public string ApplicationTitle = "CBReader";
-        static public string Version = "0.7.4.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
+        static public string Version = "0.7.6.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
         //*/
 
         // 西蓮淨苑版
@@ -31,7 +31,7 @@ namespace CBReader
 
         //static public string ProgramTitle = "CBETA 漢文電子佛典集成";  // 改由 Serial.Title 提供
        
-        static public string DebugString = "Heaven";      // debug 口令
+        static public string DebugString = "Debug";      // debug 口令
         static public bool IsDebug = false;             // debug 變數
 
         // 目錄

@@ -315,6 +315,8 @@ namespace CBReader
                 sHtml += @"
         div {display:inline;}
         p {display:inline;}
+        #div_notearea_box div {display:block;}
+        #div_notearea_box p {display:block;}
         br.lb_br {display:inline;}
         br.para_br  {display:none;}
         p.juannum   {display:inline; margin-left:0em;}
@@ -324,6 +326,8 @@ namespace CBReader
         p.byline    {display:inline; margin-left:0em;}
         table {border-style: none;}
         td {padding: 0px;}
+        #div_notearea_box table {border-style:solid; border-collapse:collapse;}
+        #div_notearea_box td {padding: 0.5em;}
         span.line_space {display:inline;}
         span.para_space {display:none;}";
             } else {
@@ -792,7 +796,9 @@ namespace CBReader
                 sRowspan = " rowspan = '" + sRows + "'";
             }
 
-            if (Setting.ShowLineFormat) {
+            // 這種格式 !InNoteOrig && !InNoteMod && !InNoteAdd
+            // 表示在校注中的文字一律比照段落格式呈現，不要切換成原書行格式
+            if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                 sHtml += "<span";
             } else {
                 sHtml += "<td";
@@ -802,7 +808,11 @@ namespace CBReader
             sHtml += sRowspan;
             sHtml += sNewStyle;
             sHtml += sNewClass;
-            sHtml += " data-tagname='td'>";
+            if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
+                sHtml += " data-tagname='td'>";
+            } else {
+                sHtml += ">";
+            }
 
             // 第一個空一格, 其它空三格
             // 因為第一個 <cell> 之後通常會有 <lb>，所以空格要在 <lb> 之後
@@ -815,7 +825,7 @@ namespace CBReader
 
             string sCellSpace = "";
 
-            if (Setting.ShowLineFormat) {
+            if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                 sCellSpace += "<span class='line_space'>";
             } else {
                 sCellSpace += "<span class='line_space' style='display:none'>";
@@ -863,7 +873,7 @@ namespace CBReader
             }
             sHtml += sCellSpace + sChild;
 
-            if (Setting.ShowLineFormat) {
+            if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                 sHtml += "</span>";
             } else {
                 sHtml += "</td>";
@@ -895,42 +905,64 @@ namespace CBReader
 
             if (DivType[DivCount] == "w") { 		// 附文
                 FuWenCount++;
-                if (Setting.ShowLineFormat) {
+                if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                     sHtml += "<span class='w' data-tagname='div'" + sNewStyle + ">";
                 } else {
                     // 要用 div , 才不會有 span 包 p 的困境
-                    sHtml += "<div class='w' data-tagname='div'" + sNewStyle + ">";
+                    if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
+                        sHtml += "<div class='w' data-tagname='div'" + sNewStyle + ">";
+                    } else {
+                        sHtml += "<div class='w'" + sNewStyle + ">";
+                    }
+
                 }
 
                 if (FuWenCount == 1) {
-                    if (Setting.ShowLineFormat) {
+                    if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                         sHtml += "<span data-margin-left='1em' data-tagname='div'>" +
                         "<span class='line_space'>　</span>";
                     } else {
-                        sHtml += "<div data-margin-left='1em' style='margin-left: 1em' data-tagname='div'>" +
+                        if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
+                            sHtml += "<div data-margin-left='1em' style='margin-left: 1em' data-tagname='div'>" +
                         "<span class='line_space' style='display:none'>　</span>";
+                        } else {
+                            sHtml += "<div data-margin-left='1em' style='margin-left: 1em'>" +
+                        "<span class='line_space' style='display:none'>　</span>";
+                        }
                     }
                 }
             } else if (DivType[DivCount] == "xu") { 		// 序文
-                if (Setting.ShowLineFormat) {
+                if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                     sHtml += "<span class='xu' data-tagname='div'" + sNewStyle + ">";
                 } else {
                     // 要用 div , 才不會有 span 包 p 的困境
-                    sHtml += "<div class='xu' data-tagname='div'" + sNewStyle + ">";
+                    if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
+                        sHtml += "<div class='xu' data-tagname='div'" + sNewStyle + ">";
+                    } else {
+                        sHtml += "<div class='xu'" + sNewStyle + ">";
+                    }
                 }
             } else if (DivType[DivCount] == "orig") { 		// 原書資料
-                if (Setting.ShowLineFormat) {
+                if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                     sHtml += "<span class='div-orig' data-tagname='div'" + sNewStyle + ">";
                 } else {
                     // 要用 div , 才不會有 span 包 p 的困境
-                    sHtml += "<div class='div-orig' data-tagname='div'" + sNewStyle + ">";
+                    if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
+                        sHtml += "<div class='div-orig' data-tagname='div'" + sNewStyle + ">";
+                    } else {
+                        sHtml += "<div class='div-orig'" + sNewStyle + ">";
+                    }
                 }
             } else {
-                if (Setting.ShowLineFormat) {
+                if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                     sHtml += "<span data-tagname='div'" + sNewStyle + ">";
                 } else {
                     // 要用 div , 才不會有 span 包 p 的困境
-                    sHtml += "<div data-tagname='div'" + sNewStyle + ">";
+                    if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
+                        sHtml += "<div data-tagname='div'" + sNewStyle + ">";
+                    } else {
+                        sHtml += "<div" + sNewStyle + ">";
+                    }
                 }
             }
 
@@ -939,7 +971,7 @@ namespace CBReader
             // ----------------------------------
 
             string sEndTag = "</div>";
-            if (Setting.ShowLineFormat) {
+            if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                 sEndTag = "</span>";
             }
 
@@ -1527,10 +1559,14 @@ namespace CBReader
             // 就類似 <I5>.....<I6>....<I5> , 則 <I5> 也要空5格.
             // 實例 X26n0524.xml <lb ed="X" n="0633a23"/>
 
-            if (Setting.ShowLineFormat) {
+            if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                 sHtml += "<span data-tagname='li'>";
             } else {
-                sHtml += "<li data-tagname='li'>";
+                if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
+                    sHtml += "<li data-tagname='li'>";
+                } else {
+                    sHtml += "<li>";
+                }
             }
 
             //if(Setting.CutLine)	// 大正藏切行
@@ -1543,7 +1579,8 @@ namespace CBReader
                     // 在切換校注呈現時如何處理? 待研究 ????
                     //if(Setting.CorrSelect == 0 && sItemId == "itemX63p0502b0319"){}
                     //else
-                    if (Setting.ShowLineFormat) {
+
+                    if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                         sHtml += "<span class='line_space'>" + StringRepeat("　", ListCount * 2) + "</span>";
                     } else {
                         sHtml += "<span class='line_space' style='display:none'>" + StringRepeat("　", ListCount * 2) + "</span>";
@@ -1596,7 +1633,7 @@ namespace CBReader
                     }
                     else
                     */
-                    if (Setting.ShowLineFormat) {
+                    if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                         sHtml += "<span class='line_space'>　</span>";  // 行中的 item 只空一格
                     } else {
                         sHtml += "<span class='line_space' style='display:none'>　</span>";  // 行中的 item 只空一格
@@ -1628,7 +1665,7 @@ namespace CBReader
             if (myRend.NewStyle != "" || myStyle.NewStyle != "") {
                 sHtml += "</span>";
             }
-            if (Setting.ShowLineFormat) {
+            if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                 sHtml += "</span>";
             } else {
                 sHtml += "</li>";
@@ -2399,7 +2436,7 @@ namespace CBReader
             }
 
             if (!bHasHead) {
-                if (Setting.ShowLineFormat) {
+                if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                     sHtml += "<span style='text-indent: ";
                     sHtml += iTextIndent.ToString();
                     sHtml += "em;";
@@ -2422,7 +2459,11 @@ namespace CBReader
                     sHtml += myStyle.NewStyle;
                     sHtml += "' data-margin-left='";
                     sHtml += iMarginLeft.ToString();
-                    sHtml += "em' data-tagname='ul'>";
+                    if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
+                        sHtml += "em' data-tagname='ul'>";
+                    } else {
+                        sHtml += "em'>";
+                    }
 
                     sHtml += "<span class='line_space' style='display:none'>";
                     sHtml += sTextIndentSpace;
@@ -2432,7 +2473,7 @@ namespace CBReader
 
             sHtml += parseChild(node); // 處理內容
 
-            if (Setting.ShowLineFormat) {
+            if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                 sHtml += "</span>";
             } else {
                 sHtml += "</ul>";
@@ -2692,8 +2733,9 @@ namespace CBReader
                 InNoteOrig = true;
                 string sNoteText = parseChild(node);
                 InNoteOrig = false;
-                // <div id="txt_note_orig_0001001">校勘內容</div>
-                HTMLCollation += "<div id='txt_note_orig_" + sId + "'>" + sNoteText + "</div>\n";
+                // <div class='txt_note' id="txt_note_orig_0001001">校勘內容</div>
+                // class='txt_note' 是讓 javascript 用來判斷這是校勘
+                HTMLCollation += "<div class='txt_note' id='txt_note_orig_" + sId + "'>" + sNoteText + "</div>\n";
             } else if (sType.Substring(0, 3) == "mod") {
                 if (sId == "") {
                     CGlobalMessage.push("錯誤 : 校勘沒有 n 屬性");
@@ -2719,7 +2761,8 @@ namespace CBReader
                 string sNoteText = parseChild(node);
                 InNoteMod = false;
 
-                HTMLCollation += "<div id='txt_note_mod_" + sId + "'" + sNoteKey + ">" + sNoteText + "</div>\n";
+                // class='txt_note' 是讓 javascript 用來判斷這是校勘
+                HTMLCollation += "<div class='txt_note' id='txt_note_mod_" + sId + "'" + sNoteKey + ">" + sNoteText + "</div>\n";
 
                 //string sIdNormal = sId.SubString0(0,7); // 取出標準的 ID, 因為有些有 abc...
 
@@ -2751,8 +2794,9 @@ namespace CBReader
                 InNoteAdd = true;
                 string sNoteText = parseChild(node);
                 InNoteAdd = false;
-                // <div id="txt_note_orig_0001001">校勘內容</div>
-                HTMLCollation += "<div id='txt_note_add_A" + sIdNum + "'" + sNoteKey + ">" + sNoteText + "</div>\n";
+                // <div class='txt_note' id="txt_note_orig_0001001">校勘內容</div>
+                // class='txt_note' 是讓 javascript 用來判斷這是校勘
+                HTMLCollation += "<div class='txt_note' id='txt_note_add_A" + sIdNum + "'" + sNoteKey + ">" + sNoteText + "</div>\n";
             }
             // 2018 新增加的版本 <note type="authorial" ...
             // Y13n0013 }<lb n="0303a11" ed="Y"/>
@@ -2886,7 +2930,7 @@ namespace CBReader
             // 處理 <p....>
             if (iSpecialType > 0) {
                 // iSpecialType > 0 只會出現在校注
-                // ???? 出現在校注需要把 p 換成 span 嗎？
+                // 出現在校注需要把 p 換成 span 嗎？（答：不用）
                 sHtml += "<p style='text-indent: ";
                 sHtml += iTextIndent.ToString();
                 sHtml += "em; margin-left: ";
@@ -2894,7 +2938,8 @@ namespace CBReader
                 sHtml += "em; margin-top: 5px; margin-bottom: 0em;";
                 sHtml += myRend.NewStyle;
                 sHtml += myStyle.NewStyle;
-                sHtml += "' data-tagname='p'>";
+                // sHtml += "' data-tagname='p'>";
+                sHtml += "'>";
 
                 if (iSpecialType == 1) {
                     sHtml += "<font color=#800000>";
@@ -2925,7 +2970,7 @@ namespace CBReader
                     }
                 }
 
-                if (Setting.ShowLineFormat) {
+                if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                     sHtml += "<span style='text-indent: ";
                     sHtml += iTextIndent.ToString();
                     sHtml += "em;";
@@ -2942,9 +2987,14 @@ namespace CBReader
                     sHtml += "em;";
                     sHtml += myRend.NewStyle;
                     sHtml += myStyle.NewStyle;
-                    sHtml += "' data-margin-left='";
-                    sHtml += iMarginLeft.ToString();
-                    sHtml += "em' data-tagname='p'>";
+                    // 在校注中也不要 data-tagname='p' ， 讓它無法還原
+                    if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
+                        sHtml += "' data-margin-left='";
+                        sHtml += iMarginLeft.ToString();
+                        sHtml += "em' data-tagname='p'>";
+                    } else {
+                        sHtml += "'>";
+                    }
                 }
             }
 
@@ -2976,7 +3026,7 @@ namespace CBReader
                     sSpace = StringRepeat("　", iMarginLeft + iTextIndent);
                 }
 
-                if (Setting.ShowLineFormat) {
+                if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                     sHtml += "<span class='line_space'>";
                 } else {
                     sHtml += "<span class='line_space' style='display:none'>";
@@ -3014,7 +3064,7 @@ namespace CBReader
             if (iSpecialType > 0) {
                 sHtml += "</font></p>";
             } else {
-                if (Setting.ShowLineFormat) {
+                if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                     sHtml += "</span>";
                 } else {
                     sHtml += "</p>";
@@ -3139,12 +3189,16 @@ namespace CBReader
             CellNum = 0;        // cell 格式數量歸 0
             OtherColspan = 0;   // 因本 cell 佔 n 格以上, 所以和後面的 cell 要空 (n-1)*3 的空格, 此即記錄 n-1 的數字
 
-            if (Setting.ShowLineFormat) {
+            if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                 sHtml += "<span data-tagname='tr'>";
                 sHtml += parseChild(node); // 處理內容
                 sHtml += "</span>";
             } else {
-                sHtml += "<tr data-tagname='tr'>";
+                if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
+                    sHtml += "<tr data-tagname='tr'>";
+                } else {
+                    sHtml += "<tr>";
+                }
                 sHtml += parseChild(node); // 處理內容
                 sHtml += "</tr>";
             }
@@ -3315,7 +3369,7 @@ namespace CBReader
                 sBorder = "0";
             }
 
-            if (Setting.ShowLineFormat) {
+            if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                 sHtml += "<span class='line_space'>";
                 sHtml += sTextIndentSpace;
                 sHtml += "</span>";
@@ -3336,7 +3390,11 @@ namespace CBReader
                 sHtml += "<span class='line_space' style='display:none'>";
                 sHtml += sTextIndentSpace;
                 sHtml += "</span>";
-                sHtml += "<table data-tagname='table' border='";
+                if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
+                    sHtml += "<table data-tagname='table' border='";
+                } else {
+                    sHtml += "<table border='";
+                }
                 sHtml += sBorder;
                 sHtml += "'";
                 if (sNewStyle != "" || iMarginLeft != 0 || iTextIndent != 0) {
@@ -3351,12 +3409,16 @@ namespace CBReader
                     }
                     sHtml += "'";
                 }
-                sHtml += $" data-margin-left='{iMarginLeft}em'><tbody data-tagname='tbody'>";
+                if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
+                    sHtml += $" data-margin-left='{iMarginLeft}em'><tbody data-tagname='tbody'>";
+                } else {
+                    sHtml += $" data-margin-left='{iMarginLeft}em'><tbody>";
+                }
             }
 
             sHtml += parseChild(node); // 處理內容
 
-            if (Setting.ShowLineFormat) {
+            if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                 sHtml += "</span></span>";
             } else {
                 sHtml += "</tbody></table>";
