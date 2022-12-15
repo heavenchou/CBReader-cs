@@ -31,7 +31,7 @@ namespace CBReader
 
         //static public string ProgramTitle = "CBETA 漢文電子佛典集成";  // 改由 Serial.Title 提供
        
-        static public string DebugString = "Debug";      // debug 口令
+        static public string DebugString = "Heaven";      // debug 口令
         static public bool IsDebug = false;             // debug 變數
 
         // 目錄

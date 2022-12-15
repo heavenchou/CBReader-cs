@@ -3036,10 +3036,12 @@ namespace CBReader
 
                 // 處理段首
                 if (!sType.StartsWith("head")) { // 當成 head 就不要加行首資訊了
-                    if (Setting.ShowLineHead && !Setting.ShowLineFormat) {
-                        sHtml += "<span class='parahead'>[" + PageLine + "] </span>";
-                    } else {
-                        sHtml += "<span class='parahead' style='display:none'>[" + PageLine + "] </span>";
+                    if (!InNoteOrig && !InNoteMod && !InNoteAdd) {  // 校注也不用加段首
+                        if (Setting.ShowLineHead && !Setting.ShowLineFormat) {
+                            sHtml += "<span class='parahead'>[" + PageLine + "] </span>";
+                        } else {
+                            sHtml += "<span class='parahead' style='display:none'>[" + PageLine + "] </span>";
+                        }
                     }
                 }
             }
