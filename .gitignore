@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/CBReader/alcsout.txt
+/CBReader/allcs.rb
+/CBReader/allcs.txt
