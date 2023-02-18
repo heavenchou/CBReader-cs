@@ -95,6 +95,7 @@
     <Compile Include="Int2List.cs" />
     <Compile Include="IntList.cs" />
     <Compile Include="JuanLine.cs" />
+    <Compile Include="Language.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

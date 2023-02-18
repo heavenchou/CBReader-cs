@@ -13,9 +13,9 @@ namespace CBReader
 {
     public partial class CreateHtml : Form
     {
-        MainForm mainForm;
+        mainForm mainForm;
         bool Stop;
-        public CreateHtml(MainForm main)
+        public CreateHtml(mainForm main)
         {
             InitializeComponent();
             mainForm = main;

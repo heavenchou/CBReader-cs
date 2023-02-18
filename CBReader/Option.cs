@@ -12,9 +12,9 @@ namespace CBReader
 {
     public partial class OptionForm : Form
     {
-        MainForm mainForm;
+        mainForm mainForm;
         CSetting Setting;       // 設定檔
-        public OptionForm(MainForm main)
+        public OptionForm(mainForm main)
         {
             InitializeComponent();
             mainForm = main;

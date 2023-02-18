@@ -19,8 +19,10 @@ namespace CBReader
 {
     // 為了讓程式可以接收 javascript 的呼叫
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class MainForm : Form
+    public partial class mainForm : Form
     {
+        public Language language;
+
         AboutForm aboutForm;
         OptionForm optionForm;
         SearchRangeForm searchrangeForm;
@@ -43,7 +45,10 @@ namespace CBReader
         int NavWidth = 380;   // 目錄區的寬度
         int MuluWidth = 200;  // 書目區的寬度
 
-        public MainForm()
+        public string SearchTimeDiff = "";    // 記錄最後搜尋時間，切換語系需要
+        public int SearchFoundCount = 0;        // 記錄最後搜尋數量，切換語系需要
+
+        public mainForm()
         {
             InitializeComponent();
             // javascript 指令碼可存取的物件，this 是目前的 Form
@@ -53,7 +58,10 @@ namespace CBReader
             CGlobalVal.initialPath();
             // 將 IE 設定到 IE 11 (如果沒 IE 11 的如何?)
             SetPermissions(11001);
-
+            // 取得語系
+            language = new Language(CGlobalVal.MyFullPath + "Language");
+            // 將語系加入選單中
+            AddLanguage2Menu();
             // 取得設定檔並讀取所有設定
             Setting = new CSetting(CGlobalVal.SettingFile);
 
@@ -129,10 +137,10 @@ namespace CBReader
             // 都沒有就詢問使用者
             if (!Directory.Exists(sBookcasePath)) {
 
-                MessageBox.Show("沒有找到您的 Bookcase 書櫃目錄，請手動選擇目錄所在位置。");
+                MessageBox.Show(t("沒有找到您的 Bookcase 書櫃目錄，請手動選擇目錄所在位置。","01001"));
                 // 使用指定目錄
 
-                folderBrowserDialog1.Description = "選擇 Bookcase 目錄所在位置";
+                folderBrowserDialog1.Description = t("選擇 Bookcase 目錄所在位置","01002");
                 //folderBrowserDialog1.RootFolder = CGlobalVal.MyFullPath;
                 if (folderBrowserDialog1.ShowDialog() == DialogResult.OK) {
                     sBookcasePath = folderBrowserDialog1.SelectedPath;
@@ -149,7 +157,7 @@ namespace CBReader
                 // 在書櫃選擇叢書
                 iBookcaseCount = Bookcase.Books.Count;
                 if (iBookcaseCount == 0) {
-                    CGlobalMessage.push("書櫃中一本書都沒有");
+                    CGlobalMessage.push(t("書櫃中一本書都沒有", "01003"));
                 }
                 // else if(iBookcaseCount == 1)
                 else {
@@ -181,26 +189,48 @@ namespace CBReader
             // 西蓮淨苑 SLReader 專用
             // 檢索範圍要加上西蓮
         }
-        
+
+        // 將語系加入選單中
+        void AddLanguage2Menu()
+        {
+            if (language.FileNames.Count == 0) {
+                miLanguage.Visible= false;
+                return;
+            }
+
+            foreach (string item in language.FileNames.Keys) {
+                ToolStripMenuItem menuItem = new ToolStripMenuItem(item);
+                menuItem.Click += MenuItem_Click;
+                miLanguage.DropDownItems.Add(menuItem);
+            }
+        }
+
+        private void MenuItem_Click(object sender, EventArgs e)
+        {
+            // 在此處理事件
+            string langName = ((ToolStripMenuItem)sender).Text;
+            language.ChangeLanguage(language.FileNames[langName], this, optionForm, searchrangeForm, updateForm);
+        }
+
         // 西蓮畫面
         void SeeLandView()
         {
-            lbFindSutraBookId.Text = "叢書";
-            lbGoSutraBookId.Text = "叢書";
-            lbGoBookBookId.Text = "叢書";
+            lbFindSutraBookId.Text = t("叢書", "01026");
+            lbGoSutraBookId.Text = t("叢書", "01026");
+            lbGoBookBookId.Text = t("叢書", "01026");
 
-            lbFindSutraSutraFrom.Text = "編號從";
-            lbGoSutraSutraNum.Text = "編號";
-            lbFindSutraSutraName.Text = "著作";
+            lbFindSutraSutraFrom.Text = t("編號從", "01028");
+            lbGoSutraSutraNum.Text = t("編號", "01027");
+            lbFindSutraSutraName.Text = t("著作", "01029");
 
-            sgFindSutra.Columns[0].HeaderText = "叢書";
-            sgFindSutra.Columns[2].HeaderText = "編號";
-            sgFindSutra.Columns[3].HeaderText = "著作";
+            sgFindSutra.Columns[0].HeaderText = t("叢書", "01026");
+            sgFindSutra.Columns[2].HeaderText = t("編號", "01027");
+            sgFindSutra.Columns[3].HeaderText = t("著作", "01029");
             sgFindSutra.Columns[5].Visible = false;
 
-            sgTextSearch.Columns[1].HeaderText = "叢書";
-            sgTextSearch.Columns[3].HeaderText = "編號";
-            sgTextSearch.Columns[4].HeaderText = "著作";
+            sgTextSearch.Columns[1].HeaderText = t("叢書", "01026");
+            sgTextSearch.Columns[3].HeaderText = t("編號", "01027");
+            sgTextSearch.Columns[4].HeaderText = t("著作", "01029");
             sgTextSearch.Columns[6].Visible = false;
 
             cbSearchRange.Visible = false;  // 全文檢索範圍
@@ -230,7 +260,7 @@ namespace CBReader
                     return;
                 }
             }
-            MessageBox.Show("找不到 CBETA 資料");
+            MessageBox.Show(t("找不到 CBETA 資料", "01004"));
             return;
         }
 
@@ -264,7 +294,7 @@ namespace CBReader
         void ShowCBXML(string sFile, bool bShowHighlight = false, CSeries sSeries = null)
         {
             if (sFile == "") {
-                MessageBox.Show("沒有找到正確檔案");
+                MessageBox.Show(t("沒有找到正確檔案", "01005"));
                 return;
             }
             if (sSeries == null) {
@@ -280,7 +310,7 @@ namespace CBReader
                 sLink = sFile.Substring(iPos + 1);
                 sFile = sFile.Substring(0, iPos);
                 if (sFile == "") {
-                    MessageBox.Show("沒有找到正確檔案");
+                    MessageBox.Show(t("沒有找到正確檔案", "01005"));
                     return;
                 }
             }
@@ -338,12 +368,12 @@ namespace CBReader
                 sJuan = sJuan.TrimStart('0');
                 sSutra = sSutra.TrimStart('0');
                 string sCaption = Bookcase.CBETA.Title + "《" + sName + "》"
-                        + sVol + ", No. " + sSutra + ", 卷/篇章" + sJuan;
+                        + sVol + ", No. " + sSutra + ", " + t("卷/篇章", "01018") + sJuan;
                 this.Text = sCaption;
 
                 // 將經名後面的 （上中下一二三......十）移除
                 sName = CCBSutraUtil.CutNumberAfterSutraName(sName);
-                cbSearchThisSutra.Text = "檢索本經：" + sName;
+                cbSearchThisSutra.Text = t("檢索本經：", "01019") + sName;
                 cbSearchThisSutraChange();  // 設定檢索本經的相關資料
             }
 
@@ -383,11 +413,11 @@ namespace CBReader
         {
             if (pnMulu.Width == 0) {
                 pnMulu.Width = MuluWidth;
-                btMuluWidthSwitch.Text = "◄ 目次";
+                btMuluWidthSwitch.Text = t("◄ 目次", "01020");
             } else {
                 MuluWidth = pnMulu.Width;
                 pnMulu.Width = 0;
-                btMuluWidthSwitch.Text = "目次 ►";
+                btMuluWidthSwitch.Text = t("目次 ►", "01021");
             }
         }
 
@@ -446,7 +476,7 @@ namespace CBReader
             cbGoSutraBookId.Items.Clear();
             cbGoBookBookId.Items.Clear();
             if(Bookcase != null) {
-                cbFindSutraBookId.Items.Add("   全部");
+                cbFindSutraBookId.Items.Add(t("   全部", "01025"));
                 for (int i = 0; i < Bookcase.CBETA.BookData.Count; i++) {
                     string sItem = Bookcase.CBETA.BookData.ID[i] + " " + Bookcase.CBETA.BookData.BookName[i];
                     cbFindSutraBookId.Items.Add(sItem);
@@ -691,7 +721,7 @@ namespace CBReader
                     return;
                 }
             }
-            MessageBox.Show("目前已是第一卷/篇章。");
+            MessageBox.Show(t("目前已是第一卷/篇章。", "01006"));
         }
 
         // 下一卷
@@ -710,18 +740,18 @@ namespace CBReader
                     return;
                 }
             }
-            MessageBox.Show("目前已是最後一卷/篇章。");
+            MessageBox.Show(t("目前已是最後一卷/篇章。", "01007"));
         }
 
         private void btNavWidthSwitch_Click(object sender, EventArgs e)
         {
             if (pnMainFunc.Width == 0) {
                 pnMainFunc.Width = NavWidth;
-                btNavWidthSwitch.Text = "◄ 主功能";
+                btNavWidthSwitch.Text = t("◄ 主功能","01022");
             } else {
                 NavWidth = pnMainFunc.Width;
                 pnMainFunc.Width = 0;
-                btNavWidthSwitch.Text = "主功能 ►";
+                btNavWidthSwitch.Text = t("主功能 ►", "01023");
             }
         }
 
@@ -837,9 +867,15 @@ namespace CBReader
                 sgFindSutra.RowCount = iGridIndex;
                 sgFindSutra.ResumeLayout();
 
-                lbFindSutraCount.Text = $"共找到 {iGridIndex} 筆";
+                // lbFindSutraCount.Text = $"共找到 {iGridIndex} 筆";
+
+                //lbFindSutraCount.Text = t("找到 %d 筆", "01008");
+                //lbFindSutraCount.Text = lbFindSutraCount.Text.Replace("%d", $"{iGridIndex}");
+
+                language.ChangeComponetLang("mainForm", lbFindSutraCount);
+
                 if (iGridIndex == 0) {
-                    MessageBox.Show("沒有滿足此條件的資料");
+                    MessageBox.Show(t("沒有滿足此條件的資料", "01009"));
                 }
             }
         }
@@ -896,7 +932,7 @@ namespace CBReader
             string sLine = edGoSutraLine.Text;
 
             if (sSutraNum == "") {
-                MessageBox.Show("請輸入經號");
+                MessageBox.Show(t("請輸入經號", "01010"));
                 edGoSutraSutraNum.Focus();
                 return;
             }
@@ -931,7 +967,7 @@ namespace CBReader
             string sLine = edGoBookLine.Text;
 
             if(sVol == "") {
-                MessageBox.Show("請輸入冊數");
+                MessageBox.Show(t("請輸入冊數", "01011"));
                 edGoBookVol.Focus();
                 return;
             }
@@ -1020,7 +1056,7 @@ namespace CBReader
             // 選擇全文檢索引擎, 若某一方為 0 , 則選另一方 (全 0 就不管了)
             SearchEngine = Bookcase.CBETA.getSearchEngine(Setting.CollationType);
             if(SearchEngine == null) {
-                MessageBox.Show("沒有可用的全文檢索引擎");
+                MessageBox.Show(t("沒有可用的全文檢索引擎", "01012"));
                 return;
             }
 
@@ -1029,13 +1065,20 @@ namespace CBReader
             bool bFindOK = SearchEngine.Find(SearchSentence, bHasRange);      // 在找囉.........................................
             DateTime t2 = DateTime.Now;
 
-            int iFoundCount = SearchEngine.FileFound.Total;
+            SearchFoundCount = SearchEngine.FileFound.Total;
 
             // 秀出找到幾個的訊息
 
-            string timeDiff = string.Format("{0:#0.###}",(t2 - t1).TotalSeconds);
+            SearchTimeDiff = string.Format("{0:#0.###}",(t2 - t1).TotalSeconds);
 
-            lbSearchMsg.Text = $"找到 {iFoundCount} 筆，共花時間：{timeDiff} 秒";
+            //lbSearchMsg.Text = $"找到 {iFoundCount} 筆，共花時間：{timeDiff} 秒";
+            
+            //lbSearchMsg.Text = t("找到 %d 筆，共花時間：%f 秒", "01024");
+            //lbSearchMsg.Text = lbSearchMsg.Text.Replace("%d", $"{iFoundCount}");
+            //lbSearchMsg.Text = lbSearchMsg.Text.Replace("%f", $"{searchTimeDiff}");
+
+            language.ChangeComponetLang("mainForm", lbSearchMsg);
+
 
             int iTotalSearchFileNum = 0;
             bool bShowAll = false;
@@ -1106,10 +1149,10 @@ namespace CBReader
 
             if (bFindOK) {
                 if (sgTextSearch.RowCount == 0) {
-                    MessageBox.Show("找不到任何資料");
+                    MessageBox.Show(t("找不到任何資料", "01013"));
                 }
             } else {
-                MessageBox.Show("查詢字串語法有問題，請再檢查看看。");
+                MessageBox.Show(t("查詢字串語法有問題，請再檢查看看。", "01014"));
             }
         }
 
@@ -1310,7 +1353,7 @@ namespace CBReader
         {
             if(updateForm.IsDownloadOK) {
                 // 下載更新檔案完成，但是尚未更新
-                var result = MessageBox.Show("已下載更新檔案，尚未進行更新，確定要結束嗎？", "確定要結束程式？", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                var result = MessageBox.Show(t("已下載更新檔案，尚未進行更新，確定要結束嗎？", "01015"), t("確定要結束程式？", "01016"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if(result != DialogResult.Yes) {
                     e.Cancel = true;
                     updateForm.Focus();
@@ -1318,7 +1361,7 @@ namespace CBReader
             }
             if(updateForm.IsDownloading) {
                 // 正在下載更新檔
-                var result = MessageBox.Show("正在下載更新檔案，確定要結束嗎？", "確定要結束程式？", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                var result = MessageBox.Show(t("正在下載更新檔案，確定要結束嗎？", "01017"), t("確定要結束程式？", "01016"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result != DialogResult.Yes) {
                     e.Cancel = true;
                     updateForm.Focus();
@@ -1372,6 +1415,17 @@ namespace CBReader
         public void openNoteKey(string url)
         {
             Process.Start(url);
+        }
+
+        private void miGetLanguageIni_Click(object sender, EventArgs e)
+        {
+            language.CreateIniFile(this, optionForm, searchrangeForm, updateForm);
+        }
+
+        // 專門處理字串語系的函數
+        string t(string message, string msgId)
+        {
+            return language.GetMessage(message, msgId);
         }
     }
 }

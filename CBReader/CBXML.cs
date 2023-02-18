@@ -2459,7 +2459,7 @@ namespace CBReader
                     sHtml += myStyle.NewStyle;
                     sHtml += "' data-margin-left='";
                     sHtml += iMarginLeft.ToString();
-                    if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
+                    if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
                         sHtml += "em' data-tagname='ul'>";
                     } else {
                         sHtml += "em'>";
@@ -2666,7 +2666,7 @@ namespace CBReader
             string sPlace = GetAttr(node, "place");
             string sId = GetAttr(node, "n");
             string sRend = GetAttr(node, "rend");
-            string sNoteKey = GetAttr(node, "note_key");
+            string sNoteKey = GetAttr(node, "cb:note_key");
             string sIdNum = ""; // 0001001a 取得 1a
 
             // rend="hide" 直接取消處理, 目前只出現在 Y 和 TX

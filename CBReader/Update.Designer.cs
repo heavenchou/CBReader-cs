@@ -34,11 +34,11 @@ namespace CBReader
             this.panel1 = new System.Windows.Forms.Panel();
             this.btUpdate = new System.Windows.Forms.Button();
             this.cbUseChinaServer = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbUseChineseSite = new System.Windows.Forms.Label();
             this.btDownload = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbMessage = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbBookcasePath = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.edBookcasePath = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -66,7 +66,7 @@ namespace CBReader
             // 
             this.panel1.Controls.Add(this.btUpdate);
             this.panel1.Controls.Add(this.cbUseChinaServer);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.lbUseChineseSite);
             this.panel1.Controls.Add(this.btDownload);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(553, 0);
@@ -98,14 +98,14 @@ namespace CBReader
             this.cbUseChinaServer.Text = "中國大陸分站";
             this.cbUseChinaServer.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // lbUseChineseSite
             // 
-            this.label1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(10, 201);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(157, 77);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "使用中國大陸分站的主機進行更新";
+            this.lbUseChineseSite.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbUseChineseSite.Location = new System.Drawing.Point(10, 201);
+            this.lbUseChineseSite.Name = "lbUseChineseSite";
+            this.lbUseChineseSite.Size = new System.Drawing.Size(157, 77);
+            this.lbUseChineseSite.TabIndex = 1;
+            this.lbUseChineseSite.Text = "使用中國大陸分站的主機進行更新";
             // 
             // btDownload
             // 
@@ -122,7 +122,7 @@ namespace CBReader
             // panel2
             // 
             this.panel2.Controls.Add(this.lbMessage);
-            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.lbBookcasePath);
             this.panel2.Controls.Add(this.progressBar1);
             this.panel2.Controls.Add(this.edBookcasePath);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -142,15 +142,15 @@ namespace CBReader
             this.lbMessage.TabIndex = 3;
             this.lbMessage.Text = "訊息：";
             // 
-            // label2
+            // lbBookcasePath
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(11, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 25);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "書櫃目錄";
+            this.lbBookcasePath.AutoSize = true;
+            this.lbBookcasePath.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbBookcasePath.Location = new System.Drawing.Point(11, 81);
+            this.lbBookcasePath.Name = "lbBookcasePath";
+            this.lbBookcasePath.Size = new System.Drawing.Size(92, 25);
+            this.lbBookcasePath.TabIndex = 2;
+            this.lbBookcasePath.Text = "書櫃目錄";
             // 
             // progressBar1
             // 
@@ -219,11 +219,11 @@ namespace CBReader
         private System.Windows.Forms.TextBox Memo;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox cbUseChinaServer;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbUseChineseSite;
         private System.Windows.Forms.Button btDownload;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lbMessage;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbBookcasePath;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.TextBox edBookcasePath;
         private System.Windows.Forms.Panel panel3;

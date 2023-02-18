@@ -17,7 +17,7 @@ namespace CBReader
 {
     public partial class UpdateForm : Form
     {
-        MainForm mainForm;
+        mainForm mainForm;
 		FileStream fileStream;	// 共用的 fileStream，要給 Timer 看的。
 
 		// string DestFile;
@@ -51,7 +51,7 @@ namespace CBReader
 
 		static readonly HttpClient httpClient = new HttpClient();	// HttpClient
 
-		public UpdateForm(MainForm main)
+		public UpdateForm(mainForm main)
         {
             InitializeComponent();
             mainForm = main;
@@ -116,11 +116,13 @@ namespace CBReader
 			if (sStr1.Substring(0, 2) == "ok") {
 				// 表示沒有更新資料
 				if (IsShowMessage) {
-					MessageBox.Show("您的 CBReader 是最新的!");
+					MessageBox.Show(t("您的 CBReader 是最新的!","02001"));
 				}
 			} else if (sStr1.StartsWith("message=")) {
 
-				var result = MessageBox.Show("發現有更新檔案，您要進行更新嗎？\n\n更新後會自動重啟程式。", "是否進行更新？", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				string msg = t("發現有更新檔案，您要進行更新嗎？", "02002") + "\n\n" + t("更新後會自動重啟程式。", "02003");
+
+                var result = MessageBox.Show(msg, t("是否進行更新？","02008"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
 				if (result == DialogResult.Yes) {
 					IsUpdate = true;
@@ -140,7 +142,7 @@ namespace CBReader
 		async Task Download()
         {
 			for (int i = 0; i < updateSource.Count; i++) {
-				lbMessage.Text = $"下載中... ({i+1}/{updateSource.Count})";
+				lbMessage.Text = t("下載中...","02005") + $" ({i+1}/{updateSource.Count})";
 				using (HttpClient httpClient = new HttpClient()) {
 					try {
 						var requestUri = updateSource[i];
@@ -244,7 +246,7 @@ namespace CBReader
 			IsDownloading = true;
 
 			// 開始下載
-			lbMessage.Text = "下載中...";
+			lbMessage.Text = t("下載中...","02005");
 
 			updateDest.Clear();
 			updateSource.Clear();
@@ -288,13 +290,16 @@ namespace CBReader
 			}
 			await Download();
 
-			lbMessage.Text = "下載完成";
+			lbMessage.Text = t("下載完成","02006");
 			IsDownloading = false;
 			IsDownloadOK = true;
 			btUpdate.Enabled = true;
 			btDownload.Enabled = false;
 			btUpdate.Focus();
-			var result = MessageBox.Show("更新檔案下載完成。\n\n按下「是」會自動進行更新及重啟程式，更新期間無法操作 CBReader。", "是否立刻更新？", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			string msg = t("更新檔案下載完成。", "02007") + "\n\n" +
+				t("按下「是」會自動進行更新，更新期間無法操作 CBReader。", "02012") + "\n\n" +
+				t("您也可以稍候選擇按下「更新」按鈕進行更新。", "02013");
+            var result = MessageBox.Show(msg, t("是否進行更新？", "02008"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 			if (result == DialogResult.Yes) {
 				btUpdate_Click(this, null);
 			}
@@ -314,7 +319,7 @@ namespace CBReader
 			TopMost = true;
 			mainForm.Bookcase.CBETA.FreeSearchEngine();
 			for (int i = 0; i < updateFilename.Count; i++) {
-				lbMessage.Text = $"更新中... ({i+1}/{updateFilename.Count})";
+				lbMessage.Text = t("更新中...","02009") + $" ({i+1}/{updateFilename.Count})";
 				string zipFile = CGlobalVal.MyTempPath + updateFilename[i];
 				if (updateDest[i] == "bookcase") {
 					// 解壓縮到 bookcase 目錄
@@ -332,9 +337,9 @@ namespace CBReader
 					UnzipToDirectory(zipFile, CGlobalVal.MyFullPath);
 				}
             }
-			lbMessage.Text = "更新完成";
+			lbMessage.Text = t("更新完成","02010");
 			IsDownloadOK = false;
-			MessageBox.Show("更新完成，按下「確定」後會重啟程式。");
+			MessageBox.Show(t("更新完成，按下「確定」後會重啟程式。","02011"));
 			CGlobalVal.restart = true;
 			mainForm.Close();
         }
@@ -342,6 +347,12 @@ namespace CBReader
         private void UpdateForm_FormClosing(object sender, FormClosingEventArgs e)
         {
 			e.Cancel = true;
+        }
+
+        // 專門處理字串語系的函數
+        string t(string message, string msgId)
+        {
+            return mainForm.language.GetMessage(message, msgId);
         }
     }
 }

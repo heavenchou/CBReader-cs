@@ -10,7 +10,7 @@ namespace CBReader
     // 各種 WriteXXX 寫入的版本, 若傳回 0 表示失敗
     public class CIniFile
     {
-        string FileName;
+        public string FileName;
 
         // 這是輸入為 utf8 , 輸出是 ANSI
         // [DllImport("kernel32", CharSet = CharSet.Unicode)] 
@@ -22,7 +22,11 @@ namespace CBReader
         static extern int WritePrivateProfileString(string Section, string Key, byte[] Value, string FilePath);
         [DllImport("kernel32", SetLastError = true)]
         static extern int GetPrivateProfileString(string Section, string Key, byte[] Default, byte[] RetVal, int Size, string FilePath);
-
+        [DllImport("kernel32", SetLastError = true)]
+        static extern int GetPrivateProfileSection(string Section, IntPtr lpReturnedString, int nSize, string FilePath);
+        public CIniFile()
+        {
+        }
         public CIniFile(string file)
         {
             FileName = file;
@@ -98,6 +102,28 @@ namespace CBReader
         public bool KeyExists(string Section, string Key)
         {
             return ReadString(Section, Key, "").Length > 0;
+        }
+
+
+        // 讀取整個 Section ，傳回字串，該字串是由 \0 區隔各行，每一行都是 key=value 格式。
+        public string ReadSection(string section)
+        {
+            // 定義一個用於存儲 section 內容的字串數組
+            var buffer = new byte[65535];
+            var ptr = Marshal.AllocHGlobal(buffer.Length);
+            int count = 0;
+            try {
+                // 使用 GetPrivateProfileSection 函數將 section 中的所有項目存儲在字串數組中
+                count = GetPrivateProfileSection(section, ptr, buffer.Length, FileName);
+                Marshal.Copy(ptr, buffer, 0, count);
+            } finally {
+                Marshal.FreeHGlobal(ptr);
+            }
+
+            // 將字串數組轉換為字串
+            string sectionContent = Encoding.GetEncoding("utf-8").GetString(buffer, 0, count);
+
+            return sectionContent;
         }
     }
 }
