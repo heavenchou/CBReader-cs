@@ -159,6 +159,7 @@ namespace CBReader
         public string SDGifPath = "sd-gif\\";       // 悉曇字圖檔的位置
         public string RJGifPath = "rj-gif\\";       // 蘭札字圖檔的位置
         public string FigurePath = "figures\\";      // 圖檔的位置
+        public string LanguageFile = "";                // 使用的語系
         //string UserDataPath;    // 個人資料目錄
         public bool SaveLastTocFileName = true;   // 是否儲存最後開啟的書目
         //string LastTocFileName = "";     // 最後開啟的書目
@@ -250,6 +251,7 @@ namespace CBReader
             //MyFullPath = IniFile.ReadString(Section, "MyFullPath", MyFullPath);
             BookcasePath = iniFile.ReadString(Section, "BookcasePath", BookcasePath);
             BookcaseFullPath = iniFile.ReadString(Section, "BookcaseFullPath", BookcaseFullPath);
+            LanguageFile = iniFile.ReadString(Section, "LanguageFile", LanguageFile);
 
             // 自訂 CSS
 
@@ -315,6 +317,7 @@ namespace CBReader
             //IniFile.WriteString(Section, "MyFullPath", MyFullPath);
             iniFile.WriteString(Section, "BookcasePath", BookcasePath);
             iniFile.WriteString(Section, "BookcaseFullPath", BookcaseFullPath);
+            iniFile.WriteString(Section, "LanguageFile", LanguageFile);
 
             // 自訂 CSS
 

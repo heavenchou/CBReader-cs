@@ -17,7 +17,7 @@ namespace CBReader
 {
     public partial class UpdateForm : Form
     {
-        mainForm mainForm;
+        MainForm mainForm;
 		FileStream fileStream;	// 共用的 fileStream，要給 Timer 看的。
 
 		// string DestFile;
@@ -51,7 +51,7 @@ namespace CBReader
 
 		static readonly HttpClient httpClient = new HttpClient();	// HttpClient
 
-		public UpdateForm(mainForm main)
+		public UpdateForm(MainForm main)
         {
             InitializeComponent();
             mainForm = main;

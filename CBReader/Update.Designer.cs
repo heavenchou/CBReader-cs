@@ -36,7 +36,7 @@ namespace CBReader
             this.cbUseChinaServer = new System.Windows.Forms.CheckBox();
             this.lbUseChineseSite = new System.Windows.Forms.Label();
             this.btDownload = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.plMessage = new System.Windows.Forms.Panel();
             this.lbMessage = new System.Windows.Forms.Label();
             this.lbBookcasePath = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -44,7 +44,7 @@ namespace CBReader
             this.panel3 = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.plMessage.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +59,7 @@ namespace CBReader
             this.Memo.Name = "Memo";
             this.Memo.ReadOnly = true;
             this.Memo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Memo.Size = new System.Drawing.Size(532, 338);
+            this.Memo.Size = new System.Drawing.Size(520, 338);
             this.Memo.TabIndex = 0;
             // 
             // panel1
@@ -69,18 +69,18 @@ namespace CBReader
             this.panel1.Controls.Add(this.lbUseChineseSite);
             this.panel1.Controls.Add(this.btDownload);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(553, 0);
+            this.panel1.Location = new System.Drawing.Point(541, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(171, 491);
+            this.panel1.Size = new System.Drawing.Size(183, 491);
             this.panel1.TabIndex = 1;
             // 
             // btUpdate
             // 
             this.btUpdate.Enabled = false;
-            this.btUpdate.Location = new System.Drawing.Point(16, 80);
+            this.btUpdate.Location = new System.Drawing.Point(14, 80);
             this.btUpdate.Name = "btUpdate";
-            this.btUpdate.Size = new System.Drawing.Size(143, 55);
+            this.btUpdate.Size = new System.Drawing.Size(145, 55);
             this.btUpdate.TabIndex = 3;
             this.btUpdate.Text = "🆕 更新及重啟";
             this.btUpdate.UseVisualStyleBackColor = true;
@@ -88,12 +88,11 @@ namespace CBReader
             // 
             // cbUseChinaServer
             // 
-            this.cbUseChinaServer.AutoSize = true;
             this.cbUseChinaServer.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.cbUseChinaServer.Location = new System.Drawing.Point(14, 156);
             this.cbUseChinaServer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbUseChinaServer.Name = "cbUseChinaServer";
-            this.cbUseChinaServer.Size = new System.Drawing.Size(154, 29);
+            this.cbUseChinaServer.Size = new System.Drawing.Size(166, 54);
             this.cbUseChinaServer.TabIndex = 2;
             this.cbUseChinaServer.Text = "中國大陸分站";
             this.cbUseChinaServer.UseVisualStyleBackColor = true;
@@ -101,9 +100,9 @@ namespace CBReader
             // lbUseChineseSite
             // 
             this.lbUseChineseSite.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lbUseChineseSite.Location = new System.Drawing.Point(10, 201);
+            this.lbUseChineseSite.Location = new System.Drawing.Point(9, 214);
             this.lbUseChineseSite.Name = "lbUseChineseSite";
-            this.lbUseChineseSite.Size = new System.Drawing.Size(157, 77);
+            this.lbUseChineseSite.Size = new System.Drawing.Size(171, 198);
             this.lbUseChineseSite.TabIndex = 1;
             this.lbUseChineseSite.Text = "使用中國大陸分站的主機進行更新";
             // 
@@ -119,18 +118,18 @@ namespace CBReader
             this.btDownload.UseVisualStyleBackColor = true;
             this.btDownload.Click += new System.EventHandler(this.btDownload_Click);
             // 
-            // panel2
+            // plMessage
             // 
-            this.panel2.Controls.Add(this.lbMessage);
-            this.panel2.Controls.Add(this.lbBookcasePath);
-            this.panel2.Controls.Add(this.progressBar1);
-            this.panel2.Controls.Add(this.edBookcasePath);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 364);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(553, 127);
-            this.panel2.TabIndex = 2;
+            this.plMessage.Controls.Add(this.lbMessage);
+            this.plMessage.Controls.Add(this.lbBookcasePath);
+            this.plMessage.Controls.Add(this.progressBar1);
+            this.plMessage.Controls.Add(this.edBookcasePath);
+            this.plMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.plMessage.Location = new System.Drawing.Point(0, 364);
+            this.plMessage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.plMessage.Name = "plMessage";
+            this.plMessage.Size = new System.Drawing.Size(541, 127);
+            this.plMessage.TabIndex = 2;
             // 
             // lbMessage
             // 
@@ -159,7 +158,7 @@ namespace CBReader
             this.progressBar1.Location = new System.Drawing.Point(15, 42);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(532, 19);
+            this.progressBar1.Size = new System.Drawing.Size(520, 19);
             this.progressBar1.TabIndex = 1;
             // 
             // edBookcasePath
@@ -171,7 +170,7 @@ namespace CBReader
             this.edBookcasePath.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.edBookcasePath.Name = "edBookcasePath";
             this.edBookcasePath.ReadOnly = true;
-            this.edBookcasePath.Size = new System.Drawing.Size(438, 34);
+            this.edBookcasePath.Size = new System.Drawing.Size(426, 34);
             this.edBookcasePath.TabIndex = 0;
             // 
             // panel3
@@ -181,7 +180,7 @@ namespace CBReader
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(553, 364);
+            this.panel3.Size = new System.Drawing.Size(541, 364);
             this.panel3.TabIndex = 3;
             // 
             // timer1
@@ -194,7 +193,7 @@ namespace CBReader
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(724, 491);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.plMessage);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -205,9 +204,8 @@ namespace CBReader
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UpdateForm_FormClosing);
             this.Shown += new System.EventHandler(this.UpdateForm_Shown);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.plMessage.ResumeLayout(false);
+            this.plMessage.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
@@ -221,11 +219,11 @@ namespace CBReader
         private System.Windows.Forms.CheckBox cbUseChinaServer;
         private System.Windows.Forms.Label lbUseChineseSite;
         private System.Windows.Forms.Button btDownload;
-        private System.Windows.Forms.Panel panel2;
+        public  System.Windows.Forms.Panel plMessage;
         private System.Windows.Forms.Label lbMessage;
-        private System.Windows.Forms.Label lbBookcasePath;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.TextBox edBookcasePath;
+        public  System.Windows.Forms.Label lbBookcasePath;
+        public  System.Windows.Forms.ProgressBar progressBar1;
+        public  System.Windows.Forms.TextBox edBookcasePath;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btUpdate;

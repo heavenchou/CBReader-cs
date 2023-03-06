@@ -7,19 +7,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/*
+ * 1.記錄 lang
+ * 2.自訂 lang
+ * 3.跨行 message 及 tip
+ * 4.lang 目錄位置
+ * 5.語系要排序
+ * 6.語言選單額外處理
+ * 7.更新要修改打包格式，乾脆做成 cbreader.exe + bookcase+lang 包在一起
+ */
 namespace CBReader
 {
-
     // 一開始只要給目錄，讓它取得所有的語系檔名及語系名稱
     // 更換語系時，就是切換檔名，再更換所有元件文字，取得所有訊息
     public class Language
     {
         string FileName = "";        // 目前使用中的語系檔名
+        string UserFileName = "";        // 目前使用中的語系檔名
         string LangPath = "";        // 語系檔的路徑
-        string DefaultIni = "";
-        CIniFile iniFile = new CIniFile();
+        string UserLangPath = "";        // 使用者自訂語系檔的路徑
+        string DefaultIni = "";     // heaven 專用，要列出預設 ini 有哪些項目
+        CIniFile IniFile = new CIniFile();
+        CIniFile UserIniFile = new CIniFile();
 
         public SortedDictionary<string, string> FileNames;  // 語系檔列表 (語系名, 檔名)
+        public SortedDictionary<string, string> UserFileNames;  // 使用者自訂語系檔列表 (語系名, 檔名)
         public Dictionary<string, string> Messages;         // 所有的訊息列表
 
         string FontName;            // 字型
@@ -27,10 +39,12 @@ namespace CBReader
         //TFontCharset FontCharset;   // 字元集
         //unsigned int CodePage;      // code page
 
-        public Language(string sLangPath) // 建構函式, 傳入語系檔目錄
+        public Language(string sLangPath, string sUserLangPath) // 建構函式, 傳入語系檔目錄
         {
             LangPath = sLangPath;
+            UserLangPath = sUserLangPath;
             FileNames = new SortedDictionary<string, string>();  // 語系檔列表 (語系名, 檔名)
+            UserFileNames = new SortedDictionary<string, string>();  // 語系檔列表 (語系名, 檔名)
             Messages = new Dictionary<string, string>();         // 所有的訊息列表
 
             FontName = "";
@@ -58,22 +72,40 @@ namespace CBReader
                     FileNames[langName] = file;
                 }
             }
+            
+            // 使用者自訂
+
+            if (!Directory.Exists(UserLangPath)) {
+                return;
+            }
+            string[] userFiles = Directory.GetFiles(UserLangPath, "*.ini");
+            UserFileNames.Clear();
+
+            foreach (string file in userFiles) {
+                // 取得此語系檔的語系名稱
+                string langName = GetLangNameFromFile(file);
+                if (langName != "") {
+                    UserFileNames[langName] = file;
+                }
+            }
         }
 
-        // 由語系檔取得此語系檔的語系名稱, 例如得到 FileNames[Chinese(Big5)]=cbr_big5.ini
+        // 由語系檔取得此語系檔的語系名稱, 例如得到 FileNames[Chinese(Big5)]=xxx/xxx/cbr_big5.ini
         string GetLangNameFromFile(string fileName)
         {
             // Ini file 結構是
             // [section]
             // Ident = Value
 
-            iniFile.FileName = fileName;
-            return iniFile.ReadString("Info", "Language", "");
+            IniFile.FileName = fileName;
+            return IniFile.ReadString("Info", "Language", "");
         }
 
         // 更換語系，傳入語系檔名，以及要更換的 form
-        public void ChangeLanguage(string sFileName, params Form[] forms)
+        public void ChangeLanguage(string langName, params Form[] forms)
         {
+            string sFileName = FileNames[langName];
+
             if (!File.Exists(sFileName)) {
                 string sMessage = "Language : File " + FileName + " is not exist.";
                 MessageBox.Show(sMessage);
@@ -81,7 +113,15 @@ namespace CBReader
             }
 
             FileName = sFileName;
-            iniFile.FileName = sFileName;
+            IniFile.FileName = sFileName;
+
+            if(UserFileNames.ContainsKey(langName)) {
+                UserFileName = UserFileNames[langName];
+                UserIniFile.FileName = UserFileName;
+            } else {
+                UserFileName = "";
+                UserIniFile.FileName = "";
+            }
 
             // 取得全部的 message
             // 要先處理，才能取得 Font 資料
@@ -106,16 +146,38 @@ namespace CBReader
 
             string Section = "INFO";
 
-            FontName = iniFile.ReadString(Section, "FontName", FontName);
-            FontSize = iniFile.ReadInteger(Section, "FontSize", FontSize);
-            //FontCharset = iniFile.ReadInteger(Section, "FontCharset", FontCharset);
-            //CodePage = iniFile.ReadInteger(Section, "CodePage", CodePage);
+            string UserFontName = UserIniFile.ReadString(Section, "FontName", "");
+            if (UserFontName == "") {
+                FontName = IniFile.ReadString(Section, "FontName", FontName);
+            } else {
+                FontName = UserFontName;
+            }
+
+            int UserFontSize = UserIniFile.ReadInteger(Section, "FontSize", 0);
+            if (UserFontSize == 0) {
+                FontSize = IniFile.ReadInteger(Section, "FontSize", FontSize);
+            } else {
+                FontSize = UserFontSize;
+            }
+            
+            //FontCharset = IniFile.ReadInteger(Section, "FontCharset", FontCharset);
+            //CodePage = IniFile.ReadInteger(Section, "CodePage", CodePage);
 
             Section = "Message";
 
             Messages.Clear();
-            string sSectionContent = iniFile.ReadSection(Section);
+            
+            // 先處理一般語系
+            string sSectionContent = IniFile.ReadSection(Section);
+            SplitString2KeyAndValue(sSectionContent);   // 拆分字串，將每個字串拆分成鍵和值
+            // 再處理使用者自訂語系
+            sSectionContent = UserIniFile.ReadSection(Section);
+            SplitString2KeyAndValue(sSectionContent);   // 拆分字串，將每個字串拆分成鍵和值
+        }
 
+        // 拆分字串，將每個字串拆分成鍵和值
+        void SplitString2KeyAndValue(string sSectionContent)
+        {
             // 拆分字串，將每個字串拆分成鍵和值
             foreach (string item in sSectionContent.Split('\0')) {
                 if (!string.IsNullOrEmpty(item)) {
@@ -124,8 +186,14 @@ namespace CBReader
                     string key = item.Substring(0, index);
                     string value = item.Substring(index + 1);
 
+                    value = value.Replace("\\r", "\r");
+                    value = value.Replace("\\n", "\n");
                     // 將鍵和值添加到字典中
-                    Messages.Add(key, value);
+                    if (Messages.ContainsKey(key)) {
+                        Messages[key] = value;
+                    } else {
+                        Messages.Add(key, value);
+                    }
                 }
             }
         }
@@ -143,25 +211,35 @@ namespace CBReader
         // 更新所有 form 的語系
         public void ChangeFormLang(Form form)
         {
+            /*
             if (FontName != "") {
                 Font newFont = new Font(FontName, FontSize);
                 form.Font = newFont;
             }
+            */
             EachControl(form.Name, form);
         }
 
         void EachControl(string formName, Control c)
         {
-            ChangeComponetLang(formName, c);
+            ChangeComponentLang(formName, c);
+
+            if(formName == "AboutForm") {
+                // about 只要處理標題即可
+                return;
+            }
 
             // 其它有子項目的另外處理
             if (c is ToolStrip) {
                 EachMenuItems(formName, (c as ToolStrip).Items);
             } else if (c is ComboBox) {
+                c.Font = new Font(FontName, FontSize);
                 EachComboBoxItems(formName, c.Name, (c as ComboBox).Items);
             } else if (c is ListBox) {
+                c.Font = new Font(FontName, FontSize);
                 EachListBoxItems(formName, c.Name, (c as ListBox).Items);
             } else if (c is DataGridView) {
+                c.Font = new Font(FontName, FontSize);
                 EachDataGridViewColumns(formName, c.Name, (c as DataGridView).Columns);
             }
 
@@ -171,22 +249,42 @@ namespace CBReader
         }
 
         // 更新元件的語系
-        public void ChangeComponetLang(string formName, Control c)
+        public void ChangeComponentLang(string formName, Control c)
         {
-            string controlName = iniFile.ReadString(formName, c.Name, "");
+            string controlName = IniFile.ReadString(formName, c.Name, "");
+            controlName = UserIniFile.ReadString(formName, c.Name, controlName);
+            MainForm main = null;
+            if (formName == "MainForm") {
+                main = (MainForm) c.FindForm();
+            }
 
             // 處理特殊的位置
+            // 主功能表切換按鈕
+            if (formName == "MainForm" && c.Name == "btNavWidthSwitch") {
+                if (main.pnMainFunc.Width == 0) {
+                    controlName = GetMessage("主功能 ►", "01023");
+                } else {
+                    controlName = GetMessage("◄ 主功能", "01022");
+                }
+            }
+            // 目錄切換按鈕
+            if (formName == "MainForm" && c.Name == "btMuluWidthSwitch") {
+                if (main.pnMulu.Width == 0) {
+                    controlName = GetMessage("目次 ►", "01021");
+                } else {
+                    controlName = GetMessage("◄ 目次", "01020");
+                }
+            }
+
             // 搜尋書目數量
-            if (formName == "mainForm" && c.Name == "lbFindSutraCount") {
+            if (formName == "MainForm" && c.Name == "lbFindSutraCount") {
                 controlName = GetMessage("找到 %d 筆", "01008");
-                mainForm main = (mainForm) c.FindForm();
                 controlName = controlName.Replace("%d", main.sgFindSutra.RowCount.ToString());
             }
 
             // 全文檢索數量
-            if (formName == "mainForm" && c.Name == "lbSearchMsg") {
+            if (formName == "MainForm" && c.Name == "lbSearchMsg") {
                 controlName = GetMessage("找到 %d 筆，共花時間：%f 秒", "01024");
-                mainForm main = (mainForm)c.FindForm();
                 if (main.SearchTimeDiff == "") {
                     controlName = "";   // 還沒開始搜尋，所以不顯示
                 } else {
@@ -195,17 +293,41 @@ namespace CBReader
                 }
             }
 
+            // 檢索本書
+            if (formName == "MainForm" && c.Name == "cbSearchThisSutra") {
+                controlName = GetMessage("檢索本經：", "01019") + main.SearchThisBookName;
+            }
+
+            // 更新元件標題與字型
             if (controlName != "") {
                 c.Text = controlName;
+                if (formName != "AboutForm") {
+                    // about 不換字型
+                    c.Font = new Font(FontName, FontSize);
+                }
+            }
+
+            // 設定 TabControl 字型
+            if (c is TabControl) {
+                c.Font = new Font(FontName, FontSize);
+            }
+
+            // 設定 tooltip
+            if (formName == "MainForm") {
+                string controlTooltip = IniFile.ReadString(formName, c.Name + "_tip", "");
+                controlTooltip = UserIniFile.ReadString(formName, c.Name + "_tip", controlTooltip);
+                if (controlTooltip != "") {
+                    controlTooltip = controlTooltip.Replace("\\r", "\r");
+                    controlTooltip = controlTooltip.Replace("\\n", "\n");
+                    main.toolTip1.SetToolTip(c, controlTooltip);
+                }
             }
         }
 
         void EachMenuItems(string formName, ToolStripItemCollection items)
         {
             foreach (ToolStripMenuItem item in items) {
-
                 ChangeMenuItemLang(formName, item);
-
                 if (item.HasDropDownItems) {
                     EachMenuItems(formName, item.DropDownItems);
                 }
@@ -215,9 +337,19 @@ namespace CBReader
         // 更新選單的語系
         void ChangeMenuItemLang(string formName, ToolStripMenuItem item)
         {
-            string controlName = iniFile.ReadString(formName, item.Name, "");
+            string controlName = IniFile.ReadString(formName, item.Name, "");
+            controlName = UserIniFile.ReadString(formName, item.Name, controlName);
+            // 特別處理語言
+            if(item.Name == "miLanguage") {
+                if(controlName == "") {
+                    controlName = "Language";
+                } else if(controlName.ToUpper() != "LANGUAGE") {
+                    controlName = controlName + " (Language)";
+                } 
+            }
             if (controlName != "") {
                 item.Text = controlName;
+                item.Font = new Font(FontName,9);
             }
         }
 
@@ -225,7 +357,8 @@ namespace CBReader
         void EachComboBoxItems(string formName, string comboBoxName, ComboBox.ObjectCollection items)
         {
             for (int i = 0; i < items.Count; i++) {
-                string controlName = iniFile.ReadString(formName, $"{comboBoxName}Item{i}", "");
+                string controlName = IniFile.ReadString(formName, $"{comboBoxName}Item{i}", "");
+                controlName = UserIniFile.ReadString(formName, $"{comboBoxName}Item{i}", controlName);
                 if (controlName != "") {
                     items[i] = controlName;
                 }
@@ -236,7 +369,8 @@ namespace CBReader
         void EachListBoxItems(string formName, string listBoxName, ListBox.ObjectCollection items)
         {
             for (int i = 0; i < items.Count; i++) {
-                string controlName = iniFile.ReadString(formName, $"{listBoxName}Item{i}", "");
+                string controlName = IniFile.ReadString(formName, $"{listBoxName}Item{i}", "");
+                controlName = UserIniFile.ReadString(formName, $"{listBoxName}Item{i}", controlName);
                 if (controlName != "") {
                     items[i] = controlName;
                 }
@@ -247,7 +381,8 @@ namespace CBReader
         void EachDataGridViewColumns(string formName, string dataGridViewName, DataGridViewColumnCollection items)
         {
             for (int i = 0; i < items.Count; i++) {
-                string controlName = iniFile.ReadString(formName, $"{dataGridViewName}Column{i + 1}", "");
+                string controlName = IniFile.ReadString(formName, $"{dataGridViewName}Column{i + 1}", "");
+                controlName = UserIniFile.ReadString(formName, $"{dataGridViewName}Column{i + 1}", controlName);
                 if (controlName != "") {
                     items[i].HeaderText = controlName;
                 }
@@ -264,11 +399,8 @@ namespace CBReader
                 GetAllControlNameAndText(form.Name, form);
             }
             StreamWriter sw = new StreamWriter("default_lang.ini", false, Encoding.UTF8);
-
             sw.Write(DefaultIni);
-
             sw.Close();
-
         }
 
         private void GetAllControlNameAndText(string formName, Control c)

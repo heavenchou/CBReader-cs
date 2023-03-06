@@ -17,7 +17,7 @@ namespace CBReader
         ///*
         static public string ProgramTitle = "CBReader 毘舍離版";
         static public string ApplicationTitle = "CBReader";
-        static public string Version = "0.8.0.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
+        static public string Version = "0.8.1.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
         //*/
 
         // 西蓮淨苑版
@@ -69,7 +69,6 @@ namespace CBReader
             MyHomePath = pathAddSlash(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
 
             // 設定檔目錄
-            // TODO: 目錄要考慮要不要改名？
             MySettingPath = MyHomePath + "CBETA\\";
             if (!Directory.Exists(MySettingPath)) {
                 Directory.CreateDirectory(MySettingPath);

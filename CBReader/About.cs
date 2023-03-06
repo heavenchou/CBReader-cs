@@ -12,8 +12,8 @@ namespace CBReader
 {
     public partial class AboutForm : Form
     {
-        mainForm mainForm;
-        public AboutForm(mainForm main)
+        MainForm mainForm;
+        public AboutForm(MainForm main)
         {
             InitializeComponent();
             mainForm = main;

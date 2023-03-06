@@ -12,8 +12,8 @@ namespace CBReader
 {
     public partial class SearchRangeForm : Form
     {
-        mainForm mainForm;
-        public SearchRangeForm(mainForm main)
+        MainForm mainForm;
+        public SearchRangeForm(MainForm main)
         {
             InitializeComponent();
             mainForm = main;

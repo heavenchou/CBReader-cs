@@ -19,7 +19,7 @@ namespace CBReader
 {
     // 為了讓程式可以接收 javascript 的呼叫
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
-    public partial class mainForm : Form
+    public partial class MainForm : Form
     {
         public Language language;
 
@@ -47,8 +47,9 @@ namespace CBReader
 
         public string SearchTimeDiff = "";    // 記錄最後搜尋時間，切換語系需要
         public int SearchFoundCount = 0;        // 記錄最後搜尋數量，切換語系需要
+        public string SearchThisBookName = "";         // 檢索本經的經名 （未來有分頁要換方式處理????)
 
-        public mainForm()
+        public MainForm()
         {
             InitializeComponent();
             // javascript 指令碼可存取的物件，this 是目前的 Form
@@ -59,7 +60,8 @@ namespace CBReader
             // 將 IE 設定到 IE 11 (如果沒 IE 11 的如何?)
             SetPermissions(11001);
             // 取得語系
-            language = new Language(CGlobalVal.MyFullPath + "Language");
+            // Windows 版的語系檔目錄一定和主程式相同位置，不可依賴其它位置。
+            language = new Language(CGlobalVal.MyFullPath + "Language\\", CGlobalVal.MySettingPath + "Language\\");
             // 將語系加入選單中
             AddLanguage2Menu();
             // 取得設定檔並讀取所有設定
@@ -200,16 +202,50 @@ namespace CBReader
 
             foreach (string item in language.FileNames.Keys) {
                 ToolStripMenuItem menuItem = new ToolStripMenuItem(item);
-                menuItem.Click += MenuItem_Click;
+                menuItem.Click += LangMenuItem_Click;
                 miLanguage.DropDownItems.Add(menuItem);
             }
         }
 
-        private void MenuItem_Click(object sender, EventArgs e)
+        private void LangMenuItem_Click(object sender, EventArgs e)
         {
             // 在此處理事件
             string langName = ((ToolStripMenuItem)sender).Text;
-            language.ChangeLanguage(language.FileNames[langName], this, optionForm, searchrangeForm, updateForm);
+            changeLanguage(langName);
+            Setting.LanguageFile = langName;
+            Setting.SaveToFile();
+        }
+
+        void changeLanguage(string langName)
+        {
+            if (language.FileNames.ContainsKey(langName)) { 
+                language.ChangeLanguage(langName, this, optionForm, searchrangeForm, updateForm, aboutForm);
+                // 調整 mainForm 按鈕位置，以適應不同語言。
+                resizeComponent();
+            }
+        }
+
+
+
+        // 調整 mainForm 按鈕位置，以適應不同語言。
+        void resizeComponent()
+        {
+            btOption.Width = 10;
+            btNavWidthSwitch.Width = 10;
+            btMuluWidthSwitch.Width = 10;
+            btPrevJuan.Width = 10;
+            btNextJuan.Width = 10;
+            btOpenNav.Width = 10;
+            lbFindSutraByline.Width = 10;
+            btNavWidthSwitch.Left = btOption.Left + btOption.Width + 6;
+            btMuluWidthSwitch.Left = btNavWidthSwitch.Left + btNavWidthSwitch.Width + 6;
+            btPrevJuan.Left = btMuluWidthSwitch.Left + btMuluWidthSwitch.Width + 20;
+            btNextJuan.Left = btPrevJuan.Left + btPrevJuan.Width + 6;
+            edFindSutraByline.Left = lbFindSutraByline.Left + lbFindSutraByline.Width + 6;
+            edFindSutraByline.Width = edFindSutraSutraName.Left + edFindSutraSutraName.Width - edFindSutraByline.Left;
+
+            updateForm.edBookcasePath.Left = updateForm.lbBookcasePath.Left + updateForm.lbBookcasePath.Width + 6;
+            updateForm.edBookcasePath.Width = updateForm.progressBar1.Width + updateForm.progressBar1.Left - updateForm.edBookcasePath.Left;
         }
 
         // 西蓮畫面
@@ -373,7 +409,10 @@ namespace CBReader
 
                 // 將經名後面的 （上中下一二三......十）移除
                 sName = CCBSutraUtil.CutNumberAfterSutraName(sName);
-                cbSearchThisSutra.Text = t("檢索本經：", "01019") + sName;
+
+                SearchThisBookName = sName;
+                language.ChangeComponentLang("MainForm", cbSearchThisSutra);
+                //cbSearchThisSutra.Text = t("檢索本經：", "01019") + sName;
                 cbSearchThisSutraChange();  // 設定檢索本經的相關資料
             }
 
@@ -413,12 +452,14 @@ namespace CBReader
         {
             if (pnMulu.Width == 0) {
                 pnMulu.Width = MuluWidth;
-                btMuluWidthSwitch.Text = t("◄ 目次", "01020");
+                //btMuluWidthSwitch.Text = t("◄ 目次", "01020");
             } else {
                 MuluWidth = pnMulu.Width;
                 pnMulu.Width = 0;
-                btMuluWidthSwitch.Text = t("目次 ►", "01021");
+                //btMuluWidthSwitch.Text = t("目次 ►", "01021");
             }
+
+            language.ChangeComponentLang("MainForm", btMuluWidthSwitch);
         }
 
         // 檢索本經
@@ -476,7 +517,7 @@ namespace CBReader
             cbGoSutraBookId.Items.Clear();
             cbGoBookBookId.Items.Clear();
             if(Bookcase != null) {
-                cbFindSutraBookId.Items.Add(t("   全部", "01025"));
+                cbFindSutraBookId.Items.Add(t("全部", "01025"));
                 for (int i = 0; i < Bookcase.CBETA.BookData.Count; i++) {
                     string sItem = Bookcase.CBETA.BookData.ID[i] + " " + Bookcase.CBETA.BookData.BookName[i];
                     cbFindSutraBookId.Items.Add(sItem);
@@ -675,6 +716,11 @@ namespace CBReader
 
             // 載入環境
             LoadEnvironment();
+
+            // 載入語系
+            if (Setting.LanguageFile != "") {
+                changeLanguage(Setting.LanguageFile);
+            }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -747,12 +793,13 @@ namespace CBReader
         {
             if (pnMainFunc.Width == 0) {
                 pnMainFunc.Width = NavWidth;
-                btNavWidthSwitch.Text = t("◄ 主功能","01022");
+                //btNavWidthSwitch.Text = t("◄ 主功能","01022");
             } else {
                 NavWidth = pnMainFunc.Width;
                 pnMainFunc.Width = 0;
-                btNavWidthSwitch.Text = t("主功能 ►", "01023");
+                //btNavWidthSwitch.Text = t("主功能 ►", "01023");
             }
+            language.ChangeComponentLang("MainForm", btNavWidthSwitch);
         }
 
         private void btFindSutra_Click(object sender, EventArgs e)
@@ -872,7 +919,7 @@ namespace CBReader
                 //lbFindSutraCount.Text = t("找到 %d 筆", "01008");
                 //lbFindSutraCount.Text = lbFindSutraCount.Text.Replace("%d", $"{iGridIndex}");
 
-                language.ChangeComponetLang("mainForm", lbFindSutraCount);
+                language.ChangeComponentLang("MainForm", lbFindSutraCount);
 
                 if (iGridIndex == 0) {
                     MessageBox.Show(t("沒有滿足此條件的資料", "01009"));
@@ -1077,8 +1124,7 @@ namespace CBReader
             //lbSearchMsg.Text = lbSearchMsg.Text.Replace("%d", $"{iFoundCount}");
             //lbSearchMsg.Text = lbSearchMsg.Text.Replace("%f", $"{searchTimeDiff}");
 
-            language.ChangeComponetLang("mainForm", lbSearchMsg);
-
+            language.ChangeComponentLang("MainForm", lbSearchMsg);
 
             int iTotalSearchFileNum = 0;
             bool bShowAll = false;
@@ -1219,7 +1265,6 @@ namespace CBReader
                 }
             }
         }
-
 
         private void cbSearchThisSutra_CheckedChanged(object sender, EventArgs e)
         {
@@ -1419,7 +1464,7 @@ namespace CBReader
 
         private void miGetLanguageIni_Click(object sender, EventArgs e)
         {
-            language.CreateIniFile(this, optionForm, searchrangeForm, updateForm);
+            language.CreateIniFile(this, optionForm, searchrangeForm, updateForm, aboutForm);
         }
 
         // 專門處理字串語系的函數

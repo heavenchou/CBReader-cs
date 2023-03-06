@@ -151,7 +151,7 @@ namespace CBReader
             this.edCSSFileName.Location = new System.Drawing.Point(34, 73);
             this.edCSSFileName.Margin = new System.Windows.Forms.Padding(4);
             this.edCSSFileName.Name = "edCSSFileName";
-            this.edCSSFileName.Size = new System.Drawing.Size(248, 34);
+            this.edCSSFileName.Size = new System.Drawing.Size(268, 34);
             this.edCSSFileName.TabIndex = 10;
             // 
             // cbUseCSSFile
@@ -188,7 +188,7 @@ namespace CBReader
             this.cbGaijiUseNormal.Name = "cbGaijiUseNormal";
             this.cbGaijiUseNormal.Size = new System.Drawing.Size(134, 29);
             this.cbGaijiUseNormal.TabIndex = 1;
-            this.cbGaijiUseNormal.Text = "使用通用字";
+            this.cbGaijiUseNormal.Text = "顯示通用字";
             this.cbGaijiUseNormal.UseVisualStyleBackColor = true;
             // 
             // cbGaijiUseUniExt
@@ -199,18 +199,18 @@ namespace CBReader
             this.cbGaijiUseUniExt.Name = "cbGaijiUseUniExt";
             this.cbGaijiUseUniExt.Size = new System.Drawing.Size(191, 29);
             this.cbGaijiUseUniExt.TabIndex = 0;
-            this.cbGaijiUseUniExt.Text = "使用 Unicode Ext";
+            this.cbGaijiUseUniExt.Text = "顯示 Unicode Ext";
             this.cbGaijiUseUniExt.UseVisualStyleBackColor = true;
             // 
             // gbNoUnicodeAndNormal
             // 
             this.gbNoUnicodeAndNormal.Controls.Add(this.rbGaijiImageFirst);
             this.gbNoUnicodeAndNormal.Controls.Add(this.rbGaijiDesFirst);
-            this.gbNoUnicodeAndNormal.Location = new System.Drawing.Point(34, 226);
+            this.gbNoUnicodeAndNormal.Location = new System.Drawing.Point(10, 226);
             this.gbNoUnicodeAndNormal.Margin = new System.Windows.Forms.Padding(5);
             this.gbNoUnicodeAndNormal.Name = "gbNoUnicodeAndNormal";
             this.gbNoUnicodeAndNormal.Padding = new System.Windows.Forms.Padding(5);
-            this.gbNoUnicodeAndNormal.Size = new System.Drawing.Size(248, 111);
+            this.gbNoUnicodeAndNormal.Size = new System.Drawing.Size(292, 111);
             this.gbNoUnicodeAndNormal.TabIndex = 4;
             this.gbNoUnicodeAndNormal.TabStop = false;
             this.gbNoUnicodeAndNormal.Text = "無 Unicode 及通用字時";
@@ -221,10 +221,10 @@ namespace CBReader
             this.rbGaijiImageFirst.Location = new System.Drawing.Point(23, 73);
             this.rbGaijiImageFirst.Margin = new System.Windows.Forms.Padding(4);
             this.rbGaijiImageFirst.Name = "rbGaijiImageFirst";
-            this.rbGaijiImageFirst.Size = new System.Drawing.Size(73, 29);
+            this.rbGaijiImageFirst.Size = new System.Drawing.Size(113, 29);
             this.rbGaijiImageFirst.TabIndex = 5;
             this.rbGaijiImageFirst.TabStop = true;
-            this.rbGaijiImageFirst.Text = "圖檔";
+            this.rbGaijiImageFirst.Text = "顯示圖檔";
             this.rbGaijiImageFirst.UseVisualStyleBackColor = true;
             // 
             // rbGaijiDesFirst
@@ -233,24 +233,24 @@ namespace CBReader
             this.rbGaijiDesFirst.Location = new System.Drawing.Point(23, 36);
             this.rbGaijiDesFirst.Margin = new System.Windows.Forms.Padding(4);
             this.rbGaijiDesFirst.Name = "rbGaijiDesFirst";
-            this.rbGaijiDesFirst.Size = new System.Drawing.Size(93, 29);
+            this.rbGaijiDesFirst.Size = new System.Drawing.Size(133, 29);
             this.rbGaijiDesFirst.TabIndex = 4;
             this.rbGaijiDesFirst.TabStop = true;
-            this.rbGaijiDesFirst.Text = "組字式";
+            this.rbGaijiDesFirst.Text = "顯示組字式";
             this.rbGaijiDesFirst.UseVisualStyleBackColor = true;
             // 
             // gbWhichFirst
             // 
             this.gbWhichFirst.Controls.Add(this.rbGaijiNormalFirst);
             this.gbWhichFirst.Controls.Add(this.rbGaijiUniExtFirst);
-            this.gbWhichFirst.Location = new System.Drawing.Point(34, 111);
+            this.gbWhichFirst.Location = new System.Drawing.Point(10, 111);
             this.gbWhichFirst.Margin = new System.Windows.Forms.Padding(5);
             this.gbWhichFirst.Name = "gbWhichFirst";
             this.gbWhichFirst.Padding = new System.Windows.Forms.Padding(5);
-            this.gbWhichFirst.Size = new System.Drawing.Size(248, 105);
+            this.gbWhichFirst.Size = new System.Drawing.Size(292, 105);
             this.gbWhichFirst.TabIndex = 3;
             this.gbWhichFirst.TabStop = false;
-            this.gbWhichFirst.Text = "何者優先";
+            this.gbWhichFirst.Text = "優先顯示順序";
             // 
             // rbGaijiNormalFirst
             // 
@@ -343,7 +343,7 @@ namespace CBReader
             this.cbShowCollationCF.Name = "cbShowCollationCF";
             this.cbShowCollationCF.Size = new System.Drawing.Size(194, 29);
             this.cbShowCollationCF.TabIndex = 3;
-            this.cbShowCollationCF.Text = "呈現校注參考資訊";
+            this.cbShowCollationCF.Text = "顯示校注參考資訊";
             this.cbShowCollationCF.UseVisualStyleBackColor = true;
             // 
             // cbShowCollation
@@ -354,7 +354,7 @@ namespace CBReader
             this.cbShowCollation.Name = "cbShowCollation";
             this.cbShowCollation.Size = new System.Drawing.Size(154, 29);
             this.cbShowCollation.TabIndex = 0;
-            this.cbShowCollation.Text = "呈現校注符號";
+            this.cbShowCollation.Text = "顯示校注符號";
             this.cbShowCollation.UseVisualStyleBackColor = true;
             this.cbShowCollation.CheckedChanged += new System.EventHandler(this.cbShowCollation_CheckedChanged);
             // 
@@ -400,7 +400,7 @@ namespace CBReader
             // cbNoShowLgPunc
             // 
             this.cbNoShowLgPunc.AutoSize = true;
-            this.cbNoShowLgPunc.Location = new System.Drawing.Point(55, 150);
+            this.cbNoShowLgPunc.Location = new System.Drawing.Point(55, 147);
             this.cbNoShowLgPunc.Margin = new System.Windows.Forms.Padding(4);
             this.cbNoShowLgPunc.Name = "cbNoShowLgPunc";
             this.cbNoShowLgPunc.Size = new System.Drawing.Size(174, 29);
