@@ -295,6 +295,7 @@ namespace CBReader
             this.tvBulei.ShowLines = false;
             this.tvBulei.Size = new System.Drawing.Size(407, 686);
             this.tvBulei.TabIndex = 2;
+            this.tvBulei.Tag = "han";
             this.tvBulei.DoubleClick += new System.EventHandler(this.tvBulei_DoubleClick);
             this.tvBulei.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tvBulei_KeyPress);
             // 
@@ -393,6 +394,7 @@ namespace CBReader
             this.tvBook.ShowLines = false;
             this.tvBook.Size = new System.Drawing.Size(407, 686);
             this.tvBook.TabIndex = 3;
+            this.tvBook.Tag = "han";
             this.tvBook.DoubleClick += new System.EventHandler(this.tvBook_DoubleClick);
             this.tvBook.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tvBook_KeyPress);
             // 

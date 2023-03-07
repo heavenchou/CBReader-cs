@@ -15,6 +15,7 @@ using System.Windows.Forms;
  * 5.語系要排序
  * 6.語言選單額外處理
  * 7.更新要修改打包格式，乾脆做成 cbreader.exe + bookcase+lang 包在一起
+ * 8.增加中文字型
  */
 namespace CBReader
 {
@@ -36,6 +37,8 @@ namespace CBReader
 
         string FontName;            // 字型
         int FontSize;               // 字型大小
+        string HanFontName;            // 漢字字型
+        int HanFontSize;               // 漢字字型大小
         //TFontCharset FontCharset;   // 字元集
         //unsigned int CodePage;      // code page
 
@@ -48,8 +51,10 @@ namespace CBReader
             Messages = new Dictionary<string, string>();         // 所有的訊息列表
 
             FontName = "";
-            //FontCharset = 1;                    // 字元集
+            HanFontName = "";
             FontSize = 12;
+            HanFontSize = 12;
+            //FontCharset = 1;                    // 字元集
             //CodePage = 0;                       // code page
 
             //MessageInitial();       // Message 要初值化, 否則若找不到語系檔就麻煩了
@@ -153,13 +158,31 @@ namespace CBReader
                 FontName = UserFontName;
             }
 
+            // 漢字
+            HanFontName = FontName;     // 預設等於 FontName
+            UserFontName = UserIniFile.ReadString(Section, "HanFontName", "");
+            if (UserFontName == "") {
+                HanFontName = IniFile.ReadString(Section, "HanFontName", HanFontName);
+            } else {
+                HanFontName = UserFontName;
+            }
+
             int UserFontSize = UserIniFile.ReadInteger(Section, "FontSize", 0);
             if (UserFontSize == 0) {
                 FontSize = IniFile.ReadInteger(Section, "FontSize", FontSize);
             } else {
                 FontSize = UserFontSize;
             }
-            
+
+            // 漢字
+            HanFontSize = FontSize;     // 預設等於 FontSize
+            UserFontSize = UserIniFile.ReadInteger(Section, "HanFontSize", 0);
+            if (UserFontSize == 0) {
+                HanFontSize = IniFile.ReadInteger(Section, "HanFontSize", HanFontSize);
+            } else {
+                HanFontSize = UserFontSize;
+            }
+
             //FontCharset = IniFile.ReadInteger(Section, "FontCharset", FontCharset);
             //CodePage = IniFile.ReadInteger(Section, "CodePage", CodePage);
 
@@ -211,12 +234,6 @@ namespace CBReader
         // 更新所有 form 的語系
         public void ChangeFormLang(Form form)
         {
-            /*
-            if (FontName != "") {
-                Font newFont = new Font(FontName, FontSize);
-                form.Font = newFont;
-            }
-            */
             EachControl(form.Name, form);
         }
 
@@ -229,18 +246,36 @@ namespace CBReader
                 return;
             }
 
-            // 其它有子項目的另外處理
+            // 其它有子項目或特殊項目的另外處理
             if (c is ToolStrip) {
                 EachMenuItems(formName, (c as ToolStrip).Items);
             } else if (c is ComboBox) {
-                c.Font = new Font(FontName, FontSize);
+                if (c.Tag == "han") {
+                    c.Font = new Font(HanFontName, HanFontSize);
+                } else {
+                    c.Font = new Font(FontName, FontSize);
+                }
                 EachComboBoxItems(formName, c.Name, (c as ComboBox).Items);
             } else if (c is ListBox) {
-                c.Font = new Font(FontName, FontSize);
+                if (c.Tag == "han") {
+                    c.Font = new Font(HanFontName, HanFontSize);
+                } else {
+                    c.Font = new Font(FontName, FontSize);
+                }
                 EachListBoxItems(formName, c.Name, (c as ListBox).Items);
             } else if (c is DataGridView) {
                 c.Font = new Font(FontName, FontSize);
                 EachDataGridViewColumns(formName, c.Name, (c as DataGridView).Columns);
+            } else if (c is TabControl) {
+                // 設定 TabControl 字型
+                c.Font = new Font(FontName, FontSize);
+            } else if (c is TreeView) {
+                // 設定 TreeView 字型
+                if (c.Tag == "han") {
+                    c.Font = new Font(HanFontName, HanFontSize);
+                } else {
+                    c.Font = new Font(FontName, FontSize);
+                }
             }
 
             foreach (Control cs in c.Controls) {
@@ -295,7 +330,7 @@ namespace CBReader
 
             // 檢索本書
             if (formName == "MainForm" && c.Name == "cbSearchThisSutra") {
-                controlName = GetMessage("檢索本經：", "01019") + main.SearchThisBookName;
+                controlName = GetMessage("檢索本書：", "01019") + main.SearchThisBookName;
             }
 
             // 更新元件標題與字型
@@ -303,13 +338,12 @@ namespace CBReader
                 c.Text = controlName;
                 if (formName != "AboutForm") {
                     // about 不換字型
-                    c.Font = new Font(FontName, FontSize);
+                    if (c.Tag == "han") {
+                        c.Font = new Font(HanFontName, HanFontSize);
+                    } else {
+                        c.Font = new Font(FontName, FontSize);
+                    }
                 }
-            }
-
-            // 設定 TabControl 字型
-            if (c is TabControl) {
-                c.Font = new Font(FontName, FontSize);
             }
 
             // 設定 tooltip
@@ -385,6 +419,15 @@ namespace CBReader
                 controlName = UserIniFile.ReadString(formName, $"{dataGridViewName}Column{i + 1}", controlName);
                 if (controlName != "") {
                     items[i].HeaderText = controlName;
+                }
+
+                // 特殊的欄位要用中文字型
+                if (dataGridViewName == "sgFindSutra" && (i == 3 || i == 5 || i == 6)) {
+                    items[i].DefaultCellStyle.Font = new Font(HanFontName, HanFontSize);
+                } else if (dataGridViewName == "sgTextSearch" && (i == 4 || i == 6 || i == 7)) {
+                    items[i].DefaultCellStyle.Font = new Font(HanFontName, HanFontSize);
+                } else {
+                    items[i].DefaultCellStyle.Font = new Font(FontName, FontSize);
                 }
             }
         }

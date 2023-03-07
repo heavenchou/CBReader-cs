@@ -402,6 +402,7 @@ namespace CBReader
             this.tvNavTree.ShowNodeToolTips = true;
             this.tvNavTree.Size = new System.Drawing.Size(350, 511);
             this.tvNavTree.TabIndex = 1;
+            this.tvNavTree.Tag = "han";
             this.tvNavTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvNavTree_KeyDown);
             this.tvNavTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tvNavTree_MouseDoubleClick);
             // 
@@ -810,6 +811,7 @@ namespace CBReader
             this.cbFindSutraBookId.Name = "cbFindSutraBookId";
             this.cbFindSutraBookId.Size = new System.Drawing.Size(228, 33);
             this.cbFindSutraBookId.TabIndex = 0;
+            this.cbFindSutraBookId.Tag = "han";
             this.toolTip1.SetToolTip(this.cbFindSutraBookId, "請選擇佛教典籍");
             this.cbFindSutraBookId.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
             this.cbFindSutraBookId.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
@@ -1289,6 +1291,7 @@ namespace CBReader
             this.cbGoBookBookId.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbGoBookBookId.Size = new System.Drawing.Size(235, 33);
             this.cbGoBookBookId.TabIndex = 0;
+            this.cbGoBookBookId.Tag = "han";
             this.toolTip1.SetToolTip(this.cbGoBookBookId, "請選擇佛教典籍");
             this.cbGoBookBookId.Enter += new System.EventHandler(this.edGoBookVol_Enter);
             this.cbGoBookBookId.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
@@ -1329,6 +1332,7 @@ namespace CBReader
             this.cbGoSutraBookId.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cbGoSutraBookId.Size = new System.Drawing.Size(235, 33);
             this.cbGoSutraBookId.TabIndex = 6;
+            this.cbGoSutraBookId.Tag = "han";
             this.toolTip1.SetToolTip(this.cbGoSutraBookId, "請選擇佛教典籍");
             this.cbGoSutraBookId.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
             this.cbGoSutraBookId.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
@@ -1628,6 +1632,7 @@ namespace CBReader
             this.tvMuluTree.Name = "tvMuluTree";
             this.tvMuluTree.Size = new System.Drawing.Size(197, 573);
             this.tvMuluTree.TabIndex = 2;
+            this.tvMuluTree.Tag = "han";
             this.tvMuluTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvNavTree_KeyDown);
             this.tvMuluTree.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tvNavTree_MouseDoubleClick);
             // 
