@@ -78,9 +78,9 @@ namespace CBReader
             // btUpdate
             // 
             this.btUpdate.Enabled = false;
-            this.btUpdate.Location = new System.Drawing.Point(14, 80);
+            this.btUpdate.Location = new System.Drawing.Point(6, 80);
             this.btUpdate.Name = "btUpdate";
-            this.btUpdate.Size = new System.Drawing.Size(145, 55);
+            this.btUpdate.Size = new System.Drawing.Size(165, 55);
             this.btUpdate.TabIndex = 3;
             this.btUpdate.Text = "🆕 更新及重啟";
             this.btUpdate.UseVisualStyleBackColor = true;
@@ -89,10 +89,10 @@ namespace CBReader
             // cbUseChinaServer
             // 
             this.cbUseChinaServer.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cbUseChinaServer.Location = new System.Drawing.Point(14, 156);
+            this.cbUseChinaServer.Location = new System.Drawing.Point(6, 156);
             this.cbUseChinaServer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbUseChinaServer.Name = "cbUseChinaServer";
-            this.cbUseChinaServer.Size = new System.Drawing.Size(166, 54);
+            this.cbUseChinaServer.Size = new System.Drawing.Size(174, 54);
             this.cbUseChinaServer.TabIndex = 2;
             this.cbUseChinaServer.Text = "中國大陸分站";
             this.cbUseChinaServer.UseVisualStyleBackColor = true;
@@ -100,19 +100,19 @@ namespace CBReader
             // lbUseChineseSite
             // 
             this.lbUseChineseSite.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lbUseChineseSite.Location = new System.Drawing.Point(9, 214);
+            this.lbUseChineseSite.Location = new System.Drawing.Point(0, 214);
             this.lbUseChineseSite.Name = "lbUseChineseSite";
-            this.lbUseChineseSite.Size = new System.Drawing.Size(171, 198);
+            this.lbUseChineseSite.Size = new System.Drawing.Size(180, 198);
             this.lbUseChineseSite.TabIndex = 1;
             this.lbUseChineseSite.Text = "使用中國大陸分站的主機進行更新";
             // 
             // btDownload
             // 
             this.btDownload.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btDownload.Location = new System.Drawing.Point(14, 18);
+            this.btDownload.Location = new System.Drawing.Point(6, 18);
             this.btDownload.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btDownload.Name = "btDownload";
-            this.btDownload.Size = new System.Drawing.Size(144, 55);
+            this.btDownload.Size = new System.Drawing.Size(165, 55);
             this.btDownload.TabIndex = 0;
             this.btDownload.Text = "📥 下載";
             this.btDownload.UseVisualStyleBackColor = true;

@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Windows.Controls;
 
 namespace CBReader
 {
@@ -225,11 +226,10 @@ namespace CBReader
             }
         }
 
-
-
         // 調整 mainForm 按鈕位置，以適應不同語言。
         void resizeComponent()
         {
+            // 先縮小，讓 autosize 運作
             btOption.Width = 10;
             btNavWidthSwitch.Width = 10;
             btMuluWidthSwitch.Width = 10;
@@ -242,8 +242,19 @@ namespace CBReader
             btPrevJuan.Left = btMuluWidthSwitch.Left + btMuluWidthSwitch.Width + 20;
             btNextJuan.Left = btPrevJuan.Left + btPrevJuan.Width + 6;
             edFindSutraByline.Left = lbFindSutraByline.Left + lbFindSutraByline.Width + 6;
+            if(edFindSutraByline.Left < edFindSutraSutraName.Left) {
+                // 如果 label 文字太短，則輸入欄左邊要對齊其它欄位
+                edFindSutraByline.Left = edFindSutraSutraName.Left;
+            }
             edFindSutraByline.Width = edFindSutraSutraName.Left + edFindSutraSutraName.Width - edFindSutraByline.Left;
 
+            // 處理查詢及全文檢索表格的欄高
+            var textSize = TextRenderer.MeasureText(sgFindSutra.Columns[0].HeaderText, sgFindSutra.ColumnHeadersDefaultCellStyle.Font);
+            sgFindSutra.ColumnHeadersHeight = textSize.Height + 8;
+            textSize = TextRenderer.MeasureText(sgTextSearch.Columns[0].HeaderText, sgTextSearch.ColumnHeadersDefaultCellStyle.Font);
+            sgTextSearch.ColumnHeadersHeight = textSize.Height + 8;
+
+            // 處理更新對話框的元件
             updateForm.edBookcasePath.Left = updateForm.lbBookcasePath.Left + updateForm.lbBookcasePath.Width + 6;
             updateForm.edBookcasePath.Width = updateForm.progressBar1.Width + updateForm.progressBar1.Left - updateForm.edBookcasePath.Left;
         }
@@ -601,11 +612,15 @@ namespace CBReader
             for(int i=0; i<7; i++) {
                 sgFindSutra.Columns[i].Width = iniFile.ReadInteger(Section, $"FindSutraC{i}", sgFindSutra.Columns[i].Width);
             }
+            // 經目搜尋的標頭欄高
+            sgFindSutra.ColumnHeadersHeight = iniFile.ReadInteger(Section, "FindSutraColumnHeadersHeight", sgFindSutra.ColumnHeadersHeight);
+
             // 全文檢索的欄寬
             for (int i = 0; i < 8; i++) {
                 sgTextSearch.Columns[i].Width = iniFile.ReadInteger(Section, $"TextSearchC{i}", sgTextSearch.Columns[i].Width);
             }
-
+            // 全文檢索的標頭欄高
+            sgTextSearch.ColumnHeadersHeight = iniFile.ReadInteger(Section, "TextSearchColumnHeadersHeight", sgTextSearch.ColumnHeadersHeight);
         }
 
         // 儲存環境
@@ -637,10 +652,15 @@ namespace CBReader
             for (int i = 0; i < 7; i++) {
                 iniFile.WriteInteger(Section, $"FindSutraC{i}", sgFindSutra.Columns[i].Width);
             }
+            // 經目搜尋的標頭欄高
+            iniFile.WriteInteger(Section, "FindSutraColumnHeadersHeight", sgFindSutra.ColumnHeadersHeight);
+
             // 全文檢索的欄寬
             for (int i = 0; i < 8; i++) {
                 iniFile.WriteInteger(Section, $"TextSearchC{i}", sgTextSearch.Columns[i].Width);
             }
+            // 全文檢索的標頭欄高
+            iniFile.WriteInteger(Section, "TextSearchColumnHeadersHeight", sgTextSearch.ColumnHeadersHeight);
         }
 
         // 清除暫存目錄的檔案
@@ -714,13 +734,13 @@ namespace CBReader
             // 將各藏經放入下拉選單中
             InitialComboBoxData();
 
-            // 載入環境
-            LoadEnvironment();
-
             // 載入語系
             if (Setting.LanguageFile != "") {
                 changeLanguage(Setting.LanguageFile);
             }
+
+            // 載入環境，這個要在語系之後，以免表格欄寬被重設
+            LoadEnvironment();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -1274,7 +1294,7 @@ namespace CBReader
 
         private void tvNavTree_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            TreeView treeView = sender as TreeView;
+            System.Windows.Forms.TreeView treeView = sender as System.Windows.Forms.TreeView;
             TreeNode tvItem = treeView.GetNodeAt(e.X, e.Y);
             if(tvItem == null) { return; }
             if(tvItem != treeView.SelectedNode) { return; }
@@ -1283,7 +1303,7 @@ namespace CBReader
 
         private void tvNavTree_KeyDown(object sender, KeyEventArgs e)
         {
-            TreeView treeView = sender as TreeView;
+            System.Windows.Forms.TreeView treeView = sender as System.Windows.Forms.TreeView;
             if (e.KeyCode == Keys.Enter) {
                 TreeNode tvItem = treeView.SelectedNode;
                 if (tvItem != null) {

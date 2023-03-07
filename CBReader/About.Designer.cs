@@ -33,6 +33,7 @@ namespace CBReader
             this.btOK = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.llbCBETAWeb = new System.Windows.Forms.LinkLabel();
             this.llbCBETAEmail = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
@@ -43,14 +44,15 @@ namespace CBReader
             this.panel4 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.edReadme = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -60,7 +62,7 @@ namespace CBReader
             this.panel1.Location = new System.Drawing.Point(0, 684);
             this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(601, 59);
+            this.panel1.Size = new System.Drawing.Size(606, 59);
             this.panel1.TabIndex = 0;
             // 
             // btOK
@@ -82,7 +84,7 @@ namespace CBReader
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(601, 304);
+            this.panel2.Size = new System.Drawing.Size(606, 304);
             this.panel2.TabIndex = 1;
             // 
             // panel5
@@ -99,17 +101,27 @@ namespace CBReader
             this.panel5.Location = new System.Drawing.Point(175, 14);
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(411, 276);
+            this.panel5.Size = new System.Drawing.Size(417, 276);
             this.panel5.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(17, 239);
+            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(376, 20);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Non-commercial use and distribution are welcome!";
             // 
             // llbCBETAWeb
             // 
-            this.llbCBETAWeb.AutoSize = true;
             this.llbCBETAWeb.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.llbCBETAWeb.Location = new System.Drawing.Point(16, 140);
             this.llbCBETAWeb.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbCBETAWeb.Name = "llbCBETAWeb";
-            this.llbCBETAWeb.Size = new System.Drawing.Size(345, 25);
+            this.llbCBETAWeb.Size = new System.Drawing.Size(387, 25);
             this.llbCBETAWeb.TabIndex = 0;
             this.llbCBETAWeb.TabStop = true;
             this.llbCBETAWeb.Text = "中華電子佛典協會 🌐 www.cbeta.org";
@@ -117,12 +129,11 @@ namespace CBReader
             // 
             // llbCBETAEmail
             // 
-            this.llbCBETAEmail.AutoSize = true;
             this.llbCBETAEmail.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.llbCBETAEmail.Location = new System.Drawing.Point(16, 171);
             this.llbCBETAEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbCBETAEmail.Name = "llbCBETAEmail";
-            this.llbCBETAEmail.Size = new System.Drawing.Size(212, 25);
+            this.llbCBETAEmail.Size = new System.Drawing.Size(387, 25);
             this.llbCBETAEmail.TabIndex = 1;
             this.llbCBETAEmail.TabStop = true;
             this.llbCBETAEmail.Text = "📧 service@cbeta.org";
@@ -207,13 +218,26 @@ namespace CBReader
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.edReadme);
+            this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Controls.Add(this.panel6);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 304);
             this.panel3.Margin = new System.Windows.Forms.Padding(5);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(601, 380);
+            this.panel3.Size = new System.Drawing.Size(606, 380);
             this.panel3.TabIndex = 1;
+            // 
+            // panel6
+            // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel6.BackColor = System.Drawing.SystemColors.Window;
+            this.panel6.Controls.Add(this.edReadme);
+            this.panel6.Location = new System.Drawing.Point(14, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(580, 369);
+            this.panel6.TabIndex = 3;
             // 
             // edReadme
             // 
@@ -221,27 +245,16 @@ namespace CBReader
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.edReadme.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.edReadme.Location = new System.Drawing.Point(14, 9);
+            this.edReadme.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.edReadme.Location = new System.Drawing.Point(17, 15);
             this.edReadme.Margin = new System.Windows.Forms.Padding(4);
             this.edReadme.Multiline = true;
             this.edReadme.Name = "edReadme";
             this.edReadme.ReadOnly = true;
-            this.edReadme.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.edReadme.Size = new System.Drawing.Size(572, 362);
-            this.edReadme.TabIndex = 2;
+            this.edReadme.Size = new System.Drawing.Size(559, 324);
+            this.edReadme.TabIndex = 3;
             this.edReadme.TabStop = false;
             this.edReadme.Text = resources.GetString("edReadme.Text");
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(17, 239);
-            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(376, 20);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Non-commercial use and distribution are welcome!";
             // 
             // AboutForm
             // 
@@ -249,7 +262,7 @@ namespace CBReader
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.btOK;
-            this.ClientSize = new System.Drawing.Size(601, 743);
+            this.ClientSize = new System.Drawing.Size(606, 743);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -266,7 +279,8 @@ namespace CBReader
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -287,7 +301,8 @@ namespace CBReader
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btOK;
-        private System.Windows.Forms.TextBox edReadme;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.TextBox edReadme;
     }
 }

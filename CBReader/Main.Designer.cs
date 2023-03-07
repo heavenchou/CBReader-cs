@@ -86,10 +86,10 @@ namespace CBReader
             this.cbFindSutraBookId = new System.Windows.Forms.ComboBox();
             this.tpGoto = new System.Windows.Forms.TabPage();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.lbStar2 = new System.Windows.Forms.Label();
             this.lbGoSutraSutraNum = new System.Windows.Forms.Label();
             this.lbGoBookVol = new System.Windows.Forms.Label();
             this.lbStar1 = new System.Windows.Forms.Label();
-            this.lbStar2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btGoByKeyword = new System.Windows.Forms.Button();
@@ -227,34 +227,34 @@ namespace CBReader
             this.miAdmin});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(865, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(865, 30);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // miOption
             // 
             this.miOption.Name = "miOption";
-            this.miOption.Size = new System.Drawing.Size(53, 26);
+            this.miOption.Size = new System.Drawing.Size(53, 23);
             this.miOption.Text = "設定";
             this.miOption.Click += new System.EventHandler(this.miOption_Click);
             // 
             // miUpdate
             // 
             this.miUpdate.Name = "miUpdate";
-            this.miUpdate.Size = new System.Drawing.Size(83, 26);
+            this.miUpdate.Size = new System.Drawing.Size(83, 23);
             this.miUpdate.Text = "更新檢查";
             this.miUpdate.Click += new System.EventHandler(this.miUpdate_Click);
             // 
             // miLanguage
             // 
             this.miLanguage.Name = "miLanguage";
-            this.miLanguage.Size = new System.Drawing.Size(133, 26);
+            this.miLanguage.Size = new System.Drawing.Size(133, 23);
             this.miLanguage.Text = "語言(Language)";
             // 
             // miAbout
             // 
             this.miAbout.Name = "miAbout";
-            this.miAbout.Size = new System.Drawing.Size(53, 26);
+            this.miAbout.Size = new System.Drawing.Size(53, 23);
             this.miAbout.Text = "關於";
             this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
@@ -461,9 +461,7 @@ namespace CBReader
             // 
             this.sgFindSutra.AllowUserToAddRows = false;
             this.sgFindSutra.AllowUserToDeleteRows = false;
-            this.sgFindSutra.AllowUserToResizeRows = false;
             this.sgFindSutra.ColumnHeadersHeight = 29;
-            this.sgFindSutra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.sgFindSutra.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
@@ -871,6 +869,18 @@ namespace CBReader
             this.panel9.Size = new System.Drawing.Size(350, 561);
             this.panel9.TabIndex = 1;
             // 
+            // lbStar2
+            // 
+            this.lbStar2.AutoSize = true;
+            this.lbStar2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbStar2.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.lbStar2.Location = new System.Drawing.Point(0, 279);
+            this.lbStar2.Name = "lbStar2";
+            this.lbStar2.Size = new System.Drawing.Size(21, 25);
+            this.lbStar2.TabIndex = 33;
+            this.lbStar2.Text = "*";
+            this.toolTip1.SetToolTip(this.lbStar2, "* 為必填欄位");
+            // 
             // lbGoSutraSutraNum
             // 
             this.lbGoSutraSutraNum.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -904,18 +914,6 @@ namespace CBReader
             this.lbStar1.TabIndex = 34;
             this.lbStar1.Text = "*";
             this.toolTip1.SetToolTip(this.lbStar1, "* 為必填欄位");
-            // 
-            // lbStar2
-            // 
-            this.lbStar2.AutoSize = true;
-            this.lbStar2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lbStar2.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lbStar2.Location = new System.Drawing.Point(0, 279);
-            this.lbStar2.Name = "lbStar2";
-            this.lbStar2.Size = new System.Drawing.Size(21, 25);
-            this.lbStar2.TabIndex = 33;
-            this.lbStar2.Text = "*";
-            this.toolTip1.SetToolTip(this.lbStar2, "* 為必填欄位");
             // 
             // panel3
             // 
@@ -1361,9 +1359,7 @@ namespace CBReader
             // 
             this.sgTextSearch.AllowUserToAddRows = false;
             this.sgTextSearch.AllowUserToDeleteRows = false;
-            this.sgTextSearch.AllowUserToResizeRows = false;
             this.sgTextSearch.ColumnHeadersHeight = 29;
-            this.sgTextSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.sgTextSearch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,

@@ -86,7 +86,7 @@ namespace CBReader
             // btCancel
             // 
             this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btCancel.Location = new System.Drawing.Point(510, 20);
+            this.btCancel.Location = new System.Drawing.Point(518, 20);
             this.btCancel.Margin = new System.Windows.Forms.Padding(5);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(88, 42);
@@ -141,7 +141,7 @@ namespace CBReader
             this.gbViewShow.Margin = new System.Windows.Forms.Padding(5);
             this.gbViewShow.Name = "gbViewShow";
             this.gbViewShow.Padding = new System.Windows.Forms.Padding(5);
-            this.gbViewShow.Size = new System.Drawing.Size(312, 122);
+            this.gbViewShow.Size = new System.Drawing.Size(320, 122);
             this.gbViewShow.TabIndex = 3;
             this.gbViewShow.TabStop = false;
             this.gbViewShow.Text = "畫面呈現";
@@ -151,7 +151,7 @@ namespace CBReader
             this.edCSSFileName.Location = new System.Drawing.Point(34, 73);
             this.edCSSFileName.Margin = new System.Windows.Forms.Padding(4);
             this.edCSSFileName.Name = "edCSSFileName";
-            this.edCSSFileName.Size = new System.Drawing.Size(268, 34);
+            this.edCSSFileName.Size = new System.Drawing.Size(278, 34);
             this.edCSSFileName.TabIndex = 10;
             // 
             // cbUseCSSFile
@@ -175,7 +175,7 @@ namespace CBReader
             this.gbGaijiFormat.Margin = new System.Windows.Forms.Padding(5);
             this.gbGaijiFormat.Name = "gbGaijiFormat";
             this.gbGaijiFormat.Padding = new System.Windows.Forms.Padding(5);
-            this.gbGaijiFormat.Size = new System.Drawing.Size(312, 362);
+            this.gbGaijiFormat.Size = new System.Drawing.Size(320, 362);
             this.gbGaijiFormat.TabIndex = 2;
             this.gbGaijiFormat.TabStop = false;
             this.gbGaijiFormat.Text = "缺字格式";
@@ -210,7 +210,7 @@ namespace CBReader
             this.gbNoUnicodeAndNormal.Margin = new System.Windows.Forms.Padding(5);
             this.gbNoUnicodeAndNormal.Name = "gbNoUnicodeAndNormal";
             this.gbNoUnicodeAndNormal.Padding = new System.Windows.Forms.Padding(5);
-            this.gbNoUnicodeAndNormal.Size = new System.Drawing.Size(292, 111);
+            this.gbNoUnicodeAndNormal.Size = new System.Drawing.Size(302, 111);
             this.gbNoUnicodeAndNormal.TabIndex = 4;
             this.gbNoUnicodeAndNormal.TabStop = false;
             this.gbNoUnicodeAndNormal.Text = "無 Unicode 及通用字時";
@@ -247,7 +247,7 @@ namespace CBReader
             this.gbWhichFirst.Margin = new System.Windows.Forms.Padding(5);
             this.gbWhichFirst.Name = "gbWhichFirst";
             this.gbWhichFirst.Padding = new System.Windows.Forms.Padding(5);
-            this.gbWhichFirst.Size = new System.Drawing.Size(292, 105);
+            this.gbWhichFirst.Size = new System.Drawing.Size(302, 105);
             this.gbWhichFirst.TabIndex = 3;
             this.gbWhichFirst.TabStop = false;
             this.gbWhichFirst.Text = "優先顯示順序";
