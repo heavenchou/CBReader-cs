@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,9 @@ namespace CBReader
 {
     static public class CGlobalVal
     {
+        [DllImport("user32.dll")]
+        static extern uint GetDpiForSystem();
+
         // 更新版本注意事項, 要改底下資訊, 還有 project 的版本，icon
         // 跨年要改 project 的著作權及商標年份
         // 還有 About 畫面的版本與日期資料
@@ -46,6 +50,8 @@ namespace CBReader
         // 更新
         static public string updateString = "";   // 更新時取得的字串
         static public bool restart = false;       // 如果要重新啟動程式，就設為 true
+
+        static public float scaleFactor = 1.0f;        // windows 縮放比
 
         // 設定目錄初值
         static public void initialPath()
@@ -90,6 +96,12 @@ namespace CBReader
             } else {
                 SettingFile = MySettingPath + "cbreader.ini";
             }
+
+            // 查 windows 縮放比
+            // 獲取系統 DPI 值
+            uint dpi = GetDpiForSystem();
+            // 計算縮放比例
+            scaleFactor = (float)dpi / 96.0f;
         }
 
         // 目錄結尾加上 / 斜線

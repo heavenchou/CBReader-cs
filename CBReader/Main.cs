@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Windows.Controls;
+using System.Reflection;
+using SHDocVw;
 
 namespace CBReader
 {
@@ -49,6 +51,9 @@ namespace CBReader
         public string SearchTimeDiff = "";    // 記錄最後搜尋時間，切換語系需要
         public int SearchFoundCount = 0;        // 記錄最後搜尋數量，切換語系需要
         public string SearchThisBookName = "";         // 檢索本經的經名 （未來有分頁要換方式處理????)
+
+        int IEZoom = 100;                       // IE 縮放比率
+        bool SetIEZoom = false;                 // 是否設定過 IE縮放率
 
         public MainForm()
         {
@@ -605,6 +610,9 @@ namespace CBReader
             cbGoBookBookId.SelectedIndex = iniFile.ReadInteger(Section, "GoBookBookIdIndex", 0);
             cbGoSutraBookId.SelectedIndex = iniFile.ReadInteger(Section, "GoSutraBookIdIndex", 0);
 
+            // IE 縮放比率
+            IEZoom = iniFile.ReadInteger(Section, "IEZoom", 100);
+
             // 欄寬
             Section = "ColumnWidth";
 
@@ -644,6 +652,11 @@ namespace CBReader
             // 記錄最後選擇的藏經
             iniFile.WriteInteger(Section, "GoBookBookIdIndex", cbGoBookBookId.SelectedIndex);
             iniFile.WriteInteger(Section, "GoSutraBookIdIndex", cbGoSutraBookId.SelectedIndex);
+
+            // IE 瀏覽器縮放率
+            dynamic domWindow = webBrowser.Document.Window.DomWindow;
+            int IEZoom = (int)((double)domWindow.devicePixelRatio * 100);
+            iniFile.WriteInteger(Section, "IEZoom", IEZoom);
 
             // 欄寬
             Section = "ColumnWidth";
@@ -1491,6 +1504,31 @@ namespace CBReader
         string t(string message, string msgId)
         {
             return language.GetMessage(message, msgId);
+        }
+
+        private void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            setupIEZoom();  // 設定 IE 縮放率
+        }
+
+        // 設定 IE 縮放率
+        void setupIEZoom()
+        {
+            if (SetIEZoom == false) {
+                SetIEZoom = true;
+                // 獲取 WebBrowser 元件的 COM 對象
+                IWebBrowser2 browserInst = (IWebBrowser2)webBrowser.ActiveXInstance;
+                // 設定縮放比例
+                object zoom = (int)(IEZoom * CGlobalVal.scaleFactor);
+                object pvaIn = zoom;
+                // 呼叫 ExecWB 方法進行縮放
+                browserInst.ExecWB(
+                    OLECMDID.OLECMDID_OPTICAL_ZOOM,
+                    OLECMDEXECOPT.OLECMDEXECOPT_DONTPROMPTUSER,
+                    ref pvaIn,
+                    IntPtr.Zero
+                );
+            }
         }
     }
 }
