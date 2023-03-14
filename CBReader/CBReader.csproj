@@ -132,6 +132,7 @@
     <Compile Include="Spine.cs" />
     <Compile Include="StyleAttr.cs" />
     <Compile Include="SubUtil.cs" />
+    <Compile Include="Theme.cs" />
     <Compile Include="Update.cs">
       <SubType>Form</SubType>
     </Compile>

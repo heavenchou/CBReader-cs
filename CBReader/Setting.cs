@@ -164,6 +164,8 @@ namespace CBReader
         public bool SaveLastTocFileName = true;   // 是否儲存最後開啟的書目
         //string LastTocFileName = "";     // 最後開啟的書目
 
+        public int Theme = 0;       // Theme, 0 為預設, 1 為暗色系
+
         // 全文檢索
 
         public int NearNum = 30;                // 全文檢索 Near 的字距
@@ -252,6 +254,7 @@ namespace CBReader
             BookcasePath = iniFile.ReadString(Section, "BookcasePath", BookcasePath);
             BookcaseFullPath = iniFile.ReadString(Section, "BookcaseFullPath", BookcaseFullPath);
             LanguageFile = iniFile.ReadString(Section, "LanguageFile", LanguageFile);
+            Theme = iniFile.ReadInteger(Section, "Theme", Theme);
 
             // 自訂 CSS
 
@@ -318,6 +321,7 @@ namespace CBReader
             iniFile.WriteString(Section, "BookcasePath", BookcasePath);
             iniFile.WriteString(Section, "BookcaseFullPath", BookcaseFullPath);
             iniFile.WriteString(Section, "LanguageFile", LanguageFile);
+            //iniFile.WriteInteger(Section, "Theme", Theme);    // 由 MainForm 寫入
 
             // 自訂 CSS
 

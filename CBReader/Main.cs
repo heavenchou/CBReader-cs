@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Windows.Controls;
 using System.Reflection;
 using SHDocVw;
+using System.Drawing.Drawing2D;
 
 namespace CBReader
 {
@@ -25,6 +26,7 @@ namespace CBReader
     public partial class MainForm : Form
     {
         public Language language;
+        public Theme theme;
 
         AboutForm aboutForm;
         OptionForm optionForm;
@@ -55,6 +57,8 @@ namespace CBReader
         int IEZoom = 100;                       // IE 縮放比率
         bool SetIEZoom = false;                 // 是否設定過 IE縮放率
 
+        bool IsDarkTheme = false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -68,6 +72,7 @@ namespace CBReader
             // 取得語系
             // Windows 版的語系檔目錄一定和主程式相同位置，不可依賴其它位置。
             language = new Language(CGlobalVal.MyFullPath + "Language\\", CGlobalVal.MySettingPath + "Language\\");
+            theme = new Theme();
             // 將語系加入選單中
             AddLanguage2Menu();
             // 取得設定檔並讀取所有設定
@@ -102,6 +107,11 @@ namespace CBReader
             //sgTextSearch->OnKeyDown = sgTextSearchKeyDown;
             //sgFindSutra->OnKeyDown = sgFindSutraKeyDown;
 
+            // 設定 theme
+            // Theme, 預設是 0，暗色系是 1
+            if(Setting.Theme == 1) {
+                btTheme_Click(this, null);
+            }
         }
 
         // =====================================================
@@ -145,10 +155,10 @@ namespace CBReader
             // 都沒有就詢問使用者
             if (!Directory.Exists(sBookcasePath)) {
 
-                MessageBox.Show(t("沒有找到您的 Bookcase 書櫃目錄，請手動選擇目錄所在位置。","01001"));
+                MessageBox.Show(t("沒有找到您的 Bookcase 書櫃目錄，請手動選擇目錄所在位置。", "01001"));
                 // 使用指定目錄
 
-                folderBrowserDialog1.Description = t("選擇 Bookcase 目錄所在位置","01002");
+                folderBrowserDialog1.Description = t("選擇 Bookcase 目錄所在位置", "01002");
                 //folderBrowserDialog1.RootFolder = CGlobalVal.MyFullPath;
                 if (folderBrowserDialog1.ShowDialog() == DialogResult.OK) {
                     sBookcasePath = folderBrowserDialog1.SelectedPath;
@@ -202,7 +212,7 @@ namespace CBReader
         void AddLanguage2Menu()
         {
             if (language.FileNames.Count == 0) {
-                miLanguage.Visible= false;
+                miLanguage.Visible = false;
                 return;
             }
 
@@ -224,7 +234,7 @@ namespace CBReader
 
         void changeLanguage(string langName)
         {
-            if (language.FileNames.ContainsKey(langName)) { 
+            if (language.FileNames.ContainsKey(langName)) {
                 language.ChangeLanguage(langName, this, optionForm, searchrangeForm, updateForm, aboutForm);
                 // 調整 mainForm 按鈕位置，以適應不同語言。
                 resizeComponent();
@@ -247,7 +257,7 @@ namespace CBReader
             btPrevJuan.Left = btMuluWidthSwitch.Left + btMuluWidthSwitch.Width + 20;
             btNextJuan.Left = btPrevJuan.Left + btPrevJuan.Width + 6;
             edFindSutraByline.Left = lbFindSutraByline.Left + lbFindSutraByline.Width + 6;
-            if(edFindSutraByline.Left < edFindSutraSutraName.Left) {
+            if (edFindSutraByline.Left < edFindSutraSutraName.Left) {
                 // 如果 label 文字太短，則輸入欄左邊要對齊其它欄位
                 edFindSutraByline.Left = edFindSutraSutraName.Left;
             }
@@ -510,19 +520,19 @@ namespace CBReader
         // 檢查有沒有更新程式, bShowNoUpdate : 沒更新時要不要秀訊息
         void CheckUpdate(bool bShowNoUpdate)
         {
-            if(Bookcase == null) {
+            if (Bookcase == null) {
                 return;
             }
 
-	        // 取得資料版本
-	        string sDataVer = Bookcase.CBETA.Version;
+            // 取得資料版本
+            string sDataVer = Bookcase.CBETA.Version;
 
             updateForm.CheckUpdate(CGlobalVal.Version, sDataVer, bShowNoUpdate);
 
-	        if(!updateForm.IsUpdate)    // 有更新就不要修改更新日期
-	        {
+            if (!updateForm.IsUpdate)    // 有更新就不要修改更新日期
+            {
                 Setting.LastUpdateChk = DateTime.Today.ToString("yyyyMMdd");
-		        Setting.SaveToFile();
+                Setting.SaveToFile();
             }
         }
 
@@ -532,7 +542,7 @@ namespace CBReader
             cbFindSutraBookId.Items.Clear();
             cbGoSutraBookId.Items.Clear();
             cbGoBookBookId.Items.Clear();
-            if(Bookcase != null) {
+            if (Bookcase != null) {
                 cbFindSutraBookId.Items.Add(t("全部", "01025"));
                 for (int i = 0; i < Bookcase.CBETA.BookData.Count; i++) {
                     string sItem = Bookcase.CBETA.BookData.ID[i] + " " + Bookcase.CBETA.BookData.BookName[i];
@@ -617,7 +627,7 @@ namespace CBReader
             Section = "ColumnWidth";
 
             // 經目搜尋的欄寬
-            for(int i=0; i<7; i++) {
+            for (int i = 0; i < 7; i++) {
                 sgFindSutra.Columns[i].Width = iniFile.ReadInteger(Section, $"FindSutraC{i}", sgFindSutra.Columns[i].Width);
             }
             // 經目搜尋的標頭欄高
@@ -658,6 +668,16 @@ namespace CBReader
             int IEZoom = (int)((double)domWindow.devicePixelRatio * 100);
             iniFile.WriteInteger(Section, "IEZoom", IEZoom);
 
+            Section = "SystemInfo";
+
+            // Theme, 預設是 0，暗色系是 1
+
+            int theme = 0;
+            if(IsDarkTheme) {
+                theme = 1;
+            }
+            iniFile.WriteInteger(Section, "Theme", theme);
+
             // 欄寬
             Section = "ColumnWidth";
 
@@ -695,7 +715,7 @@ namespace CBReader
             if (cbSearchRange.Checked) {
                 // 設定檢索範圍
                 var result = searchrangeForm.ShowDialog();
-                if(result == DialogResult.Cancel) {
+                if (result == DialogResult.Cancel) {
                     cbSearchRange.Checked = false;
                 } else {
                     cbSearchThisSutra.Checked = false;
@@ -733,7 +753,7 @@ namespace CBReader
 
             // 檢查更新
             string sToday = DateTime.Today.ToString("yyyyMMdd");
-            if (sToday != Setting.LastUpdateChk) { 
+            if (sToday != Setting.LastUpdateChk) {
                 CheckUpdate(false);   // 檢查更新 (false : 沒更新就不用秀訊息)
             }
 
@@ -754,6 +774,10 @@ namespace CBReader
 
             // 載入環境，這個要在語系之後，以免表格欄寬被重設
             LoadEnvironment();
+
+            if (IsDarkTheme) {
+                //btTheme_Click(this, e);
+            }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -767,7 +791,7 @@ namespace CBReader
             DeleteTempFile();
 
             // 更新後自動重啟
-            if(CGlobalVal.restart) {
+            if (CGlobalVal.restart) {
                 Application.Restart();
             }
         }
@@ -865,7 +889,7 @@ namespace CBReader
                 // CSeries * Series = (CSeries *) Bookcase->Books->Items[SelectedBook];
                 CSeries Series = Bookcase.CBETA;
                 CCatalog Catalog = Series.Catalog;
-                
+
                 // 逐一檢查
                 sgFindSutra.SuspendLayout();
                 int iGridIndex = 0;
@@ -930,14 +954,14 @@ namespace CBReader
 
                     // 找到了
 
-                    sgFindSutra[0,iGridIndex].Value = Catalog.ID[i];
-                    sgFindSutra[1,iGridIndex].Value = Catalog.Vol[i];
-                    sgFindSutra[2,iGridIndex].Value = Catalog.SutraNum[i];
-                    sgFindSutra[3,iGridIndex].Value = Catalog.SutraName[i];
-                    sgFindSutra[4,iGridIndex].Value = Catalog.JuanNum[i];
-                    sgFindSutra[5,iGridIndex].Value = Catalog.Part[i];
-                    sgFindSutra[6,iGridIndex].Value = Catalog.Byline[i];
-                    sgFindSutra[7,iGridIndex].Value = i;
+                    sgFindSutra[0, iGridIndex].Value = Catalog.ID[i];
+                    sgFindSutra[1, iGridIndex].Value = Catalog.Vol[i];
+                    sgFindSutra[2, iGridIndex].Value = Catalog.SutraNum[i];
+                    sgFindSutra[3, iGridIndex].Value = Catalog.SutraName[i];
+                    sgFindSutra[4, iGridIndex].Value = Catalog.JuanNum[i];
+                    sgFindSutra[5, iGridIndex].Value = Catalog.Part[i];
+                    sgFindSutra[6, iGridIndex].Value = Catalog.Byline[i];
+                    sgFindSutra[7, iGridIndex].Value = i;
                     iGridIndex++;
 
                     if (iGridIndex >= sgFindSutra.RowCount - 1) {
@@ -965,10 +989,10 @@ namespace CBReader
             if (e.RowIndex == -1) {
                 return;
             }
-            if(sgFindSutra[7, e.RowIndex].Value == null) {
-                return ;
+            if (sgFindSutra[7, e.RowIndex].Value == null) {
+                return;
             }
-            int iIndex = Convert.ToInt32(sgFindSutra[7,e.RowIndex].Value);
+            int iIndex = Convert.ToInt32(sgFindSutra[7, e.RowIndex].Value);
             ShowSutraByCatalogIndex(iIndex);
         }
 
@@ -982,7 +1006,7 @@ namespace CBReader
                 }
                 // 表示略過控制項的預設處理，這樣 GridView 就不會自動跳到下一筆了
                 e.Handled = true;
-            }  
+            }
         }
 
         // sgFindSutra 開啟的經文
@@ -1017,22 +1041,14 @@ namespace CBReader
                 return;
             }
 
-            if (sCol == "1") { sCol = "a"; }
-            else if (sCol == "2") { sCol = "b"; }
-            else if (sCol == "3") { sCol = "c"; }
-            else if (sCol == "4") { sCol = "d"; }
-            else if (sCol == "5") { sCol = "e"; }
-            else if (sCol == "6") { sCol = "f"; }
-            else if (sCol == "7") { sCol = "g"; }
-            else if (sCol == "8") { sCol = "h"; }
-            else if (sCol == "9") { sCol = "i"; }
+            if (sCol == "1") { sCol = "a"; } else if (sCol == "2") { sCol = "b"; } else if (sCol == "3") { sCol = "c"; } else if (sCol == "4") { sCol = "d"; } else if (sCol == "5") { sCol = "e"; } else if (sCol == "6") { sCol = "f"; } else if (sCol == "7") { sCol = "g"; } else if (sCol == "8") { sCol = "h"; } else if (sCol == "9") { sCol = "i"; }
 
             CSeries csCBETA = Bookcase.CBETA;
 
             string sFile = csCBETA.CBGetFileNameBySutraNumJuan(sBook, "", sSutraNum, sJuan, sPage, sCol, sLine);
             ShowCBXML(sFile);
         }
-        
+
         // 由冊頁欄行呈現經文
         private void btGoBook_Click(object sender, EventArgs e)
         {
@@ -1046,21 +1062,13 @@ namespace CBReader
             string sCol = edGoBookCol.Text;
             string sLine = edGoBookLine.Text;
 
-            if(sVol == "") {
+            if (sVol == "") {
                 MessageBox.Show(t("請輸入冊數", "01011"));
                 edGoBookVol.Focus();
                 return;
             }
 
-            if (sCol == "1") { sCol = "a"; }
-            else if (sCol == "2") { sCol = "b"; }
-            else if (sCol == "3") { sCol = "c"; }
-            else if (sCol == "4") { sCol = "d"; }
-            else if (sCol == "5") { sCol = "e"; }
-            else if (sCol == "6") { sCol = "f"; }
-            else if (sCol == "7") { sCol = "g"; }
-            else if (sCol == "8") { sCol = "h"; }
-            else if (sCol == "9") { sCol = "i"; }
+            if (sCol == "1") { sCol = "a"; } else if (sCol == "2") { sCol = "b"; } else if (sCol == "3") { sCol = "c"; } else if (sCol == "4") { sCol = "d"; } else if (sCol == "5") { sCol = "e"; } else if (sCol == "6") { sCol = "f"; } else if (sCol == "7") { sCol = "g"; } else if (sCol == "8") { sCol = "h"; } else if (sCol == "9") { sCol = "i"; }
 
             CSeries csCBETA = Bookcase.CBETA;
 
@@ -1135,7 +1143,7 @@ namespace CBReader
 
             // 選擇全文檢索引擎, 若某一方為 0 , 則選另一方 (全 0 就不管了)
             SearchEngine = Bookcase.CBETA.getSearchEngine(Setting.CollationType);
-            if(SearchEngine == null) {
+            if (SearchEngine == null) {
                 MessageBox.Show(t("沒有可用的全文檢索引擎", "01012"));
                 return;
             }
@@ -1149,10 +1157,10 @@ namespace CBReader
 
             // 秀出找到幾個的訊息
 
-            SearchTimeDiff = string.Format("{0:#0.###}",(t2 - t1).TotalSeconds);
+            SearchTimeDiff = string.Format("{0:#0.###}", (t2 - t1).TotalSeconds);
 
             //lbSearchMsg.Text = $"找到 {iFoundCount} 筆，共花時間：{timeDiff} 秒";
-            
+
             //lbSearchMsg.Text = t("找到 %d 筆，共花時間：%f 秒", "01024");
             //lbSearchMsg.Text = lbSearchMsg.Text.Replace("%d", $"{iFoundCount}");
             //lbSearchMsg.Text = lbSearchMsg.Text.Replace("%f", $"{searchTimeDiff}");
@@ -1204,7 +1212,7 @@ namespace CBReader
                     // 經名要移除 (第X卷)
                     string sSutraName = CCBSutraUtil.CutJuanAfterSutraName(Catalog.SutraName[iCatalogIndex]);
 
-                    sgTextSearch[0,iGridIndex].Value = SearchEngine.FileFound.Ints[i];
+                    sgTextSearch[0, iGridIndex].Value = SearchEngine.FileFound.Ints[i];
                     sgTextSearch[1, iGridIndex].Value = Catalog.ID[iCatalogIndex];
                     sgTextSearch[2, iGridIndex].Value = Spine.VolNum[i];
                     sgTextSearch[3, iGridIndex].Value = Catalog.SutraNum[iCatalogIndex];
@@ -1288,7 +1296,7 @@ namespace CBReader
         private void sgTextSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) {
-                if(sgTextSearch.SelectedRows.Count > 0) {
+                if (sgTextSearch.SelectedRows.Count > 0) {
                     int iRow = sgTextSearch.SelectedRows[0].Index;
                     int iIndex = Convert.ToInt32(sgTextSearch[8, iRow].Value);
                     string sFile = Bookcase.CBETA.Spine.Files[iIndex];
@@ -1309,8 +1317,8 @@ namespace CBReader
         {
             System.Windows.Forms.TreeView treeView = sender as System.Windows.Forms.TreeView;
             TreeNode tvItem = treeView.GetNodeAt(e.X, e.Y);
-            if(tvItem == null) { return; }
-            if(tvItem != treeView.SelectedNode) { return; }
+            if (tvItem == null) { return; }
+            if (tvItem != treeView.SelectedNode) { return; }
             OpenTreeViewItem(tvItem);
         }
 
@@ -1429,15 +1437,15 @@ namespace CBReader
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(updateForm.IsDownloadOK) {
+            if (updateForm.IsDownloadOK) {
                 // 下載更新檔案完成，但是尚未更新
                 var result = MessageBox.Show(t("已下載更新檔案，尚未進行更新，確定要結束嗎？", "01015"), t("確定要結束程式？", "01016"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if(result != DialogResult.Yes) {
+                if (result != DialogResult.Yes) {
                     e.Cancel = true;
                     updateForm.Focus();
                 }
             }
-            if(updateForm.IsDownloading) {
+            if (updateForm.IsDownloading) {
                 // 正在下載更新檔
                 var result = MessageBox.Show(t("正在下載更新檔案，確定要結束嗎？", "01017"), t("確定要結束程式？", "01016"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result != DialogResult.Yes) {
@@ -1460,7 +1468,7 @@ namespace CBReader
             // 30000 (D880 DC00)～3134A (D884 DF4A)：𰀀𱍊 CJK Extension F 擴展 G 區 (Unicode 13.0)
             string s = edTextSearch.Text;
             for (int i = 0; i < s.Length; i++) {
-                if ((s[i] == 0xD86E && s[i+1] >= 0xDC20) || (s[i] > 0xD86E && s[i] < 0xD87A)) {
+                if ((s[i] == 0xD86E && s[i + 1] >= 0xDC20) || (s[i] > 0xD86E && s[i] < 0xD87A)) {
                     edTextSearch.Font = edUnicode.Font;
                     return;
                 }
@@ -1477,7 +1485,7 @@ namespace CBReader
             e.DrawText();
             */
 
-            // Draw the standard background.
+            // Draw the standard backGround.
 
             e.DrawBackground();
             e.DrawBorder();
@@ -1528,6 +1536,81 @@ namespace CBReader
                     ref pvaIn,
                     IntPtr.Zero
                 );
+            }
+        }
+
+        private void MainFunc_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Brush textBrush;
+            TabPage tabPage = MainFunc.TabPages[e.Index];
+            Font tabFont = tabPage.Font;
+            Rectangle rect = e.Bounds;
+
+            if (e.State == DrawItemState.Selected) {
+                textBrush = new SolidBrush(Color.FromArgb(240, 240, 240));
+                if (e.Index == 0) {
+                    // 若第一格是選擇頁籤，它會塗色太左邊，所以要縮小並右移，才會好看
+                    rect.Inflate(-3, 0);
+                    rect.Offset(1, 0);
+                }
+                g.FillRectangle(new SolidBrush(Color.FromArgb(30, 30, 30)), rect);
+            } else {
+                textBrush = new SolidBrush(Color.FromArgb(180, 180, 180));
+                rect.Inflate(2, 2); // 擴大範圍 2 格，才能填滿上方及下方的空白
+                g.FillRectangle(new SolidBrush(Color.FromArgb(80, 80, 80)), rect);
+            }
+
+            // 寫上文字
+
+            StringFormat stringFlags = new StringFormat();
+            stringFlags.Alignment = StringAlignment.Center;
+            stringFlags.LineAlignment = StringAlignment.Center;
+            g.DrawString(tabPage.Text, tabFont, textBrush, MainFunc.GetTabRect(e.Index), new StringFormat(stringFlags));
+
+            // 填滿標籤右後方空間
+
+            Rectangle lastTabRect = MainFunc.GetTabRect(MainFunc.TabPages.Count - 1);
+            Rectangle backGround = new Rectangle();
+            backGround.Location = new Point(lastTabRect.Right, 0);
+            backGround.Size = new Size(MainFunc.Right - backGround.Left, lastTabRect.Height + 1);
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(80, 80, 80)), backGround);
+        }
+
+        private void MainFunc_Resize(object sender, EventArgs e)
+        {
+            pnMainFunc.Width += 1;
+            pnMainFunc.Width -= 1; // 這樣 tabcontrol 拉大時，上方在暗色系才不會白一塊
+        }
+
+        private void btTheme_Click(object sender, EventArgs e)
+        {
+            Color bc = btTheme.BackColor;
+            Color fc = btTheme.ForeColor;
+            if (IsDarkTheme) {
+                btTheme.Text = "💡";
+                //optionForm.panel2.BackColor = SystemColors.ButtonHighlight;
+                //optionForm.BackColor = SystemColors.Control;
+            } else {
+                btTheme.Text = "🌞";
+            }
+            IsDarkTheme = !IsDarkTheme; 
+            theme.ChangeTheme(IsDarkTheme, this, optionForm, searchrangeForm, updateForm, aboutForm);
+            btTheme.BackColor = bc;
+            btTheme.ForeColor = fc;
+        }
+
+        private void sgFindSutra_Paint(object sender, PaintEventArgs e)
+        {
+            if (IsDarkTheme) {
+                e.Graphics.DrawRectangle(Pens.LightGray, new Rectangle(0, 0, this.sgFindSutra.Width - 1, this.sgFindSutra.Height - 1));
+            }
+        }
+
+        private void sgTextSearch_Paint(object sender, PaintEventArgs e)
+        {
+            if (IsDarkTheme) {
+                e.Graphics.DrawRectangle(Pens.LightGray, new Rectangle(0, 0, this.sgTextSearch.Width - 1, this.sgTextSearch.Height - 1));
             }
         }
     }

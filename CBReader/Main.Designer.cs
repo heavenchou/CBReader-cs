@@ -30,8 +30,10 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btTheme = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.miOption = new System.Windows.Forms.ToolStripMenuItem();
             this.miUpdate = new System.Windows.Forms.ToolStripMenuItem();
@@ -204,6 +206,8 @@ namespace CBReader
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.btTheme);
             this.panel1.Controls.Add(this.menuStrip1);
             this.panel1.Controls.Add(this.btNextJuan);
             this.panel1.Controls.Add(this.btPrevJuan);
@@ -215,6 +219,17 @@ namespace CBReader
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(865, 76);
             this.panel1.TabIndex = 1;
+            // 
+            // btTheme
+            // 
+            this.btTheme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btTheme.Font = new System.Drawing.Font("新細明體", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btTheme.Location = new System.Drawing.Point(811, 28);
+            this.btTheme.Name = "btTheme";
+            this.btTheme.Size = new System.Drawing.Size(47, 40);
+            this.btTheme.TabIndex = 6;
+            this.btTheme.Text = "💡";
+            this.btTheme.Click += new System.EventHandler(this.btTheme_Click);
             // 
             // menuStrip1
             // 
@@ -366,10 +381,13 @@ namespace CBReader
             this.MainFunc.Size = new System.Drawing.Size(364, 601);
             this.MainFunc.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.MainFunc.TabIndex = 0;
+            this.MainFunc.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.MainFunc_DrawItem);
             this.MainFunc.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
+            this.MainFunc.Resize += new System.EventHandler(this.MainFunc_Resize);
             // 
             // tpCatalog
             // 
+            this.tpCatalog.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.tpCatalog.Controls.Add(this.panel7);
             this.tpCatalog.Controls.Add(this.panel6);
             this.tpCatalog.Location = new System.Drawing.Point(4, 30);
@@ -378,7 +396,6 @@ namespace CBReader
             this.tpCatalog.Size = new System.Drawing.Size(356, 567);
             this.tpCatalog.TabIndex = 0;
             this.tpCatalog.Text = "目錄";
-            this.tpCatalog.UseVisualStyleBackColor = true;
             // 
             // panel7
             // 
@@ -417,6 +434,7 @@ namespace CBReader
             // 
             // panel6
             // 
+            this.panel6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel6.Controls.Add(this.btOpenNav);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(3, 3);
@@ -438,6 +456,7 @@ namespace CBReader
             // 
             // tpBibl
             // 
+            this.tpBibl.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.tpBibl.Controls.Add(this.panel12);
             this.tpBibl.Controls.Add(this.splitter3);
             this.tpBibl.Controls.Add(this.panel8);
@@ -447,7 +466,6 @@ namespace CBReader
             this.tpBibl.Size = new System.Drawing.Size(356, 567);
             this.tpBibl.TabIndex = 1;
             this.tpBibl.Text = "書目";
-            this.tpBibl.UseVisualStyleBackColor = true;
             // 
             // panel12
             // 
@@ -478,6 +496,14 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;
@@ -485,6 +511,7 @@ namespace CBReader
             this.sgFindSutra.Size = new System.Drawing.Size(350, 312);
             this.sgFindSutra.TabIndex = 8;
             this.sgFindSutra.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sgFindSutra_CellDoubleClick);
+            this.sgFindSutra.Paint += new System.Windows.Forms.PaintEventHandler(this.sgFindSutra_Paint);
             this.sgFindSutra.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sgFindSutra_KeyDown);
             // 
             // dataGridViewTextBoxColumn2
@@ -564,6 +591,7 @@ namespace CBReader
             // 
             // panel8
             // 
+            this.panel8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel8.Controls.Add(this.btMainFuncNarrow);
             this.panel8.Controls.Add(this.btMainFuncWide);
             this.panel8.Controls.Add(this.btFindSutra);
@@ -818,6 +846,7 @@ namespace CBReader
             // 
             // tpGoto
             // 
+            this.tpGoto.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.tpGoto.Controls.Add(this.panel9);
             this.tpGoto.Location = new System.Drawing.Point(4, 30);
             this.tpGoto.Name = "tpGoto";
@@ -825,10 +854,10 @@ namespace CBReader
             this.tpGoto.Size = new System.Drawing.Size(356, 567);
             this.tpGoto.TabIndex = 2;
             this.tpGoto.Text = "前往";
-            this.tpGoto.UseVisualStyleBackColor = true;
             // 
             // panel9
             // 
+            this.panel9.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel9.Controls.Add(this.lbStar2);
             this.panel9.Controls.Add(this.lbGoSutraSutraNum);
             this.panel9.Controls.Add(this.lbGoBookVol);
@@ -1339,6 +1368,7 @@ namespace CBReader
             // 
             // tpSearch
             // 
+            this.tpSearch.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.tpSearch.Controls.Add(this.panel11);
             this.tpSearch.Controls.Add(this.splitter4);
             this.tpSearch.Controls.Add(this.panel10);
@@ -1348,7 +1378,6 @@ namespace CBReader
             this.tpSearch.Size = new System.Drawing.Size(356, 567);
             this.tpSearch.TabIndex = 3;
             this.tpSearch.Text = "全文檢索";
-            this.tpSearch.UseVisualStyleBackColor = true;
             // 
             // panel11
             // 
@@ -1387,6 +1416,7 @@ namespace CBReader
             this.sgTextSearch.Size = new System.Drawing.Size(350, 383);
             this.sgTextSearch.TabIndex = 6;
             this.sgTextSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sgTextSearch_CellDoubleClick);
+            this.sgTextSearch.Paint += new System.Windows.Forms.PaintEventHandler(this.sgTextSearch_Paint);
             this.sgTextSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sgTextSearch_KeyDown);
             // 
             // Column1
@@ -1473,6 +1503,7 @@ namespace CBReader
             // 
             // panel10
             // 
+            this.panel10.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel10.Controls.Add(this.edUnicode);
             this.panel10.Controls.Add(this.btMainFuncNarrow2);
             this.panel10.Controls.Add(this.btMainFuncWide2);
@@ -1537,6 +1568,7 @@ namespace CBReader
             // 
             // btBoolean
             // 
+            this.btBoolean.ContextMenuStrip = this.cmBoolean;
             this.btBoolean.Location = new System.Drawing.Point(265, 78);
             this.btBoolean.Name = "btBoolean";
             this.btBoolean.Size = new System.Drawing.Size(32, 34);
@@ -1560,7 +1592,6 @@ namespace CBReader
             // cbSearchThisSutra
             // 
             this.cbSearchThisSutra.AutoSize = true;
-            this.cbSearchThisSutra.Enabled = false;
             this.cbSearchThisSutra.Location = new System.Drawing.Point(10, 113);
             this.cbSearchThisSutra.Name = "cbSearchThisSutra";
             this.cbSearchThisSutra.Size = new System.Drawing.Size(134, 29);
@@ -1778,6 +1809,7 @@ namespace CBReader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(865, 677);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.splitter2);
@@ -1947,14 +1979,6 @@ namespace CBReader
         public System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem miLanguage;
         private System.Windows.Forms.ToolStripMenuItem miGetLanguageIni;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
@@ -1964,6 +1988,15 @@ namespace CBReader
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.Button btTheme;
     }
 }
 

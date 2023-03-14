@@ -13,15 +13,16 @@ namespace CBReader
         [DllImport("user32.dll")]
         static extern uint GetDpiForSystem();
 
-        // 更新版本注意事項, 要改底下資訊, 還有 project 的版本，icon
-        // 跨年要改 project 的著作權及商標年份
+        // 更新版本注意事項, 要改底下資訊,
+        // 還有 project 的版本，icon
         // 還有 About 畫面的版本與日期資料
+        // 跨年要改 project 的著作權及商標年份
 
         // CBETA 版
         ///*
         static public string ProgramTitle = "CBReader 毘舍離版";
         static public string ApplicationTitle = "CBReader";
-        static public string Version = "0.8.1.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
+        static public string Version = "0.8.2.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
         //*/
 
         // 西蓮淨苑版

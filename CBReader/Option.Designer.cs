@@ -484,7 +484,7 @@ namespace CBReader
         private System.Windows.Forms.Button btCancel;
         private System.Windows.Forms.Button btOK;
         private System.Windows.Forms.Button btSave;
-        private System.Windows.Forms.Panel panel2;
+        public  System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox gbViewShow;
         private System.Windows.Forms.CheckBox cbUseCSSFile;
         private System.Windows.Forms.GroupBox gbGaijiFormat;

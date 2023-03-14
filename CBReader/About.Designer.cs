@@ -59,16 +59,16 @@ namespace CBReader
             // 
             this.panel1.Controls.Add(this.btOK);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 684);
+            this.panel1.Location = new System.Drawing.Point(0, 694);
             this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(606, 59);
+            this.panel1.Size = new System.Drawing.Size(592, 59);
             this.panel1.TabIndex = 0;
             // 
             // btOK
             // 
             this.btOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btOK.Location = new System.Drawing.Point(265, 9);
+            this.btOK.Location = new System.Drawing.Point(259, 9);
             this.btOK.Margin = new System.Windows.Forms.Padding(4);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(79, 39);
@@ -84,7 +84,7 @@ namespace CBReader
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(606, 304);
+            this.panel2.Size = new System.Drawing.Size(592, 304);
             this.panel2.TabIndex = 1;
             // 
             // panel5
@@ -101,7 +101,7 @@ namespace CBReader
             this.panel5.Location = new System.Drawing.Point(175, 14);
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(417, 276);
+            this.panel5.Size = new System.Drawing.Size(405, 276);
             this.panel5.TabIndex = 1;
             // 
             // label4
@@ -192,7 +192,7 @@ namespace CBReader
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(333, 25);
             this.label1.TabIndex = 0;
-            this.label1.Text = "CBReader 2X  v0.8.1　2023-02-28";
+            this.label1.Text = "CBReader 2X  v0.8.2　2023-03-14";
             // 
             // panel4
             // 
@@ -224,7 +224,7 @@ namespace CBReader
             this.panel3.Location = new System.Drawing.Point(0, 304);
             this.panel3.Margin = new System.Windows.Forms.Padding(5);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(606, 380);
+            this.panel3.Size = new System.Drawing.Size(592, 390);
             this.panel3.TabIndex = 1;
             // 
             // panel6
@@ -232,11 +232,11 @@ namespace CBReader
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel6.BackColor = System.Drawing.SystemColors.Window;
+            this.panel6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel6.Controls.Add(this.edReadme);
             this.panel6.Location = new System.Drawing.Point(14, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(580, 369);
+            this.panel6.Size = new System.Drawing.Size(566, 387);
             this.panel6.TabIndex = 3;
             // 
             // edReadme
@@ -244,14 +244,15 @@ namespace CBReader
             this.edReadme.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.edReadme.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.edReadme.BackColor = System.Drawing.SystemColors.Window;
             this.edReadme.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.edReadme.Location = new System.Drawing.Point(17, 15);
             this.edReadme.Margin = new System.Windows.Forms.Padding(4);
             this.edReadme.Multiline = true;
             this.edReadme.Name = "edReadme";
             this.edReadme.ReadOnly = true;
-            this.edReadme.Size = new System.Drawing.Size(559, 324);
+            this.edReadme.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.edReadme.Size = new System.Drawing.Size(548, 356);
             this.edReadme.TabIndex = 3;
             this.edReadme.TabStop = false;
             this.edReadme.Text = resources.GetString("edReadme.Text");
@@ -262,7 +263,7 @@ namespace CBReader
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.btOK;
-            this.ClientSize = new System.Drawing.Size(606, 743);
+            this.ClientSize = new System.Drawing.Size(592, 753);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
