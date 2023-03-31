@@ -424,13 +424,17 @@ namespace CBReader
 
         private void cbShowPunc_CheckedChanged(object sender, EventArgs e)
         {
-            cbNoShowLgPunc.Enabled = cbShowPunc.Checked;
-            cbNoShowAIPunc.Enabled = cbShowPunc.Checked;
+            // 不要 Disable，因為暗色系會看不到
+
+            // cbNoShowLgPunc.Enabled = cbShowPunc.Checked;
+            // cbNoShowAIPunc.Enabled = cbShowPunc.Checked;
         }
 
         private void cbShowCollation_CheckedChanged(object sender, EventArgs e)
         {
-            cbShowCollationCF.Enabled = cbShowCollation.Checked;
+            // 不要 Disable，因為暗色系會看不到
+
+            // cbShowCollationCF.Enabled = cbShowCollation.Checked;
         }
     }
 }

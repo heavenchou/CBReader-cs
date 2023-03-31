@@ -269,12 +269,25 @@ namespace CBReader
 
 						if (StrHas(HTMLSource, pPoint, "P.")) {  // 南傳有 [P.nn] 的 PTS 頁碼
 							pPoint += 2;
-						} else if (HTMLSource[pPoint] == 'A') {              // CBETA 自訂校注是 [Axx]
-							pPoint++;
-						}
+                        } else if (HTMLSource[pPoint] == 'A') {  // CBETA 自訂校注是 [Axx]
+                            pPoint++;
+                        } else if (HTMLSource[pPoint] == '科') {	// 卍續藏有 [科1] 科標解三種
+                            pPoint++;
+                        } else if (HTMLSource[pPoint] == '標') {
+                            pPoint++;
+                        } else if (HTMLSource[pPoint] == '解') {
+                            pPoint++;
+                        }
 
-						if (HTMLSource[pPoint] >= '0' && HTMLSource[pPoint] <= '9') {
-							while (HTMLSource[pPoint] >= '0' && HTMLSource[pPoint] <= '9') {
+						// 校勘數字有 [1] [1A] [1a] 等種類
+                        if (HTMLSource[pPoint] >= '0' && HTMLSource[pPoint] <= '9') {
+                            // T01n0001_p0028b26  <note n="0028009a" <note n="0028009b" => [9a][9b]
+                            // T18n0868_p0272c03  <note n="0272003A" => [3A]
+                            // T18n0868_p0272c25  <note n="0272003B" => [3B]
+                            // T14n0474_p0519b29  <note n="0519023-1" <note n="0519023-2" => [23]
+                            while ((HTMLSource[pPoint] >= '0' && HTMLSource[pPoint] <= '9')
+							    || (HTMLSource[pPoint] >= 'a' && HTMLSource[pPoint] <= 'z')
+                                || (HTMLSource[pPoint] >= 'A' && HTMLSource[pPoint] <= 'Z')) {
 								pPoint++;
 							}
 							if (HTMLSource[pPoint] == ']') {
@@ -286,7 +299,7 @@ namespace CBReader
 					}
 
 					// 4.校勘數字 [<a id="a0001005" ....<..巢狀..>. >5</a>]
-					// ???? 這個新版的會改
+					// 目前這部份似乎不會發生了，因為格式變了
 					if (HTMLSource[pPoint] == '[') {
 						int pTmp = pPoint;
 						pPoint++;
@@ -329,7 +342,7 @@ namespace CBReader
 								if (HTMLSource[pPoint] == '＊')	{
 									pPoint += 1;
 								}
-								if (StrHas(HTMLSource, pPoint, "</a>]")) {
+								if (StrHas(HTMLSource, pPoint, "]</a>")) {
 									pPoint += 5;
 									continue;
 								}
