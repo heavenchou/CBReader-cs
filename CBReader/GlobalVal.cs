@@ -13,26 +13,29 @@ namespace CBReader
         [DllImport("user32.dll")]
         static extern uint GetDpiForSystem();
 
+        // CBETA 版
         // 更新版本注意事項, 要改底下資訊,
-        // 還有 project 的版本，icon
+        // 還有 project 的版本號碼，主要 icon，各 Form 的 icom
         // 還有 About 畫面的版本與日期資料
         // 跨年要改 project 的著作權及商標年份
 
-        // CBETA 版
-        ///*
+        /*
         static public string ProgramTitle = "CBReader 毘舍離版";
         static public string ApplicationTitle = "CBReader";
         static public string Version = "0.8.3.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
         //*/
 
         // 西蓮淨苑版
-        // 西蓮版要改 "SLReader", 版本號碼等
-        // 也要記得換 icon
+        // 更新版本注意事項, 要改底下資訊,
+        // 還有 project 的版本號碼，主要 icon，各 Form 的 icom
+        // 還有 About 畫面的版本與日期資料 （程式會自動將 CBReader 改成 SLReader）
+        // 程式檔要改 SLReader.exe
+        // 跨年要改 project 的著作權及商標年份
 
-        /*
+        ///*
         static public string ProgramTitle = "SLReader 毘舍離版";
         static public string ApplicationTitle = "SLReader";
-        static public string Version = "0.7.1.1";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
+        static public string Version = "0.8.3.1";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
         //*/
 
         //static public string ProgramTitle = "CBETA 漢文電子佛典集成";  // 改由 Serial.Title 提供

@@ -89,8 +89,16 @@ namespace CBReader
             }
 
             // 刪去舊版
-            string sOld = CGlobalVal.MyFullPath + "CBReader_old.exe";
-            string sOld2 = CGlobalVal.MyFullPath + "CBReader.exe.tmp";
+            string sOld = "";
+            string sOld2 = "";
+            if (CGlobalVal.ApplicationTitle == "SLReader") {
+                sOld = CGlobalVal.MyFullPath + "SLReader_old.exe";
+                sOld2 = CGlobalVal.MyFullPath + "SLReader.exe.tmp";
+            } else {
+                sOld = CGlobalVal.MyFullPath + "CBReader_old.exe";
+                sOld2 = CGlobalVal.MyFullPath + "CBReader.exe.tmp";
+            }
+
             if (File.Exists(sOld)) {
                 File.Delete(sOld);
             }
@@ -281,18 +289,18 @@ namespace CBReader
             lbGoSutraBookId.Text = t("叢書", "01026");
             lbGoBookBookId.Text = t("叢書", "01026");
 
-            lbFindSutraSutraFrom.Text = t("編號從", "01028");
-            lbGoSutraSutraNum.Text = t("編號", "01027");
-            lbFindSutraSutraName.Text = t("著作", "01029");
+            // lbFindSutraSutraFrom.Text = t("編號從", "01028");
+            // lbGoSutraSutraNum.Text = t("編號", "01027");
+            // lbFindSutraSutraName.Text = t("著作", "01029");
 
             sgFindSutra.Columns[0].HeaderText = t("叢書", "01026");
-            sgFindSutra.Columns[2].HeaderText = t("編號", "01027");
-            sgFindSutra.Columns[3].HeaderText = t("著作", "01029");
+            // sgFindSutra.Columns[2].HeaderText = t("編號", "01027");
+            // sgFindSutra.Columns[3].HeaderText = t("著作", "01029");
             sgFindSutra.Columns[5].Visible = false;
 
             sgTextSearch.Columns[1].HeaderText = t("叢書", "01026");
-            sgTextSearch.Columns[3].HeaderText = t("編號", "01027");
-            sgTextSearch.Columns[4].HeaderText = t("著作", "01029");
+            // sgTextSearch.Columns[3].HeaderText = t("編號", "01027");
+            // sgTextSearch.Columns[4].HeaderText = t("著作", "01029");
             sgTextSearch.Columns[6].Visible = false;
 
             cbSearchRange.Visible = false;  // 全文檢索範圍
@@ -337,9 +345,14 @@ namespace CBReader
             string sKey = Path.GetFileName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
 
             var ieVer = Microsoft.Win32.Registry.GetValue(sFeatureBrowserEmulation, sKey, "0");
-            string sIEVer = ieVer.ToString();
-            if (sIEVer != iIE.ToString()) {
-                Microsoft.Win32.Registry.SetValue(sFeatureBrowserEmulation, sKey, iIE);
+            if (ieVer == null) {
+                MessageBox.Show("Get IE Ver is null.");
+            } else {
+                string sIEVer = ieVer.ToString();
+                // MessageBox.Show("Get IE Ver is " + sIEVer);
+                if (sIEVer != iIE.ToString()) {
+                    Microsoft.Win32.Registry.SetValue(sFeatureBrowserEmulation, sKey, iIE);
+                }
             }
         }
 

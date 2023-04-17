@@ -17,6 +17,11 @@ namespace CBReader
         {
             InitializeComponent();
             mainForm = main;
+
+            if (CGlobalVal.ApplicationTitle != "CBReader") {
+                // CBReader 換成 SLReader 或其它
+                lbTitle.Text = lbTitle.Text.Replace("CBReader", CGlobalVal.ApplicationTitle);
+            }
         }
 
         private void llbCBETAWeb_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

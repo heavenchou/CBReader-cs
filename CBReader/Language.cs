@@ -225,6 +225,10 @@ namespace CBReader
         public string GetMessage(string message, string msgId)
         {
             if (Messages.ContainsKey(msgId)) {
+                if (CGlobalVal.ApplicationTitle != "CBReader") {
+                    // CBReader 換成 SLReader 或其它
+                    return Messages[msgId].Replace("CBReader", CGlobalVal.ApplicationTitle);
+                }
                 return Messages[msgId];
             } else {
                 return message;

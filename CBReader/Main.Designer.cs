@@ -30,7 +30,7 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btTheme = new System.Windows.Forms.Button();
@@ -142,6 +142,13 @@ namespace CBReader
             this.btMainFuncWide2 = new System.Windows.Forms.Button();
             this.lbSearchMsg = new System.Windows.Forms.Label();
             this.btBoolean = new System.Windows.Forms.Button();
+            this.cmBoolean = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.miNear = new System.Windows.Forms.ToolStripMenuItem();
+            this.miBefore = new System.Windows.Forms.ToolStripMenuItem();
+            this.miAnd = new System.Windows.Forms.ToolStripMenuItem();
+            this.miOr = new System.Windows.Forms.ToolStripMenuItem();
+            this.miExclude = new System.Windows.Forms.ToolStripMenuItem();
+            this.miAny = new System.Windows.Forms.ToolStripMenuItem();
             this.btTextSearch = new System.Windows.Forms.Button();
             this.cbSearchThisSutra = new System.Windows.Forms.CheckBox();
             this.cbSearchRange = new System.Windows.Forms.CheckBox();
@@ -158,13 +165,6 @@ namespace CBReader
             this.tpWeb = new System.Windows.Forms.TabPage();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.cmBoolean = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miNear = new System.Windows.Forms.ToolStripMenuItem();
-            this.miBefore = new System.Windows.Forms.ToolStripMenuItem();
-            this.miAnd = new System.Windows.Forms.ToolStripMenuItem();
-            this.miOr = new System.Windows.Forms.ToolStripMenuItem();
-            this.miExclude = new System.Windows.Forms.ToolStripMenuItem();
-            this.miAny = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -183,12 +183,12 @@ namespace CBReader
             this.panel11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sgTextSearch)).BeginInit();
             this.panel10.SuspendLayout();
+            this.cmBoolean.SuspendLayout();
             this.pnMulu.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tpWeb.SuspendLayout();
-            this.cmBoolean.SuspendLayout();
             this.SuspendLayout();
             // 
             // btOption
@@ -496,14 +496,14 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;
@@ -1578,6 +1578,61 @@ namespace CBReader
             this.btBoolean.UseVisualStyleBackColor = true;
             this.btBoolean.Click += new System.EventHandler(this.btBoolean_Click);
             // 
+            // cmBoolean
+            // 
+            this.cmBoolean.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmBoolean.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miNear,
+            this.miBefore,
+            this.miAnd,
+            this.miOr,
+            this.miExclude,
+            this.miAny});
+            this.cmBoolean.Name = "cmBoolean";
+            this.cmBoolean.Size = new System.Drawing.Size(142, 148);
+            // 
+            // miNear
+            // 
+            this.miNear.Name = "miNear";
+            this.miNear.Size = new System.Drawing.Size(141, 24);
+            this.miNear.Text = "+ near";
+            this.miNear.Click += new System.EventHandler(this.miNear_Click);
+            // 
+            // miBefore
+            // 
+            this.miBefore.Name = "miBefore";
+            this.miBefore.Size = new System.Drawing.Size(141, 24);
+            this.miBefore.Text = "* before";
+            this.miBefore.Click += new System.EventHandler(this.miBefore_Click);
+            // 
+            // miAnd
+            // 
+            this.miAnd.Name = "miAnd";
+            this.miAnd.Size = new System.Drawing.Size(141, 24);
+            this.miAnd.Text = "&& and";
+            this.miAnd.Click += new System.EventHandler(this.miAnd_Click);
+            // 
+            // miOr
+            // 
+            this.miOr.Name = "miOr";
+            this.miOr.Size = new System.Drawing.Size(141, 24);
+            this.miOr.Text = ", or";
+            this.miOr.Click += new System.EventHandler(this.miOr_Click);
+            // 
+            // miExclude
+            // 
+            this.miExclude.Name = "miExclude";
+            this.miExclude.Size = new System.Drawing.Size(141, 24);
+            this.miExclude.Text = "- exclude";
+            this.miExclude.Click += new System.EventHandler(this.miExclude_Click);
+            // 
+            // miAny
+            // 
+            this.miAny.Name = "miAny";
+            this.miAny.Size = new System.Drawing.Size(141, 24);
+            this.miAny.Text = "? Any";
+            this.miAny.Click += new System.EventHandler(this.miAny_Click);
+            // 
             // btTextSearch
             // 
             this.btTextSearch.Location = new System.Drawing.Point(265, 38);
@@ -1738,61 +1793,6 @@ namespace CBReader
             this.webBrowser.TabIndex = 0;
             this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_DocumentCompleted);
             // 
-            // cmBoolean
-            // 
-            this.cmBoolean.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmBoolean.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miNear,
-            this.miBefore,
-            this.miAnd,
-            this.miOr,
-            this.miExclude,
-            this.miAny});
-            this.cmBoolean.Name = "cmBoolean";
-            this.cmBoolean.Size = new System.Drawing.Size(142, 148);
-            // 
-            // miNear
-            // 
-            this.miNear.Name = "miNear";
-            this.miNear.Size = new System.Drawing.Size(141, 24);
-            this.miNear.Text = "+ near";
-            this.miNear.Click += new System.EventHandler(this.miNear_Click);
-            // 
-            // miBefore
-            // 
-            this.miBefore.Name = "miBefore";
-            this.miBefore.Size = new System.Drawing.Size(141, 24);
-            this.miBefore.Text = "* before";
-            this.miBefore.Click += new System.EventHandler(this.miBefore_Click);
-            // 
-            // miAnd
-            // 
-            this.miAnd.Name = "miAnd";
-            this.miAnd.Size = new System.Drawing.Size(141, 24);
-            this.miAnd.Text = "&& and";
-            this.miAnd.Click += new System.EventHandler(this.miAnd_Click);
-            // 
-            // miOr
-            // 
-            this.miOr.Name = "miOr";
-            this.miOr.Size = new System.Drawing.Size(141, 24);
-            this.miOr.Text = ", or";
-            this.miOr.Click += new System.EventHandler(this.miOr_Click);
-            // 
-            // miExclude
-            // 
-            this.miExclude.Name = "miExclude";
-            this.miExclude.Size = new System.Drawing.Size(141, 24);
-            this.miExclude.Text = "- exclude";
-            this.miExclude.Click += new System.EventHandler(this.miExclude_Click);
-            // 
-            // miAny
-            // 
-            this.miAny.Name = "miAny";
-            this.miAny.Size = new System.Drawing.Size(141, 24);
-            this.miAny.Text = "? Any";
-            this.miAny.Click += new System.EventHandler(this.miAny_Click);
-            // 
             // toolTip1
             // 
             this.toolTip1.AutomaticDelay = 100;
@@ -1849,13 +1849,13 @@ namespace CBReader
             ((System.ComponentModel.ISupportInitialize)(this.sgTextSearch)).EndInit();
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
+            this.cmBoolean.ResumeLayout(false);
             this.pnMulu.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tpWeb.ResumeLayout(false);
-            this.cmBoolean.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

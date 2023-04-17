@@ -327,9 +327,17 @@ namespace CBReader
 					UnzipToDirectory(zipFile, mainForm.Bookcase.BookcaseDir);
 				} else {
 					// 解壓縮到主程式目錄
-					string exeFile = CGlobalVal.MyFullPath + "CBReader.exe";
-					string oldFile = CGlobalVal.MyFullPath + "CBReader_old.exe";
-					if (File.Exists(oldFile)) {
+					string exeFile = "";
+					string oldFile = "";
+					if (CGlobalVal.ApplicationTitle == "SLReader") {
+                        exeFile = CGlobalVal.MyFullPath + "SLReader.exe";
+                        oldFile = CGlobalVal.MyFullPath + "SLReader_old.exe";
+                    } else {
+                        exeFile = CGlobalVal.MyFullPath + "CBReader.exe";
+                        oldFile = CGlobalVal.MyFullPath + "CBReader_old.exe";
+                    }
+
+                    if (File.Exists(oldFile)) {
 						File.Delete(oldFile);
                     }
 					File.Move(exeFile, oldFile);

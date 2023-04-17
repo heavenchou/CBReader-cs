@@ -41,15 +41,16 @@ namespace CBReader
 				} else if (sStr == "italic") {
 					NewStyle += "font-style:italic;";
 				} else if (sStr == "small") {
-					NewStyle += "font-size:14pt;";	// ???? 要檢討, 及如何應對未來自訂大小
+					NewStyle += "font-size:18px;";	// ???? 要檢討, 及如何應對未來自訂大小
 				} else if (sStr == "large") {
-					NewStyle += "font-size:18pt;";  // ???? 要檢討, 及如何應對未來自訂大小
+					NewStyle += "font-size:24px;";  // ???? 要檢討, 及如何應對未來自訂大小
 				} else if (sStr == "circle-above") {
 					NewStyle += "text-emphasize:circle-above;";
 				} else if (sStr == "text-left") {
 					NewStyle += "text-align:left;";
 				} else if (sStr == "text-center") {
-					NewStyle += "text-align:center;";
+					// 因為 p 設為 center 會空四格，head 整段空二格，所以要用 0 去取消
+					NewStyle += "text-align:center; text-indent:0em !important; margin-left:0em !important;";
 				} else if (sStr == "text-right") {
 					NewStyle += "text-align:right;";
 				} else if (sStr == "mingti" || sStr == "songti") {
@@ -65,13 +66,19 @@ namespace CBReader
 					// Heiti TC Mac 黑體
 					NewStyle += "font-family:\"Times New Roman\",\"Microsoft JhengHei\",微軟正黑體,\"Microsoft YaHei\",simhei,\"Heiti TC\";";
 
-					// 處理成 Class
+                    // 處理成 Class
 
-				} else if (sStr.StartsWith("pl-")) {
-					// pl-1 , pl-2 , .....
-					NewClass += sStr + " ";
-				}
-			}
+                } else if (sStr.StartsWith("pl-")) {
+                    // pl-1 , pl-2 , .....
+                    NewClass += sStr + " ";
+                } else if (sStr == "under") {
+                    NewStyle += "text-decoration:underline;";
+                } else if (sStr == "over") {
+                    NewStyle += "text-decoration:overline;";
+                } else if (sStr == "del") {
+                    NewStyle += "text-decoration:line-through;";
+                }
+            }
 		}
 
 		// 在 RendList 找到某字串

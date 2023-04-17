@@ -298,7 +298,7 @@ namespace CBReader
         .headname2 {color:#0000A0; font-weight: bold; font-size:24px;}
         .headname3 {color:#0000A0; font-weight: bold; font-size:24px;}
         .headname4 {color:#0000A0; font-weight: bold; font-size:24px;}
-        .linehead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';}
+        .linehead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';font-style:normal;}
         .parahead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';}
         .pts_head {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';}
         .lg {color:#008040; font-size:21px;}
@@ -717,7 +717,7 @@ namespace CBReader
             sHtml += parseChild(node); // 處理內容
 
             if (sNewStyle != "") {
-                sHtml = "<span style='" + sNewStyle + "'>" + sHtml + "</span>";
+                sNewStyle = " style='" + sNewStyle + "'";
             }
 
             if (ListCount > 0) {
@@ -726,10 +726,10 @@ namespace CBReader
                 InByline = false;
                 if (Setting.ShowLineFormat) {
                     sHtml = "<span class='line_space'>　　　　</span>" +
-                    "<span class='byline' data-tagname='p'>" + sHtml + "</span>";
+                    "<span class='byline'" + sNewStyle + " data-tagname='p'>" + sHtml + "</span>";
                 } else {
                     sHtml = "<span class='line_space' style='display:none'>　　　　</span>" +
-                    "<p class='byline' data-tagname='p'>" + sHtml + "</p>"; 
+                    "<p class='byline'" + sNewStyle + " data-tagname='p'>" + sHtml + "</p>"; 
                 }
             }
             return sHtml;
@@ -3019,7 +3019,11 @@ namespace CBReader
                 if (iMarginLeft >= 0) {
                     MarginLeft += StringRepeat("　", iMarginLeft);
                 } else {
-                    MarginLeft = MarginLeft.Remove(0, iMarginLeft * -1);
+                    if (MarginLeft.Length + iMarginLeft >= 0) {
+                        MarginLeft = MarginLeft.Remove(0, iMarginLeft * -1);
+                    } else {
+                        MarginLeft = "";
+                    }
                 }
                 string sSpace = "";
                 if (iMarginLeft + iTextIndent > 0) {

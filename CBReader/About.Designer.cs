@@ -40,7 +40,7 @@ namespace CBReader
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbTitle = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -97,7 +97,7 @@ namespace CBReader
             this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.label2);
-            this.panel5.Controls.Add(this.label1);
+            this.panel5.Controls.Add(this.lbTitle);
             this.panel5.Location = new System.Drawing.Point(175, 14);
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
             this.panel5.Name = "panel5";
@@ -183,16 +183,16 @@ namespace CBReader
             this.label2.TabIndex = 1;
             this.label2.Text = "CBETA Reader 閱藏系統 - 毘舍離";
             // 
-            // label1
+            // lbTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(16, 6);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(333, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "CBReader 2X  v0.8.3　2023-04-01";
+            this.lbTitle.AutoSize = true;
+            this.lbTitle.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbTitle.Location = new System.Drawing.Point(16, 6);
+            this.lbTitle.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbTitle.Name = "lbTitle";
+            this.lbTitle.Size = new System.Drawing.Size(333, 25);
+            this.lbTitle.TabIndex = 0;
+            this.lbTitle.Text = "CBReader 2X  v0.8.3　2023-04-01";
             // 
             // panel4
             // 
@@ -297,7 +297,7 @@ namespace CBReader
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbTitle;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel3;
