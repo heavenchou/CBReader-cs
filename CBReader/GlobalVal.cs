@@ -19,10 +19,10 @@ namespace CBReader
         // 還有 About 畫面的版本與日期資料
         // 跨年要改 project 的著作權及商標年份
 
-        /*
+        ///*
         static public string ProgramTitle = "CBReader 毘舍離版";
         static public string ApplicationTitle = "CBReader";
-        static public string Version = "0.8.3.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
+        static public string Version = "0.8.4.0";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
         //*/
 
         // 西蓮淨苑版
@@ -32,7 +32,7 @@ namespace CBReader
         // 程式檔要改 SLReader.exe
         // 跨年要改 project 的著作權及商標年份
 
-        ///*
+        /*
         static public string ProgramTitle = "SLReader 毘舍離版";
         static public string ApplicationTitle = "SLReader";
         static public string Version = "0.8.3.1";         // 末位 .1 是全西蓮, .2 是西蓮+CBETA
