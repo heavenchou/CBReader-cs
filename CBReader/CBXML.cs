@@ -7,6 +7,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Forms;
+using System.Windows;
 
 namespace CBReader
 {
@@ -37,12 +41,16 @@ namespace CBReader
         bool InLg = false;           	// 判斷是不是在 <lg> 之中, 主要是用來處理偈頌中的標點要不要呈現.
         bool LgNormal = true;		    // lg 的 type 是不是 normal? 有 normal 及 abnormal 二種
         bool LgInline = false;          // lg 的 place 是不是 inline?
-        string LgMarginLeft = "";	// lg 整段要空的格
+        string LgMarginLeft = "";	    // lg 整段要空的格
         // L
         //int LTagNum = 0;		    // <l> 出現的數字, 用來判斷要在普及版寫幾個空格
         //string LMarginLeft = "";	    // L的空格
 
-        string MarginLeft = "";		// 移位
+        string MarginLeft = "";     // 移位
+
+        // list TextIndent, 若 item 沒有 TextIndent 就用 list 的 TextIndent。
+        // 若 item 有 TextIndent，就忽略 list 的 TextIndent。
+        string ListTextIndent = "";     
 
         int ListCount = 0;			// 計算 list 的數目, 有一些地方需要用到
         int[] ItemNum = new int[100];		// 用來判斷 item 出現的次數, 每一層 list 都有不同的內容
@@ -267,8 +275,38 @@ namespace CBReader
             font-family: Ranjana;
             src: local(Ranjana), url('{sRanjanaFile}');
         }}";
+            // text-center: 因為 p 設為 center 會空四格，head 整段空二格，所以置中的 head 要用 0 去取消
             sHtml += @"
         body { background:#DDF1DC; font-weight: normal; line-height:26px; color:#000000; font-size:21px; font-family:CBFont;}
+        .bold {font-weight:bold;}
+        .no-bold {font-weight:normal;}
+        .italic {font-style:italic;}        
+        .no-italic {font-style:normal;}  
+        .songti {font-family:'Times New Roman',MingLiU,細明體,PMingLiU,新細明體,SimSun,NSimSun,'Songti TC';}
+        .mingti {font-family:'Times New Roman',MingLiU,細明體,PMingLiU,新細明體,SimSun,NSimSun,'Songti TC';}
+        .kaiti {font-family:'Times New Roman',DFKai-SB,標楷體,STKaiti,'Kaiti TC';}
+        .heiti {font-family:'Times New Roman','Microsoft JhengHei',微軟正黑體,'Microsoft YaHei',simhei,'Heiti TC';}
+        .sup {vertical-align:super;font-size:70%;}
+        .sub {vertical-align:sub;font-size:70%;}
+        .over {text-decoration:overline;}
+        .under {text-decoration:underline;}
+        .del {text-decoration:line-through;}
+        .border {border:1px black solid;}
+        .no-border {border:0;}
+        .text-left {text-align:left;}
+        .text-center {text-align:center; text-indent:0em !important; margin-left:0em !important;}
+        .text-right {text-align:right;}
+        .larger {font-size:larger;}
+        .smaller {font-size:smaller;}
+        .xx-small {font-size:xx-small;}
+        .x-small {font-size:x-small;}
+        .small {font-size:small;}
+        .medium {font-size:medium;}
+        .large {font-size:large;}
+        .x-large {font-size:x-large;}
+        .xx-large {font-size:xx-large;}
+        .no-marker {list-style:none;}
+        .circle-above {text-emphasize:circle-above;}
         #AIPuncRemind {color:#ffffff; background: #d80000;}
         #SearchHead {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C','TH-Tshyn-P1';}
         a.SearchWord0 {color:#0000ff; background: #ffff66;}
@@ -299,15 +337,30 @@ namespace CBReader
         .headname3 {color:#0000A0; font-weight: bold; font-size:24px;}
         .headname4 {color:#0000A0; font-weight: bold; font-size:24px;}
         .linehead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';font-style:normal;}
-        .parahead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';}
-        .pts_head {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';}
+        .parahead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';font-style:normal;}
+        .pts_head {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';font-style:normal;}
         .lg {color:#008040; font-size:21px;}
         .corr {color:#FF0000; }
         .note {color:#9F5000; font-size:18px;}
-        table {border-collapse: collapse; margin: 20px;}";
+        table {border-collapse: collapse; margin: 20px; border: 1px solid black;}
+        th, td { padding: 0.5em; border: 1px solid black;}
+        table.no-border td, table.no-border th {border: 0px solid black;}
+        table td.border-top {border-top:1px black solid;}
+        table td.border-bottom {border-bottom:1px black solid;}
+        table td.border-left {border-left:1px black solid;}
+        table td.border-right {border-right:1px black solid;}
+        td.pl-1 { padding-left: 1.5em; }
+        td.pl-2 { padding-left: 2.5em; }
+        td.pl-3 { padding-left: 3.5em; }
+        td.pl-4 { padding-left: 4.5em; }
+        td.pl-5 { padding-left: 5.5em; }
+        td.pl-6 { padding-left: 6.5em; }
+        td.pl-7 { padding-left: 7.5em; }
+        td.pl-8 { padding-left: 8.5em; }";
 
-            if(Setting.VerticalMode)
+            if (Setting.VerticalMode) {
                 sHtml += "      body {writing-mode: tb-rl;}\n";
+            }
 
             // 行首格式
             if(Setting.ShowLineFormat) {
@@ -324,8 +377,8 @@ namespace CBReader
         p.headname3 {display:inline; margin-left:0em;}
         p.headname4 {display:inline; margin-left:0em;}
         p.byline    {display:inline; margin-left:0em;}
-        table {border-style: none;}
-        td {padding: 0px;}
+        table-bak {border-style: none;}
+        td-bak {padding: 0px;}
         #div_notearea_box table {border-style:solid; border-collapse:collapse;}
         #div_notearea_box td {padding: 0.5em;}
         span.line_space {display:inline;}
@@ -342,16 +395,8 @@ namespace CBReader
         p.headname3 {display:block; margin-left:3em;}
         p.headname4 {display:block; margin-left:4em;}
         p.byline    {display:block; text-align:right;}
-        table {border-style:solid; border-collapse:collapse;}
-        td {padding: 0.5em;}
-        td.pl-1 {padding-left: 1.5em;}
-        td.pl-2 {padding-left: 2.5em;}
-        td.pl-3 {padding-left: 3.5em;}
-        td.pl-4 {padding-left: 4.5em;}
-        td.pl-5 {padding-left: 5.5em;}
-        td.pl-6 {padding-left: 6.5em;}
-        td.pl-7 {padding-left: 7.5em;}
-        td.pl-8 {padding-left: 8.5em;}
+        p.byline.text-center    {display:block; text-align:center;}
+        p.byline.text-left    {display:block; text-align:left;}
         span.line_space {display:none;}
         span.para_space {display:inline;}";
             }
@@ -488,7 +533,7 @@ namespace CBReader
                 else if(sTagName == "g") { sHtml = tagG(node); }
                 else if(sTagName == "graphic") { sHtml = tagGraphic(node); }
                 else if(sTagName == "head") { sHtml = tagHead(node); }
-                else if(sTagName == "hi") { sHtml = tagFormula(node); }  // 二標記處理法相同
+                else if(sTagName == "hi") { sHtml = tagHi(node); }  // 二標記處理法相同
                 else if(sTagName == "item") { sHtml = tagItem(node); }
                 else if(sTagName == "cb:juan") { sHtml = tagJuan(node); }
                 else if(sTagName == "l") { sHtml = tagL(node); }
@@ -503,7 +548,7 @@ namespace CBReader
                 else if(sTagName == "rdg") { sHtml = tagRdg(node); }
                 else if(sTagName == "ref") { sHtml = tagRef(node); }
                 else if(sTagName == "row") { sHtml = tagRow(node); }
-                else if(sTagName == "seg") { sHtml = tagSeg(node); }
+                else if(sTagName == "seg") { sHtml = tagHi(node); }
                 else if(sTagName == "cb:sg") { sHtml = tagSg(node); }
                 else if(sTagName == "space") { sHtml = tagSpace(node); }
                 else if(sTagName == "cb:t") { sHtml = tagT(node); }
@@ -683,16 +728,13 @@ namespace CBReader
             string sHtml = "";
             string sRend = GetAttr(node, "rend");
             string sStyle = GetAttr(node, "style");
-            CRendAttr myRend = new CRendAttr(sRend);
-            CStyleAttr myStyle = new CStyleAttr(sStyle);
-            if (myRend.NewStyle != "" || myStyle.NewStyle != "" ) {
-                sHtml += "<span style='";
-                sHtml += myRend.NewStyle;
-                sHtml += myStyle.NewStyle;
-                sHtml += "'>";
+
+            string sStyleClass = getStyleClass("", sStyle, sRend);
+            if (sStyleClass != "") {
+                sHtml += $"<span{sStyleClass}>";
             }
             sHtml += parseChild(node); // 處理內容
-            if (myRend.NewStyle != "" || myStyle.NewStyle != "" ) {
+            if (sStyleClass != "") {
                 sHtml += "</span>";
             }
             return sHtml;
@@ -709,27 +751,20 @@ namespace CBReader
             string sRend = GetAttr(node, "rend");
             string sStyle = GetAttr(node, "style");
 
-            CRendAttr myRend = new CRendAttr(sRend);
-            CStyleAttr myStyle = new CStyleAttr(sStyle);
-
-            string sNewStyle = myRend.NewStyle + myStyle.NewStyle;
+            string sStyleClass = getStyleClass("byline", sStyle, sRend);
 
             sHtml += parseChild(node); // 處理內容
 
-            if (sNewStyle != "") {
-                sNewStyle = " style='" + sNewStyle + "'";
-            }
-
             if (ListCount > 0) {
-                sHtml = "<span class='byline'>　" + sHtml + "</span>";
+                sHtml = "<span" + sStyleClass + ">　" + sHtml + "</span>";
             } else {
                 InByline = false;
                 if (Setting.ShowLineFormat) {
                     sHtml = "<span class='line_space'>　　　　</span>" +
-                    "<span class='byline'" + sNewStyle + " data-tagname='p'>" + sHtml + "</span>";
+                    "<span" + sStyleClass + " data-tagname='p'>" + sHtml + "</span>";
                 } else {
                     sHtml = "<span class='line_space' style='display:none'>　　　　</span>" +
-                    "<p class='byline'" + sNewStyle + " data-tagname='p'>" + sHtml + "</p>"; 
+                    "<p" + sStyleClass + " data-tagname='p'>" + sHtml + "</p>"; 
                 }
             }
             return sHtml;
@@ -772,7 +807,7 @@ namespace CBReader
             string sStyle = GetAttr(node, "style");
             CRendAttr myRend = new CRendAttr(sRend);
             CStyleAttr myStyle = new CStyleAttr(sStyle);
-            string sNewStyle = myRend.NewStyle + myStyle.NewStyle;
+            string sNewStyle = myStyle.NewStyle;
             string sNewClass = myRend.NewClass;
             if (sNewStyle != "") {
                 sNewStyle = " style='" + sNewStyle + "'";
@@ -892,9 +927,11 @@ namespace CBReader
 
             CRendAttr myRend = new CRendAttr(sRend);
             CStyleAttr myStyle = new CStyleAttr(sStyle);
-            string sNewStyle = myRend.NewStyle + myStyle.NewStyle;
+
+            string sNewStyle = myStyle.NewStyle;
+            string sNewClass = myRend.NewClass;
             if (sNewStyle != "") {
-                sNewStyle = " style='" + sNewStyle + "'";
+                sNewStyle = $" style='{sNewStyle}'";
             }
 
             DivCount++;
@@ -906,15 +943,14 @@ namespace CBReader
             if (DivType[DivCount] == "w") { 		// 附文
                 FuWenCount++;
                 if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
-                    sHtml += "<span class='w' data-tagname='div'" + sNewStyle + ">";
+                    sHtml += $"<span class='w {sNewClass}' data-tagname='div'{sNewStyle}>";
                 } else {
                     // 要用 div , 才不會有 span 包 p 的困境
                     if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
-                        sHtml += "<div class='w' data-tagname='div'" + sNewStyle + ">";
+                        sHtml += $"<div class='w {sNewClass}' data-tagname='div'{sNewStyle}>";
                     } else {
-                        sHtml += "<div class='w'" + sNewStyle + ">";
+                        sHtml += $"<div class='w {sNewClass}'{sNewStyle}>";
                     }
-
                 }
 
                 if (FuWenCount == 1) {
@@ -933,35 +969,35 @@ namespace CBReader
                 }
             } else if (DivType[DivCount] == "xu") { 		// 序文
                 if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
-                    sHtml += "<span class='xu' data-tagname='div'" + sNewStyle + ">";
+                    sHtml += $"<span class='xu {sNewClass}' data-tagname='div'{sNewStyle}>";
                 } else {
                     // 要用 div , 才不會有 span 包 p 的困境
                     if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
-                        sHtml += "<div class='xu' data-tagname='div'" + sNewStyle + ">";
+                        sHtml += $"<div class='xu {sNewClass}' data-tagname='div'{sNewStyle}>";
                     } else {
-                        sHtml += "<div class='xu'" + sNewStyle + ">";
+                        sHtml += $"<div class='xu {sNewClass}'{sNewStyle}>";
                     }
                 }
             } else if (DivType[DivCount] == "orig") { 		// 原書資料
                 if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
-                    sHtml += "<span class='div-orig' data-tagname='div'" + sNewStyle + ">";
+                    sHtml += $"<span class='div-orig {sNewClass}' data-tagname='div'{sNewStyle}>";
                 } else {
                     // 要用 div , 才不會有 span 包 p 的困境
                     if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
-                        sHtml += "<div class='div-orig' data-tagname='div'" + sNewStyle + ">";
+                        sHtml += $"<div class='div-orig {sNewClass}' data-tagname='div'{sNewStyle}>";
                     } else {
-                        sHtml += "<div class='div-orig'" + sNewStyle + ">";
+                        sHtml += $"<div class='div-orig {sNewClass}'{sNewStyle}>";
                     }
                 }
             } else {
                 if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
-                    sHtml += "<span data-tagname='div'" + sNewStyle + ">";
+                    sHtml += $"<span data-tagname='div'{sNewStyle}>";
                 } else {
                     // 要用 div , 才不會有 span 包 p 的困境
                     if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
-                        sHtml += "<div data-tagname='div'" + sNewStyle + ">";
+                        sHtml += $"<div data-tagname='div'{sNewStyle}>";
                     } else {
-                        sHtml += "<div" + sNewStyle + ">";
+                        sHtml += $"<div{sNewStyle}>";
                     }
                 }
             }
@@ -1031,9 +1067,12 @@ namespace CBReader
 
             CRendAttr myRend = new CRendAttr(sRend);
             CStyleAttr myStyle = new CStyleAttr(sStyle);
+            
+            string sNewStyle = myStyle.NewStyle;
+            string sNewClass = myRend.NewClass;
 
             string sOldMarginLeft = MarginLeft;
-            string sTextIndentSpace = MarginLeft;   // 先設為原來的 MarginLeft
+            string sTextIndentSpace = "";   // 先設為原來的 MarginLeft
 
             int iMarginLeft = 0;
             int iTextIndent = 0;
@@ -1052,31 +1091,21 @@ namespace CBReader
             }
 
             if (Setting.ShowLineFormat) {
-                sHtml += "<span class='entry' style='text-indent: ";
-                sHtml += iTextIndent.ToString();
-                sHtml += "em;";
-                sHtml += myRend.NewStyle;
-                sHtml += myStyle.NewStyle;
-                sHtml += "' data-margin-left='";
-                sHtml += iMarginLeft.ToString();
-                sHtml += "em' data-tagname='div'>";
-                sHtml += "<span class='line_space'>";
-                sHtml += sTextIndentSpace;
-                sHtml += "</span>";
+                sNewStyle = myStyle.sTextIndent + myStyle.NewStyle;
+                if(sNewStyle != "") {
+                    sNewStyle = $" style='{sNewStyle}'";
+                }
+                sHtml += $"<span class='entry {myRend.NewClass}'{sNewStyle}";
+                sHtml += $" data-margin-left='{iMarginLeft}em' data-tagname='div'>";
+                sHtml += $"<span class='line_space'>{sTextIndentSpace}</span>";
             } else {
-                sHtml += "<div class='entry' style='text-indent: ";
-                sHtml += iTextIndent.ToString();
-                sHtml += "em; margin-left: ";
-                sHtml += iMarginLeft.ToString();
-                sHtml += "em;";
-                sHtml += myRend.NewStyle;
-                sHtml += myStyle.NewStyle;
-                sHtml += "' data-margin-left='";
-                sHtml += iMarginLeft.ToString();
-                sHtml += "em' data-tagname='div'>";
-                sHtml += "<span class='line_space' style='display:none'>";
-                sHtml += sTextIndentSpace;
-                sHtml += "</span>";
+                sNewStyle = myStyle.sMarginLeft + myStyle.sTextIndent + myStyle.NewStyle;
+                if (sNewStyle != "") {
+                    sNewStyle = $" style='{sNewStyle}'";
+                }
+                sHtml += $"<div class='entry {myRend.NewClass}'{sNewStyle}";
+                sHtml += $" data-margin-left='{iMarginLeft}em' data-tagname='div'>";
+                sHtml += $"<span class='line_space' style='display:none'>{sTextIndentSpace}</span>";
             }
 
             //------------------------------------
@@ -1117,11 +1146,9 @@ namespace CBReader
             CRendAttr myRend = new CRendAttr(sRend);
             CStyleAttr myStyle = new CStyleAttr(sStyle);
 
-            sHtml += "<span class='foreign'";
-            if (myRend.NewStyle != "" || myStyle.NewStyle != "") {
-                sHtml += " style='" + myRend.NewStyle + myStyle.NewStyle + "'";
-            }
-            sHtml += ">";
+            string sStyleClass = getStyleClass("foreign", sStyle, sRend);
+
+            sHtml += $"<span{sStyleClass}>";
 
             sHtml += parseChild(node); // 處理內容
 
@@ -1423,7 +1450,8 @@ namespace CBReader
 
             CRendAttr myRend = new CRendAttr(sRend);
             CStyleAttr myStyle = new CStyleAttr(sStyle);
-            string sNewStyle = myRend.NewStyle + myStyle.NewStyle;
+            string sNewStyle = myStyle.NewStyle;
+            string sNewClass = myRend.NewClass;
             if (sNewStyle != "") {
                 sNewStyle = " style='" + sNewStyle + "'";
             }
@@ -1442,7 +1470,7 @@ namespace CBReader
 
             if (sParentNodeName == "list") {
                 // list 的規則參考 list 的項目
-                sHtml += "<span class='headname'" + sNewStyle + ">";
+                sHtml += $"<span class='headname {sNewClass}'{sNewStyle}>";
             } else {
                 // 設定 head 待處理
                 if (DivType[DivCount] == "pin") {          // 品的標題
@@ -1468,24 +1496,24 @@ namespace CBReader
                 if (Setting.ShowLineFormat) {
                     if (DivCount == 0 || DivCount % 3 == 1) {
                         sHtml += "<span class='line_space'>　　</span>" +
-                        "<span class='headname2' data-tagname='p'" + sNewStyle + ">";
+                        $"<span class='headname2 {sNewClass}'{sNewStyle} data-tagname='p'>";
                     } else if (DivCount % 3 == 2) {
                         sHtml += "<span class='line_space'>　　　</span>" +
-                        "<span class='headname3' data-tagname='p'" + sNewStyle + ">";
+                        $"<span class='headname3 {sNewClass}'{sNewStyle} data-tagname='p'>";
                     } else if (DivCount % 3 == 0) {
                         sHtml += "<span class='line_space'>　　　　</span>" +
-                        "<span class='headname4' data-tagname='p'" + sNewStyle + ">";
+                        $"<span class='headname4 {sNewClass}'{sNewStyle} data-tagname='p'>";
                     }
                 } else {
                     if (DivCount == 0 || DivCount % 3 == 1) {
                         sHtml += "<span class='line_space' style='display:none'>　　</span>" +
-                        "<p class='headname2' data-tagname='p'" + sNewStyle + ">";
+                        $"<p class='headname2 {sNewClass}'{sNewStyle} data-tagname='p'>";
                     } else if (DivCount % 3 == 2) {
                         sHtml += "<span class='line_space' style='display:none'>　　　</span>" +
-                        "<p class='headname3' data-tagname='p'" + sNewStyle + ">";
+                        $"<p class='headname3 {sNewClass}'{sNewStyle} data-tagname='p'>";
                     } else if (DivCount % 3 == 0) {
                         sHtml += "<span class='line_space' style='display:none'>　　　　</span>" +
-                        "<p class='headname4' data-tagname='p'" + sNewStyle + ">";
+                        $"<p class='headname4 {sNewClass}'{sNewStyle} data-tagname='p'>";
                     }
                 }
             }
@@ -1533,6 +1561,24 @@ namespace CBReader
             return sHtml;
         }
 
+        // <hi rend="border">p.12</hi> 要加外框
+        // <hi,2>...</hi>空格要處理 ????
+        string tagHi(XmlNode node)
+        {
+            string sHtml = "";
+            string sRend = GetAttr(node, "rend");
+            string sStyle = GetAttr(node, "style");
+            string sStyleClass = getStyleClass("", sStyle, sRend);
+            if (sStyleClass != "") {
+                sHtml += $"<span{sStyleClass}>";
+            }
+            sHtml += parseChild(node); // 處理內容
+            if (sStyleClass != "") {
+                sHtml += "</span>";
+            }
+            return sHtml;
+        }
+
         string tagItem(XmlNode node)
         {
             string sHtml = "";
@@ -1559,15 +1605,34 @@ namespace CBReader
             // 就類似 <I5>.....<I6>....<I5> , 則 <I5> 也要空5格.
             // 實例 X26n0524.xml <lb ed="X" n="0633a23"/>
 
-            if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
-                sHtml += "<span data-tagname='li'>";
-            } else {
-                if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
-                    sHtml += "<li data-tagname='li'>";
+            string sRend = GetAttr(node, "rend");
+            string sStyle = GetAttr(node, "style");
+
+            CRendAttr myRend = new CRendAttr(sRend);
+            CStyleAttr myStyle = new CStyleAttr(sStyle);
+
+            string sOldMarginLeft = MarginLeft;     // 記錄舊的 MarginLeft
+            string sTextIndentSpace = "";   // 要空的空格
+
+            int iMarginLeft = 0;
+            int iTextIndent = 0;
+
+            if (sStyle != "") {
+                iMarginLeft = myStyle.MarginLeft;
+                iTextIndent = myStyle.TextIndent;
+
+                sTextIndentSpace = StringRepeat("　", iMarginLeft);
+                MarginLeft += sTextIndentSpace;   // 這是第二行之後要空的
+
+                // 有 TextIndent 就依自己的 TextIndent，不然就依上層的 ListTextIndent
+                if (myStyle.HasTextIndent) {
+                    sTextIndentSpace += StringRepeat("　", iTextIndent);
                 } else {
-                    sHtml += "<li>";
+                    sTextIndentSpace += ListTextIndent;
                 }
             }
+
+            // 原書格式的空白
 
             //if(Setting.CutLine)	// 大正藏切行
             {
@@ -1581,9 +1646,9 @@ namespace CBReader
                     //else
 
                     if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
-                        sHtml += "<span class='line_space'>" + StringRepeat("　", ListCount * 2) + "</span>";
+                        sHtml += "<span class='line_space'>" + sTextIndentSpace + StringRepeat("　", ListCount * 2) + "</span>";
                     } else {
-                        sHtml += "<span class='line_space' style='display:none'>" + StringRepeat("　", ListCount * 2) + "</span>";
+                        sHtml += "<span class='line_space' style='display:none'>" + sTextIndentSpace + StringRepeat("　", ListCount * 2) + "</span>";
                     }
                 } else {
                     // 這幾組在呈現修訂用字時不空格
@@ -1641,15 +1706,52 @@ namespace CBReader
                 }
             }
 
-            string sRend = GetAttr(node, "rend");
-            string sStyle = GetAttr(node, "style");
+            // <li...>
 
-            CRendAttr myRend = new CRendAttr(sRend);
-            CStyleAttr myStyle = new CStyleAttr(sStyle);
+            if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
+                string sNewStyle = myStyle.sTextIndent + myStyle.NewStyle;
+                if (sNewStyle.Length > 0) {
+                    sNewStyle = $" style='{sNewStyle}'";
+                }
+                string sNewClass = myRend.NewClass;
+                if (sNewClass.Length > 0) {
+                    sNewClass = $" class='{sNewClass}'";
+                }
 
-            if (myRend.NewStyle != "" || myStyle.NewStyle != "") {
-                sHtml += "<span style='" + myRend.NewStyle + myStyle.NewStyle + "'>";
+                sHtml += $"<span{sNewStyle}{sNewClass}";
+                if (myStyle.HasMarginLeft) {
+                    sHtml += "' data-margin-left='";
+                    sHtml += iMarginLeft.ToString();
+                    sHtml += "em'";
+                }
+                sHtml += " data-tagname='li'>";
+            } else {
+                string sNewStyle = myStyle.sMarginLeft + myStyle.sTextIndent + myStyle.NewStyle;
+                if (sNewStyle.Length > 0) {
+                    sNewStyle = $" style='{sNewStyle}'";
+                }
+                string sNewClass = myRend.NewClass;
+                if (sNewClass.Length > 0) {
+                    sNewClass = $" class='{sNewClass}'";
+                }
+
+                sHtml += $"<li{sNewStyle}{sNewClass}";
+                if (myStyle.HasMarginLeft) {
+                    sHtml += "' data-margin-left='";
+                    sHtml += iMarginLeft.ToString();
+                    sHtml += "em'";
+                }
+                if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
+                    sHtml += " data-tagname='li'>";
+                } else {
+                    sHtml += ">";
+                }
             }
+
+
+            //if (myRend.NewStyle != "" || myStyle.NewStyle != "") {
+            //    sHtml += "<span style='" + myRend.NewStyle + myStyle.NewStyle + "'>";
+            //}
 
             // item 的屬性要印出來 , <list xml:lang="sa-Sidd" type="ordered">
             //                         <item n="（一）" xml:id="itemT18p0087a1401">....
@@ -1662,14 +1764,16 @@ namespace CBReader
             sHtml += parseChild(node); // 處理內容
             // -----------------------------------
 
-            if (myRend.NewStyle != "" || myStyle.NewStyle != "") {
-                sHtml += "</span>";
-            }
+            //if (myRend.NewStyle != "" || myStyle.NewStyle != "") {
+            //    sHtml += "</span>";
+            //}
             if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                 sHtml += "</span>";
             } else {
                 sHtml += "</li>";
             }
+
+            MarginLeft = sOldMarginLeft;
             return sHtml;
         }
 
@@ -1726,7 +1830,9 @@ namespace CBReader
             // 檢查移位 <l rend="margin-left:1">
 
             string sStyle = GetAttr(node, "style");
+            string sRend = GetAttr(node, "rend");
             CStyleAttr myStyle = new CStyleAttr(sStyle);
+            CRendAttr myRend = new CRendAttr(sRend);
 
             if ((myStyle.HasMarginLeft || myStyle.HasTextIndent)
                 && !(!Setting.ShowPunc && LgNormal)      //若不秀標點且是標準格式, 就不依 style
@@ -1787,14 +1893,16 @@ namespace CBReader
                 }
             }
 
-            sLTextIndent += StringRepeat("　", iMarginLeft + iTextIndent);
             // l 本身要空的格
-            sHtml += sLTextIndent;
+            sHtml += StringRepeat("　", iMarginLeft + iTextIndent);
+
+            sHtml += "<span" + getStyleClass("", myStyle, myRend) + ">";
 
             // -----------------------------------
             sHtml += parseChild(node); // 處理內容
             // -----------------------------------
 
+            sHtml += "</span>";
             // LMarginLeft = "";
 
             return sHtml;
@@ -1816,7 +1924,7 @@ namespace CBReader
 
             // Debug
 
-            if (sN == "0196a09") {
+            if (sN == "0012a12") {
                 int deb = 10;
                 deb++;
                 IsDebug = true;
@@ -2205,7 +2313,7 @@ namespace CBReader
 
             // 再處理 style 屬性
 
-            int iMarginLeft = 0;
+            int iMarginLeft = 1;
             int iTextIndent = 0;
             // 檢查移位 <lg style="margin-left:1">
             if ((myStyle.HasMarginLeft || myStyle.HasTextIndent)
@@ -2213,7 +2321,10 @@ namespace CBReader
                 && !(Setting.NoShowLgPunc && LgNormal)) {     // 若在偈頌中且偈頌不秀新標
                 bHasStyle = true;
 
-                iMarginLeft = myStyle.MarginLeft;
+                // 若沒有設 MarginLeft，則預設是 1
+                if (myStyle.HasMarginLeft) {
+                    iMarginLeft = myStyle.MarginLeft;
+                }
                 iTextIndent = myStyle.TextIndent;
 
                 // lg 整段要空的格
@@ -2246,11 +2357,9 @@ namespace CBReader
                     sHtml += "<p data-tagname='p'";
                 }
 
-                // 處理 style
+                // 處理 style and class
 
-                if (myRend.NewStyle != "" || myStyle.NewStyle != "") {
-                    sHtml += " style='" + myRend.NewStyle + myStyle.NewStyle + "'";
-                }
+                sHtml += getStyleClass("", myStyle, myRend);
 
                 sHtml += ">";
                 sHtml += sLgTextIndent;
@@ -2264,17 +2373,15 @@ namespace CBReader
                     if (Setting.ShowLineFormat) {
                         sHtml += "<span style='";
                         if (iTextIndent != 0) {
-                            sHtml += "text-indent:";
-                            sHtml += iTextIndent.ToString();
-                            sHtml += "em;";
+                            sHtml += $"text-indent:{iTextIndent}em;";
                         }
-                        sHtml += myRend.NewStyle;
                         sHtml += myStyle.NewStyle;
                         sHtml += "'";
+                        if(myRend.NewClass != "") {
+                            sHtml += $" class='{myRend.NewClass}'";
+                        }
                         if (iMarginLeft != 0) {
-                            sHtml += " data-margin-left='";
-                            sHtml += iMarginLeft.ToString();
-                            sHtml += "em'";
+                            sHtml += $" data-margin-left='{iMarginLeft}em'";
                         }
                         sHtml += " data-tagname='p'>";
 
@@ -2293,9 +2400,11 @@ namespace CBReader
                             sHtml += iTextIndent.ToString();
                             sHtml += "em;";
                         }
-                        sHtml += myRend.NewStyle;
                         sHtml += myStyle.NewStyle;
                         sHtml += "'";
+                        if (myRend.NewClass != "") {
+                            sHtml += $" class='{myRend.NewClass}'";
+                        }
                         if (iMarginLeft != 0) {
                             sHtml += " data-margin-left='";
                             sHtml += iMarginLeft.ToString();
@@ -2315,10 +2424,7 @@ namespace CBReader
                     }
 
                     // 處理 style
-
-                    if (myRend.NewStyle != "" || myStyle.NewStyle != "") {
-                        sHtml += " style='" + myRend.NewStyle + myStyle.NewStyle + "'";
-                    }
+                    sHtml += getStyleClass("", myStyle, myRend);
                     sHtml += ">";
                 }
             }
@@ -2388,7 +2494,20 @@ namespace CBReader
         行中 <item> : 第一個 item 依 list 的層數來空格, 第二個之後一律空一格.
         <lb> 要依 list 留空白, 除非其後是 <list> 或 <item>
 
+        如果 list 或 item 有用 margin-left 和 text-indent 指定空格，就依指定的空格處理。
+
+        margin-left 是 list 和 item 加起來的。
+        如果 list 和 item 同時都有 text-indent，則忽略 list 的 text-indent，以 item 的 text-indent 為主。
+        
+        margin-left 和 text-indent 預設都是 0，在 BM 就是每一層會加二個空格，
+        所以 margin-left 為 1 就表示會空 3 格。
+
+        當第一層的 text-indent > 0 時，底下還有多層 list 時，
+        只有最後一層的 list 才會受到 text-indent 的影響，這個規則不好捉，
+        BM 採取不記錄上層 list 或 item 的 text-indent，請小心。
+
         */
+
         string tagList(XmlNode node)
         {
             string sHtml = "";
@@ -2415,14 +2534,17 @@ namespace CBReader
                 }
             }
 
-            // 如果是 <list rend="no-marker"> 要轉成 <ul style="list-style:none;">
+            // 如果是 <list rend="no-marker"> 要轉成 <ul rend="no-marker">
             string sRend = GetAttr(node, "rend");
             string sStyle = GetAttr(node, "style");
             CRendAttr myRend = new CRendAttr(sRend);
             CStyleAttr myStyle = new CStyleAttr(sStyle);
 
-            string sOldMarginLeft = MarginLeft;
-            string sTextIndentSpace = MarginLeft;   // 先設為原來的 MarginLeft
+            string sOldMarginLeft = MarginLeft;     // 記錄舊的 MarginLeft
+            
+            string sTextIndentSpace = "";               // 要空的空格
+            string sOldListTextIndent = ListTextIndent; // 記錄舊的 ListTextIndent
+            ListTextIndent = "";                        // 本層的 ListTextIndent 先設為空的
 
             int iMarginLeft = 0;
             int iTextIndent = 0;
@@ -2431,38 +2553,57 @@ namespace CBReader
                 iMarginLeft = myStyle.MarginLeft;
                 iTextIndent = myStyle.TextIndent;
 
-                MarginLeft += StringRepeat("　", iMarginLeft);// 這是第二行之後要空的
-                sTextIndentSpace += StringRepeat("　", iMarginLeft + iTextIndent);
+                sTextIndentSpace = StringRepeat("　", iMarginLeft);
+                MarginLeft += sTextIndentSpace;   // 這是第二行之後要空的
+
+                // list 不要加 iTextIndent，這是留給 item 空的
+                //sTextIndentSpace += StringRepeat("　", iMarginLeft);     // + iTextIndent);
+                ListTextIndent = StringRepeat("　", iTextIndent);    // 本層的 ListTextIndent
             }
 
             if (!bHasHead) {
                 if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
-                    sHtml += "<span style='text-indent: ";
-                    sHtml += iTextIndent.ToString();
-                    sHtml += "em;";
-                    sHtml += myRend.NewStyle;
-                    sHtml += myStyle.NewStyle;
-                    sHtml += "' data-margin-left='";
-                    sHtml += iMarginLeft.ToString();
-                    sHtml += "em' data-tagname='ul'>";
+                    string sNewStyle = myStyle.sTextIndent + myStyle.NewStyle;
+                    if(sNewStyle.Length > 0) {
+                        sNewStyle = $" style='{sNewStyle}'";
+                    }
+                    string sNewClass = myRend.NewClass;
+                    if (sNewClass.Length > 0) {
+                        sNewClass = $" class='{sNewClass}'";
+                    }
+
+                    sHtml += $"<span{sNewStyle}{sNewClass}";
+                    if (myStyle.HasMarginLeft) {
+                        sHtml += "' data-margin-left='";
+                        sHtml += iMarginLeft.ToString();
+                        sHtml += "em'";
+                    }
+                    sHtml += " data-tagname='ul'>";
 
                     sHtml += "<span class='line_space'>";
                     sHtml += sTextIndentSpace;
                     sHtml += "</span>";
                 } else {
-                    sHtml += "<ul style='text-indent: ";
-                    sHtml += iTextIndent.ToString();
-                    sHtml += "em; margin-left: ";
-                    sHtml += iMarginLeft.ToString();
-                    sHtml += "em;";
-                    sHtml += myRend.NewStyle;
-                    sHtml += myStyle.NewStyle;
-                    sHtml += "' data-margin-left='";
-                    sHtml += iMarginLeft.ToString();
+
+                    string sNewStyle = myStyle.sMarginLeft + myStyle.sTextIndent + myStyle.NewStyle;
+                    if (sNewStyle.Length > 0) {
+                        sNewStyle = $" style='{sNewStyle}'";
+                    }
+                    string sNewClass = myRend.NewClass;
+                    if (sNewClass.Length > 0) {
+                        sNewClass = $" class='{sNewClass}'";
+                    }
+
+                    sHtml += $"<ul{sNewStyle}{sNewClass}";
+                    if (myStyle.HasMarginLeft) {
+                        sHtml += "' data-margin-left='";
+                        sHtml += iMarginLeft.ToString();
+                        sHtml += "em'";
+                    }
                     if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
-                        sHtml += "em' data-tagname='ul'>";
+                        sHtml += " data-tagname='ul'>";
                     } else {
-                        sHtml += "em'>";
+                        sHtml += ">";
                     }
 
                     sHtml += "<span class='line_space' style='display:none'>";
@@ -2481,6 +2622,7 @@ namespace CBReader
 
             ListCount--;
             MarginLeft = sOldMarginLeft;
+            ListTextIndent = sOldListTextIndent;
 
             return sHtml;
         }
@@ -2936,8 +3078,11 @@ namespace CBReader
                 sHtml += "em; margin-left: ";
                 sHtml += iMarginLeft.ToString();
                 sHtml += "em; margin-top: 5px; margin-bottom: 0em;";
-                sHtml += myRend.NewStyle;
                 sHtml += myStyle.NewStyle;
+                sHtml += "'";
+                if (myRend.NewClass != "") {
+                    sHtml += " class='" + myRend.NewClass + "'";
+                }
                 // sHtml += "' data-tagname='p'>";
                 sHtml += "'>";
 
@@ -2974,9 +3119,12 @@ namespace CBReader
                     sHtml += "<span style='text-indent: ";
                     sHtml += iTextIndent.ToString();
                     sHtml += "em;";
-                    sHtml += myRend.NewStyle;
                     sHtml += myStyle.NewStyle;
-                    sHtml += "' data-margin-left='";
+                    sHtml += "'";
+                    if (myRend.NewClass != "") {
+                        sHtml += " class='" + myRend.NewClass + "'";
+                    }
+                    sHtml += " data-margin-left='";
                     sHtml += iMarginLeft.ToString();
                     sHtml += "em' data-tagname='p'>";
                 } else {
@@ -2985,15 +3133,18 @@ namespace CBReader
                     sHtml += "em; margin-left: ";
                     sHtml += iMarginLeft.ToString();
                     sHtml += "em;";
-                    sHtml += myRend.NewStyle;
                     sHtml += myStyle.NewStyle;
+                    sHtml += "'";
+                    if (myRend.NewClass != "") {
+                        sHtml += " class='" + myRend.NewClass + "'";
+                    }
                     // 在校注中也不要 data-tagname='p' ， 讓它無法還原
                     if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
-                        sHtml += "' data-margin-left='";
+                        sHtml += " data-margin-left='";
                         sHtml += iMarginLeft.ToString();
                         sHtml += "em' data-tagname='p'>";
                     } else {
-                        sHtml += "'>";
+                        sHtml += ">";
                     }
                 }
             }
@@ -3211,27 +3362,6 @@ namespace CBReader
             return sHtml;
         }
 
-        // <seg rend="border">p.12</seg> 要加外框
-        string tagSeg(XmlNode node)
-        {
-            string sHtml = "";
-            string sRend = GetAttr(node, "rend");
-            string sStyle = GetAttr(node, "style");
-            CRendAttr myRend = new CRendAttr(sRend);
-            CStyleAttr myStyle = new CStyleAttr(sStyle);
-            if (myRend.NewStyle != "" || myStyle.NewStyle != "" ) {
-                sHtml += "<span style='";
-                sHtml += myRend.NewStyle;
-                sHtml += myStyle.NewStyle;
-                sHtml += "'>";
-            }
-            sHtml += parseChild(node); // 處理內容
-            if (myRend.NewStyle != "" || myStyle.NewStyle != "" ) {
-                sHtml += "</span>";
-            }
-            return sHtml;
-        }
-
         // <cb:sg> 要加括號 , <cb:tt><cb:t xml:lang="sa-Sidd"><g ref="#SD-E074">??</g></cb:t><cb:t xml:lang="zh"><cb:yin><cb:zi>唵</cb:zi><cb:sg>引</cb:sg></cb:yin></cb:t></cb:tt>
         string tagSg(XmlNode node)
         {
@@ -3352,14 +3482,15 @@ namespace CBReader
             string sHtml = "";
             string sRend = GetAttr(node, "rend");
             string sStyle = GetAttr(node, "style");
-            string sBorder = "1";      // 預設表格線為 1
+            //string sBorder = "1";      // 預設表格線為 1
 
             CRendAttr myRend = new CRendAttr(sRend);
             CStyleAttr myStyle = new CStyleAttr(sStyle);
-            string sNewStyle = myRend.NewStyle + myStyle.NewStyle;
+            string sNewStyle = myStyle.NewStyle;
+            string sNewClass = myRend.NewClass;
 
             string sOldMarginLeft = MarginLeft;
-            string sTextIndentSpace = MarginLeft;   // 先設為原來的 MarginLeft
+            string sTextIndentSpace = "";   // 先設為原來的 MarginLeft
             int iMarginLeft = 0;
             int iTextIndent = 0;
 
@@ -3371,50 +3502,33 @@ namespace CBReader
             }
 
             // 如果用 style="border:1" 只會最外圍有框線, 格子沒有, 細節要再研究
-            if (myRend.Find("no-border")) {
-                sBorder = "0";
-            }
+            // if (myRend.Find("no-border")) {
+            //     sBorder = "0";
+            // }
 
             if (Setting.ShowLineFormat && !InNoteOrig && !InNoteMod && !InNoteAdd) {
                 sHtml += "<span class='line_space'>";
                 sHtml += sTextIndentSpace;
                 sHtml += "</span>";
-                sHtml += "<span data-tagname='table' border='";
-                sHtml += sBorder;
-                sHtml += "'";
+                sHtml += "<span data-tagname='table'";
                 if (sNewStyle != "" || iMarginLeft != 0 || iTextIndent != 0) {
-                    sHtml += " style='" + sNewStyle;
-                    if (iTextIndent != 0) {
-                        sHtml += "text-indent: ";
-                        sHtml += iTextIndent.ToString();
-                        sHtml += "em;";
-                    }
-                    sHtml += "'";
+                    sHtml += $" style='{sNewStyle}{myStyle.sTextIndent}'";
                 }
+                sHtml += $" class='{sNewClass}'";
                 sHtml += $" data-margin-left='{iMarginLeft}em'><span data-tagname='tbody'>";
             } else {
                 sHtml += "<span class='line_space' style='display:none'>";
                 sHtml += sTextIndentSpace;
                 sHtml += "</span>";
                 if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
-                    sHtml += "<table data-tagname='table' border='";
+                    sHtml += "<table data-tagname='table' ";
                 } else {
-                    sHtml += "<table border='";
+                    sHtml += "<table ";
                 }
-                sHtml += sBorder;
-                sHtml += "'";
                 if (sNewStyle != "" || iMarginLeft != 0 || iTextIndent != 0) {
-                    sHtml += " style='" + sNewStyle;
-                    if (iMarginLeft != 0 || iTextIndent != 0) {
-                        sHtml += "text-indent: ";
-                        sHtml += iTextIndent.ToString();
-                        sHtml += "em;";
-                        sHtml += "margin-left: ";
-                        sHtml += iMarginLeft.ToString();
-                        sHtml += "em;";
-                    }
-                    sHtml += "'";
+                    sHtml += $" style='{sNewStyle}{myStyle.sTextIndent}{myStyle.sMarginLeft}'";
                 }
+                sHtml += $" class='{sNewClass}'";
                 if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
                     sHtml += $" data-margin-left='{iMarginLeft}em'><tbody data-tagname='tbody'>";
                 } else {
@@ -3602,6 +3716,28 @@ namespace CBReader
 
             sHtml += "</span>";
             return sHtml;
+        }
+
+        // 傳入 xml 的 style 和 rend 內容，傳回 html 的 style 和 class
+        // 第一個參數是指定的 class 名稱
+        string getStyleClass(string className, string sStyle, string sRend)
+        {
+            CStyleAttr myStyle = new CStyleAttr(sStyle);
+            CRendAttr myRend = new CRendAttr(sRend);
+            return getStyleClass(className, myStyle, myRend);
+        }
+
+        string getStyleClass(string className, CStyleAttr myStyle, CRendAttr myRend)
+        {
+            string sNewStyle = myStyle.NewStyle;
+            string sNewClass = className == "" ? myRend.NewClass : className + " " + myRend.NewClass;
+            if (sNewStyle != "") {
+                sNewStyle = " style='" + sNewStyle + "'";
+            }
+            if (sNewClass != "") {
+                sNewClass = " class='" + sNewClass + "'";
+            }
+            return sNewStyle + sNewClass;
         }
 
         // 通知 note orig , 此校勘有 mod 版
@@ -3959,8 +4095,9 @@ namespace CBReader
             // <date>2019-09-12 02:11:51 +0800</date>
             XmlNode NodeDate = Document.DocumentElement["teiHeader"]["fileDesc"]["publicationStmt"]["date"];
             sUpdateDate = NodeDate.InnerText;
-            sUpdateDate = sUpdateDate.Substring(0,10);
-
+            if(sUpdateDate.Length > 10) {
+                sUpdateDate = sUpdateDate.Substring(0,10);
+            }
 	        sBookName = Series.BookData.GetBookName(BookId);
             // 經名要移除 (第X卷)
             sSutraName = CCBSutraUtil.CutJuanAfterSutraName(SutraName);
@@ -3995,6 +4132,10 @@ namespace CBReader
         // 產生重複指定字串
         string StringRepeat(string str, int iCount)
         {
+            // 底下不要處理，這樣負數才會出現錯誤。
+            //if(iCount < 0) {
+            //    iCount = iCount < 0 ? 0 : iCount;
+            //}
             return string.Concat(Enumerable.Repeat(str, iCount));
         }
 

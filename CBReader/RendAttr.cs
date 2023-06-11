@@ -13,7 +13,7 @@ namespace CBReader
 	public class CRendAttr
 	{
 		string Rend;
-		public string NewStyle = "";   // 由 Rend 的內容自動產生相對應的 Style
+		//public string NewStyle = "";   // 由 Rend 的內容自動產生相對應的 Style
 		public string NewClass = "";   // 由 Rend 的內容自動產生相對應的 Class
 								//List<string> RendList = new List<string>(); // 存放每一組 Rend
 		string[] RendList;
@@ -29,18 +29,20 @@ namespace CBReader
 		// 產生相對應的 Style
 		void CreateStyle() {
 			foreach (string sStr in RendList) {
-				// 處理 Style
-				if (sStr == "border") {
+				NewClass += sStr + " ";
+                /*
+                // 處理 Style
+                if (sStr == "border") {
 					NewStyle += "border:1px black solid;";
 				} else if (sStr == "no-border") {
 					NewStyle += "border:0;";
 				} else if (sStr == "no-marker") {
 					NewStyle += "list-style:none;";
 				} else if (sStr == "bold") {
-					NewStyle += "font-weight:bold;";
+                    NewClass += "bold ";
 				} else if (sStr == "italic") {
-					NewStyle += "font-style:italic;";
-				} else if (sStr == "small") {
+                    NewClass += "italic ";
+                } else if (sStr == "small") {
 					NewStyle += "font-size:18px;";	// ???? 要檢討, 及如何應對未來自訂大小
 				} else if (sStr == "large") {
 					NewStyle += "font-size:24px;";  // ???? 要檢討, 及如何應對未來自訂大小
@@ -49,7 +51,7 @@ namespace CBReader
 				} else if (sStr == "text-left") {
 					NewStyle += "text-align:left;";
 				} else if (sStr == "text-center") {
-					// 因為 p 設為 center 會空四格，head 整段空二格，所以要用 0 去取消
+					// 因為 p 設為 center 會空四格，head 整段空二格，所以置中的 head 要用 0 去取消
 					NewStyle += "text-align:center; text-indent:0em !important; margin-left:0em !important;";
 				} else if (sStr == "text-right") {
 					NewStyle += "text-align:right;";
@@ -78,8 +80,10 @@ namespace CBReader
                 } else if (sStr == "del") {
                     NewStyle += "text-decoration:line-through;";
                 }
+				*/
             }
-		}
+            NewClass = NewClass.Trim();
+        }
 
 		// 在 RendList 找到某字串
 		public bool Find(string sStr) {
