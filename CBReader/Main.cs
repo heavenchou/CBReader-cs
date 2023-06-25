@@ -18,6 +18,8 @@ using System.Windows.Controls;
 using System.Reflection;
 using SHDocVw;
 using System.Drawing.Drawing2D;
+using Microsoft.Web.WebView2.WinForms;
+using Microsoft.Web.WebView2.Core;
 
 namespace CBReader
 {
@@ -32,6 +34,7 @@ namespace CBReader
         OptionForm optionForm;
         SearchRangeForm searchrangeForm;
         UpdateForm updateForm;
+        WebView2 webView = null;    // Edge 的 Chrome 元件
         public CSetting Setting; // 設定檔
 
         int SelectedBook = -1;   // 目前選中的書, -1 表示還沒選
@@ -56,6 +59,7 @@ namespace CBReader
 
         int IEZoom = 100;                       // IE 縮放比率
         bool SetIEZoom = false;                 // 是否設定過 IE縮放率
+        bool SetWebViewZoom = false;            // 是否設定 WebView 縮放率
 
         bool IsDarkTheme = false;
 
@@ -69,6 +73,9 @@ namespace CBReader
             CGlobalVal.initialPath();
             // 將 IE 設定到 IE 11 (如果沒 IE 11 的如何?)
             SetPermissions(11001);
+            // 設定 WebView2
+            InitialWebView2();
+
             // 取得語系
             // Windows 版的語系檔目錄一定和主程式相同位置，不可依賴其它位置。
             language = new Language(CGlobalVal.MyFullPath + "Language\\", CGlobalVal.MySettingPath + "Language\\");
@@ -202,7 +209,7 @@ namespace CBReader
 
             if (iBookcaseCount != 0) {
                 string URL = "file://" + Bookcase.CBETA.Dir + "help/index.htm";
-                webBrowser.Navigate(URL);
+                OpenURL(URL);
             }
 
             Text = CGlobalVal.ProgramTitle;
@@ -356,6 +363,43 @@ namespace CBReader
             }
         }
 
+        // 設定 WebView2
+        async void InitialWebView2()
+        {
+            // 檢查有沒有 Microsoft.Web.WebView2.Core.dll
+            string path = CGlobalVal.MyFullPath + "Microsoft.Web.WebView2.Core.dll";
+            if (!File.Exists(path)) {
+                // 沒有 Microsoft.Web.WebView2.Core.dll 就離開
+                return;
+            }
+
+            // 檢查 webView2 版本
+            try {
+                string version = CoreWebView2Environment.GetAvailableBrowserVersionString();
+            } catch (Exception ex) {
+                // 無法查版本，有問題就離開
+                return;
+            }
+
+            // 設定 webView2
+            webBrowser.Visible = false;
+            webView = new WebView2();
+            webView.NavigationStarting += WebView_NavigationStarting;
+            webView.SourceChanged += WebView_SourceChanged;
+            webView.NavigationCompleted += webView_CoreWebView2NavigationCompleted;
+            webView.ZoomFactorChanged += WebView_ZoomFactorChanged;
+            webView.Parent = tpWeb;
+            webView.Dock = DockStyle.Fill;
+
+            // 設定 UDF 目錄路徑
+            string userDataFolder = CGlobalVal.MySettingPath + "CBReader.exe.WebView2";
+            var webView2Environment = await CoreWebView2Environment.CreateAsync(null, userDataFolder);
+            await webView.EnsureCoreWebView2Async(webView2Environment);
+
+            // 向網頁提供可呼叫的類別 WebViewClass，第一個參數是名稱，第二個參數是類別實體
+            webView.CoreWebView2.AddHostObjectToScript("webViewBridge", new WebViewBridge());
+        }
+
         // 將檔案載入導覽樹
         void LoadNavTree(string sFile)
         {
@@ -404,13 +448,8 @@ namespace CBReader
             sOutFile = CGlobalVal.MyTempPath + sOutFile;
 
             CBXML.SaveToHTML(sOutFile);
-
-            try {
-                //WebBrowser->URL = (u"file://" + sOutFile);
-                webBrowser.Navigate("file://" + sOutFile);
-            } catch {
-                //WebBrowser->Navigate(u"file://" + sOutFile);
-            }
+            OpenURL("file://" + sOutFile);
+     
 
             // 產生目錄
 
@@ -600,9 +639,9 @@ namespace CBReader
             // 一般連結
             if (iType == ENavItemType.nit_NormalLink) {
                 if (sURL.Substring(0, 4) == "http") {
-                    webBrowser.Navigate(sURL);
+                    OpenURL(sURL);
                 } else {
-                    webBrowser.Navigate("file://" + sSeries.Dir + sURL);
+                    OpenURL("file://" + sSeries.Dir + sURL);
                 }
             } else if (iType == ENavItemType.nit_NavLink) {
                 // 目錄連結
@@ -677,9 +716,14 @@ namespace CBReader
             iniFile.WriteInteger(Section, "GoSutraBookIdIndex", cbGoSutraBookId.SelectedIndex);
 
             // IE 瀏覽器縮放率
-            dynamic domWindow = webBrowser.Document.Window.DomWindow;
-            int IEZoom = (int)((double)domWindow.devicePixelRatio * 100);
-            iniFile.WriteInteger(Section, "IEZoom", IEZoom);
+            if (webView != null) {
+                int IEZoom = (int)(webView.ZoomFactor * 100);
+                iniFile.WriteInteger(Section, "IEZoom", IEZoom);
+            } else { 
+                dynamic domWindow = webBrowser.Document.Window.DomWindow;
+                int IEZoom = (int)((double)domWindow.devicePixelRatio * 100);
+                iniFile.WriteInteger(Section, "IEZoom", IEZoom);
+            }
 
             Section = "SystemInfo";
 
@@ -716,6 +760,28 @@ namespace CBReader
 
             foreach (var file in tmpDir.GetFiles()) {
                 file.Delete();
+            }
+        }
+
+        void OpenURL(string url)
+        {
+            try {
+                if(webView != null) {
+                    webView.Source = new Uri(url);
+                } else {
+                    webBrowser.Navigate(url);
+                }
+            } catch {
+            }
+        }
+
+        // 清除 webView 的使用者資料檔案夾中的流覽資料
+        async void clearWebViewCache()
+        {
+            if (webView != null) {
+                if (webView.CoreWebView2 != null) {
+                    await webView.CoreWebView2.Profile.ClearBrowsingDataAsync();
+                }
             }
         }
 
@@ -802,6 +868,9 @@ namespace CBReader
 
             // 清除暫存目錄的檔案
             DeleteTempFile();
+
+            // 清除 webView 的使用者資料檔案夾中的流覽資料
+            clearWebViewCache();
 
             // 更新後自動重啟
             if (CGlobalVal.restart) {
@@ -1549,6 +1618,27 @@ namespace CBReader
                     ref pvaIn,
                     IntPtr.Zero
                 );
+            }
+        }
+
+        private void WebView_NavigationStarting(object sender, CoreWebView2NavigationStartingEventArgs e)
+        {
+            SetWebViewZoom = false;
+        }
+        private void WebView_SourceChanged(object sender, CoreWebView2SourceChangedEventArgs e)
+        {
+            webView.ZoomFactor = IEZoom / 100.0;// 設定 webView2 縮放率
+        }
+
+        private void webView_CoreWebView2NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            SetWebViewZoom = true;
+        }
+
+        private void WebView_ZoomFactorChanged(object sender, EventArgs e)
+        {
+            if (SetWebViewZoom) {
+                IEZoom = (int)(webView.ZoomFactor * 100.0);
             }
         }
 

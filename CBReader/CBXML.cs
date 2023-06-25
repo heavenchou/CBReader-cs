@@ -195,6 +195,9 @@ namespace CBReader
                 HTMLText += $"\tlocation.href='#{sLink}';\n";
             } else if(bShowHighlight) {
                 HTMLText += "\tlocation.href='#Search_0_1';\n";
+            } else {
+                // 如果不加底下這行，webview2 不會重新載入同樣檔名的內容
+                HTMLText += "\tlocation.href='#';\n";
             }
             HTMLText += "</script>\n</body>\n</html>";
         }
@@ -3084,7 +3087,7 @@ namespace CBReader
                     sHtml += " class='" + myRend.NewClass + "'";
                 }
                 // sHtml += "' data-tagname='p'>";
-                sHtml += "'>";
+                sHtml += ">";
 
                 if (iSpecialType == 1) {
                     sHtml += "<font color=#800000>";
@@ -4117,7 +4120,7 @@ namespace CBReader
 		        }
             }
             sVerInfo += "<br>\n";
-            sVerInfo += "【編輯說明】本資料庫由中華電子佛典協會（CBETA）依" + sBookName + "所編輯<br>\n";
+            sVerInfo += "【編輯說明】本資料庫由中華電子佛典協會（CBETA）依「" + sBookName + "」所編輯<br>\n";
             //不管什麼版本, 都要列出版權宣告比較好
             //if(Application->Title == u"CBReader")
             {
