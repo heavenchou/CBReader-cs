@@ -30,7 +30,7 @@ namespace CBReader
 
 			string sXMLFile = mainForm.Bookcase.CBETA.Dir + sFile;
 			string sJSFile = mainForm.Bookcase.CBETA.Dir + mainForm.Bookcase.CBETA.JSFile;
-			CCBXML CBXML = new CCBXML(sXMLFile, "", mainForm.Setting, sJSFile, false, mainForm.Bookcase.CBETA);
+			CCBXML CBXML = new CCBXML(false, sXMLFile, "", mainForm.Setting, sJSFile, false, mainForm.Bookcase.CBETA);
 
 			string sOutFile = sFile + ".htm";
 
@@ -50,10 +50,11 @@ namespace CBReader
 			string sTempPath = CGlobalVal.MyTempPath + "Debug\\";
 			if (Directory.Exists(sTempPath)) {
 				Directory.CreateDirectory(sTempPath);
-			}
-			edTempPath.Text = sTempPath;
+            }
+            edTempPath.Text = sTempPath;
+            edTempPath.Text = "d:\\Temp\\cbr_htm\\";
 
-			int iSpineCount = mainForm.Bookcase.CBETA.Spine.Files.Length;
+            int iSpineCount = mainForm.Bookcase.CBETA.Spine.Files.Length;
 			for (int i = 0; i < iSpineCount; i++) {
 				// 該忽略還是要忽略才對
 				if (edSkipThisBook.Text != "") {

@@ -364,10 +364,16 @@ namespace CBReader
 
         void EachMenuItems(string formName, ToolStripItemCollection items)
         {
-            foreach (ToolStripMenuItem item in items) {
-                ChangeMenuItemLang(formName, item);
-                if (item.HasDropDownItems) {
-                    EachMenuItems(formName, item.DropDownItems);
+            foreach (ToolStripItem i in items) {
+                if (i is ToolStripMenuItem) {
+                    ToolStripMenuItem item = i as ToolStripMenuItem;
+                    ChangeMenuItemLang(formName, item);
+                    if (item.HasDropDownItems) {
+                        EachMenuItems(formName, item.DropDownItems);
+                    }
+                } else if (i is ToolStripButton) {
+                    ToolStripButton item = i as ToolStripButton;
+                    ChangeToolStripButtonLang(formName, item);
                 }
             }
         }
@@ -389,6 +395,26 @@ namespace CBReader
                 item.Text = controlName;
                 item.Font = new Font(FontName,9);
             }
+        }
+
+
+        // 更新工具列按鈕的語系
+        public void ChangeToolStripButtonLang(string formName, ToolStripButton c)
+        {
+            string controlName = IniFile.ReadString(formName, c.Name, "");
+            controlName = UserIniFile.ReadString(formName, c.Name, controlName);
+
+            // 設定 tooltip
+            //if (formName == "MainForm") {
+                string controlTooltip = IniFile.ReadString(formName, c.Name + "_tip", "");
+                controlTooltip = UserIniFile.ReadString(formName, c.Name + "_tip", controlTooltip);
+                if (controlTooltip != "") {
+                    controlTooltip = controlTooltip.Replace("\\r", "\r");
+                    controlTooltip = controlTooltip.Replace("\\n", "\n");
+                    c.ToolTipText = controlTooltip;
+                    //main.toolTip1.SetToolTip(c, controlTooltip);
+                }
+            //}
         }
 
         // 更新 ComboBox Item

@@ -20,6 +20,8 @@ using SHDocVw;
 using System.Drawing.Drawing2D;
 using Microsoft.Web.WebView2.WinForms;
 using Microsoft.Web.WebView2.Core;
+using System.Security.Policy;
+using System.Net.NetworkInformation;
 
 namespace CBReader
 {
@@ -63,6 +65,11 @@ namespace CBReader
 
         bool IsDarkTheme = false;
 
+        Point tsMainLocation;
+        Point tsSutraLocation;
+
+        bool formMin = false;   // 用來判斷剛剛是不是在最小化狀態
+
         public MainForm()
         {
             InitializeComponent();
@@ -76,6 +83,24 @@ namespace CBReader
             // 設定 WebView2
             InitialWebView2();
 
+            // 沒有 webview2 則沒有工具列
+            if(webView == null) {
+                tsSutra.Visible = false;
+                miSutraToolStrip.Visible = false;
+
+                // 要求使用者安裝 WebView2
+                DialogResult result = MessageBox.Show(
+                  "您的系統沒有安裝 WebView2 元件，請至相關說明網頁，了解並安裝 WebView2 元件。",
+                  "安裝 WebView2 元件",
+                  MessageBoxButtons.YesNo,
+                  MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes) {
+                    // 選擇 Yes
+                    Process.Start(@"https://www.cbeta.org/CBReader2X_FAQ.php#Q12");	// 指定程式開啟文件
+                }
+            }
+
             // 取得語系
             // Windows 版的語系檔目錄一定和主程式相同位置，不可依賴其它位置。
             language = new Language(CGlobalVal.MyFullPath + "Language\\", CGlobalVal.MySettingPath + "Language\\");
@@ -84,6 +109,7 @@ namespace CBReader
             AddLanguage2Menu();
             // 取得設定檔並讀取所有設定
             Setting = new CSetting(CGlobalVal.SettingFile);
+            resetSutraToolStripCheckedStatus(); // 設定工具列
 
             // 載入環境
             //LoadEnvironment();
@@ -127,6 +153,7 @@ namespace CBReader
             if(Setting.Theme == 1) {
                 btTheme_Click(this, null);
             }
+
         }
 
         // =====================================================
@@ -260,17 +287,17 @@ namespace CBReader
         void resizeComponent()
         {
             // 先縮小，讓 autosize 運作
-            btOption.Width = 10;
-            btNavWidthSwitch.Width = 10;
-            btMuluWidthSwitch.Width = 10;
-            btPrevJuan.Width = 10;
-            btNextJuan.Width = 10;
+            btOption1.Width = 10;
+            btNavWidthSwitch1.Width = 10;
+            btMuluWidthSwitch1.Width = 10;
+            btPrevJuan1.Width = 10;
+            btNextJuan1.Width = 10;
             btOpenNav.Width = 10;
             lbFindSutraByline.Width = 10;
-            btNavWidthSwitch.Left = btOption.Left + btOption.Width + 6;
-            btMuluWidthSwitch.Left = btNavWidthSwitch.Left + btNavWidthSwitch.Width + 6;
-            btPrevJuan.Left = btMuluWidthSwitch.Left + btMuluWidthSwitch.Width + 20;
-            btNextJuan.Left = btPrevJuan.Left + btPrevJuan.Width + 6;
+            btNavWidthSwitch1.Left = btOption1.Left + btOption1.Width + 6;
+            btMuluWidthSwitch1.Left = btNavWidthSwitch1.Left + btNavWidthSwitch1.Width + 6;
+            btPrevJuan1.Left = btMuluWidthSwitch1.Left + btMuluWidthSwitch1.Width + 20;
+            btNextJuan1.Left = btPrevJuan1.Left + btPrevJuan1.Width + 6;
             edFindSutraByline.Left = lbFindSutraByline.Left + lbFindSutraByline.Width + 6;
             if (edFindSutraByline.Left < edFindSutraSutraName.Left) {
                 // 如果 label 文字太短，則輸入欄左邊要對齊其它欄位
@@ -436,7 +463,11 @@ namespace CBReader
 
             string sXMLFile = Bookcase.CBETA.Dir + sFile;
             string sJSFile = Bookcase.CBETA.Dir + Bookcase.CBETA.JSFile;
-            CCBXML CBXML = new CCBXML(sXMLFile, sLink, Setting, sJSFile, bShowHighlight, sSeries);
+            bool isIE = false;
+            if(webView == null) {
+                isIE = true;
+            }
+            CCBXML CBXML = new CCBXML(isIE, sXMLFile, sLink, Setting, sJSFile, bShowHighlight, sSeries);
 
             // 找出 spine id , -1 表示沒找到
             SpineID = Array.IndexOf(Bookcase.CBETA.Spine.Files, sFile);
@@ -537,7 +568,7 @@ namespace CBReader
                 //btMuluWidthSwitch.Text = t("目次 ►", "01021");
             }
 
-            language.ChangeComponentLang("MainForm", btMuluWidthSwitch);
+            language.ChangeComponentLang("MainForm", btMuluWidthSwitch1);
         }
 
         // 檢索本經
@@ -668,6 +699,32 @@ namespace CBReader
             pnMainFunc.Width = iniFile.ReadInteger(Section, "FunMenuWidth", pnMainFunc.Width);
             MuluWidth = iniFile.ReadInteger(Section, "MuluWidth", MuluWidth);
 
+            tsMain.Visible = iniFile.ReadBool(Section, "MainToolBarVisible", tsMain.Visible);
+            miMainToolStrip.Checked = tsMain.Visible;
+            tsSutra.Visible = iniFile.ReadBool(Section, "SutraToolBarVisible", tsSutra.Visible);
+            miSutraToolStrip.Checked = tsSutra.Visible;
+
+            int mt = iniFile.ReadInteger(Section, "MainToolBarTop", tsMain.Top);
+            int ml = iniFile.ReadInteger(Section, "MainToolBarLeft", tsMain.Left);
+            int st = iniFile.ReadInteger(Section, "SutraToolBarTop", tsSutra.Top);
+            int sl = iniFile.ReadInteger(Section, "SutraToolBarLeft", tsSutra.Left);
+
+            // 因為二個 toolstrip 移動時，會干擾另一個，所以最好先分層，才不會錯亂
+            if(mt == st) {
+                // 同一層就先分開
+                tsSutra.Top = 50;
+            } else if (mt > 0) {
+                tsMain.Top = mt;
+            } else {
+                tsSutra.Top = st;
+            }
+            // 先移動 X 座標
+            tsMain.Left = ml;
+            tsSutra.Left = sl;
+            // 再移動 Y 座標，才不會干擾
+            tsMain.Top = mt;
+            tsSutra.Top = st;
+
             // 記錄最後選擇的藏經
             cbGoBookBookId.SelectedIndex = iniFile.ReadInteger(Section, "GoBookBookIdIndex", 0);
             cbGoSutraBookId.SelectedIndex = iniFile.ReadInteger(Section, "GoSutraBookIdIndex", 0);
@@ -693,6 +750,25 @@ namespace CBReader
             sgTextSearch.ColumnHeadersHeight = iniFile.ReadInteger(Section, "TextSearchColumnHeadersHeight", sgTextSearch.ColumnHeadersHeight);
         }
 
+        public void SetToolStripLocation(int mt, int ml, int st, int sl) {
+            
+            // 因為二個 toolstrip 移動時，會干擾另一個，所以最好先分層，才不會錯亂
+            if (mt == st) {
+                // 同一層就先分開
+                tsSutra.Top = 50;
+            } else if (mt > 0) {
+                tsMain.Top = mt;
+            } else {
+                tsSutra.Top = st;
+            }
+            // 先移動 X 座標
+            tsMain.Left = ml;
+            tsSutra.Left = sl;
+            // 再移動 Y 座標，才不會干擾
+            tsMain.Top = mt;
+            tsSutra.Top = st;
+        }
+
         // 儲存環境
         void SaveEnvironment()
         {
@@ -711,6 +787,15 @@ namespace CBReader
             } else {
                 iniFile.WriteInteger(Section, "MuluWidth", MuluWidth);
             }
+
+            // 工具列
+            iniFile.WriteInteger(Section, "MainToolBarTop", tsMain.Top);
+            iniFile.WriteInteger(Section, "MainToolBarLeft", tsMain.Left);
+            iniFile.WriteBool(Section, "MainToolBarVisible", tsMain.Visible);
+            iniFile.WriteInteger(Section, "SutraToolBarTop", tsSutra.Top);
+            iniFile.WriteInteger(Section, "SutraToolBarLeft", tsSutra.Left);
+            iniFile.WriteBool(Section, "SutraToolBarVisible", tsSutra.Visible);
+
             // 記錄最後選擇的藏經
             iniFile.WriteInteger(Section, "GoBookBookIdIndex", cbGoBookBookId.SelectedIndex);
             iniFile.WriteInteger(Section, "GoSutraBookIdIndex", cbGoSutraBookId.SelectedIndex);
@@ -782,6 +867,61 @@ namespace CBReader
                 if (webView.CoreWebView2 != null) {
                     await webView.CoreWebView2.Profile.ClearBrowsingDataAsync();
                 }
+            }
+        }
+
+        // 重設工具列 tsSutra 的 Checked 狀態
+        public void resetSutraToolStripCheckedStatus()
+        {
+            // 格式
+            tsbShowLine.Checked = Setting.ShowLineFormat;
+            tsbShowPara.Checked = !Setting.ShowLineFormat;
+            tsbToggleLineHead.Checked = Setting.ShowLineHead;
+            // 缺字
+            // 通用字優先的條件：
+            // 1. 有使用通用字卻沒有使用 Unicode
+            // 2. 有使用通用字且通用字優先
+            if (Setting.GaijiUseNormal && (!Setting.GaijiUseUniExt || Setting.GaijiNormalFirst)) {
+                tsbGaijiShowNormal.Checked = true;
+            } else {
+                tsbGaijiShowNormal.Checked= false;
+            }
+            // Unicode 優先的條件：
+            // 1. 有使用 Unicode 卻沒有使用通用字
+            // 2. 有使用 Unicode 且 Unicode 優先
+            if (Setting.GaijiUseUniExt && (!Setting.GaijiUseNormal || Setting.GaijiUniExtFirst)) {
+                tsbGaijiShowUnicode.Checked = true;
+            } else {
+                tsbGaijiShowUnicode.Checked = false;
+            }
+            // 組字式優先的條件：
+            // 1. 沒有使用 Unicode 且 沒有使用通用字 且 組字式優先
+            if(!Setting.GaijiUseNormal && !Setting.GaijiUseUniExt && Setting.GaijiDesFirst) {
+                tsbGaijiShowDes.Checked = true;
+            } else {
+                tsbGaijiShowDes.Checked= false;
+            }
+            // 圖檔優先的條件：
+            // 1. 沒有使用 Unicode 且 沒有使用通用字 且 圖檔優先
+            if (!Setting.GaijiUseNormal && !Setting.GaijiUseUniExt && Setting.GaijiImageFirst) {
+                tsbGaijiShowPic.Checked = true;
+            } else {
+                tsbGaijiShowPic.Checked = false;
+            }
+            // 校注
+            if (Setting.ShowCollation) {
+                tsbNoCollation.Checked = false;
+                if (Setting.CollationType == ECollationType.Orig) {
+                    tsbOrigCollation.Checked = true;
+                    tsbCBETACollation.Checked = false;
+                } else if (Setting.CollationType == ECollationType.CBETA) {
+                    tsbOrigCollation.Checked = false;
+                    tsbCBETACollation.Checked = true;
+                }
+            } else {
+                tsbNoCollation.Checked = true;
+                tsbOrigCollation.Checked = false;
+                tsbCBETACollation.Checked = false;
             }
         }
 
@@ -905,6 +1045,18 @@ namespace CBReader
                     ShowCBXML(sFile);
                     return;
                 }
+                // 某些情況要多檢查一卷，例如底下的 125 卷要接到 124 卷
+                // XML / B / B15 / B15n0088_124.xml , 0713a01
+                // XML / B / B16 / B16na015_001.xml , a001a01
+                // XML / B / B16 / B16n0088_125.xml , 0001a01
+                if (SpineID > 1) {
+                    sPrevSutra = Bookcase.CBETA.Spine.Sutra[SpineID - 2];
+                    if (sThisSutra == sPrevSutra) {
+                        string sFile = Bookcase.CBETA.Spine.CBGetFileNameBySpineIndex(SpineID - 2);
+                        ShowCBXML(sFile);
+                        return;
+                    }
+                }
             }
             MessageBox.Show(t("目前已是第一卷/篇章。", "01006"));
         }
@@ -924,6 +1076,18 @@ namespace CBReader
                     ShowCBXML(sFile);
                     return;
                 }
+                // 某些情況要多檢查一卷，例如底下的 124 卷要接到 125 卷
+                // XML / B / B15 / B15n0088_124.xml , 0713a01
+                // XML / B / B16 / B16na015_001.xml , a001a01
+                // XML / B / B16 / B16n0088_125.xml , 0001a01
+                if ((SpineID + 2) < Bookcase.CBETA.Spine.Files.Length) {
+                    sNextSutra = Bookcase.CBETA.Spine.Sutra[SpineID + 2];
+                    if (sThisSutra == sNextSutra) {
+                        string sFile = Bookcase.CBETA.Spine.CBGetFileNameBySpineIndex(SpineID + 2);
+                        ShowCBXML(sFile);
+                        return;
+                    }
+                }
             }
             MessageBox.Show(t("目前已是最後一卷/篇章。", "01007"));
         }
@@ -938,7 +1102,7 @@ namespace CBReader
                 pnMainFunc.Width = 0;
                 //btNavWidthSwitch.Text = t("主功能 ►", "01023");
             }
-            language.ChangeComponentLang("MainForm", btNavWidthSwitch);
+            language.ChangeComponentLang("MainForm", btNavWidthSwitch1);
         }
 
         private void btFindSutra_Click(object sender, EventArgs e)
@@ -1688,19 +1852,21 @@ namespace CBReader
 
         private void btTheme_Click(object sender, EventArgs e)
         {
-            Color bc = btTheme.BackColor;
-            Color fc = btTheme.ForeColor;
+            Color bc = btTheme1.BackColor;
+            Color fc = btTheme1.ForeColor;
             if (IsDarkTheme) {
-                btTheme.Text = "💡";
+                btTheme1.Text = "💡";
+                btTheme.Image = Properties.Resources.DarkBulb;
                 //optionForm.panel2.BackColor = SystemColors.ButtonHighlight;
                 //optionForm.BackColor = SystemColors.Control;
             } else {
-                btTheme.Text = "🌞";
+                btTheme1.Text = "🌞";
+                btTheme.Image = Properties.Resources.LightBulb;
             }
             IsDarkTheme = !IsDarkTheme; 
             theme.ChangeTheme(IsDarkTheme, this, optionForm, searchrangeForm, updateForm, aboutForm);
-            btTheme.BackColor = bc;
-            btTheme.ForeColor = fc;
+            btTheme1.BackColor = bc;
+            btTheme1.ForeColor = fc;
         }
 
         private void sgFindSutra_Paint(object sender, PaintEventArgs e)
@@ -1714,6 +1880,190 @@ namespace CBReader
         {
             if (IsDarkTheme) {
                 e.Graphics.DrawRectangle(Pens.LightGray, new Rectangle(0, 0, this.sgTextSearch.Width - 1, this.sgTextSearch.Height - 1));
+            }
+        }
+
+        // 工具列按鈕
+        private async void tsbShowLine_Click(object sender, EventArgs e)
+        {
+            if (webView ==  null) { return; }
+            // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
+            // if (yearq != "null") {
+            _ = webView.CoreWebView2.ExecuteScriptAsync("ShowLine()");
+                Setting.ShowLineFormat = true;
+                resetSutraToolStripCheckedStatus();
+            // }
+        }
+
+        private async void tsbShowPara_Click(object sender, EventArgs e)
+        {
+            if (webView == null) { return; }
+            // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
+            // if (yearq != "null") {
+            _ = webView.CoreWebView2.ExecuteScriptAsync("ShowPara()");
+                Setting.ShowLineFormat = false;
+                resetSutraToolStripCheckedStatus();
+            // }
+        }
+
+        private async void tsbToggleLineHead_Click(object sender, EventArgs e)
+        {
+            if (webView == null) { return; }
+            // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
+            // if (yearq != "null") {
+            _ = webView.CoreWebView2.ExecuteScriptAsync("ToggleLineHead()");
+                Setting.ShowLineHead = !Setting.ShowLineHead;
+                resetSutraToolStripCheckedStatus();
+                // }
+            }
+
+            private async void tsbGaijiShowNormal_Click(object sender, EventArgs e)
+        {
+            if (webView == null) { return; }
+            // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
+            // if (yearq != "null") {
+            _ = webView.CoreWebView2.ExecuteScriptAsync("GaijiShowNormal()");
+                Setting.GaijiUseNormal = true;
+                Setting.GaijiNormalFirst = true;
+                Setting.GaijiUniExtFirst = false;
+                resetSutraToolStripCheckedStatus();
+            // }
+        }
+
+        private async void tsbGaijiShowUnicode_Click(object sender, EventArgs e)
+        {
+            if (webView == null) { return; }
+            // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
+            // if (yearq != "null") {
+            _ = webView.CoreWebView2.ExecuteScriptAsync("GaijiShowUnicode()");
+                Setting.GaijiUseUniExt = true;
+                Setting.GaijiUniExtFirst = true;
+                Setting.GaijiNormalFirst = false;
+                resetSutraToolStripCheckedStatus();
+            // }
+        }
+
+        private async void tsbGaijiShowDes_Click(object sender, EventArgs e)
+        {
+            if (webView == null) { return; }
+            // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
+            // if (yearq != "null") {
+            _ = webView.CoreWebView2.ExecuteScriptAsync("GaijiShowDes()");
+                Setting.GaijiUseUniExt = false;
+                Setting.GaijiUseNormal = false;
+                Setting.GaijiDesFirst = true;
+                Setting.GaijiImageFirst = false;
+                resetSutraToolStripCheckedStatus();
+            // }
+        }
+
+        private async void tsbGaijiShowPic_Click(object sender, EventArgs e)
+        {
+            if (webView == null) { return; }
+            // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
+            // if (yearq != "null") {
+            _ = webView.CoreWebView2.ExecuteScriptAsync("GaijiShowPic()");
+                Setting.GaijiUseUniExt = false;
+                Setting.GaijiUseNormal = false;
+                Setting.GaijiImageFirst = true;
+                Setting.GaijiDesFirst = false;
+                resetSutraToolStripCheckedStatus();
+            // }
+        }
+
+        private async void tsbNoCollation_Click(object sender, EventArgs e)
+        {
+            if (webView == null) { return; }
+            // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
+            // if (yearq != "null") {
+            _ = webView.CoreWebView2.ExecuteScriptAsync("NoCollation()");
+                Setting.ShowCollation = false;
+                resetSutraToolStripCheckedStatus();
+            // }
+        }
+
+        private async void tsbOrigCollation_Click(object sender, EventArgs e)
+        {
+            if (webView == null) { return; }
+            // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
+            // if (yearq != "null") {
+            _ = webView.CoreWebView2.ExecuteScriptAsync("OrigCollation()");
+                Setting.ShowCollation = true;
+                Setting.CollationType = ECollationType.Orig;
+                resetSutraToolStripCheckedStatus();
+            // }
+        }
+
+        private async void tsbCBETACollation_Click(object sender, EventArgs e)
+        {
+            if (webView == null) { return; }
+            // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
+            // if (yearq != "null") {
+            _ = webView.CoreWebView2.ExecuteScriptAsync("CBETACollation()");
+                Setting.ShowCollation = true;
+                Setting.CollationType = ECollationType.CBETA;
+                resetSutraToolStripCheckedStatus();
+            // }
+        }
+
+        private async void tsbCBCopy_Click(object sender, EventArgs e)
+        {
+            if (webView == null) { return; }
+            // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
+            // if (yearq != "null") {
+            _ = webView.CoreWebView2.ExecuteScriptAsync("CBCopy.go()");
+            // }
+        }
+
+        private void toolStripContainer_TopToolStripPanel_ClientSizeChanged(object sender, EventArgs e)
+        {
+            pnToolBar.Height = toolStripContainer.TopToolStripPanel.Height + menuStrip1.Height;
+        }
+
+        private void miMainToolStrip_Click(object sender, EventArgs e)
+        {
+            miMainToolStrip.Checked = !miMainToolStrip.Checked;
+            tsMain.Visible = miMainToolStrip.Checked;
+        }
+
+        private void miSutraToolStrip_Click(object sender, EventArgs e)
+        {
+            miSutraToolStrip.Checked = !miSutraToolStrip.Checked;
+            tsSutra.Visible = miSutraToolStrip.Checked;
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized) {
+                formMin = true;
+            } else {
+                formMin = false;
+            }
+
+            if (WindowState != FormWindowState.Minimized) {
+                //tsMain.Location = tsMainLocation;
+                //tsSutra.Location = tsSutraLocation;
+                SetToolStripLocation(tsMainLocation.Y, tsMainLocation.X, tsSutraLocation.Y, tsSutraLocation.X);
+            }
+        }
+
+        private void tsSutra_LocationChanged(object sender, EventArgs e)
+        {
+            if (WindowState != FormWindowState.Minimized) {
+                if (formMin != true) {  // 之前不是最小化
+                    tsMainLocation = tsMain.Location;
+                    tsSutraLocation = tsSutra.Location;
+                }
+            }
+        }
+
+        private void tsMain_LocationChanged(object sender, EventArgs e)
+        {
+            if (WindowState != FormWindowState.Minimized) {
+                if (formMin != true) {  // 之前不是最小化
+                    tsMainLocation = tsMain.Location;
+                    tsSutraLocation = tsSutra.Location;
+                }
             }
         }
     }

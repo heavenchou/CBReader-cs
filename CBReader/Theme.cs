@@ -61,6 +61,8 @@ namespace CBReader
 
             public Color MenuItemBack;
             public Color MenuItemText;
+
+            public Color ToolStripBack;
         }
 
         myColors darkColors;
@@ -108,6 +110,8 @@ namespace CBReader
             lightColors.MenuItemBack = Color.Transparent;
             lightColors.MenuItemText = SystemColors.ControlText;
 
+            lightColors.ToolStripBack = SystemColors.Window;
+
             // =======================
 
             darkColors.FormBack = Color.FromArgb(50, 50, 50);
@@ -146,6 +150,8 @@ namespace CBReader
 
             darkColors.MenuItemBack = Color.FromArgb(160, 160, 160);
             darkColors.MenuItemText = SystemColors.ControlText;
+
+            darkColors.ToolStripBack = Color.FromArgb(200, 200, 200);
         }
 
         // mode : dark, orig
@@ -274,8 +280,22 @@ namespace CBReader
                     c.BackColor = lightColors.MenuItemBack;
                 }
                 EachMenuItems(formName, (c as ToolStrip).Items);
-            } 
-            
+            } else if (c is ToolStripPanel) {
+                if (c.BackColor == oldColors.PanelBack) {
+                    c.BackColor = newColors.PanelBack;
+                } else if (c.BackColor == oldColors.PanelLight) {
+                    c.BackColor = newColors.PanelLight;
+                } else if (c.BackColor == oldColors.PanelDark) {
+                    c.BackColor = newColors.PanelDark;
+                }
+            } else if (c is ToolStrip) {
+                if (IsDarkMode) {
+                    c.BackColor = darkColors.ToolStripBack;
+                } else {
+                    c.BackColor = lightColors.ToolStripBack;
+                }
+            }
+
             // 檢查 ContextMenuStrip
 
             ContextMenuStrip cms = c.ContextMenuStrip;

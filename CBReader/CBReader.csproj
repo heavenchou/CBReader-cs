@@ -130,6 +130,11 @@
     <Compile Include="PostfixStack.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RendAttr.cs" />
     <Compile Include="SearchRange.cs">
       <SubType>Form</SubType>
@@ -169,13 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="SearchRange.resx">
       <DependentUpon>SearchRange.cs</DependentUpon>
     </EmbeddedResource>
@@ -210,6 +211,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="cbeta.ico" />
+    <None Include="Image\MainMenu.png" />
+    <None Include="Image\TOCMenu.png" />
+    <None Include="Image\PreJuan.png" />
+    <None Include="Image\NextJuan.png" />
+    <None Include="Image\LineFormat.png" />
+    <None Include="Image\CBCopy.png" />
+    <None Include="Image\CBNote.png" />
+    <None Include="Image\Composition.png" />
+    <None Include="Image\Image.png" />
+    <None Include="Image\LineHead.png" />
+    <None Include="Image\NoNote.png" />
+    <None Include="Image\Normal.png" />
+    <None Include="Image\OrigNote.png" />
+    <None Include="Image\ParaFormat.png" />
+    <None Include="Image\Unicode.png" />
+    <None Include="Resources\Image1.bmp" />
+    <None Include="Image\DownArrow.png" />
+    <None Include="Image\LeftArrow.png" />
+    <None Include="Image\RightArrow.png" />
+    <None Include="Image\UpArrow.png" />
+    <None Include="Image\DarkBulb.png" />
+    <None Include="Image\LightBulb.png" />
+    <None Include="Image\Gear.png" />
     <Content Include="seeland.ico" />
   </ItemGroup>
   <ItemGroup>

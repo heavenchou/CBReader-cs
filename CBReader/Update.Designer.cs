@@ -62,7 +62,7 @@ namespace CBReader
             this.Memo.Size = new System.Drawing.Size(520, 338);
             this.Memo.TabIndex = 0;
             // 
-            // panel1
+            // pnToolBar
             // 
             this.panel1.Controls.Add(this.btUpdate);
             this.panel1.Controls.Add(this.cbUseChinaServer);
@@ -71,7 +71,7 @@ namespace CBReader
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(541, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel1.Name = "panel1";
+            this.panel1.Name = "pnToolBar";
             this.panel1.Size = new System.Drawing.Size(183, 491);
             this.panel1.TabIndex = 1;
             // 

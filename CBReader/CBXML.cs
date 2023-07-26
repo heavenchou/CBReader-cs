@@ -135,10 +135,13 @@ namespace CBReader
         string BookVerName = "";     // 例如大正藏是 【大】,這是要由其他資料找出來的
         string SerialPath = "";      // 主要目錄, 要找圖檔位置用的
 
+        bool IsIE = false;
+
         // ======================================
         // 建構式, 傳入參數為 XML 檔, 呈現的設定
-        public CCBXML(string sFile, string sLink, CSetting csSetting, string sJSFile, bool bShowHighlight = false, CSeries csSeries = null)
+        public CCBXML(bool isIE, string sFile, string sLink, CSetting csSetting, string sJSFile, bool bShowHighlight = false, CSeries csSeries = null)
         {
+            IsIE = isIE;
             XMLFile = sFile;
             Setting = csSetting;
             JSFile = sJSFile;
@@ -249,6 +252,13 @@ namespace CBReader
 
             string sJqueryFile = JSFile.Replace("cbreader.js", "jquery.min.js");
             string sSiddamFile = JSFile.Replace("cbreader.js", "font/Siddam.otf");
+            string sMuluFile = JSFile.Replace("cbreader.js", $"mulu/{BookId}{VolId}_mulu.js");
+            string sMuluScript = "";
+            if(File.Exists(sMuluFile)) {
+                if (!IsIE) {
+                    sMuluScript = $"\n\t<script src='{sMuluFile}'></script>";
+                }
+            }
             // 底下一定要用 / 才能使用
             sSiddamFile = sSiddamFile.Replace("\\", "/");
             string sRanjanaFile = sSiddamFile.Replace("Siddam.otf", "Ranjana.otf");
@@ -259,7 +269,7 @@ namespace CBReader
     <meta charset='utf-8'>
     <title>{BookId}{SutraId} {SutraName}</title>
     <script src='{sJqueryFile}'></script>
-    <script src='{JSFile}'></script>
+    <script src='{JSFile}'></script>{sMuluScript}
     <style type='text/css'>
         @font-face {{
             font-family: CBFont;
@@ -3366,6 +3376,18 @@ namespace CBReader
         }
 
         // <cb:sg> 要加括號 , <cb:tt><cb:t xml:lang="sa-Sidd"><g ref="#SD-E074">??</g></cb:t><cb:t xml:lang="zh"><cb:yin><cb:zi>唵</cb:zi><cb:sg>引</cb:sg></cb:yin></cb:t></cb:tt>
+
+        // 二種不同的用法
+        
+        // <cb:fan><cb:zi>儒</cb:zi><cb:yin><note place="inline">仁祚切</note></cb:yin></cb:fan>
+        // <cb:fan><cb:zi>嚩</cb:zi><cb:yin><note place="inline">切</note></cb:yin></cb:fan>
+        // <cb:fan><cb:zi>娑</cb:zi><cb:yin><note place="inline">蘇奈反</note></cb:yin></cb:fan>
+        // <cb:fan><cb:zi>羶</cb:zi><cb:yin><note place="inline">輸千切</note></cb:yin></cb:fan>
+
+        // <cb:yin><cb:zi>薩嚩</cb:zi><cb:sg>二合</cb:sg></cb:yin>
+        // <cb:yin><cb:zi>阿</cb:zi><cb:sg>引</cb:sg></cb:yin>
+        // <cb:yin><cb:zi>婆嚩</cb:zi><cb:sg>二合引</cb:sg></cb:yin>
+
         string tagSg(XmlNode node)
         {
             string sHtml = "(";

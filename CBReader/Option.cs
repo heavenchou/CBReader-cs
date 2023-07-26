@@ -325,7 +325,6 @@ namespace CBReader
             Setting.UseCSSFile = cbUseCSSFile.Checked;
             Setting.CSSFileName = edCSSFileName.Text;
 
-
             // 缺字處理
 
             Setting.GaijiUseUniExt = cbGaijiUseUniExt.Checked;    // 是否使用 Unicode Ext
@@ -336,7 +335,6 @@ namespace CBReader
 
             Setting.GaijiDesFirst = rbGaijiDesFirst.Checked;     // 優先使用組字式
             Setting.GaijiImageFirst = rbGaijiImageFirst.Checked;   // 優先使用缺字圖檔
-
 
             /*
             // 悉曇字處理法 0:悉曇字型(siddam.ttf) 1:羅馬轉寫(unicode) 2:羅馬轉寫(純文字) 3:悉曇圖檔 4:自訂符號 5:CB碼 6:悉曇羅馬對照
@@ -404,6 +402,9 @@ namespace CBReader
                 CreateDir(Setting.UserDataPath);
             }
             */
+
+            // 重設主視窗工具列狀態
+            mainForm.resetSutraToolStripCheckedStatus();
         }
 
         private void OptionForm_Shown(object sender, EventArgs e)
