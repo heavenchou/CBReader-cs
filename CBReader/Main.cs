@@ -22,6 +22,11 @@ using Microsoft.Web.WebView2.WinForms;
 using Microsoft.Web.WebView2.Core;
 using System.Security.Policy;
 using System.Net.NetworkInformation;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.IO.Packaging;
+using System.Text.Json;
+using System.Globalization;
+using System.Windows.Controls.Primitives;
 
 namespace CBReader
 {
@@ -36,6 +41,9 @@ namespace CBReader
         OptionForm optionForm;
         SearchRangeForm searchrangeForm;
         UpdateForm updateForm;
+        BookmarkForm bookmarkForm;
+        public BookmarkEditorForm bookmarkEditorForm;
+        public BookmarkFolderEditorForm bookmarkFolderEditorForm;
         WebView2 webView = null;    // Edge 的 Chrome 元件
         public CSetting Setting; // 設定檔
 
@@ -63,12 +71,22 @@ namespace CBReader
         bool SetIEZoom = false;                 // 是否設定過 IE縮放率
         bool SetWebViewZoom = false;            // 是否設定 WebView 縮放率
 
-        bool IsDarkTheme = false;
+        public bool IsDarkTheme = false;
 
         Point tsMainLocation;
         Point tsSutraLocation;
 
         bool formMin = false;   // 用來判斷剛剛是不是在最小化狀態
+
+        // 書籤
+        BookmarkManager BookmarkTree;       // 完整的
+        public BookmarkItemRoot BookmarkRoot;   // 書籤的根
+        public BookmarkItemRoot BookmarkRootBackup;   // 備份書籤，用來比對有沒有更新
+        // treeView 移動的節點和目標
+        private TreeNode draggedNode;
+        private TreeNode targetNode;
+        // 畫線用的
+        int insertType = 0;             // 1: 插入在上方，2:放入節點中，3:插入在下方
 
         public MainForm()
         {
@@ -84,9 +102,10 @@ namespace CBReader
             InitialWebView2();
 
             // 沒有 webview2 則沒有工具列
-            if(webView == null) {
+            if (webView == null) {
                 tsSutra.Visible = false;
                 miSutraToolStrip.Visible = false;
+                tpBookmark.Visible = false;
 
                 // 要求使用者安裝 WebView2
                 DialogResult result = MessageBox.Show(
@@ -113,6 +132,13 @@ namespace CBReader
 
             // 載入環境
             //LoadEnvironment();
+
+            // 處理書籤
+            if(!LoadBookmark()) {
+                BookmarkRoot = new BookmarkItemRoot("bookmark");
+            }
+            BookmarkTree = new BookmarkManager(tvBookmark, BookmarkRoot);
+            BookmarkTree.updateTreeView();
 
             InitializeForms();  // 初始其它的 Form
 
@@ -150,10 +176,26 @@ namespace CBReader
 
             // 設定 theme
             // Theme, 預設是 0，暗色系是 1
-            if(Setting.Theme == 1) {
+            if (Setting.Theme == 1) {
                 btTheme_Click(this, null);
             }
+        }
 
+        // 載入書籤
+        // 失敗傳回 false
+        bool LoadBookmark()
+        {
+            if (File.Exists(CGlobalVal.BookmarkFile)) {
+                string json = File.ReadAllText(CGlobalVal.BookmarkFile);
+                BookmarkRoot = JsonSerializer.Deserialize<BookmarkItemRoot>(json);
+                BookmarkRootBackup = JsonSerializer.Deserialize<BookmarkItemRoot>(json);
+                BookmarkRoot.IsFolder = true;
+                BookmarkRoot.ResetAllParent();
+                BookmarkRootBackup.IsFolder = true;
+                BookmarkRootBackup.ResetAllParent();
+                return true;
+            }
+            return false;
         }
 
         // =====================================================
@@ -167,6 +209,9 @@ namespace CBReader
             optionForm = new OptionForm(this);
             searchrangeForm = new SearchRangeForm(this);
             updateForm = new UpdateForm(this);
+            bookmarkEditorForm = new BookmarkEditorForm(this);
+            bookmarkFolderEditorForm = new BookmarkFolderEditorForm(this);
+            bookmarkForm = new BookmarkForm(this, this.BookmarkRoot);
         }
 
         // 初始資料
@@ -235,7 +280,7 @@ namespace CBReader
             SpineID = -1;   // 初值表示沒開啟
 
             if (iBookcaseCount != 0) {
-                string URL = "file://" + Bookcase.CBETA.Dir + "help/index.htm";
+                string URL = "file:///" + Bookcase.CBETA.Dir + "help/index.htm";
                 OpenURL(URL);
             }
 
@@ -277,7 +322,7 @@ namespace CBReader
         void changeLanguage(string langName)
         {
             if (language.FileNames.ContainsKey(langName)) {
-                language.ChangeLanguage(langName, this, optionForm, searchrangeForm, updateForm, aboutForm);
+                language.ChangeLanguage(langName, this, optionForm, searchrangeForm, updateForm, aboutForm, bookmarkForm, bookmarkEditorForm, bookmarkFolderEditorForm);
                 // 調整 mainForm 按鈕位置，以適應不同語言。
                 resizeComponent();
             }
@@ -380,7 +425,8 @@ namespace CBReader
 
             var ieVer = Microsoft.Win32.Registry.GetValue(sFeatureBrowserEmulation, sKey, "0");
             if (ieVer == null) {
-                MessageBox.Show("Get IE Ver is null.");
+                // Win11 沒有 IE，會執行到這行
+                // MessageBox.Show("Get IE Ver is null.");
             } else {
                 string sIEVer = ieVer.ToString();
                 // MessageBox.Show("Get IE Ver is " + sIEVer);
@@ -464,7 +510,7 @@ namespace CBReader
             string sXMLFile = Bookcase.CBETA.Dir + sFile;
             string sJSFile = Bookcase.CBETA.Dir + Bookcase.CBETA.JSFile;
             bool isIE = false;
-            if(webView == null) {
+            if (webView == null) {
                 isIE = true;
             }
             CCBXML CBXML = new CCBXML(isIE, sXMLFile, sLink, Setting, sJSFile, bShowHighlight, sSeries);
@@ -479,8 +525,8 @@ namespace CBReader
             sOutFile = CGlobalVal.MyTempPath + sOutFile;
 
             CBXML.SaveToHTML(sOutFile);
-            OpenURL("file://" + sOutFile);
-     
+            OpenURL("file:///" + sOutFile);
+
 
             // 產生目錄
 
@@ -520,7 +566,7 @@ namespace CBReader
                 sName = CCBSutraUtil.CutNumberAfterSutraName(sName);
 
                 SearchThisBookName = sName;
-                language.ChangeComponentLang("MainForm", cbSearchThisSutra);
+                language.ChangeComponentLang(this, cbSearchThisSutra);
                 //cbSearchThisSutra.Text = t("檢索本經：", "01019") + sName;
                 cbSearchThisSutraChange();  // 設定檢索本經的相關資料
             }
@@ -568,7 +614,7 @@ namespace CBReader
                 //btMuluWidthSwitch.Text = t("目次 ►", "01021");
             }
 
-            language.ChangeComponentLang("MainForm", btMuluWidthSwitch1);
+            language.ChangeComponentLang(this, btMuluWidthSwitch1);
         }
 
         // 檢索本經
@@ -672,7 +718,7 @@ namespace CBReader
                 if (sURL.Substring(0, 4) == "http") {
                     OpenURL(sURL);
                 } else {
-                    OpenURL("file://" + sSeries.Dir + sURL);
+                    OpenURL("file:///" + sSeries.Dir + sURL);
                 }
             } else if (iType == ENavItemType.nit_NavLink) {
                 // 目錄連結
@@ -710,7 +756,7 @@ namespace CBReader
             int sl = iniFile.ReadInteger(Section, "SutraToolBarLeft", tsSutra.Left);
 
             // 因為二個 toolstrip 移動時，會干擾另一個，所以最好先分層，才不會錯亂
-            if(mt == st) {
+            if (mt == st) {
                 // 同一層就先分開
                 tsSutra.Top = 50;
             } else if (mt > 0) {
@@ -751,7 +797,7 @@ namespace CBReader
         }
 
         public void SetToolStripLocation(int mt, int ml, int st, int sl) {
-            
+
             // 因為二個 toolstrip 移動時，會干擾另一個，所以最好先分層，才不會錯亂
             if (mt == st) {
                 // 同一層就先分開
@@ -804,7 +850,7 @@ namespace CBReader
             if (webView != null) {
                 int IEZoom = (int)(webView.ZoomFactor * 100);
                 iniFile.WriteInteger(Section, "IEZoom", IEZoom);
-            } else { 
+            } else {
                 dynamic domWindow = webBrowser.Document.Window.DomWindow;
                 int IEZoom = (int)((double)domWindow.devicePixelRatio * 100);
                 iniFile.WriteInteger(Section, "IEZoom", IEZoom);
@@ -815,7 +861,7 @@ namespace CBReader
             // Theme, 預設是 0，暗色系是 1
 
             int theme = 0;
-            if(IsDarkTheme) {
+            if (IsDarkTheme) {
                 theme = 1;
             }
             iniFile.WriteInteger(Section, "Theme", theme);
@@ -851,7 +897,7 @@ namespace CBReader
         void OpenURL(string url)
         {
             try {
-                if(webView != null) {
+                if (webView != null) {
                     webView.Source = new Uri(url);
                 } else {
                     webBrowser.Navigate(url);
@@ -884,7 +930,7 @@ namespace CBReader
             if (Setting.GaijiUseNormal && (!Setting.GaijiUseUniExt || Setting.GaijiNormalFirst)) {
                 tsbGaijiShowNormal.Checked = true;
             } else {
-                tsbGaijiShowNormal.Checked= false;
+                tsbGaijiShowNormal.Checked = false;
             }
             // Unicode 優先的條件：
             // 1. 有使用 Unicode 卻沒有使用通用字
@@ -896,10 +942,10 @@ namespace CBReader
             }
             // 組字式優先的條件：
             // 1. 沒有使用 Unicode 且 沒有使用通用字 且 組字式優先
-            if(!Setting.GaijiUseNormal && !Setting.GaijiUseUniExt && Setting.GaijiDesFirst) {
+            if (!Setting.GaijiUseNormal && !Setting.GaijiUseUniExt && Setting.GaijiDesFirst) {
                 tsbGaijiShowDes.Checked = true;
             } else {
-                tsbGaijiShowDes.Checked= false;
+                tsbGaijiShowDes.Checked = false;
             }
             // 圖檔優先的條件：
             // 1. 沒有使用 Unicode 且 沒有使用通用字 且 圖檔優先
@@ -947,7 +993,7 @@ namespace CBReader
             optionForm.ShowDialog();
         }
 
-        private void miAbout_Click(object sender, EventArgs e)
+        private async void miAbout_Click(object sender, EventArgs e)
         {
             aboutForm.ShowDialog();
         }
@@ -997,6 +1043,13 @@ namespace CBReader
             if (IsDarkTheme) {
                 //btTheme_Click(this, e);
             }
+
+            // 沒有 webview2 則沒有工具列及書籤
+            if (webView == null) {
+                tsSutra.Visible = false;
+                miSutraToolStrip.Visible = false;
+                MainFunc.TabPages.Remove(tpBookmark);
+            }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -1005,6 +1058,11 @@ namespace CBReader
 
             // 儲存環境
             SaveEnvironment();
+
+            // 書籤有改變就儲存書籤
+            if (!BookmarkRoot.IsSameWith(BookmarkRootBackup)) {
+                SaveBookmark();
+            }
 
             // 清除暫存目錄的檔案
             DeleteTempFile();
@@ -1102,7 +1160,7 @@ namespace CBReader
                 pnMainFunc.Width = 0;
                 //btNavWidthSwitch.Text = t("主功能 ►", "01023");
             }
-            language.ChangeComponentLang("MainForm", btNavWidthSwitch1);
+            language.ChangeComponentLang(this, btNavWidthSwitch1);
         }
 
         private void btFindSutra_Click(object sender, EventArgs e)
@@ -1222,7 +1280,7 @@ namespace CBReader
                 //lbFindSutraCount.Text = t("找到 %d 筆", "01008");
                 //lbFindSutraCount.Text = lbFindSutraCount.Text.Replace("%d", $"{iGridIndex}");
 
-                language.ChangeComponentLang("MainForm", lbFindSutraCount);
+                language.ChangeComponentLang(this, lbFindSutraCount);
 
                 if (iGridIndex == 0) {
                     MessageBox.Show(t("沒有滿足此條件的資料", "01009"));
@@ -1329,36 +1387,9 @@ namespace CBReader
             // 2. 引用複製 T01,no.1,p.1,b5
             // 3. 特定的代碼, 例如 : SN1.1
 
-            MatchCollection reMatch;
-            GroupCollection reGroup;
-
-            string sKey = edGoByKeyword.Text;
-            // T01n0001_p0001a01
-            string sPatten = @"([A-Z]+)(\d+)n.{5}p(.{4})(.)(\d\d)";
-
-            reMatch = Regex.Matches(sKey, sPatten);
-            if (reMatch.Count == 0) {
-                // (CBETA, T01, no. 1, p. 23c20-21)  , 新版
-                // (CBETA, T01, no. 1, p. 23, c20-21) , 舊版
-                sPatten = @"([A-Z]+)(\d+)\s*,\s*no\.\s*.+?,\s*pp?\.\s*(\S+?)(?:\s*,\s*)?([a-z])(\d+)";
-                reMatch = Regex.Matches(sKey, sPatten);
-            }
-
-            if (reMatch.Count > 0) {
-                reGroup = reMatch[0].Groups;
-
-                string sBook = reGroup[1].Value;
-                string sVol = reGroup[2].Value;
-                string sPage = reGroup[3].Value;
-                string sField = reGroup[4].Value;
-                string sLine = reGroup[5].Value;
-
-                CSeries csCBETA = Bookcase.CBETA;
-
-                string sFile = csCBETA.CBGetFileNameByVolPageColLine(sBook, sVol, sPage, sField, sLine);
-                ShowCBXML(sFile);
-            }
+            GoByKeyword(edGoByKeyword.Text);
         }
+
 
         private void btTextSearch_Click(object sender, EventArgs e)
         {
@@ -1411,7 +1442,7 @@ namespace CBReader
             //lbSearchMsg.Text = lbSearchMsg.Text.Replace("%d", $"{iFoundCount}");
             //lbSearchMsg.Text = lbSearchMsg.Text.Replace("%f", $"{searchTimeDiff}");
 
-            language.ChangeComponentLang("MainForm", lbSearchMsg);
+            language.ChangeComponentLang(this, lbSearchMsg);
 
             int iTotalSearchFileNum = 0;
             bool bShowAll = false;
@@ -1751,7 +1782,7 @@ namespace CBReader
 
         private void miGetLanguageIni_Click(object sender, EventArgs e)
         {
-            language.CreateIniFile(this, optionForm, searchrangeForm, updateForm, aboutForm);
+            language.CreateIniFile(this, optionForm, searchrangeForm, updateForm, aboutForm, bookmarkForm, bookmarkEditorForm, bookmarkFolderEditorForm);
         }
 
         // 專門處理字串語系的函數
@@ -1864,7 +1895,7 @@ namespace CBReader
                 btTheme.Image = Properties.Resources.LightBulb;
             }
             IsDarkTheme = !IsDarkTheme; 
-            theme.ChangeTheme(IsDarkTheme, this, optionForm, searchrangeForm, updateForm, aboutForm);
+            theme.ChangeTheme(IsDarkTheme, this, optionForm, searchrangeForm, updateForm, aboutForm, bookmarkForm, bookmarkEditorForm, bookmarkFolderEditorForm);
             btTheme1.BackColor = bc;
             btTheme1.ForeColor = fc;
         }
@@ -1884,7 +1915,7 @@ namespace CBReader
         }
 
         // 工具列按鈕
-        private async void tsbShowLine_Click(object sender, EventArgs e)
+        private void tsbShowLine_Click(object sender, EventArgs e)
         {
             if (webView ==  null) { return; }
             // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
@@ -1895,7 +1926,7 @@ namespace CBReader
             // }
         }
 
-        private async void tsbShowPara_Click(object sender, EventArgs e)
+        private void tsbShowPara_Click(object sender, EventArgs e)
         {
             if (webView == null) { return; }
             // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
@@ -1906,7 +1937,7 @@ namespace CBReader
             // }
         }
 
-        private async void tsbToggleLineHead_Click(object sender, EventArgs e)
+        private void tsbToggleLineHead_Click(object sender, EventArgs e)
         {
             if (webView == null) { return; }
             // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
@@ -1917,7 +1948,7 @@ namespace CBReader
                 // }
             }
 
-            private async void tsbGaijiShowNormal_Click(object sender, EventArgs e)
+        private void tsbGaijiShowNormal_Click(object sender, EventArgs e)
         {
             if (webView == null) { return; }
             // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
@@ -1930,7 +1961,7 @@ namespace CBReader
             // }
         }
 
-        private async void tsbGaijiShowUnicode_Click(object sender, EventArgs e)
+        private void tsbGaijiShowUnicode_Click(object sender, EventArgs e)
         {
             if (webView == null) { return; }
             // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
@@ -1943,7 +1974,7 @@ namespace CBReader
             // }
         }
 
-        private async void tsbGaijiShowDes_Click(object sender, EventArgs e)
+        private void tsbGaijiShowDes_Click(object sender, EventArgs e)
         {
             if (webView == null) { return; }
             // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
@@ -1957,7 +1988,7 @@ namespace CBReader
             // }
         }
 
-        private async void tsbGaijiShowPic_Click(object sender, EventArgs e)
+        private void tsbGaijiShowPic_Click(object sender, EventArgs e)
         {
             if (webView == null) { return; }
             // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
@@ -1971,7 +2002,7 @@ namespace CBReader
             // }
         }
 
-        private async void tsbNoCollation_Click(object sender, EventArgs e)
+        private void tsbNoCollation_Click(object sender, EventArgs e)
         {
             if (webView == null) { return; }
             // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
@@ -1982,7 +2013,7 @@ namespace CBReader
             // }
         }
 
-        private async void tsbOrigCollation_Click(object sender, EventArgs e)
+        private void tsbOrigCollation_Click(object sender, EventArgs e)
         {
             if (webView == null) { return; }
             // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
@@ -1994,7 +2025,7 @@ namespace CBReader
             // }
         }
 
-        private async void tsbCBETACollation_Click(object sender, EventArgs e)
+        private void tsbCBETACollation_Click(object sender, EventArgs e)
         {
             if (webView == null) { return; }
             // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
@@ -2006,13 +2037,52 @@ namespace CBReader
             // }
         }
 
-        private async void tsbCBCopy_Click(object sender, EventArgs e)
+        private void tsbCBCopy_Click(object sender, EventArgs e)
         {
             if (webView == null) { return; }
             // string yearq = await webView.CoreWebView2.ExecuteScriptAsync("YearQ");
             // if (yearq != "null") {
             _ = webView.CoreWebView2.ExecuteScriptAsync("CBCopy.go()");
             // }
+        }
+
+        private async void tbsAddBookmark_Click(object sender, EventArgs e)
+        {
+            if (webView == null) { return; }
+            string sBookmark = "";
+            try {
+                // 傳回文字為 "T02n0099_p0001a03║所選擇的文字"
+                sBookmark = await webView.CoreWebView2.ExecuteScriptAsync("CBCopy.get_bookmark()");
+
+            } catch (Exception ex) {
+                // 處理異常，例如記錄錯誤訊息或顯示用戶提示
+                MessageBox.Show(t("錯誤訊息：", "01032") + ex.Message);
+            }
+            int iPos = sBookmark.IndexOf('║');
+
+                if (iPos > 0) {
+                    // CBETA 的經文
+                    // 移除前後的雙引號
+                    if (sBookmark[0] == '"') {
+                        sBookmark = sBookmark.Substring(1);
+                        iPos -= 1;
+                    }
+                    if (sBookmark[sBookmark.Length - 1] == '"') {
+                        sBookmark = sBookmark.Substring(0, sBookmark.Length - 1);
+                    }
+                    string location = sBookmark.Substring(0, iPos);
+                    string title = sBookmark.Substring(iPos + 1);
+                    bookmarkEditorForm.setTitleAndLocation(title, location);
+                } else {
+                    // 一般的檔案或網址
+                    bookmarkEditorForm.setTitleAndLocation(webView.CoreWebView2.DocumentTitle, webView.Source.ToString());
+                }
+                DialogResult result = bookmarkEditorForm.ShowDialog();
+                if (result == DialogResult.OK) {
+                    (string, string) book = bookmarkEditorForm.getTitleAndLocation();
+                    BookmarkItem item = new BookmarkItem(book.Item1, book.Item2);
+                    BookmarkTree.addBookmarkNode(null, item);
+                }
         }
 
         private void toolStripContainer_TopToolStripPanel_ClientSizeChanged(object sender, EventArgs e)
@@ -2065,6 +2135,529 @@ namespace CBReader
                     tsSutraLocation = tsSutra.Location;
                 }
             }
+        }
+
+        /// =================================================
+        /// 書籤樹狀目錄移動節點
+        /// =================================================
+
+        // 開始拖曳節點
+
+        private void tvBookmark_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            targetNode = null;                  // 重置目標節點
+            insertType = 0;                     // 插入模式歸 0
+            tvBookmark.Invalidate();            // 畫面重新整理
+            draggedNode = e.Item as TreeNode;   // 要移動的節點
+            DoDragDrop(draggedNode, DragDropEffects.Move);  // 開始拖曳
+        }
+
+        // 拖曳經過其它節點上方
+
+        private void tvBookmark_DragOver(object sender, DragEventArgs e)
+        {
+            Point point = tvBookmark.PointToClient(new Point(e.X, e.Y));
+            TreeNode newTargetNode = tvBookmark.GetNodeAt(point);     // 目前目標
+
+            if(newTargetNode == null) {
+                int count = tvBookmark.Nodes.Count;
+                if (count > 0) {
+                    newTargetNode = tvBookmark.Nodes[count -1];
+                }
+            }
+
+            // 切換目標後，畫線才會重畫，否則會一直閃爍
+            if (newTargetNode != targetNode) {
+                tvBookmark.Invalidate();
+                targetNode = newTargetNode;
+            }
+
+            // 如果滑鼠靠近 TreeView 的上方或下方邊界，則捲動捲軸
+            int scrollMargin = 30; // 捲動邊界的大小，可以自行調整
+            if (targetNode != null) {
+                if (point.Y < scrollMargin) {
+                    // 捲動到上一個可見節點
+                    TreeNode prevNode = targetNode.PrevVisibleNode;
+                    if (prevNode != null) {
+                        prevNode.EnsureVisible();
+                        tvBookmark.Invalidate();
+                    }
+                    //e.Effect = DragDropEffects.Scroll;
+                } else if (point.Y > tvBookmark.Height - scrollMargin) {
+                    // 捲動到下一個可見節點
+                    TreeNode nextNode = targetNode.NextVisibleNode;
+                    if (nextNode != null) {
+                        nextNode.EnsureVisible();
+                        tvBookmark.Invalidate();
+                    }
+                    //e.Effect = DragDropEffects.Scroll;
+                }
+            }
+
+            if (draggedNode != null && targetNode != null && newTargetNode != draggedNode) {
+                // 判斷拖動節點是否可以移動到目標位置（同一層或下一層）
+                //e.Effect = CanMoveToTargetNode(draggedNode, newTargetItem) ? DragDropEffects.Move : DragDropEffects.None;
+
+                // 如果目標節點是收合的，則在停頓一段時間後自動展開
+                if (!targetNode.IsExpanded) {
+                    var timer = new Timer();
+                    timer.Interval = 1000; // 設定停頓時間，這裡設為1秒（1000毫秒）
+                    timer.Tick += (s, args) => {
+                        if (targetNode != null) {
+                            targetNode.Expand();
+                            //treeView.Invalidate();
+                        }
+                        timer.Stop();
+                    };
+                    timer.Start();
+                }
+
+                // 判斷拖放提示線位置
+                int newInsertType = 0;
+                BookmarkItem bookmark = (BookmarkItem)targetNode.Tag;
+                if (bookmark.IsFolder) {
+                    // 目錄節點
+                    if (point.Y - targetNode.Bounds.Top < 8) {
+                        // 插入在上方
+                        newInsertType = 1;
+                    } else if (targetNode.Bounds.Bottom - point.Y < 8) {
+                        // 插入在下方
+                        newInsertType = 3;
+                    } else {
+                        // 放入目錄中
+                        newInsertType = 2;
+                    }
+                } else {
+                    // 一般節點
+                    if (point.Y - targetNode.Bounds.Top < targetNode.Bounds.Height / 2) {
+                        // 插入在上方
+                        newInsertType = 1;
+                    } else {
+                        // 插入在下方
+                        newInsertType = 3;
+                    }
+                }
+
+                // 拖放線有改變才要重整畫面
+                if (newInsertType != insertType) {
+                    tvBookmark.Invalidate();
+                    insertType = newInsertType;
+                }
+
+                // 繪製拖放提示線
+                if (insertType == 1) {
+                    using (Pen pen = new Pen(Color.LightBlue, 3)) {
+                        tvBookmark.CreateGraphics().DrawLine(pen, targetNode.Bounds.Left - 20, targetNode.Bounds.Top, targetNode.Bounds.Left + 200, targetNode.Bounds.Top);
+                    }
+                } else if (insertType == 3) {
+                    using (Pen pen = new Pen(Color.LightBlue, 3)) {
+                        tvBookmark.CreateGraphics().DrawLine(pen, targetNode.Bounds.Left - 20, targetNode.Bounds.Bottom, targetNode.Bounds.Left + 200, targetNode.Bounds.Bottom);
+                    }
+                } else {
+                    using (Pen pen = new Pen(Color.LightGreen, 4)) {
+                        tvBookmark.CreateGraphics().DrawRectangle(pen, targetNode.Bounds);
+                    }
+                }
+                e.Effect = DragDropEffects.Move;
+            } else {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        // 拖曳到達目標
+
+        private void tvBookmark_DragDrop(object sender, DragEventArgs e)
+        {
+            if (draggedNode != null && targetNode != null) {
+                // 確認目標節點不是要移動節點的子節點，避免出現無窮迴圈
+                if (!BookmarkTree.IsNodeAncestor(draggedNode, targetNode)) {
+                    TreeNodeCollection parentNodes;
+
+                    if (targetNode.Parent == null) {
+                        parentNodes = tvBookmark.Nodes;
+                    } else {
+                        parentNodes = targetNode.Parent.Nodes;
+                    }
+                    // 插入節點上方
+                    if (insertType == 1) {
+                        draggedNode.Remove();
+                        int i = parentNodes.IndexOf(targetNode);
+                        parentNodes.Insert(i, draggedNode);
+                        // 書籤的位置也要處理
+                        BookmarkTree.moveA2BTop((BookmarkItem)draggedNode.Tag, (BookmarkItem)targetNode.Tag);
+                    }
+                    // 放入目錄中
+                    if (insertType == 2) {
+                        draggedNode.Remove();
+                        targetNode.Nodes.Add(draggedNode);
+                        // 書籤的位置也要處理
+                        BookmarkTree.moveAIntoB((BookmarkItem)draggedNode.Tag, (BookmarkItem)targetNode.Tag);
+                    }
+                    // 插入節點下方
+                    if (insertType == 3) {
+                        draggedNode.Remove();
+                        int i = parentNodes.IndexOf(targetNode);
+                        parentNodes.Insert(i + 1, draggedNode);
+                        // 書籤的位置也要處理
+                        BookmarkTree.moveA2BBottom((BookmarkItem)draggedNode.Tag, (BookmarkItem)targetNode.Tag);
+                    }
+                }
+            }
+
+            // 重置目標節點和拖放提示線
+            draggedNode = null;
+            targetNode = null;
+            tvBookmark.Invalidate();
+        }
+
+        private void tvBookmark_DragLeave(object sender, EventArgs e)
+        {
+            tvBookmark.Invalidate();
+        }
+
+        // 雙擊書籤樹狀目錄節點
+        private void tvBookmark_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            System.Windows.Forms.TreeView treeView = sender as System.Windows.Forms.TreeView;
+            TreeNode tvItem = treeView.GetNodeAt(e.X, e.Y);
+            if (tvItem == null) { return; }
+            if (tvItem != treeView.SelectedNode) { return; }
+
+            BookmarkItem item = tvItem.Tag as BookmarkItem;
+            if (!item.IsFolder) {
+                OpenBookmarkTreeViewItem(tvItem);
+            }
+        }
+
+        // 開啟書籤目錄樹中的經文或另一層目錄
+        void OpenBookmarkTreeViewItem(TreeNode tvItem)
+        {
+            BookmarkItem item = tvItem.Tag as BookmarkItem;
+            OpenBookmarkTreeViewItem(item);
+        }
+        public void OpenBookmarkTreeViewItem(BookmarkItem item)
+        {
+            string sURL = item.URL;
+
+            if (sURL.Length >= 5 && (sURL.Substring(0, 4) == "http" || sURL.Substring(0, 5) == "file:")) {
+                OpenURL(sURL);
+                // 檢查書目區是不是縮到最小
+                if (pnMulu.Width != 0) {
+                    btMuluWidthSwitchClick();
+                }
+            } else if (File.Exists(sURL)) {
+                OpenURL(sURL);
+                // 檢查書目區是不是縮到最小
+                if (pnMulu.Width != 0) {
+                    btMuluWidthSwitchClick();
+                }
+            } else if (Directory.Exists(sURL)) {
+                OpenURL("file:///" + sURL);
+                // 檢查書目區是不是縮到最小
+                if (pnMulu.Width != 0) {
+                    btMuluWidthSwitchClick();
+                }
+            } else {
+                GoByKeyword(sURL);
+            }
+        }
+
+        // 判斷各種直接前往指定經文的方法
+        // 1. 行首 T01n0001_p0001a01
+        // 2. 引用複製 T01,no.1,p.1,b5
+        // 3. 特定的代碼, 例如 : SN1.1
+        private void GoByKeyword(string sKey)
+        {
+            MatchCollection reMatch;
+            GroupCollection reGroup;
+
+            // T01n0001_p0001a01
+            string sPatten = @"([A-Z]+)(\d+)n.{5}p(.{4})(.)(\d\d)";
+
+            reMatch = Regex.Matches(sKey, sPatten);
+            if (reMatch.Count == 0) {
+                // (CBETA, T01, no. 1, p. 23c20-21)  , 新版
+                // (CBETA, T01, no. 1, p. 23, c20-21) , 舊版
+                sPatten = @"([A-Z]+)(\d+)\s*,\s*no\.\s*.+?,\s*pp?\.\s*(\S+?)(?:\s*,\s*)?([a-z])(\d+)";
+                reMatch = Regex.Matches(sKey, sPatten);
+            }
+
+            if (reMatch.Count > 0) {
+                reGroup = reMatch[0].Groups;
+
+                string sBook = reGroup[1].Value;
+                string sVol = reGroup[2].Value;
+                string sPage = reGroup[3].Value;
+                string sField = reGroup[4].Value;
+                string sLine = reGroup[5].Value;
+
+                CSeries csCBETA = Bookcase.CBETA;
+
+                string sFile = csCBETA.CBGetFileNameByVolPageColLine(sBook, sVol, sPage, sField, sLine);
+                ShowCBXML(sFile);
+            }
+
+        }
+
+        // 新增書籤目錄
+        private void btAddBookmarkFolder_Click(object sender, EventArgs e)
+        {
+            bookmarkFolderEditorForm.setFolderTitle("");
+        
+            DialogResult result = bookmarkFolderEditorForm.ShowDialog();
+            if(result == DialogResult.OK) {
+                string title = bookmarkFolderEditorForm.getFolderTitle();
+                BookmarkItem item = new BookmarkItem(title);
+
+                if (tvBookmark.SelectedNode != null) {
+                    //BookmarkItem parent = tvBookmark.SelectedNode.Tag as BookmarkItem;
+                    BookmarkTree.addBookmarkNode(tvBookmark.SelectedNode, item);
+                } else {
+                    BookmarkTree.addBookmarkNode(null, item);
+                }
+            }
+        }
+
+        // 新增書籤
+        private async void btAddBookmark_Click(object sender, EventArgs e)
+        {
+            // bookmarkEditorForm.setTitleAndLocation("","");
+
+            if (webView == null) { return; }
+            // 傳回文字為 "T02n0099_p0001a03║所選擇的文字"
+            string sBookmark = await webView.CoreWebView2.ExecuteScriptAsync("CBCopy.get_bookmark()");
+            int iPos = sBookmark.IndexOf('║');
+
+            if (iPos > 0) {
+                // CBETA 的經文
+                // 移除前後的雙引號
+                if (sBookmark[0] == '"') {
+                    sBookmark = sBookmark.Substring(1);
+                    iPos -= 1;
+                }
+                if (sBookmark[sBookmark.Length - 1] == '"') {
+                    sBookmark = sBookmark.Substring(0, sBookmark.Length - 1);
+                }
+                string location = sBookmark.Substring(0, iPos);
+                string title = sBookmark.Substring(iPos + 1);
+                bookmarkEditorForm.setTitleAndLocation(title, location);
+            } else {
+                // 一般的檔案或網址
+                bookmarkEditorForm.setTitleAndLocation(webView.CoreWebView2.DocumentTitle, webView.Source.ToString());
+            }
+
+            DialogResult result = bookmarkEditorForm.ShowDialog();
+            if (result == DialogResult.OK) {
+                (string, string) book = bookmarkEditorForm.getTitleAndLocation();
+                BookmarkItem item = new BookmarkItem(book.Item1, book.Item2);
+
+                if (tvBookmark.SelectedNode != null) {
+                    //BookmarkItem parent = tvBookmark.SelectedNode.Tag as BookmarkItem;
+                    BookmarkTree.addBookmarkNode(tvBookmark.SelectedNode, item);
+                    if (!tvBookmark.SelectedNode.IsExpanded) {
+                        tvBookmark.SelectedNode.Expand();
+                    }
+                } else {
+                    BookmarkTree.addBookmarkNode(null, item);
+                }
+            }
+        }
+
+        // 編輯書籤或目錄
+        private void btEditBookmark_Click(object sender, EventArgs e)
+        {
+            if (tvBookmark.SelectedNode == null) { return; }
+
+            BookmarkItem book = tvBookmark.SelectedNode.Tag as BookmarkItem;
+
+            if (book.IsFolder) {
+                // 目錄
+                bookmarkFolderEditorForm.setFolderTitle(book.Title);
+
+                DialogResult result = bookmarkFolderEditorForm.ShowDialog();
+                if (result == DialogResult.OK) {
+                    string title = bookmarkFolderEditorForm.getFolderTitle();
+
+                    tvBookmark.SelectedNode.Text = title;
+
+                    book.Title = title;
+                    book.URL = "";
+                }
+            } else {
+                bookmarkEditorForm.setTitleAndLocation(book.Title, book.URL);
+
+                DialogResult result = bookmarkEditorForm.ShowDialog();
+                if (result == DialogResult.OK) {
+                    (string, string) bookdata = bookmarkEditorForm.getTitleAndLocation();
+
+                    tvBookmark.SelectedNode.Text = bookdata.Item1;
+
+                    book.Title = bookdata.Item1;
+                    book.URL = bookdata.Item2;
+                }
+            }
+
+        }
+
+        private void btBookmarkManager_Click(object sender, EventArgs e)
+        {
+            bookmarkForm.ShowDialog();
+            BookmarkTree.updateTreeView();
+        }
+
+        void SaveBookmark()
+        {
+            BookmarkRoot.SaveToFile(CGlobalVal.BookmarkFile);
+            // 備份書籤
+            string now = DateTime.Now.ToString("yyyyMMddTHHmmss");
+            string sBookmarkBackupFile = CGlobalVal.MyBookmarkBackupPath + $"bookmark_backup_{now}";
+            int iCount = 1;
+            string sCheckFileName = sBookmarkBackupFile;    // 檢查有沒有重複檔名
+            while (File.Exists(sCheckFileName + ".json")) {
+                sCheckFileName = sBookmarkBackupFile + $"({iCount})";
+                iCount += 1;
+            }
+            BookmarkRoot.SaveToFile(sCheckFileName + ".json");
+        }
+
+        private void btDeleteBookmark_Click(object sender, EventArgs e)
+        {
+            if (tvBookmark.SelectedNode == null) { return; }
+            string sMsg = t("確定要刪除「%s」嗎？", "03006");
+            sMsg = sMsg.Replace("%s", tvBookmark.SelectedNode.Text);
+            DialogResult result = MessageBox.Show(sMsg, t("刪除書籤", "03005"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes) {
+                // 選擇 Yes
+                BookmarkTree.removeBookmark(tvBookmark.SelectedNode);
+            }
+        }
+
+        private void tvBookmark_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (tvBookmark.SelectedNode != null) {
+                if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Right) {
+                    TreeNode tvItem = tvBookmark.SelectedNode;
+                    BookmarkItem item = tvItem.Tag as BookmarkItem;
+                    if (!item.IsFolder) {
+                        OpenBookmarkTreeViewItem(tvItem);
+                    }
+                } else if (e.KeyCode == Keys.Delete) {
+                    btDeleteBookmark_Click(sender, null);
+                }
+            }
+        }
+
+        // 另存書籤
+        private void btExportBookmark_Click(object sender, EventArgs e)
+        {
+            if(saveBookmarkDialog.ShowDialog() == DialogResult.OK) {
+                BookmarkRoot.SaveToFile(saveBookmarkDialog.FileName, true);
+            }
+        }
+
+        // 匯入書籤
+        private void btImportBookmark_Click(object sender, EventArgs e)
+        {
+            if(LoadBookmarkDialog.ShowDialog() == DialogResult.OK) {
+                if (LoadBookmarkDialog.FileName.Contains(".bmk")) {
+                    // 載入第一代的書籤
+                    LoadOldBookmark(LoadBookmarkDialog.FileName);
+                } else {
+                    // 新版書籤
+                    string json = File.ReadAllText(LoadBookmarkDialog.FileName);
+                    BookmarkItemRoot newBookmark;
+                    newBookmark = JsonSerializer.Deserialize<BookmarkItemRoot>(json);
+                    newBookmark.IsFolder = true;
+                    newBookmark.ResetAllParent();
+                    // 把 newBookmark 加到原來的書籤
+                    string now = DateTime.Now.ToString();
+                    string sImportTime = t("（匯入時間：%s）", "03002");
+                    sImportTime = sImportTime.Replace("%s", now);
+                    BookmarkItem item = new BookmarkItem(newBookmark.Title + sImportTime);
+                    BookmarkRoot.addBookmark(item);
+                    foreach (var a in newBookmark.Children) {
+                        item.addBookmark(a);
+                    }
+                    BookmarkTree.updateTreeView();
+                }
+            }
+        }
+
+        // 載入第一代的書籤，Big5 格式
+        // <筆數>6
+        // <標題>&5929;&8056;&5EE3;&71C8;&9304;&5377;&7B2C;&4E94;
+        // <經名>&5929;&8056;&5EE3;&71C8;&9304;
+        // <藏經>X
+        // <冊數>78
+        // <部別>&53F2;&50B3;&90E8;
+        // <經號>1553
+        // <卷數>1
+        // <頁行>0420b15
+        // <譯者>&3010;&5B8B;&0020;&674E;&9075;&52D7;&6555;&7DE8;&3011;
+        void LoadOldBookmark(string filename)
+        {
+            string[] readText = File.ReadAllLines(filename, Encoding.GetEncoding("big5"));
+
+            string s = readText[0];
+            if(!s.Contains("<筆數>")) {
+                // 不是舊版書籤格式
+                MessageBox.Show("載入的書籤格式有問題。");
+                return;
+            }
+            s = s.Substring(4);
+            int count = 0;
+            int.TryParse(s, out count);
+
+            if(count == 0) {
+                MessageBox.Show(t("書籤筆數為 0。", "03004"));
+                return;
+            }
+
+            string now = DateTime.Now.ToString();
+            string sOldBookmarkTitle = t("舊版書籤", "03001") + t("（匯入時間：%s）", "03002");
+            sOldBookmarkTitle = sOldBookmarkTitle.Replace("%s", now);
+            BookmarkItem root = new BookmarkItem(sOldBookmarkTitle);
+            BookmarkRoot.addBookmark(root);
+
+            for (int i = 0; i < count; i++) {
+                string sTitle = readText[i*9+1];
+                if (sTitle.Contains("<標題>")) {
+                    sTitle = sTitle.Substring(4);
+                    sTitle = DecodeHtmlEntities(sTitle);
+                    string sLineHead = readText[i * 9 + 3].Substring(4);
+                    sLineHead += readText[i * 9 + 4].Substring(4);
+                    sLineHead += "n";
+                    string sSutra = readText[i * 9 + 6].Substring(4);
+                    sLineHead += sSutra;
+                    if(sSutra.Length < 5) {
+                        sLineHead += "_";
+                    }
+                    sLineHead += "p" + readText[i * 9 + 8].Substring(4);
+
+                    BookmarkItem item = new BookmarkItem(sTitle, sLineHead);
+                    root.addBookmark(item);
+                } else {
+                    break;
+                }
+            }
+            BookmarkTree.updateTreeView();
+        }
+
+        // &4E00; 轉成 一;
+        string DecodeHtmlEntities(string input)
+        {
+            // 使用正則表達式找到所有形如&xxxx;的字串
+            var matches = Regex.Matches(input, @"&(\w+);");
+
+            // 將每個匹配的字串轉換為Unicode字符
+            foreach (Match match in matches) {
+                string entity = match.Groups[1].Value;
+                int codePoint = Convert.ToInt32(entity, 16);
+                char unicodeChar = (char)codePoint;
+                input = input.Replace(match.Value, unicodeChar.ToString());
+            }
+            return input;
         }
     }
 }

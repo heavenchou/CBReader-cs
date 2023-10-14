@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -238,12 +239,13 @@ namespace CBReader
         // 更新所有 form 的語系
         public void ChangeFormLang(Form form)
         {
-            EachControl(form.Name, form);
+            EachControl(form, form);
         }
 
-        void EachControl(string formName, Control c)
+        void EachControl(Form form, Control c)
         {
-            ChangeComponentLang(formName, c);
+            string formName = form.Name;
+            ChangeComponentLang(form, c);
 
             if(formName == "AboutForm") {
                 // about 只要處理標題即可
@@ -252,24 +254,27 @@ namespace CBReader
 
             // 其它有子項目或特殊項目的另外處理
             if (c is ToolStrip) {
-                EachMenuItems(formName, (c as ToolStrip).Items);
+                EachMenuItems(form, (c as ToolStrip).Items);
             } else if (c is ComboBox) {
                 if (c.Tag == "han") {
                     c.Font = new Font(HanFontName, HanFontSize);
                 } else {
                     c.Font = new Font(FontName, FontSize);
                 }
-                EachComboBoxItems(formName, c.Name, (c as ComboBox).Items);
+                EachComboBoxItems(form, c.Name, (c as ComboBox).Items);
             } else if (c is ListBox) {
                 if (c.Tag == "han") {
                     c.Font = new Font(HanFontName, HanFontSize);
                 } else {
                     c.Font = new Font(FontName, FontSize);
                 }
-                EachListBoxItems(formName, c.Name, (c as ListBox).Items);
+                EachListBoxItems(form, c.Name, (c as ListBox).Items);
             } else if (c is DataGridView) {
                 c.Font = new Font(FontName, FontSize);
-                EachDataGridViewColumns(formName, c.Name, (c as DataGridView).Columns);
+                EachDataGridViewColumns(form, c.Name, (c as DataGridView).Columns);
+            } else if (c is ListView) {
+                c.Font = new Font(FontName, FontSize);
+                EachListViewColumns(form, c.Name, (c as ListView).Columns);
             } else if (c is TabControl) {
                 // 設定 TabControl 字型
                 c.Font = new Font(FontName, FontSize);
@@ -283,24 +288,33 @@ namespace CBReader
             }
 
             foreach (Control cs in c.Controls) {
-                EachControl(formName, cs);
+                EachControl(form, cs);
             }
         }
 
         // 更新元件的語系
-        public void ChangeComponentLang(string formName, Control c)
+        public void ChangeComponentLang(Form form, Control c)
         {
+            string formName = form.Name;
             string controlName = IniFile.ReadString(formName, c.Name, "");
             controlName = UserIniFile.ReadString(formName, c.Name, controlName);
-            MainForm main = null;
+
+            // 設定 form 和 tooltip
+            MainForm mainForm = null;
+            BookmarkForm bookmarkForm = null;
+            ToolTip toolTip = null;
             if (formName == "MainForm") {
-                main = (MainForm) c.FindForm();
+                mainForm = (MainForm) c.FindForm();
+                toolTip = mainForm.toolTip1;
+            } else if ((formName == "BookmarkForm")) {
+                bookmarkForm = (BookmarkForm) c.FindForm();
+                toolTip = bookmarkForm.toolTip1;
             }
 
             // 處理特殊的位置
             // 主功能表切換按鈕
             if (formName == "MainForm" && c.Name == "btNavWidthSwitch") {
-                if (main.pnMainFunc.Width == 0) {
+                if (mainForm.pnMainFunc.Width == 0) {
                     controlName = GetMessage("主功能 ►", "01023");
                 } else {
                     controlName = GetMessage("◄ 主功能", "01022");
@@ -308,7 +322,7 @@ namespace CBReader
             }
             // 目錄切換按鈕
             if (formName == "MainForm" && c.Name == "btMuluWidthSwitch") {
-                if (main.pnMulu.Width == 0) {
+                if (mainForm.pnMulu.Width == 0) {
                     controlName = GetMessage("目次 ►", "01021");
                 } else {
                     controlName = GetMessage("◄ 目次", "01020");
@@ -318,23 +332,23 @@ namespace CBReader
             // 搜尋書目數量
             if (formName == "MainForm" && c.Name == "lbFindSutraCount") {
                 controlName = GetMessage("找到 %d 筆", "01008");
-                controlName = controlName.Replace("%d", main.sgFindSutra.RowCount.ToString());
+                controlName = controlName.Replace("%d", mainForm.sgFindSutra.RowCount.ToString());
             }
 
             // 全文檢索數量
             if (formName == "MainForm" && c.Name == "lbSearchMsg") {
                 controlName = GetMessage("找到 %d 筆，共花時間：%f 秒", "01024");
-                if (main.SearchTimeDiff == "") {
+                if (mainForm.SearchTimeDiff == "") {
                     controlName = "";   // 還沒開始搜尋，所以不顯示
                 } else {
-                    controlName = controlName.Replace("%d", main.SearchFoundCount.ToString());
-                    controlName = controlName.Replace("%f", main.SearchTimeDiff);
+                    controlName = controlName.Replace("%d", mainForm.SearchFoundCount.ToString());
+                    controlName = controlName.Replace("%f", mainForm.SearchTimeDiff);
                 }
             }
 
             // 檢索本書
             if (formName == "MainForm" && c.Name == "cbSearchThisSutra") {
-                controlName = GetMessage("檢索本書：", "01019") + main.SearchThisBookName;
+                controlName = GetMessage("檢索本書：", "01019") + mainForm.SearchThisBookName;
             }
 
             // 更新元件標題與字型
@@ -351,36 +365,40 @@ namespace CBReader
             }
 
             // 設定 tooltip
-            if (formName == "MainForm") {
-                string controlTooltip = IniFile.ReadString(formName, c.Name + "_tip", "");
+
+            if (toolTip != null) {
+            string controlTooltip = IniFile.ReadString(formName, c.Name + "_tip", "");
                 controlTooltip = UserIniFile.ReadString(formName, c.Name + "_tip", controlTooltip);
                 if (controlTooltip != "") {
                     controlTooltip = controlTooltip.Replace("\\r", "\r");
                     controlTooltip = controlTooltip.Replace("\\n", "\n");
-                    main.toolTip1.SetToolTip(c, controlTooltip);
+                    toolTip.SetToolTip(c, controlTooltip);
                 }
             }
         }
 
-        void EachMenuItems(string formName, ToolStripItemCollection items)
+
+        void EachMenuItems(Form form, ToolStripItemCollection items)
         {
+            string formName = form.Name;
             foreach (ToolStripItem i in items) {
                 if (i is ToolStripMenuItem) {
                     ToolStripMenuItem item = i as ToolStripMenuItem;
-                    ChangeMenuItemLang(formName, item);
+                    ChangeMenuItemLang(form, item);
                     if (item.HasDropDownItems) {
-                        EachMenuItems(formName, item.DropDownItems);
+                        EachMenuItems(form, item.DropDownItems);
                     }
                 } else if (i is ToolStripButton) {
                     ToolStripButton item = i as ToolStripButton;
-                    ChangeToolStripButtonLang(formName, item);
+                    ChangeToolStripButtonLang(form, item);
                 }
             }
         }
 
         // 更新選單的語系
-        void ChangeMenuItemLang(string formName, ToolStripMenuItem item)
+        void ChangeMenuItemLang(Form form, ToolStripMenuItem item)
         {
+            string formName = form.Name;
             string controlName = IniFile.ReadString(formName, item.Name, "");
             controlName = UserIniFile.ReadString(formName, item.Name, controlName);
             // 特別處理語言
@@ -399,8 +417,9 @@ namespace CBReader
 
 
         // 更新工具列按鈕的語系
-        public void ChangeToolStripButtonLang(string formName, ToolStripButton c)
+        public void ChangeToolStripButtonLang(Form form, ToolStripButton c)
         {
+            string formName = form.Name;
             string controlName = IniFile.ReadString(formName, c.Name, "");
             controlName = UserIniFile.ReadString(formName, c.Name, controlName);
 
@@ -418,8 +437,9 @@ namespace CBReader
         }
 
         // 更新 ComboBox Item
-        void EachComboBoxItems(string formName, string comboBoxName, ComboBox.ObjectCollection items)
+        void EachComboBoxItems(Form form, string comboBoxName, ComboBox.ObjectCollection items)
         {
+            string formName = form.Name;
             for (int i = 0; i < items.Count; i++) {
                 string controlName = IniFile.ReadString(formName, $"{comboBoxName}Item{i}", "");
                 controlName = UserIniFile.ReadString(formName, $"{comboBoxName}Item{i}", controlName);
@@ -430,8 +450,9 @@ namespace CBReader
         }
 
         // 更新 ListBox Item
-        void EachListBoxItems(string formName, string listBoxName, ListBox.ObjectCollection items)
+        void EachListBoxItems(Form form, string listBoxName, ListBox.ObjectCollection items)
         {
+            string formName = form.Name;
             for (int i = 0; i < items.Count; i++) {
                 string controlName = IniFile.ReadString(formName, $"{listBoxName}Item{i}", "");
                 controlName = UserIniFile.ReadString(formName, $"{listBoxName}Item{i}", controlName);
@@ -442,8 +463,9 @@ namespace CBReader
         }
 
         // 更新 DataGridView Columns
-        void EachDataGridViewColumns(string formName, string dataGridViewName, DataGridViewColumnCollection items)
+        void EachDataGridViewColumns(Form form, string dataGridViewName, DataGridViewColumnCollection items)
         {
+            string formName = form.Name;
             for (int i = 0; i < items.Count; i++) {
                 string controlName = IniFile.ReadString(formName, $"{dataGridViewName}Column{i + 1}", "");
                 controlName = UserIniFile.ReadString(formName, $"{dataGridViewName}Column{i + 1}", controlName);
@@ -458,6 +480,19 @@ namespace CBReader
                     items[i].DefaultCellStyle.Font = new Font(HanFontName, HanFontSize);
                 } else {
                     items[i].DefaultCellStyle.Font = new Font(FontName, FontSize);
+                }
+            }
+        }
+
+        // 更新 ListView Columns
+        void EachListViewColumns(Form form, string listViewName, ListView.ColumnHeaderCollection items)
+        {
+            string formName = form.Name;
+            for (int i = 0; i < items.Count; i++) {
+                string controlName = IniFile.ReadString(formName, $"{listViewName}Column{i + 1}", "");
+                controlName = UserIniFile.ReadString(formName, $"{listViewName}Column{i + 1}", controlName);
+                if (controlName != "") {
+                    items[i].Text = controlName;
                 }
             }
         }
@@ -507,10 +542,16 @@ namespace CBReader
 
         void GetEachMenuItemNameAndText(string formName, ToolStripItemCollection items)
         {
-            foreach (ToolStripMenuItem item in items) {
-                DefaultIni += item.Name + "=" + item.Text + "\n";
-                if (item.HasDropDownItems) {
-                    GetEachMenuItemNameAndText(formName, item.DropDownItems);
+            foreach (var item1 in items) {
+                if (item1 is ToolStripMenuItem) {
+                    ToolStripMenuItem item = (ToolStripMenuItem)item1;
+                    DefaultIni += item.Name + "=" + item.Text + "\n";
+                    if (item.HasDropDownItems) {
+                        GetEachMenuItemNameAndText(formName, item.DropDownItems);
+                    }
+                } else if (item1 is ToolStripButton) {
+                    ToolStripButton item = (ToolStripButton)item1;
+                    DefaultIni += item.Name + "=" + item.Text + "\n";
                 }
             }
         }

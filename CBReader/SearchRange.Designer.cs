@@ -56,25 +56,26 @@ namespace CBReader
             System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("A 趙城金藏");
             System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("B 大藏經補編");
             System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("C 中華大藏經（中華書局版）");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("D 國家圖書館善本佛典");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("F 房山石經");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("G 佛教大藏經");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("GA 中國佛寺史志彙刊");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("GB 中國佛寺志叢刊");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("I 北朝佛教石刻拓片百品");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("J 嘉興大藏經（新文豐版）");
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("K 高麗大藏經（新文豐版）");
-            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("L 乾隆大藏經（新文豐版）");
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("LC 呂澂佛學著作集");
-            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("M 卍正藏經（新文豐版）");
-            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("N 漢譯南傳大藏經（元亨寺版）");
-            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("P 永樂北藏");
-            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("S 宋藏遺珍（新文豐版）");
-            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("TX 太虛大師全書");
-            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("U 洪武南藏");
-            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("Y 印順法師佛學著作集");
-            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("ZS 正史佛教資料類編");
-            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("ZW 藏外佛教文獻");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("CC CBETA 選集");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("D 國家圖書館善本佛典");
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("F 房山石經");
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("G 佛教大藏經");
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("GA 中國佛寺史志彙刊");
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("GB 中國佛寺志叢刊");
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("I 北朝佛教石刻拓片百品");
+            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("J 嘉興大藏經（新文豐版）");
+            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("K 高麗大藏經（新文豐版）");
+            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("L 乾隆大藏經（新文豐版）");
+            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("LC 呂澂佛學著作集");
+            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("M 卍正藏經（新文豐版）");
+            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("N 漢譯南傳大藏經（元亨寺版）");
+            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("P 永樂北藏");
+            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("S 宋藏遺珍（新文豐版）");
+            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("TX 太虛大師全書");
+            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("U 洪武南藏");
+            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Y 印順法師佛學著作集");
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("ZS 正史佛教資料類編");
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("ZW 藏外佛教文獻");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchRangeForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.listBox = new System.Windows.Forms.ListBox();
@@ -97,14 +98,14 @@ namespace CBReader
             this.tpBook.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnToolBar
+            // panel1
             // 
             this.panel1.Controls.Add(this.listBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(5);
-            this.panel1.Name = "pnToolBar";
-            this.panel1.Size = new System.Drawing.Size(190, 741);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(190, 769);
             this.panel1.TabIndex = 0;
             // 
             // listBox
@@ -132,7 +133,7 @@ namespace CBReader
             this.panel2.Location = new System.Drawing.Point(642, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(185, 741);
+            this.panel2.Size = new System.Drawing.Size(185, 769);
             this.panel2.TabIndex = 1;
             // 
             // btUnCheckAll
@@ -187,7 +188,7 @@ namespace CBReader
             this.panel3.Location = new System.Drawing.Point(190, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(5);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(452, 741);
+            this.panel3.Size = new System.Drawing.Size(452, 769);
             this.panel3.TabIndex = 2;
             // 
             // tabControl
@@ -198,7 +199,7 @@ namespace CBReader
             this.tabControl.Margin = new System.Windows.Forms.Padding(5);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(437, 750);
+            this.tabControl.Size = new System.Drawing.Size(437, 764);
             this.tabControl.TabIndex = 1;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -306,7 +307,7 @@ namespace CBReader
             this.tpBook.Margin = new System.Windows.Forms.Padding(5);
             this.tpBook.Name = "tpBook";
             this.tpBook.Padding = new System.Windows.Forms.Padding(5);
-            this.tpBook.Size = new System.Drawing.Size(429, 712);
+            this.tpBook.Size = new System.Drawing.Size(429, 726);
             this.tpBook.TabIndex = 1;
             this.tpBook.Text = "tabPage2";
             this.tpBook.UseVisualStyleBackColor = true;
@@ -328,44 +329,46 @@ namespace CBReader
             treeNode27.Text = "B 大藏經補編";
             treeNode28.Name = "Node5";
             treeNode28.Text = "C 中華大藏經（中華書局版）";
-            treeNode29.Name = "Node6";
-            treeNode29.Text = "D 國家圖書館善本佛典";
-            treeNode30.Name = "Node7";
-            treeNode30.Text = "F 房山石經";
-            treeNode31.Name = "Node8";
-            treeNode31.Text = "G 佛教大藏經";
-            treeNode32.Name = "Node9";
-            treeNode32.Text = "GA 中國佛寺史志彙刊";
-            treeNode33.Name = "Node10";
-            treeNode33.Text = "GB 中國佛寺志叢刊";
-            treeNode34.Name = "Node11";
-            treeNode34.Text = "I 北朝佛教石刻拓片百品";
-            treeNode35.Name = "Node12";
-            treeNode35.Text = "J 嘉興大藏經（新文豐版）";
-            treeNode36.Name = "Node13";
-            treeNode36.Text = "K 高麗大藏經（新文豐版）";
-            treeNode37.Name = "Node14";
-            treeNode37.Text = "L 乾隆大藏經（新文豐版）";
-            treeNode38.Name = "Node15";
-            treeNode38.Text = "LC 呂澂佛學著作集";
-            treeNode39.Name = "Node16";
-            treeNode39.Text = "M 卍正藏經（新文豐版）";
-            treeNode40.Name = "Node17";
-            treeNode40.Text = "N 漢譯南傳大藏經（元亨寺版）";
-            treeNode41.Name = "Node18";
-            treeNode41.Text = "P 永樂北藏";
-            treeNode42.Name = "Node19";
-            treeNode42.Text = "S 宋藏遺珍（新文豐版）";
-            treeNode43.Name = "Node20";
-            treeNode43.Text = "TX 太虛大師全書";
-            treeNode44.Name = "Node21";
-            treeNode44.Text = "U 洪武南藏";
-            treeNode45.Name = "Node22";
-            treeNode45.Text = "Y 印順法師佛學著作集";
-            treeNode46.Name = "Node23";
-            treeNode46.Text = "ZS 正史佛教資料類編";
-            treeNode47.Name = "Node24";
-            treeNode47.Text = "ZW 藏外佛教文獻";
+            treeNode29.Name = "Node0";
+            treeNode29.Text = "CC CBETA 選集";
+            treeNode30.Name = "Node6";
+            treeNode30.Text = "D 國家圖書館善本佛典";
+            treeNode31.Name = "Node7";
+            treeNode31.Text = "F 房山石經";
+            treeNode32.Name = "Node8";
+            treeNode32.Text = "G 佛教大藏經";
+            treeNode33.Name = "Node9";
+            treeNode33.Text = "GA 中國佛寺史志彙刊";
+            treeNode34.Name = "Node10";
+            treeNode34.Text = "GB 中國佛寺志叢刊";
+            treeNode35.Name = "Node11";
+            treeNode35.Text = "I 北朝佛教石刻拓片百品";
+            treeNode36.Name = "Node12";
+            treeNode36.Text = "J 嘉興大藏經（新文豐版）";
+            treeNode37.Name = "Node13";
+            treeNode37.Text = "K 高麗大藏經（新文豐版）";
+            treeNode38.Name = "Node14";
+            treeNode38.Text = "L 乾隆大藏經（新文豐版）";
+            treeNode39.Name = "Node15";
+            treeNode39.Text = "LC 呂澂佛學著作集";
+            treeNode40.Name = "Node16";
+            treeNode40.Text = "M 卍正藏經（新文豐版）";
+            treeNode41.Name = "Node17";
+            treeNode41.Text = "N 漢譯南傳大藏經（元亨寺版）";
+            treeNode42.Name = "Node18";
+            treeNode42.Text = "P 永樂北藏";
+            treeNode43.Name = "Node19";
+            treeNode43.Text = "S 宋藏遺珍（新文豐版）";
+            treeNode44.Name = "Node20";
+            treeNode44.Text = "TX 太虛大師全書";
+            treeNode45.Name = "Node21";
+            treeNode45.Text = "U 洪武南藏";
+            treeNode46.Name = "Node22";
+            treeNode46.Text = "Y 印順法師佛學著作集";
+            treeNode47.Name = "Node23";
+            treeNode47.Text = "ZS 正史佛教資料類編";
+            treeNode48.Name = "Node24";
+            treeNode48.Text = "ZW 藏外佛教文獻";
             this.tvBook.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode24,
             treeNode25,
@@ -390,9 +393,10 @@ namespace CBReader
             treeNode44,
             treeNode45,
             treeNode46,
-            treeNode47});
+            treeNode47,
+            treeNode48});
             this.tvBook.ShowLines = false;
-            this.tvBook.Size = new System.Drawing.Size(407, 686);
+            this.tvBook.Size = new System.Drawing.Size(407, 706);
             this.tvBook.TabIndex = 3;
             this.tvBook.Tag = "han";
             this.tvBook.DoubleClick += new System.EventHandler(this.tvBook_DoubleClick);
@@ -403,7 +407,7 @@ namespace CBReader
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.btCancel;
-            this.ClientSize = new System.Drawing.Size(827, 741);
+            this.ClientSize = new System.Drawing.Size(827, 769);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

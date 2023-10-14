@@ -62,7 +62,7 @@ namespace CBReader
             this.panel1.Location = new System.Drawing.Point(0, 694);
             this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(592, 59);
+            this.panel1.Size = new System.Drawing.Size(600, 59);
             this.panel1.TabIndex = 0;
             // 
             // btOK
@@ -84,7 +84,7 @@ namespace CBReader
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(592, 304);
+            this.panel2.Size = new System.Drawing.Size(600, 304);
             this.panel2.TabIndex = 1;
             // 
             // panel5
@@ -101,7 +101,7 @@ namespace CBReader
             this.panel5.Location = new System.Drawing.Point(175, 14);
             this.panel5.Margin = new System.Windows.Forms.Padding(5);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(405, 276);
+            this.panel5.Size = new System.Drawing.Size(411, 276);
             this.panel5.TabIndex = 1;
             // 
             // label4
@@ -118,13 +118,13 @@ namespace CBReader
             // llbCBETAWeb
             // 
             this.llbCBETAWeb.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.llbCBETAWeb.Location = new System.Drawing.Point(16, 140);
+            this.llbCBETAWeb.Location = new System.Drawing.Point(16, 137);
             this.llbCBETAWeb.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbCBETAWeb.Name = "llbCBETAWeb";
             this.llbCBETAWeb.Size = new System.Drawing.Size(387, 25);
             this.llbCBETAWeb.TabIndex = 0;
             this.llbCBETAWeb.TabStop = true;
-            this.llbCBETAWeb.Text = "中華電子佛典協會 🌐 www.cbeta.org";
+            this.llbCBETAWeb.Text = "財團法人佛教電子佛典基金會🌐cbeta.org";
             this.llbCBETAWeb.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbCBETAWeb_LinkClicked);
             // 
             // llbCBETAEmail
@@ -192,7 +192,7 @@ namespace CBReader
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(333, 25);
             this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "CBReader 2X  v0.8.4　2023-07-26";
+            this.lbTitle.Text = "CBReader 2X  v0.9.0　2023-12-18";
             // 
             // panel4
             // 
@@ -224,7 +224,7 @@ namespace CBReader
             this.panel3.Location = new System.Drawing.Point(0, 304);
             this.panel3.Margin = new System.Windows.Forms.Padding(5);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(592, 390);
+            this.panel3.Size = new System.Drawing.Size(600, 390);
             this.panel3.TabIndex = 1;
             // 
             // panel6
@@ -236,7 +236,7 @@ namespace CBReader
             this.panel6.Controls.Add(this.edReadme);
             this.panel6.Location = new System.Drawing.Point(14, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(566, 387);
+            this.panel6.Size = new System.Drawing.Size(574, 387);
             this.panel6.TabIndex = 3;
             // 
             // edReadme
@@ -252,7 +252,7 @@ namespace CBReader
             this.edReadme.Name = "edReadme";
             this.edReadme.ReadOnly = true;
             this.edReadme.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.edReadme.Size = new System.Drawing.Size(548, 356);
+            this.edReadme.Size = new System.Drawing.Size(556, 356);
             this.edReadme.TabIndex = 3;
             this.edReadme.TabStop = false;
             this.edReadme.Text = resources.GetString("edReadme.Text");
@@ -263,7 +263,7 @@ namespace CBReader
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.btOK;
-            this.ClientSize = new System.Drawing.Size(592, 753);
+            this.ClientSize = new System.Drawing.Size(600, 753);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

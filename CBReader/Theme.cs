@@ -231,6 +231,13 @@ namespace CBReader
                 if (c.ForeColor == oldColors.TreeViewText) {
                     c.ForeColor = newColors.TreeViewText;
                 }
+            } else if (c is ListView) {
+                if (c.BackColor == oldColors.TreeViewBack) {
+                    c.BackColor = newColors.TreeViewBack;
+                }
+                if (c.ForeColor == oldColors.TreeViewText) {
+                    c.ForeColor = newColors.TreeViewText;
+                }
             } else if (c is DataGridView) {
                 DataGridView dg = (DataGridView)c;
                 if (IsDarkMode) {

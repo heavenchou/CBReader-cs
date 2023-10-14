@@ -1,0 +1,85 @@
+
+				throw new Exception($"書櫃目錄不存在：{sDir}");
+				throw new Exception($"書櫃目錄沒有資料：{sDir}");
+				throw new Exception($"書櫃目錄沒有可讀取的資料：{sDir}");
+				throw new Exception($"BookData 文件不存在：{sFile}");
+				throw new Exception($"BookData 文件沒有資料：{sFile}");
+				throw new Exception($"Catalog 文件不存在：{sFile}");
+				throw new Exception($"Catalog 文件沒有資料：{sFile}");
+
+                HTMLText += "<div id='SearchHead'>檢索字串：" + s + ;
+                
+                CGlobalMessage.push($"檔名格式不正確, 無法分析: {XMLFile}");
+                
+                CGlobalMessage.push("版本名稱找不到");
+
+                
+                
+            if(sEdition.Contains("AI 標點")) {
+                sHtml += "<div><span id='AIPuncRemind'>【案：此資料標點由AI標點引擎提供，可從「設定/經文格式」選擇是否呈現。】</span></div>\n";
+                CGlobalMessage.push("錯誤：找不到 text 標記。");
+
+                
+                
+                        sHtml += "<span title='此悉曇字 " + sCBCode + " 無法呈現'>⍰</span>";
+                        sHtml += "<span title='此蘭札字 " + sCBCode + " 無法呈現'>⍰</span>";
+
+                        
+                        
+            if (sType == "品") {    
+                
+                    CGlobalMessage.push("錯誤 : 校勘沒有 n 屬性");
+                if (wcKBJ == 'k') { sKBJ = "科"; } else if (wcKBJ == 'b') { sKBJ = "標"; } else if (wcKBJ == 'j') { sKBJ = "解"; }
+                
+                    CGlobalMessage.push("錯誤 : 校勘沒有 n 屬性");
+                if (wcKBJ == 'k') sKBJ = "科";
+                else if (wcKBJ == 'b') sKBJ = "標";
+                else if (wcKBJ == 'j') sKBJ = "解";
+                
+                    CGlobalMessage.push("錯誤 : 校勘沒有 n 屬性");
+                    
+                    
+                    
+                sHtml += "<span class='guess1' title='本字為推測字，信心程度：高'>";
+            } else if (sCert == "above_medium") {
+                sHtml += "<span class='guess2' title='本字為推測字，信心程度：中高'>";
+                sHtml += "<span class='guess3' title='本字為推測字，信心程度：中'>";
+                sHtml += "<span class='guess4' title='本字為推測字，信心程度：低'>";
+                sHtml += "<span title='此處文字無法辨識'>";
+                sHtml += "▆";
+
+
+	        sVerInfo += "【典籍資訊】" ;
+	        sVerInfo += sBookName + "第 " + sVolNum + " 冊 No. " + sSutraNum + "《" + sSutraName + "》<br>\n";
+	        sVerInfo += "【版本記錄】發行日期：" + sPublishDate;
+			            sVerInfo += "，更新日期：" + sUpdateDate;
+            sVerInfo += "【編輯說明】本資料庫由中華電子佛典協會（CBETA）依" + sBookName + "所編輯<br>\n";
+                sVerInfo += "【資料說明】" + sSourceFrom + ;
+                sVerInfo += "【版權宣告】詳細說明請參閱【<a href='https:
+				MessageBox.Show("沒有找到正確檔案");
+                
+        static public string ProgramTitle = "CBReader 毘舍離版";
+        static public string ProgramTitle = "SLReader 毘舍離版";
+        
+				CGlobalMessage.push("沒找到指定標記，程式要再檢查處理");
+                
+                
+                
+				MessageBox.Show("錯誤：導覽文件找不到 body 標記。");
+                
+                
+                  
+				throw new Exception($"書籍目錄不存在：{Dir}");
+				CGlobalMessage.push($"後設文件不存在：{sMeta}");
+                
+						CGlobalMessage.push("CBETA 版的索引檔開啟失敗");
+					CGlobalMessage.push("沒有 CBETA 版的索引檔");
+                    
+						CGlobalMessage.push("原書資料索引檔開啟失敗");
+					CGlobalMessage.push("沒有原書資料的索引檔");
+				CGlobalMessage.push("沒有找到全文檢索目錄:" + Dir + );
+                
+                throw new Exception($"INI 檔案無法儲存。\r\n檔案：{sFile}\r\n錯誤代碼：{error}\r\n錯誤訊息：{msg}");
+				throw new Exception($"Spine 文件不存在：{sFile}");
+				throw new Exception($"Spine 文件沒有資料：{sFile}");
+                

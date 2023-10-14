@@ -263,11 +263,16 @@ namespace CBReader
             sSiddamFile = sSiddamFile.Replace("\\", "/");
             string sRanjanaFile = sSiddamFile.Replace("Siddam.otf", "Ranjana.otf");
 
+            string sHtmlTitle = $"{BookId}{SutraId} {SutraName}";
+            if(TotalJuan > 1) {
+                sHtmlTitle += $"（卷{JuanNum}）";
+            }
+
             var sHtml = $@"<!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>{BookId}{SutraId} {SutraName}</title>
+    <title>{sHtmlTitle}</title>
     <script src='{sJqueryFile}'></script>
     <script src='{JSFile}'></script>{sMuluScript}
     <style type='text/css'>
@@ -299,6 +304,10 @@ namespace CBReader
         .mingti {font-family:'Times New Roman',MingLiU,細明體,PMingLiU,新細明體,SimSun,NSimSun,'Songti TC';}
         .kaiti {font-family:'Times New Roman',DFKai-SB,標楷體,STKaiti,'Kaiti TC';}
         .heiti {font-family:'Times New Roman','Microsoft JhengHei',微軟正黑體,'Microsoft YaHei',simhei,'Heiti TC';}
+        .mono-songti {font-family:MingLiU,細明體,PMingLiU,新細明體,SimSun,NSimSun,'Songti TC';}
+        .mono-mingti {font-family:MingLiU,細明體,PMingLiU,新細明體,SimSun,NSimSun,'Songti TC';}
+        .mono-kaiti {font-family:DFKai-SB,標楷體,STKaiti,'Kaiti TC';}
+        .mono-heiti {font-family:'Microsoft JhengHei',微軟正黑體,'Microsoft YaHei',simhei,'Heiti TC';}
         .sup {vertical-align:super;font-size:70%;}
         .sub {vertical-align:sub;font-size:70%;}
         .over {text-decoration:overline;}
@@ -306,6 +315,23 @@ namespace CBReader
         .del {text-decoration:line-through;}
         .border {border:1px black solid;}
         .no-border {border:0;}
+        .circle {
+            display: inline-block;
+            position: relative;
+            line-height: 1;
+        }
+        .circle::before {
+            content: '';
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            width: 115%;
+            height: 115%;
+            border: 1px solid black;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
         .text-left {text-align:left;}
         .text-center {text-align:center; text-indent:0em !important; margin-left:0em !important;}
         .text-right {text-align:right;}
@@ -337,6 +363,7 @@ namespace CBReader
         a:active  {color:#0000ff;}
         .foreign  {font-family:'Times New Roman', 'Gandhari Unicode';}
         .preformat {font-family:細明體,MingLiU,NSimSun,'Songti TC'; font-size:21px;}
+        .preformat .kaiti {font-family:DFKai-SB,標楷體,STKaiti,'Kaiti TC';}
         .preformat .foreign {font-family:'Courier New'; font-size:17.5px;}
         .gaiji {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C','TH-Tshyn-P1';}
         .juannum  {color:#008000; font-size:21px;}
@@ -2751,7 +2778,7 @@ namespace CBReader
         <note type="cf2">
         <note type="cf3">
 
-        <note type="star" corresp="xxxxx"> : 在南傳才遇到, 因為星號在之前都是出現在 app 標記, 但南傳某些沒有 app 標記, 卻需要星號來表示重覆的註解, 待處理 ?????
+        <note type="star" corresp="xxxxx"> : X05n0229_p0269a18 , N19, no. 7, p. 211a4
 
         2016 新增 type = "add" , 表示是編輯者自行加入的, 若 resp 是 CBETA , 就表示是 CBETA 自己加上的註解,
                                     又如 DILA 自己在佛寺志加上註解, 也是用 "add" , 表示不是佛寺志原有的註解
@@ -2963,7 +2990,14 @@ namespace CBReader
             // <note type="star" corresp="#0211020"></note>
             else if (sType == "star") {
                 string sCorresp = GetAttr(node, "corresp");
-                sCorresp = sCorresp.Substring(1);
+                sCorresp = sCorresp.Substring(1);   // remove '#'
+
+                int iStar = 1;  // 預設第一個星號
+                if (mpNoteStarNum.ContainsKey(sCorresp)) {
+                    iStar = mpNoteStarNum[sCorresp] + 1;    // 星號加 1
+                }
+                mpNoteStarNum[sCorresp] = iStar;
+                sCorresp += "-" + iStar.ToString();
 
                 string sDisplay = "";   // 呈現的情況
                 if (Setting.ShowCollation == false) { sDisplay = "none"; }
@@ -2971,7 +3005,7 @@ namespace CBReader
                 else if (Setting.CollationType == ECollationType.CBETA) { sDisplay = "inline"; }
 
                 string sTmp = "<a id='note_star_" + sCorresp +
-                            "' class='note_orig note_mod' href='' style='display:" + sDisplay +
+                            "' class='note_star' href='' style='display:" + sDisplay +
                             "' onclick='return ShowCollation($(this));'>[＊]</a>";
                 sHtml += sTmp;
             }
@@ -4142,12 +4176,23 @@ namespace CBReader
 		        }
             }
             sVerInfo += "<br>\n";
-            sVerInfo += "【編輯說明】本資料庫由中華電子佛典協會（CBETA）依「" + sBookName + "」所編輯<br>\n";
+
+            string sSourceName = sBookName;
+            // 二個特例
+            if (BookId == "CC") {
+                if (sVolNum == "1") {
+                    sSourceName = "《比丘尼傳暨續比丘尼傳》（大千出版社，2006）";
+                } else if (sVolNum == "2") {
+                    sSourceName = "《敦博本六祖壇經校釋》（萬卷樓，2006）";
+                }
+            } 
+
+            sVerInfo += "【編輯說明】本資料庫由財團法人佛教電子佛典基金會（CBETA）依「" + sSourceName + "」所編輯<br>\n";
             //不管什麼版本, 都要列出版權宣告比較好
             //if(Application->Title == u"CBReader")
             {
                 sVerInfo += "【資料說明】" + sSourceFrom + "<br>\n";
-                sVerInfo += "【版權宣告】詳細說明請參閱【<a href='https://www.cbeta.org/copyright.php' target='_blank'>中華電子佛典協會資料庫版權宣告</a>】<br>\n";
+                sVerInfo += "【版權宣告】詳細說明請參閱【<a href='https://www.cbeta.org/copyright.php' target='_blank'>財團法人佛教電子佛典基金會資料庫版權宣告</a>】<br>\n";
             }
             sVerInfo += "</span><br>\n";
 

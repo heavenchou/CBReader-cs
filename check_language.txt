@@ -1,0 +1,228 @@
+==============================
+CBReader/About.Designer.cs
+==============================
+AboutForm : llbCBETAWeb : 財團法人佛教電子佛典基金會🌐cbeta.org
+AboutForm : label6 : 歡迎非商業用途之傳播使用！
+AboutForm : label2 : CBETA Reader 閱藏系統 - 毘舍離
+
+==============================
+CBReader/BookData.cs
+==============================
+throw new Exception($"BookData 文件不存在：{sFile}");
+throw new Exception($"BookData 文件沒有資料：{sFile}");
+
+==============================
+CBReader/Bookcase.cs
+==============================
+throw new Exception($"書櫃目錄不存在：{sDir}");
+throw new Exception($"書櫃目錄沒有資料：{sDir}");
+throw new Exception($"書櫃目錄沒有可讀取的資料：{sDir}");
+
+==============================
+CBReader/Bookmark.Designer.cs
+==============================
+BookmarkForm : columnHeader1 : 名稱
+BookmarkForm : columnHeader2 : 位置
+
+==============================
+CBReader/BookmarkItem.cs
+==============================
+"label": "醫藥",
+"title": "阿含部",
+"title": "〔醫術與藥學〕",
+"title": "阿摩尼-藥",
+
+==============================
+CBReader/CBXML.cs
+==============================
+HTMLText += "<div id='SearchHead'>檢索字串：" + s + "<hr></div>";
+CGlobalMessage.push($"檔名格式不正確, 無法分析: {XMLFile}");
+CGlobalMessage.push("版本名稱找不到");
+sHtmlTitle += $"（卷{JuanNum}）";
+if(sEdition.Contains("AI 標點")) {
+sHtml += "<div><span id='AIPuncRemind'>【案：此資料標點由AI標點引擎提供，可從「設定/經文格式」選擇是否呈現。】</span></div>\n";
+CGlobalMessage.push("錯誤：找不到 text 標記。");
+sHtml += "<span title='此缺字無法呈現'>⍰</span>";
+sHtml += "<span title='此缺字 " + sCBCode + " 無法呈現'>⍰</span>";
+sHtml += "<span title='此悉曇字 " + sCBCode + " 無法呈現'>⍰</span>";
+sHtml += "<span title='此蘭札字 " + sCBCode + " 無法呈現'>⍰</span>";
+<lem wit="【大】">長安</lem>
+<rdg resp="Taisho" wit="【宋】"><space quantity="0"/></rdg>
+XML 原始標記  : <lem wit="【大】">長安</lem>
+HTML 校注轉成 : <div type="lem" data-wit="【大】">長安</div>
+if (sType == "品") {    // 而目前是品, 就記錄下來
+<note place="interlinear"> : 傍註 (有時是在校勘中用文字寫著 "傍註" 二字)
+<note target="xxxxx"> : 在 p4 是 <foreign> => T01n0026.xml <note target="#beg0434012"><foreign n="0434012" cb:resp="#resp1" xml:lang="pi" cb:place="foot">Niga??has?vaka.</foreign></note>
+<note n="xxxxx" resp="xxxxx" type="orig" place="margin-top" target="xxxxx"> : X14n0288 有頭註型式 , 因此 place= "margin-top"
+<note n="xxxxx" resp="xxxxx" place="foot text" type="orig" subtype="biao" target="xxxxx">	: 卍續藏特有的 "科, 標, 解"
+<note n="xxxxx" resp="xxxxx" type="mod" subtype="ke" target="xxxxx">                       : 卍續藏特有的 "科, 標, 解"
+<note place="interlinear"> : 傍註 (有時是在校勘中用文字寫著 "傍註" 二字)
+<note target="xxxxx"> : 在 p4 是 <foreign> => T01n0026.xml <note target="#beg0434012"><foreign n="0434012" cb:resp="#resp1" xml:lang="pi" cb:place="foot">Niga??has?vaka.</foreign></note>
+<note n="xxxxx" resp="xxxxx" type="orig" place="margin-top" target="xxxxx"> : X14n0288 有頭註型式 , 因此 place= "margin-top"
+<note n="xxxxx" resp="xxxxx" place="foot text" type="orig" subtype="biao" target="xxxxx">	: 卍續藏特有的 "科, 標, 解"
+<note n="xxxxx" resp="xxxxx" type="mod" subtype="ke" target="xxxxx">                       : 卍續藏特有的 "科, 標, 解"
+CGlobalMessage.push("錯誤 : 校勘沒有 n 屬性");
+if (wcKBJ == 'k') { sKBJ = "科"; } else if (wcKBJ == 'b') { sKBJ = "標"; } else if (wcKBJ == 'j') { sKBJ = "解"; }
+CGlobalMessage.push("錯誤 : 校勘沒有 n 屬性");
+if (wcKBJ == 'k') sKBJ = "科";
+else if (wcKBJ == 'b') sKBJ = "標";
+else if (wcKBJ == 'j') sKBJ = "解";
+CGlobalMessage.push("錯誤 : 校勘沒有 n 屬性");
+if (sType == "各家會釋") {  // 行中段落加句點
+if (sType == "訂解總論") {  // 行中段落加句點
+<lem wit="【大】">長安</lem>
+<rdg resp="Taisho" wit="【宋】"><space quantity="0"/></rdg>
+XML 原始標記  : <rdg resp="Taisho" wit="【宋】"><space quantity="0"/></rdg>
+HTML 校注轉成 : <div type="rdg" data-wit="【宋】">長安</div>
+同一行的 tt						# <cb:tt place="inline"> 舊版是 <cb:tt rend="inline">
+已經自動將漢字和悉曇分開的 tt	# <cb:tt type="single-line"> 舊版是 <cb:tt rend="normal">
+<note n="0680020" resp="#resp2" type="mod" target="#nkr_note_mod_0680020"><choice><corr>婆羅婆</corr><sic><space quantity="0"/></sic></choice>～Bh?radv?ja.，婆＝娑【聖】</note>
+sHtml += "<span class='guess1' title='本字為推測字，信心程度：高'>";
+sHtml += "<span class='guess2' title='本字為推測字，信心程度：中高'>";
+sHtml += "<span class='guess3' title='本字為推測字，信心程度：中'>";
+sHtml += "<span class='guess4' title='本字為推測字，信心程度：低'>";
+sHtml += "<span title='此處文字無法辨識'>";
+sVerInfo += "【典籍資訊】" ;
+sVerInfo += sBookName + "第 " + sVolNum + " 冊 No. " + sSutraNum + "《" + sSutraName + "》<br>\n";
+sVerInfo += "【版本記錄】發行日期：" + sPublishDate;
+sVerInfo += "，更新日期：" + sUpdateDate;
+sSourceName = "《比丘尼傳暨續比丘尼傳》（大千出版社，2006）";
+sSourceName = "《敦博本六祖壇經校釋》（萬卷樓，2006）";
+sVerInfo += "【編輯說明】本資料庫由財團法人佛教電子佛典基金會（CBETA）依「" + sSourceName + "」所編輯<br>\n";
+sVerInfo += "【資料說明】" + sSourceFrom + "<br>\n";
+
+==============================
+CBReader/Catalog.cs
+==============================
+throw new Exception($"Catalog 文件不存在：{sFile}");
+throw new Exception($"Catalog 文件沒有資料：{sFile}");
+
+==============================
+CBReader/CreateHtml.Designer.cs
+==============================
+CreateHtmlForm : label1 : 藏經
+CreateHtmlForm : label2 : 略過此藏經
+CreateHtmlForm : label3 : 冊數
+CreateHtmlForm : label4 : 暫存目錄
+CreateHtmlForm : label5 : 檔名
+CreateHtmlForm : btStart : 開始
+CreateHtmlForm : btStop : 停止
+CreateHtmlForm : cbContinue : 找到就繼續下去
+
+==============================
+CBReader/CreateHtml.cs
+==============================
+MessageBox.Show("沒有找到正確檔案");
+
+==============================
+CBReader/GlobalVal.cs
+==============================
+static public string ProgramTitle = "CBReader 毘舍離版";
+static public string ProgramTitle = "SLReader 毘舍離版";
+
+==============================
+CBReader/Highlight.cs
+==============================
+CGlobalMessage.push("沒找到指定標記，程式要再檢查處理");
+
+==============================
+CBReader/Language.cs
+==============================
+controlName = GetMessage("主功能 ►", "01023");
+controlName = GetMessage("◄ 主功能", "01022");
+controlName = GetMessage("目次 ►", "01021");
+controlName = GetMessage("◄ 目次", "01020");
+controlName = GetMessage("找到 %d 筆", "01008");
+controlName = GetMessage("找到 %d 筆，共花時間：%f 秒", "01024");
+controlName = GetMessage("檢索本書：", "01019") + mainForm.SearchThisBookName;
+
+==============================
+CBReader/Main.Designer.cs
+==============================
+MainForm : btOption1 : ⚙ 設定
+MainForm : btOption1_tip : 開啟設定畫面
+MainForm : btNextJuan1 : 下一卷/篇章 ▼
+MainForm : btNextJuan1_tip : 下一卷或下一篇、章
+MainForm : btPrevJuan1 : 上一卷/篇章 ▲
+MainForm : btPrevJuan1_tip : 上一卷或上一篇、章
+MainForm : btMuluWidthSwitch1 : 目次 ►
+MainForm : btMuluWidthSwitch1_tip : 展開或收起目次
+MainForm : btNavWidthSwitch1 : ◄ 主功能
+MainForm : btNavWidthSwitch1_tip : 展開或收起主功能表
+MainForm : miAdmin : Heaven專用
+MainForm : miCreateHtml : 批量產生HTML
+MainForm : miLocalUpdateURL : 使用 local 更新網址
+MainForm : miGetLanguageIni : 産生基本語系檔
+MainForm : lbFindSutraCount : 找到 0 筆
+MainForm : lbSearchMsg : 找到 0 筆
+MainForm : cbSearchThisSutra : 檢索本書：
+
+==============================
+CBReader/Main.cs
+==============================
+"您的系統沒有安裝 WebView2 元件，請至相關說明網頁，了解並安裝 WebView2 元件。",
+"安裝 WebView2 元件",
+if(!s.Contains("<筆數>")) {
+MessageBox.Show("載入的書籤格式有問題。");
+if (sTitle.Contains("<標題>")) {
+
+==============================
+CBReader/NavXML.cs
+==============================
+MessageBox.Show("錯誤：導覽文件找不到 body 標記。");
+
+==============================
+CBReader/NextLine.cs
+==============================
+<lb n="0892c01"/><p><tt><t lang="san-sd">&SD-A5A9;</t><t lang="chi">曩</t></tt><tt><t lang="san-sd">&SD-A5F0;</t><t lang="chi"><yin><zi>莫</zi><sg><note n="0892001" resp="Taisho" type="orig" place="foot text">〔入〕－【宋】【元】，入＝引【明】</note><app n="0892001"><lem>入</lem><rdg wit="【宋】【元】" resp="Taisho">&lac;</rdg><rdg wit="【明】" resp="Taisho">引</rdg></app></sg></yin></t></tt><tt><t lang="san-sd">&SD-A67A;</t><t lang="chi">三</t></tt><tt><t lang="san-sd">&SD-A5EF;</t><t lang="chi">滿</t></tt><tt><t lang="san-sd">&SD-A557;</t><t lang="chi">多</t></tt><tt><t lang="san-sd">&SD-A656;</t><t lang="chi">跋</t></tt><tt><t lang="san-sd">&SD-AA76;</t><t lang="chi"><yin><zi>捺囉</zi><sg>二合引</sg></yin></t></tt><tt><t lang="san-sd">&SD-A5F1;</t><t lang="chi">野</t></tt><tt><t lang="san-sd">&SD-A65E;</t><t lang="chi"><yin><zi>&CB04393;</zi><sg>引</sg></yin></t></tt>
+<lb n="0892c03"/><tt><t lang="san-sd">&SD-A57D;</t><t lang="chi">地</t></tt><tt><t lang="san-sd">&SD-A67A;</t><t lang="chi">薩</t></tt><tt><t lang="san-sd">&SD-AF5A;</t><t lang="chi"><yin><zi>怛&CB00085;</zi><sg>二合引</sg></yin></t></tt><tt><t lang="san-sd">&SD-A5F1;</t><t lang="chi">野</t></tt><tt><t lang="san-sd">&SD-A5E5;</t><t lang="chi">麼</t></tt><tt><t lang="san-sd">&SD-A6A9;</t><t lang="chi"><yin><zi>賀</zi><sg>引</sg></yin></t></tt><tt><t lang="san-sd">&SD-A67A;</t><t lang="chi">薩</t></tt><tt><t lang="san-sd">&SD-AF5A;</t><t lang="chi"><yin><zi>怛&CB00085;</zi><sg>二合引</sg></yin></t></tt>
+<lb n="0892c05"/><tt><t lang="san-sd">&SD-A5F1;</t><t lang="chi">野</t></tt><tt><t lang="san-sd">&SD-A67A;</t><t lang="chi">麼</t></tt><tt><t lang="san-sd">&SD-A6A9;</t><t lang="chi"><yin><zi>賀</zi><sg>引</sg></yin></t></tt><tt><t lang="san-sd">&SD-A441;</t><t lang="chi"><yin><zi>迦</zi><sg>引</sg></yin></t></tt><tt><t lang="san-sd">&SD-A642;</t><t lang="chi">嚕</t></tt><tt><t lang="san-sd">&SD-A54D;</t><t lang="chi">抳</t></tt><tt><t lang="san-sd">&SD-A441;</t><t lang="chi"><yin><zi>迦</zi><sg>引</sg></yin></t></tt><tt><t lang="san-sd">&SD-A5F1;</t><t lang="chi">野</t></tt><tt><t lang="san-sd">&SD-A557;</t><t lang="chi">怛</t></tt>
+<lb n="0892c07"/><tt><t lang="san-sd">&SD-DA4A;</t><t lang="chi"><yin><zi>&CB00135;也</zi><sg>二合引</sg></yin></t></tt><tt><t lang="san-sd">&SD-A564;</t><t lang="chi"><yin><zi>他</zi><sg>引</sg></yin></t></tt><tt><t lang="san-sd">&SD-E074;</t><t lang="chi"><yin><zi>唵</zi><sg>引</sg></yin></t></tt><tt><t lang="san-sd">&SD-A656;</t><t lang="chi"><yin><zi>婆</zi><sg>引</sg></yin></t></tt><tt><t lang="san-sd">&SD-A5FD;</t><t lang="chi">囉</t></tt><tt><t lang="san-sd">&SD-A4DC;</t><t lang="chi"><yin><zi>胝</zi><sg>引</sg></yin></t></tt><tt><t lang="san-sd">&SD-A656;</t><t lang="chi">婆</t></tt><tt><t lang="san-sd">&SD-A5FD;</t><t lang="chi">囉</t></tt>
+
+==============================
+CBReader/RendAttr.cs
+==============================
+NewStyle += "font-family:\"Times New Roman\",MingLiU,細明體,PMingLiU,新細明體,SimSun,NSimSun,\"Songti TC\";";
+NewStyle += "font-family:\"Times New Roman\",DFKai-SB,標楷體,STKaiti,\"Kaiti TC\";";
+NewStyle += "font-family:\"Times New Roman\",\"Microsoft JhengHei\",微軟正黑體,\"Microsoft YaHei\",simhei,\"Heiti TC\";";
+
+==============================
+CBReader/Series.cs
+==============================
+throw new Exception($"書籍目錄不存在：{Dir}");
+CGlobalMessage.push($"後設文件不存在：{sMeta}");
+CGlobalMessage.push("CBETA 版的索引檔開啟失敗");
+CGlobalMessage.push("沒有 CBETA 版的索引檔");
+CGlobalMessage.push("原書資料索引檔開啟失敗");
+CGlobalMessage.push("沒有原書資料的索引檔");
+CGlobalMessage.push("沒有找到全文檢索目錄:" + Dir + "index");
+
+==============================
+CBReader/Setting.cs
+==============================
+throw new Exception($"INI 檔案無法儲存。\r\n檔案：{sFile}\r\n錯誤代碼：{error}\r\n錯誤訊息：{msg}");
+
+==============================
+CBReader/Spine.cs
+==============================
+throw new Exception($"Spine 文件不存在：{sFile}");
+throw new Exception($"Spine 文件沒有資料：{sFile}");
+
+==============================
+CBReader/SubUtil.cs
+==============================
+if (sName.Contains("(第")) {
+int iPos = sName.IndexOf("(第");
+int iPos2 = sName.IndexOf("卷)");
+if (sName.Contains("華雨集（")) {
+if (sName == "日記（八）（含墨蹟、函札、法語、編後贅語）") {
+return "日記";
+sName = Regex.Replace(sName, $"（[上中下一二三四五六七八九十、]+）$", "");
+
+==============================
+CBReader/Update.cs
+==============================
+MessageBox.Show("不更新就算了");
+t("按下「是」會自動進行更新，更新期間無法操作 CBReader。", "02012") + "\n\n" +
+t("您也可以稍候選擇按下「更新」按鈕進行更新。", "02013");
+

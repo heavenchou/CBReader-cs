@@ -30,7 +30,7 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption1 = new System.Windows.Forms.Button();
             this.pnToolBar = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
@@ -58,6 +58,8 @@ namespace CBReader
             this.tsbCBETACollation = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbCBCopy = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbAddBookmark = new System.Windows.Forms.ToolStripButton();
             this.btTheme1 = new System.Windows.Forms.Button();
             this.btNextJuan1 = new System.Windows.Forms.Button();
             this.btPrevJuan1 = new System.Windows.Forms.Button();
@@ -151,6 +153,18 @@ namespace CBReader
             this.edGoSutraSutraNum = new System.Windows.Forms.TextBox();
             this.cbGoBookBookId = new System.Windows.Forms.ComboBox();
             this.cbGoSutraBookId = new System.Windows.Forms.ComboBox();
+            this.tpBookmark = new System.Windows.Forms.TabPage();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.tvBookmark = new System.Windows.Forms.TreeView();
+            this.imglBookmark = new System.Windows.Forms.ImageList(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btImportBookmark = new System.Windows.Forms.Button();
+            this.btExportBookmark = new System.Windows.Forms.Button();
+            this.btDeleteBookmark = new System.Windows.Forms.Button();
+            this.btBookmarkManager = new System.Windows.Forms.Button();
+            this.btEditBookmark = new System.Windows.Forms.Button();
+            this.btAddBookmark = new System.Windows.Forms.Button();
+            this.btAddBookmarkFolder = new System.Windows.Forms.Button();
             this.tpSearch = new System.Windows.Forms.TabPage();
             this.panel11 = new System.Windows.Forms.Panel();
             this.sgTextSearch = new System.Windows.Forms.DataGridView();
@@ -194,6 +208,8 @@ namespace CBReader
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.saveBookmarkDialog = new System.Windows.Forms.SaveFileDialog();
+            this.LoadBookmarkDialog = new System.Windows.Forms.OpenFileDialog();
             this.pnToolBar.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
@@ -211,6 +227,9 @@ namespace CBReader
             this.panel8.SuspendLayout();
             this.tpGoto.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.tpBookmark.SuspendLayout();
+            this.panel13.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.tpSearch.SuspendLayout();
             this.panel11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sgTextSearch)).BeginInit();
@@ -272,13 +291,13 @@ namespace CBReader
             // toolStripContainer.TopToolStripPanel
             // 
             this.toolStripContainer.TopToolStripPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsMain);
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsSutra);
+            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsMain);
             this.toolStripContainer.TopToolStripPanel.ClientSizeChanged += new System.EventHandler(this.toolStripContainer_TopToolStripPanel_ClientSizeChanged);
             // 
             // tsMain
             // 
-            this.tsMain.AllowMerge = false;
+            this.tsMain.BackColor = System.Drawing.SystemColors.Control;
             this.tsMain.Dock = System.Windows.Forms.DockStyle.None;
             this.tsMain.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
             this.tsMain.ImageScalingSize = new System.Drawing.Size(30, 30);
@@ -291,7 +310,7 @@ namespace CBReader
             this.btNextJuan,
             this.toolStripSeparator5,
             this.btTheme});
-            this.tsMain.Location = new System.Drawing.Point(13, 0);
+            this.tsMain.Location = new System.Drawing.Point(4, 0);
             this.tsMain.Name = "tsMain";
             this.tsMain.Size = new System.Drawing.Size(229, 37);
             this.tsMain.TabIndex = 0;
@@ -305,7 +324,6 @@ namespace CBReader
             this.btOption.ImageTransparentColor = System.Drawing.Color.Transparent;
             this.btOption.Name = "btOption";
             this.btOption.Size = new System.Drawing.Size(34, 34);
-            this.btOption.Text = "⚙";
             this.btOption.Click += new System.EventHandler(this.btOption_Click);
             // 
             // btNavWidthSwitch
@@ -371,6 +389,7 @@ namespace CBReader
             // 
             // tsSutra
             // 
+            this.tsSutra.BackColor = System.Drawing.SystemColors.Control;
             this.tsSutra.CanOverflow = false;
             this.tsSutra.Dock = System.Windows.Forms.DockStyle.None;
             this.tsSutra.ImageScalingSize = new System.Drawing.Size(30, 30);
@@ -388,10 +407,12 @@ namespace CBReader
             this.tsbOrigCollation,
             this.tsbCBETACollation,
             this.toolStripSeparator4,
-            this.tsbCBCopy});
-            this.tsSutra.Location = new System.Drawing.Point(364, 0);
+            this.tsbCBCopy,
+            this.toolStripSeparator6,
+            this.tsbAddBookmark});
+            this.tsSutra.Location = new System.Drawing.Point(247, 0);
             this.tsSutra.Name = "tsSutra";
-            this.tsSutra.Size = new System.Drawing.Size(405, 37);
+            this.tsSutra.Size = new System.Drawing.Size(445, 37);
             this.tsSutra.TabIndex = 1;
             this.tsSutra.LocationChanged += new System.EventHandler(this.tsSutra_LocationChanged);
             // 
@@ -530,6 +551,22 @@ namespace CBReader
             this.tsbCBCopy.Text = "toolStripButton11";
             this.tsbCBCopy.ToolTipText = "引用複製";
             this.tsbCBCopy.Click += new System.EventHandler(this.tsbCBCopy_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 37);
+            // 
+            // tsbAddBookmark
+            // 
+            this.tsbAddBookmark.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbAddBookmark.Image = global::CBReader.Properties.Resources.NewBookmark;
+            this.tsbAddBookmark.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(225)))));
+            this.tsbAddBookmark.Name = "tsbAddBookmark";
+            this.tsbAddBookmark.Size = new System.Drawing.Size(34, 34);
+            this.tsbAddBookmark.Text = "toolStripButton1";
+            this.tsbAddBookmark.ToolTipText = "新增書籤";
+            this.tsbAddBookmark.Click += new System.EventHandler(this.tbsAddBookmark_Click);
             // 
             // btTheme1
             // 
@@ -710,6 +747,7 @@ namespace CBReader
             this.MainFunc.Controls.Add(this.tpCatalog);
             this.MainFunc.Controls.Add(this.tpBibl);
             this.MainFunc.Controls.Add(this.tpGoto);
+            this.MainFunc.Controls.Add(this.tpBookmark);
             this.MainFunc.Controls.Add(this.tpSearch);
             this.MainFunc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainFunc.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -835,14 +873,14 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;
@@ -1705,6 +1743,149 @@ namespace CBReader
             this.cbGoSutraBookId.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
             this.cbGoSutraBookId.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
             // 
+            // tpBookmark
+            // 
+            this.tpBookmark.Controls.Add(this.panel13);
+            this.tpBookmark.Controls.Add(this.panel1);
+            this.tpBookmark.Location = new System.Drawing.Point(4, 30);
+            this.tpBookmark.Name = "tpBookmark";
+            this.tpBookmark.Padding = new System.Windows.Forms.Padding(3);
+            this.tpBookmark.Size = new System.Drawing.Size(356, 558);
+            this.tpBookmark.TabIndex = 4;
+            this.tpBookmark.Text = "書籤";
+            this.tpBookmark.UseVisualStyleBackColor = true;
+            // 
+            // panel13
+            // 
+            this.panel13.Controls.Add(this.tvBookmark);
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel13.Location = new System.Drawing.Point(3, 51);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(350, 504);
+            this.panel13.TabIndex = 1;
+            // 
+            // tvBookmark
+            // 
+            this.tvBookmark.AllowDrop = true;
+            this.tvBookmark.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvBookmark.FullRowSelect = true;
+            this.tvBookmark.HideSelection = false;
+            this.tvBookmark.ImageIndex = 0;
+            this.tvBookmark.ImageList = this.imglBookmark;
+            this.tvBookmark.Location = new System.Drawing.Point(0, 0);
+            this.tvBookmark.Name = "tvBookmark";
+            this.tvBookmark.SelectedImageIndex = 0;
+            this.tvBookmark.Size = new System.Drawing.Size(350, 504);
+            this.tvBookmark.TabIndex = 0;
+            this.tvBookmark.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tvBookmark_ItemDrag);
+            this.tvBookmark.DragDrop += new System.Windows.Forms.DragEventHandler(this.tvBookmark_DragDrop);
+            this.tvBookmark.DragOver += new System.Windows.Forms.DragEventHandler(this.tvBookmark_DragOver);
+            this.tvBookmark.DragLeave += new System.EventHandler(this.tvBookmark_DragLeave);
+            this.tvBookmark.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvBookmark_KeyDown);
+            this.tvBookmark.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tvBookmark_MouseDoubleClick);
+            // 
+            // imglBookmark
+            // 
+            this.imglBookmark.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imglBookmark.ImageStream")));
+            this.imglBookmark.TransparentColor = System.Drawing.Color.Transparent;
+            this.imglBookmark.Images.SetKeyName(0, "folder_close.ico");
+            this.imglBookmark.Images.SetKeyName(1, "folder_open.ico");
+            this.imglBookmark.Images.SetKeyName(2, "Boookmark.png");
+            this.imglBookmark.Images.SetKeyName(3, "NewFolder.png");
+            this.imglBookmark.Images.SetKeyName(4, "NewBookmark.png");
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btImportBookmark);
+            this.panel1.Controls.Add(this.btExportBookmark);
+            this.panel1.Controls.Add(this.btDeleteBookmark);
+            this.panel1.Controls.Add(this.btBookmarkManager);
+            this.panel1.Controls.Add(this.btEditBookmark);
+            this.panel1.Controls.Add(this.btAddBookmark);
+            this.panel1.Controls.Add(this.btAddBookmarkFolder);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(350, 48);
+            this.panel1.TabIndex = 0;
+            // 
+            // btImportBookmark
+            // 
+            this.btImportBookmark.Image = global::CBReader.Properties.Resources.BookmarkImport;
+            this.btImportBookmark.Location = new System.Drawing.Point(159, 6);
+            this.btImportBookmark.Name = "btImportBookmark";
+            this.btImportBookmark.Size = new System.Drawing.Size(36, 36);
+            this.btImportBookmark.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.btImportBookmark, "匯入書籤");
+            this.btImportBookmark.UseVisualStyleBackColor = true;
+            this.btImportBookmark.Click += new System.EventHandler(this.btImportBookmark_Click);
+            // 
+            // btExportBookmark
+            // 
+            this.btExportBookmark.Image = global::CBReader.Properties.Resources.BookmarkExport;
+            this.btExportBookmark.Location = new System.Drawing.Point(194, 6);
+            this.btExportBookmark.Name = "btExportBookmark";
+            this.btExportBookmark.Size = new System.Drawing.Size(36, 36);
+            this.btExportBookmark.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.btExportBookmark, "匯出書籤");
+            this.btExportBookmark.UseVisualStyleBackColor = true;
+            this.btExportBookmark.Click += new System.EventHandler(this.btExportBookmark_Click);
+            // 
+            // btDeleteBookmark
+            // 
+            this.btDeleteBookmark.Image = global::CBReader.Properties.Resources.BookmarkDelete;
+            this.btDeleteBookmark.Location = new System.Drawing.Point(117, 6);
+            this.btDeleteBookmark.Name = "btDeleteBookmark";
+            this.btDeleteBookmark.Size = new System.Drawing.Size(36, 36);
+            this.btDeleteBookmark.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.btDeleteBookmark, "刪除書籤及目錄");
+            this.btDeleteBookmark.UseVisualStyleBackColor = true;
+            this.btDeleteBookmark.Click += new System.EventHandler(this.btDeleteBookmark_Click);
+            // 
+            // btBookmarkManager
+            // 
+            this.btBookmarkManager.Image = global::CBReader.Properties.Resources.BookmarkManager;
+            this.btBookmarkManager.Location = new System.Drawing.Point(236, 6);
+            this.btBookmarkManager.Name = "btBookmarkManager";
+            this.btBookmarkManager.Size = new System.Drawing.Size(36, 36);
+            this.btBookmarkManager.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.btBookmarkManager, "書籤管理員");
+            this.btBookmarkManager.UseVisualStyleBackColor = true;
+            this.btBookmarkManager.Click += new System.EventHandler(this.btBookmarkManager_Click);
+            // 
+            // btEditBookmark
+            // 
+            this.btEditBookmark.Image = global::CBReader.Properties.Resources.BookmarkEdit;
+            this.btEditBookmark.Location = new System.Drawing.Point(82, 6);
+            this.btEditBookmark.Name = "btEditBookmark";
+            this.btEditBookmark.Size = new System.Drawing.Size(36, 36);
+            this.btEditBookmark.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.btEditBookmark, "編輯書籤及目錄");
+            this.btEditBookmark.UseVisualStyleBackColor = true;
+            this.btEditBookmark.Click += new System.EventHandler(this.btEditBookmark_Click);
+            // 
+            // btAddBookmark
+            // 
+            this.btAddBookmark.Image = global::CBReader.Properties.Resources.NewBookmark;
+            this.btAddBookmark.Location = new System.Drawing.Point(40, 6);
+            this.btAddBookmark.Name = "btAddBookmark";
+            this.btAddBookmark.Size = new System.Drawing.Size(36, 36);
+            this.btAddBookmark.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.btAddBookmark, "新增書籤");
+            this.btAddBookmark.UseVisualStyleBackColor = true;
+            this.btAddBookmark.Click += new System.EventHandler(this.btAddBookmark_Click);
+            // 
+            // btAddBookmarkFolder
+            // 
+            this.btAddBookmarkFolder.Image = global::CBReader.Properties.Resources.NewFolder;
+            this.btAddBookmarkFolder.Location = new System.Drawing.Point(5, 6);
+            this.btAddBookmarkFolder.Name = "btAddBookmarkFolder";
+            this.btAddBookmarkFolder.Size = new System.Drawing.Size(36, 36);
+            this.btAddBookmarkFolder.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.btAddBookmarkFolder, "新增書籤目錄");
+            this.btAddBookmarkFolder.UseVisualStyleBackColor = true;
+            this.btAddBookmarkFolder.Click += new System.EventHandler(this.btAddBookmarkFolder_Click);
+            // 
             // tpSearch
             // 
             this.tpSearch.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -2144,6 +2325,14 @@ namespace CBReader
             this.toolTip1.StripAmpersands = true;
             this.toolTip1.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this.toolTip1_Draw);
             // 
+            // saveBookmarkDialog
+            // 
+            this.saveBookmarkDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
+            // 
+            // LoadBookmarkDialog
+            // 
+            this.LoadBookmarkDialog.FileName = "openFileDialog1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -2192,6 +2381,9 @@ namespace CBReader
             this.tpGoto.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            this.tpBookmark.ResumeLayout(false);
+            this.panel13.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.tpSearch.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sgTextSearch)).EndInit();
@@ -2373,6 +2565,22 @@ namespace CBReader
         private System.Windows.Forms.ToolStripMenuItem miToolStrip;
         private System.Windows.Forms.ToolStripMenuItem miMainToolStrip;
         private System.Windows.Forms.ToolStripMenuItem miSutraToolStrip;
+        private System.Windows.Forms.TabPage tpBookmark;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.TreeView tvBookmark;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton tsbAddBookmark;
+        private System.Windows.Forms.ImageList imglBookmark;
+        private System.Windows.Forms.Button btEditBookmark;
+        private System.Windows.Forms.Button btAddBookmark;
+        private System.Windows.Forms.Button btAddBookmarkFolder;
+        private System.Windows.Forms.Button btBookmarkManager;
+        private System.Windows.Forms.Button btDeleteBookmark;
+        private System.Windows.Forms.Button btExportBookmark;
+        private System.Windows.Forms.SaveFileDialog saveBookmarkDialog;
+        private System.Windows.Forms.Button btImportBookmark;
+        private System.Windows.Forms.OpenFileDialog LoadBookmarkDialog;
     }
 }
 
