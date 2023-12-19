@@ -175,7 +175,7 @@
             this.btDeleteBookmark.Name = "btDeleteBookmark";
             this.btDeleteBookmark.Size = new System.Drawing.Size(36, 36);
             this.btDeleteBookmark.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.btDeleteBookmark, "刪除書籤及目錄");
+            this.toolTip1.SetToolTip(this.btDeleteBookmark, "刪除");
             this.btDeleteBookmark.UseVisualStyleBackColor = true;
             this.btDeleteBookmark.Click += new System.EventHandler(this.btDeleteBookmark_Click);
             // 
@@ -186,7 +186,7 @@
             this.btEditBookmark.Name = "btEditBookmark";
             this.btEditBookmark.Size = new System.Drawing.Size(36, 36);
             this.btEditBookmark.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.btEditBookmark, "編輯書籤及目錄");
+            this.toolTip1.SetToolTip(this.btEditBookmark, "編輯");
             this.btEditBookmark.UseVisualStyleBackColor = true;
             this.btEditBookmark.Click += new System.EventHandler(this.btEditBookmark_Click);
             // 
@@ -208,7 +208,7 @@
             this.btAddBookmarkFolder.Name = "btAddBookmarkFolder";
             this.btAddBookmarkFolder.Size = new System.Drawing.Size(36, 36);
             this.btAddBookmarkFolder.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.btAddBookmarkFolder, "新增書籤目錄");
+            this.toolTip1.SetToolTip(this.btAddBookmarkFolder, "新增目錄");
             this.btAddBookmarkFolder.UseVisualStyleBackColor = true;
             this.btAddBookmarkFolder.Click += new System.EventHandler(this.btAddBookmarkFolder_Click);
             // 

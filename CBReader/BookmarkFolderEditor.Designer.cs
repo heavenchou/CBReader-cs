@@ -53,9 +53,9 @@
             this.lbTitle.AutoSize = true;
             this.lbTitle.Location = new System.Drawing.Point(12, 9);
             this.lbTitle.Name = "lbTitle";
-            this.lbTitle.Size = new System.Drawing.Size(132, 25);
+            this.lbTitle.Size = new System.Drawing.Size(52, 25);
             this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "書籤目錄名稱";
+            this.lbTitle.Text = "名稱";
             // 
             // panel2
             // 

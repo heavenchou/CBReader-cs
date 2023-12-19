@@ -50,9 +50,9 @@
             this.lbTitle.AutoSize = true;
             this.lbTitle.Location = new System.Drawing.Point(12, 9);
             this.lbTitle.Name = "lbTitle";
-            this.lbTitle.Size = new System.Drawing.Size(92, 25);
+            this.lbTitle.Size = new System.Drawing.Size(52, 25);
             this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "書籤名稱";
+            this.lbTitle.Text = "名稱";
             // 
             // edLocation
             // 
@@ -107,9 +107,9 @@
             this.lbLocation.AutoSize = true;
             this.lbLocation.Location = new System.Drawing.Point(12, 9);
             this.lbLocation.Name = "lbLocation";
-            this.lbLocation.Size = new System.Drawing.Size(92, 25);
+            this.lbLocation.Size = new System.Drawing.Size(52, 25);
             this.lbLocation.TabIndex = 1;
-            this.lbLocation.Text = "書籤位置";
+            this.lbLocation.Text = "位置";
             // 
             // panel4
             // 
