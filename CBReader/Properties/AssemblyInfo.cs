@@ -10,8 +10,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("財團法人佛教電子佛典基金會(CBETA)")]
 [assembly: AssemblyProduct("CBETA Reader")]
-[assembly: AssemblyCopyright("Copyright © 2001-2023 Heaven Chou")]
-[assembly: AssemblyTrademark("Copyright © 1998-2023 CBETA")]
+[assembly: AssemblyCopyright("Copyright © 2001-2024 Heaven Chou")]
+[assembly: AssemblyTrademark("Copyright © 1998-2024 CBETA")]
 [assembly: AssemblyCulture("")]
 
 // 將 ComVisible 設為 false 可對 COM 元件隱藏
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以使用 '*' 將組建和修訂編號
 // 設為預設，如下所示:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.9.0.0")]
-[assembly: AssemblyFileVersion("0.9.0.0")]
+[assembly: AssemblyVersion("0.9.0.1")]
+[assembly: AssemblyFileVersion("0.9.0.1")]

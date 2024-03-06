@@ -159,7 +159,7 @@ namespace CBReader
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(369, 25);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Copyright © 2001-2023 Heaven Chou";
+            this.label5.Text = "Copyright © 2001-2024 Heaven Chou";
             // 
             // label3
             // 
@@ -170,7 +170,7 @@ namespace CBReader
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(305, 25);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Copyright © 1998-2023 CBETA";
+            this.label3.Text = "Copyright © 1998-2024 CBETA";
             // 
             // label2
             // 
@@ -192,7 +192,7 @@ namespace CBReader
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(333, 25);
             this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "CBReader 2X  v0.9.0　2023-12-19";
+            this.lbTitle.Text = "CBReader 2X  v0.9.0　2024-03-07";
             // 
             // panel4
             // 

@@ -30,10 +30,19 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption1 = new System.Windows.Forms.Button();
             this.pnToolBar = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
+            this.tsMain = new System.Windows.Forms.ToolStrip();
+            this.btOption = new System.Windows.Forms.ToolStripButton();
+            this.btNavWidthSwitch = new System.Windows.Forms.ToolStripButton();
+            this.btMuluWidthSwitch = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btPrevJuan = new System.Windows.Forms.ToolStripButton();
+            this.btNextJuan = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.btTheme = new System.Windows.Forms.ToolStripButton();
             this.tsSutra = new System.Windows.Forms.ToolStrip();
             this.tsbShowLine = new System.Windows.Forms.ToolStripButton();
             this.tsbShowPara = new System.Windows.Forms.ToolStripButton();
@@ -51,15 +60,6 @@ namespace CBReader
             this.tsbCBCopy = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbAddBookmark = new System.Windows.Forms.ToolStripButton();
-            this.tsMain = new System.Windows.Forms.ToolStrip();
-            this.btOption = new System.Windows.Forms.ToolStripButton();
-            this.btNavWidthSwitch = new System.Windows.Forms.ToolStripButton();
-            this.btMuluWidthSwitch = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btPrevJuan = new System.Windows.Forms.ToolStripButton();
-            this.btNextJuan = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.btTheme = new System.Windows.Forms.ToolStripButton();
             this.btTheme1 = new System.Windows.Forms.Button();
             this.btNextJuan1 = new System.Windows.Forms.Button();
             this.btPrevJuan1 = new System.Windows.Forms.Button();
@@ -213,8 +213,8 @@ namespace CBReader
             this.pnToolBar.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
-            this.tsSutra.SuspendLayout();
             this.tsMain.SuspendLayout();
+            this.tsSutra.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.pnMainFunc.SuspendLayout();
             this.MainFunc.SuspendLayout();
@@ -278,7 +278,7 @@ namespace CBReader
             // 
             // toolStripContainer.ContentPanel
             // 
-            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(865, 18);
+            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(865, 0);
             this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer.LeftToolStripPanelVisible = false;
             this.toolStripContainer.Location = new System.Drawing.Point(0, 30);
@@ -294,6 +294,98 @@ namespace CBReader
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsMain);
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsSutra);
             this.toolStripContainer.TopToolStripPanel.ClientSizeChanged += new System.EventHandler(this.toolStripContainer_TopToolStripPanel_ClientSizeChanged);
+            // 
+            // tsMain
+            // 
+            this.tsMain.BackColor = System.Drawing.SystemColors.Control;
+            this.tsMain.Dock = System.Windows.Forms.DockStyle.None;
+            this.tsMain.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.tsMain.ImageScalingSize = new System.Drawing.Size(30, 30);
+            this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btOption,
+            this.btNavWidthSwitch,
+            this.btMuluWidthSwitch,
+            this.toolStripSeparator1,
+            this.btPrevJuan,
+            this.btNextJuan,
+            this.toolStripSeparator5,
+            this.btTheme});
+            this.tsMain.Location = new System.Drawing.Point(4, 37);
+            this.tsMain.Name = "tsMain";
+            this.tsMain.Size = new System.Drawing.Size(229, 37);
+            this.tsMain.TabIndex = 0;
+            this.tsMain.TabStop = true;
+            this.tsMain.LocationChanged += new System.EventHandler(this.tsMain_LocationChanged);
+            // 
+            // btOption
+            // 
+            this.btOption.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btOption.Image = global::CBReader.Properties.Resources.Gear;
+            this.btOption.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.btOption.Name = "btOption";
+            this.btOption.Size = new System.Drawing.Size(34, 34);
+            this.btOption.Click += new System.EventHandler(this.btOption_Click);
+            // 
+            // btNavWidthSwitch
+            // 
+            this.btNavWidthSwitch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btNavWidthSwitch.Image = global::CBReader.Properties.Resources.MainMenu;
+            this.btNavWidthSwitch.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.btNavWidthSwitch.Name = "btNavWidthSwitch";
+            this.btNavWidthSwitch.Size = new System.Drawing.Size(34, 34);
+            this.btNavWidthSwitch.Text = "toolStripButton1";
+            this.btNavWidthSwitch.Click += new System.EventHandler(this.btNavWidthSwitch_Click);
+            // 
+            // btMuluWidthSwitch
+            // 
+            this.btMuluWidthSwitch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btMuluWidthSwitch.Image = global::CBReader.Properties.Resources.TOCMenu;
+            this.btMuluWidthSwitch.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.btMuluWidthSwitch.Name = "btMuluWidthSwitch";
+            this.btMuluWidthSwitch.Size = new System.Drawing.Size(34, 34);
+            this.btMuluWidthSwitch.Text = "toolStripButton2";
+            this.btMuluWidthSwitch.Click += new System.EventHandler(this.btMuluWidthSwitch_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 37);
+            // 
+            // btPrevJuan
+            // 
+            this.btPrevJuan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btPrevJuan.Image = global::CBReader.Properties.Resources.UpArrow;
+            this.btPrevJuan.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.btPrevJuan.Name = "btPrevJuan";
+            this.btPrevJuan.Size = new System.Drawing.Size(34, 34);
+            this.btPrevJuan.Text = "toolStripButton3";
+            this.btPrevJuan.Click += new System.EventHandler(this.btPrevJuan_Click);
+            // 
+            // btNextJuan
+            // 
+            this.btNextJuan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btNextJuan.Image = global::CBReader.Properties.Resources.DownArrow;
+            this.btNextJuan.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.btNextJuan.Name = "btNextJuan";
+            this.btNextJuan.Size = new System.Drawing.Size(34, 34);
+            this.btNextJuan.Text = "toolStripButton4";
+            this.btNextJuan.Click += new System.EventHandler(this.btNextJuan_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 37);
+            // 
+            // btTheme
+            // 
+            this.btTheme.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btTheme.Image = global::CBReader.Properties.Resources.DarkBulb;
+            this.btTheme.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.btTheme.Name = "btTheme";
+            this.btTheme.Size = new System.Drawing.Size(34, 34);
+            this.btTheme.Text = "🌞💡";
+            this.btTheme.ToolTipText = "深色模式切換";
+            this.btTheme.Click += new System.EventHandler(this.btTheme_Click);
             // 
             // tsSutra
             // 
@@ -318,9 +410,9 @@ namespace CBReader
             this.tsbCBCopy,
             this.toolStripSeparator6,
             this.tsbAddBookmark});
-            this.tsSutra.Location = new System.Drawing.Point(246, 0);
+            this.tsSutra.Location = new System.Drawing.Point(4, 0);
             this.tsSutra.Name = "tsSutra";
-            this.tsSutra.Size = new System.Drawing.Size(484, 37);
+            this.tsSutra.Size = new System.Drawing.Size(445, 37);
             this.tsSutra.TabIndex = 1;
             this.tsSutra.LocationChanged += new System.EventHandler(this.tsSutra_LocationChanged);
             // 
@@ -475,98 +567,6 @@ namespace CBReader
             this.tsbAddBookmark.Text = "toolStripButton1";
             this.tsbAddBookmark.ToolTipText = "新增書籤";
             this.tsbAddBookmark.Click += new System.EventHandler(this.tbsAddBookmark_Click);
-            // 
-            // tsMain
-            // 
-            this.tsMain.BackColor = System.Drawing.SystemColors.Control;
-            this.tsMain.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsMain.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
-            this.tsMain.ImageScalingSize = new System.Drawing.Size(30, 30);
-            this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btOption,
-            this.btNavWidthSwitch,
-            this.btMuluWidthSwitch,
-            this.toolStripSeparator1,
-            this.btPrevJuan,
-            this.btNextJuan,
-            this.toolStripSeparator5,
-            this.btTheme});
-            this.tsMain.Location = new System.Drawing.Point(14, 0);
-            this.tsMain.Name = "tsMain";
-            this.tsMain.Size = new System.Drawing.Size(229, 37);
-            this.tsMain.TabIndex = 0;
-            this.tsMain.TabStop = true;
-            this.tsMain.LocationChanged += new System.EventHandler(this.tsMain_LocationChanged);
-            // 
-            // btOption
-            // 
-            this.btOption.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btOption.Image = global::CBReader.Properties.Resources.Gear;
-            this.btOption.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.btOption.Name = "btOption";
-            this.btOption.Size = new System.Drawing.Size(34, 34);
-            this.btOption.Click += new System.EventHandler(this.btOption_Click);
-            // 
-            // btNavWidthSwitch
-            // 
-            this.btNavWidthSwitch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btNavWidthSwitch.Image = global::CBReader.Properties.Resources.MainMenu;
-            this.btNavWidthSwitch.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.btNavWidthSwitch.Name = "btNavWidthSwitch";
-            this.btNavWidthSwitch.Size = new System.Drawing.Size(34, 34);
-            this.btNavWidthSwitch.Text = "toolStripButton1";
-            this.btNavWidthSwitch.Click += new System.EventHandler(this.btNavWidthSwitch_Click);
-            // 
-            // btMuluWidthSwitch
-            // 
-            this.btMuluWidthSwitch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btMuluWidthSwitch.Image = global::CBReader.Properties.Resources.TOCMenu;
-            this.btMuluWidthSwitch.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.btMuluWidthSwitch.Name = "btMuluWidthSwitch";
-            this.btMuluWidthSwitch.Size = new System.Drawing.Size(34, 34);
-            this.btMuluWidthSwitch.Text = "toolStripButton2";
-            this.btMuluWidthSwitch.Click += new System.EventHandler(this.btMuluWidthSwitch_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 37);
-            // 
-            // btPrevJuan
-            // 
-            this.btPrevJuan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btPrevJuan.Image = global::CBReader.Properties.Resources.UpArrow;
-            this.btPrevJuan.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.btPrevJuan.Name = "btPrevJuan";
-            this.btPrevJuan.Size = new System.Drawing.Size(34, 34);
-            this.btPrevJuan.Text = "toolStripButton3";
-            this.btPrevJuan.Click += new System.EventHandler(this.btPrevJuan_Click);
-            // 
-            // btNextJuan
-            // 
-            this.btNextJuan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btNextJuan.Image = global::CBReader.Properties.Resources.DownArrow;
-            this.btNextJuan.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.btNextJuan.Name = "btNextJuan";
-            this.btNextJuan.Size = new System.Drawing.Size(34, 34);
-            this.btNextJuan.Text = "toolStripButton4";
-            this.btNextJuan.Click += new System.EventHandler(this.btNextJuan_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 37);
-            // 
-            // btTheme
-            // 
-            this.btTheme.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btTheme.Image = global::CBReader.Properties.Resources.DarkBulb;
-            this.btTheme.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.btTheme.Name = "btTheme";
-            this.btTheme.Size = new System.Drawing.Size(34, 34);
-            this.btTheme.Text = "🌞💡";
-            this.btTheme.ToolTipText = "深色模式切換";
-            this.btTheme.Click += new System.EventHandler(this.btTheme_Click);
             // 
             // btTheme1
             // 
@@ -873,14 +873,14 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;
@@ -2361,10 +2361,10 @@ namespace CBReader
             this.toolStripContainer.TopToolStripPanel.PerformLayout();
             this.toolStripContainer.ResumeLayout(false);
             this.toolStripContainer.PerformLayout();
-            this.tsSutra.ResumeLayout(false);
-            this.tsSutra.PerformLayout();
             this.tsMain.ResumeLayout(false);
             this.tsMain.PerformLayout();
+            this.tsSutra.ResumeLayout(false);
+            this.tsSutra.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnMainFunc.ResumeLayout(false);
