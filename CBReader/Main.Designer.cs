@@ -30,7 +30,7 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption1 = new System.Windows.Forms.Button();
             this.pnToolBar = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
@@ -291,8 +291,8 @@ namespace CBReader
             // toolStripContainer.TopToolStripPanel
             // 
             this.toolStripContainer.TopToolStripPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsMain);
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsSutra);
+            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsMain);
             this.toolStripContainer.TopToolStripPanel.ClientSizeChanged += new System.EventHandler(this.toolStripContainer_TopToolStripPanel_ClientSizeChanged);
             // 
             // tsMain
@@ -873,14 +873,14 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;

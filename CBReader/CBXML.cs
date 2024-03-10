@@ -262,6 +262,7 @@ namespace CBReader
             // 底下一定要用 / 才能使用
             sSiddamFile = sSiddamFile.Replace("\\", "/");
             string sRanjanaFile = sSiddamFile.Replace("Siddam.otf", "Ranjana.otf");
+            string sSanotFile = sSiddamFile.Replace("Siddam.otf", "SantipurOT.ttf");
 
             string sHtmlTitle = $"{BookId}{SutraId} {SutraName}";
             if(TotalJuan > 1) {
@@ -292,6 +293,10 @@ namespace CBReader
         @font-face {{
             font-family: Ranjana;
             src: local(Ranjana), url('{sRanjanaFile}');
+        }}
+        @font-face {{
+            font-family: SantipurOT;
+            src: local('Santipur OT'), url('{sSanotFile}');
         }}";
             // text-center: 因為 p 設為 center 會空四格，head 整段空二格，所以置中的 head 要用 0 去取消
             sHtml += @"
@@ -308,11 +313,13 @@ namespace CBReader
         .mono-mingti {font-family:MingLiU,細明體,PMingLiU,新細明體,SimSun,NSimSun,'Songti TC';}
         .mono-kaiti {font-family:DFKai-SB,標楷體,STKaiti,'Kaiti TC';}
         .mono-heiti {font-family:'Microsoft JhengHei',微軟正黑體,'Microsoft YaHei',simhei,'Heiti TC';}
+        .sanot {font-family:'Santipur OT', SantipurOT;}
         .sup {vertical-align:super;font-size:70%;}
         .sub {vertical-align:sub;font-size:70%;}
         .over {text-decoration:overline;}
         .under {text-decoration:underline;}
         .del {text-decoration:line-through;}
+        .wavy {text-decoration-style:wavy;}
         .border {border:1px black solid;}
         .no-border {border:0;}
         .circle {
