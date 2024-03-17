@@ -263,6 +263,7 @@ namespace CBReader
             sSiddamFile = sSiddamFile.Replace("\\", "/");
             string sRanjanaFile = sSiddamFile.Replace("Siddam.otf", "Ranjana.otf");
             string sSanotFile = sSiddamFile.Replace("Siddam.otf", "SantipurOT.ttf");
+            string sShobhikaFile = sSiddamFile.Replace("Siddam.otf", "Shobhika-Regular.otf");
 
             string sHtmlTitle = $"{BookId}{SutraId} {SutraName}";
             if(TotalJuan > 1) {
@@ -287,12 +288,21 @@ namespace CBReader
             src: local(MingLiU), local(細明體), local(NSimSun), local('Songti TC');
         }}
         @font-face {{
+            font-family: CBFont;
+            unicode-range: U+0900-097f;
+            src: local('Shobhika Regular'), url('{sShobhikaFile}');
+        }}
+        @font-face {{
             font-family: siddam;
             src: local(siddam), url('{sSiddamFile}');
         }}
         @font-face {{
             font-family: Ranjana;
             src: local(Ranjana), url('{sRanjanaFile}');
+        }}
+        @font-face {{
+            font-family: Shobhika;
+            src: local('Shobhika Regular'), url('{sShobhikaFile}');
         }}
         @font-face {{
             font-family: SantipurOT;
@@ -369,7 +379,7 @@ namespace CBReader
         a:link    {color:#0000ff;}
         a:active  {color:#0000ff;}
         .foreign  {font-family:'Times New Roman', 'Gandhari Unicode';}
-        .preformat {font-family:細明體,MingLiU,NSimSun,'Songti TC'; font-size:21px;}
+        .preformat {font-family:Shobhika,細明體,MingLiU,NSimSun,'Songti TC'; font-size:21px;}
         .preformat .kaiti {font-family:DFKai-SB,標楷體,STKaiti,'Kaiti TC';}
         .preformat .foreign {font-family:'Courier New'; font-size:17.5px;}
         .gaiji {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C','TH-Tshyn-P1';}
