@@ -379,7 +379,7 @@ namespace CBReader
         a:link    {color:#0000ff;}
         a:active  {color:#0000ff;}
         .foreign  {font-family:'Times New Roman', 'Gandhari Unicode';}
-        .preformat {font-family:Shobhika,細明體,MingLiU,NSimSun,'Songti TC'; font-size:21px;}
+        .preformat {font-family:細明體,MingLiU,NSimSun,'Songti TC', Shobhika; font-size:21px;}
         .preformat .kaiti {font-family:DFKai-SB,標楷體,STKaiti,'Kaiti TC';}
         .preformat .foreign {font-family:'Courier New'; font-size:17.5px;}
         .gaiji {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C','TH-Tshyn-P1';}
