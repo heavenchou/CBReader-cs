@@ -163,6 +163,15 @@ namespace CBReader
                 // 把搜尋字串中的 ? 換成 ⍰
                 string s = Series.SearchEngine.SearchSentence;
                 s = s.Replace("?", "⍰");
+
+                // 組字式中的 "⍰" 要換回 "?" 才不會無法搜尋組字式
+                s = Regex.Replace(s, @"\[[^\]]*⍰.*?\]", match =>
+                {
+                    string tmp  = match.Value;
+                    tmp  = tmp.Replace("⍰", "?");
+                    return tmp;
+                });
+
                 HTMLText += "<div id='SearchHead'>檢索字串：" + s + "<hr></div>";
             }
 
