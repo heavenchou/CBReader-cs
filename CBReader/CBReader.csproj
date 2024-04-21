@@ -276,6 +276,7 @@
     <Compile Include="BookmarkManager.cs" />
     <Compile Include="Catalog.cs" />
     <Compile Include="CBXML.cs" />
+    <Compile Include="ComboBoxHistory.cs" />
     <Compile Include="CreateHtml.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -88,6 +88,10 @@ namespace CBReader
         // 畫線用的
         int insertType = 0;             // 1: 插入在上方，2:放入節點中，3:插入在下方
 
+        // ComboBox 的歷史記錄
+
+        AllComboBoxHistory allComboBoxHistory = new AllComboBoxHistory();
+
         public MainForm()
         {
             InitializeComponent();
@@ -179,6 +183,25 @@ namespace CBReader
             if (Setting.Theme == 1) {
                 btTheme_Click(this, null);
             }
+
+            // 設定 ComboBox 歷史記錄
+            allComboBoxHistory.Add(cbFindSutraVolFrom);
+            allComboBoxHistory.Add(cbFindSutraVolTo);
+            allComboBoxHistory.Add(cbFindSutraSutraFrom);
+            allComboBoxHistory.Add(cbFindSutraSutraTo);
+            allComboBoxHistory.Add(cbFindSutraSutraName);
+            allComboBoxHistory.Add(cbFindSutraByline);
+
+            allComboBoxHistory.Add(cbGoBookVol);
+            allComboBoxHistory.Add(cbGoBookPage);
+
+            allComboBoxHistory.Add(cbGoSutraSutraNum);
+            allComboBoxHistory.Add(cbGoSutraJuan);
+            allComboBoxHistory.Add(cbGoSutraPage);
+
+            allComboBoxHistory.Add(cbGoByKeyword);
+
+            allComboBoxHistory.Add(cbTextSearch);
         }
 
         // 載入書籤
@@ -343,12 +366,12 @@ namespace CBReader
             btMuluWidthSwitch1.Left = btNavWidthSwitch1.Left + btNavWidthSwitch1.Width + 6;
             btPrevJuan1.Left = btMuluWidthSwitch1.Left + btMuluWidthSwitch1.Width + 20;
             btNextJuan1.Left = btPrevJuan1.Left + btPrevJuan1.Width + 6;
-            edFindSutraByline.Left = lbFindSutraByline.Left + lbFindSutraByline.Width + 6;
-            if (edFindSutraByline.Left < edFindSutraSutraName.Left) {
+            cbFindSutraByline.Left = lbFindSutraByline.Left + lbFindSutraByline.Width + 6;
+            if (cbFindSutraByline.Left < cbFindSutraSutraName.Left) {
                 // 如果 label 文字太短，則輸入欄左邊要對齊其它欄位
-                edFindSutraByline.Left = edFindSutraSutraName.Left;
+                cbFindSutraByline.Left = cbFindSutraSutraName.Left;
             }
-            edFindSutraByline.Width = edFindSutraSutraName.Left + edFindSutraSutraName.Width - edFindSutraByline.Left;
+            cbFindSutraByline.Width = cbFindSutraSutraName.Left + cbFindSutraSutraName.Width - cbFindSutraByline.Left;
 
             // 處理查詢及全文檢索表格的欄高
             var textSize = TextRenderer.MeasureText(sgFindSutra.Columns[0].HeaderText, sgFindSutra.ColumnHeadersDefaultCellStyle.Font);
@@ -794,6 +817,14 @@ namespace CBReader
             }
             // 全文檢索的標頭欄高
             sgTextSearch.ColumnHeadersHeight = iniFile.ReadInteger(Section, "TextSearchColumnHeadersHeight", sgTextSearch.ColumnHeadersHeight);
+
+            // ComboBox 歷史記錄
+            Section = "ComboBoxHistory";
+            foreach(string key in allComboBoxHistory.Keys()) {
+                string s = iniFile.ReadString(Section, key, "");
+                allComboBoxHistory.SetHistory(key, s);
+            }
+
         }
 
         public void SetToolStripLocation(int mt, int ml, int st, int sl) {
@@ -882,6 +913,12 @@ namespace CBReader
             }
             // 全文檢索的標頭欄高
             iniFile.WriteInteger(Section, "TextSearchColumnHeadersHeight", sgTextSearch.ColumnHeadersHeight);
+
+            // 下拉選單歷史記錄
+            Section = "ComboBoxHistory";
+            foreach(string key in allComboBoxHistory.Keys()) {
+                iniFile.WriteString(Section, key, allComboBoxHistory.GetHistory(key));
+            }
         }
 
         // 清除暫存目錄的檔案
@@ -1165,9 +1202,9 @@ namespace CBReader
 
         private void btFindSutra_Click(object sender, EventArgs e)
         {
-            if (edFindSutraSutraName.Text == CGlobalVal.DebugString) {
+            if (cbFindSutraSutraName.Text == CGlobalVal.DebugString) {
                 CGlobalVal.IsDebug = true;
-                edFindSutraSutraName.Text = "";
+                cbFindSutraSutraName.Text = "";
                 miAdmin.Visible = true;
                 return;
             }
@@ -1178,12 +1215,21 @@ namespace CBReader
                 int iPos = sBook.IndexOf(" ");
                 sBook = sBook.Remove(iPos);
             }
-            string sVolFrom = edFindSutraVolFrom.Text;
-            string sVolTo = edFindSutraVolTo.Text;
-            string sSutraFrom = edFindSutraSutraFrom.Text;
-            string sSutraTo = edFindSutraSutraTo.Text;
-            string sSutraName = edFindSutraSutraName.Text;
-            string sByline = edFindSutraByline.Text;
+            string sVolFrom = cbFindSutraVolFrom.Text;
+            string sVolTo = cbFindSutraVolTo.Text;
+            string sSutraFrom = cbFindSutraSutraFrom.Text;
+            string sSutraTo = cbFindSutraSutraTo.Text;
+            string sSutraName = cbFindSutraSutraName.Text;
+            string sByline = cbFindSutraByline.Text;
+
+            // 記錄歷史記錄
+
+            allComboBoxHistory.AddHistory(cbFindSutraVolFrom);
+            allComboBoxHistory.AddHistory(cbFindSutraVolTo);
+            allComboBoxHistory.AddHistory(cbFindSutraSutraFrom);
+            allComboBoxHistory.AddHistory(cbFindSutraSutraTo);
+            allComboBoxHistory.AddHistory(cbFindSutraSutraName);
+            allComboBoxHistory.AddHistory(cbFindSutraByline);
 
             // 先用 CBETA 版 ???
             // 逐一搜尋目錄
@@ -1333,15 +1379,20 @@ namespace CBReader
             int iPos = sBook.IndexOf(" ");
             sBook = sBook.Remove(iPos);
 
-            string sSutraNum = edGoSutraSutraNum.Text;
-            string sJuan = edGoSutraJuan.Text;
-            string sPage = edGoSutraPage.Text;
-            string sCol = edGoSutraCol.Text;
-            string sLine = edGoSutraLine.Text;
+            string sSutraNum = cbGoSutraSutraNum.Text;
+            string sJuan = cbGoSutraJuan.Text;
+            string sPage = cbGoSutraPage.Text;
+            string sCol = cbGoSutraCol.Text;
+            string sLine = cbGoSutraLine.Text;
+
+            // 記錄歷史記錄
+            allComboBoxHistory.AddHistory(cbGoSutraSutraNum);
+            allComboBoxHistory.AddHistory(cbGoSutraJuan);
+            allComboBoxHistory.AddHistory(cbGoSutraPage);
 
             if (sSutraNum == "") {
                 MessageBox.Show(t("請輸入經號", "01010"));
-                edGoSutraSutraNum.Focus();
+                cbGoSutraSutraNum.Focus();
                 return;
             }
 
@@ -1361,14 +1412,18 @@ namespace CBReader
             int iPos = sBook.IndexOf(" ");
             sBook = sBook.Remove(iPos);
 
-            string sVol = edGoBookVol.Text;
-            string sPage = edGoBookPage.Text;
-            string sCol = edGoBookCol.Text;
-            string sLine = edGoBookLine.Text;
+            string sVol = cbGoBookVol.Text;
+            string sPage = cbGoBookPage.Text;
+            string sCol = cbGoBookCol.Text;
+            string sLine = cbGoBookLine.Text;
+
+            // 記錄歷史記錄
+            allComboBoxHistory.AddHistory(cbGoBookVol);
+            allComboBoxHistory.AddHistory(cbGoBookPage);
 
             if (sVol == "") {
                 MessageBox.Show(t("請輸入冊數", "01011"));
-                edGoBookVol.Focus();
+                cbGoBookVol.Focus();
                 return;
             }
 
@@ -1387,13 +1442,17 @@ namespace CBReader
             // 2. 引用複製 T01,no.1,p.1,b5
             // 3. 特定的代碼, 例如 : SN1.1
 
-            GoByKeyword(edGoByKeyword.Text);
+            // 記錄歷史記錄
+            allComboBoxHistory.AddHistory(cbGoByKeyword);
+
+            GoByKeyword(cbGoByKeyword.Text);
         }
 
 
         private void btTextSearch_Click(object sender, EventArgs e)
         {
-            SearchSentence = edTextSearch.Text;
+            SearchSentence = cbTextSearch.Text;
+            allComboBoxHistory.AddHistory(cbTextSearch);
 
             // 去除頭尾的萬用字元
             SearchSentence = SearchSentence.Trim('?');
@@ -1528,32 +1587,32 @@ namespace CBReader
 
         private void miNear_Click(object sender, EventArgs e)
         {
-            edTextSearch.Text = edTextSearch.Text + "+";
+            cbTextSearch.Text = cbTextSearch.Text + "+";
         }
 
         private void miBefore_Click(object sender, EventArgs e)
         {
-            edTextSearch.Text = edTextSearch.Text + "*";
+            cbTextSearch.Text = cbTextSearch.Text + "*";
         }
 
         private void miAnd_Click(object sender, EventArgs e)
         {
-            edTextSearch.Text = edTextSearch.Text + "&";
+            cbTextSearch.Text = cbTextSearch.Text + "&";
         }
 
         private void miOr_Click(object sender, EventArgs e)
         {
-            edTextSearch.Text = edTextSearch.Text + ",";
+            cbTextSearch.Text = cbTextSearch.Text + ",";
         }
 
         private void miExclude_Click(object sender, EventArgs e)
         {
-            edTextSearch.Text = edTextSearch.Text + "-";
+            cbTextSearch.Text = cbTextSearch.Text + "-";
         }
 
         private void miAny_Click(object sender, EventArgs e)
         {
-            edTextSearch.Text = edTextSearch.Text + "?";
+            cbTextSearch.Text = cbTextSearch.Text + "?";
         }
 
         private void sgTextSearch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1621,7 +1680,7 @@ namespace CBReader
             }
         }
 
-        private void edFindSutraVolFrom_Enter(object sender, EventArgs e)
+        private void cbFindSutraVolFrom_Enter(object sender, EventArgs e)
         {
             AcceptButton = btFindSutra;
         }
@@ -1630,23 +1689,27 @@ namespace CBReader
         {
             AcceptButton = btGoSutra;
         }
+        private void cbGoSutraSutraNum_Enter(object sender, EventArgs e)
+        {
+            AcceptButton = btGoSutra;
+        }
 
-        private void edFindSutraVolFrom_Leave(object sender, EventArgs e)
+        private void cbFindSutraVolFrom_Leave(object sender, EventArgs e)
         {
             AcceptButton = null;
         }
 
-        private void edGoBookVol_Enter(object sender, EventArgs e)
+        private void cbGoBookVol_Enter(object sender, EventArgs e)
         {
             AcceptButton = btGoBook;
         }
 
-        private void edGoByKeyword_Enter(object sender, EventArgs e)
+        private void cbGoByKeyword_Enter(object sender, EventArgs e)
         {
             AcceptButton = btGoByKeyword;
         }
 
-        private void edTextSearch_Enter(object sender, EventArgs e)
+        private void cbTextSearch_Enter(object sender, EventArgs e)
         {
             AcceptButton = btTextSearch;
         }
@@ -1659,51 +1722,6 @@ namespace CBReader
         private void btMainFuncNarrow_Click(object sender, EventArgs e)
         {
             pnMainFunc.Width = 380;
-        }
-
-        private void edGoBookVol_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void edGoSutraLine_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void edGoSutraPage_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void edGoSutraSutraNum_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void edGoSutraCol_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void edGoSutraJuan_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void edGoBookCol_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void edGoBookLine_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void edGoBookPage_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void miCreateHtml_Click(object sender, EventArgs e)
@@ -1737,20 +1755,20 @@ namespace CBReader
             updateForm.UseLocalhostURL = true;
         }
 
-        private void edTextSearch_TextChanged(object sender, EventArgs e)
+        private void cbTextSearch_TextChanged(object sender, EventArgs e)
         {
             // 檢查有沒有新的 unicode E, F，有就換字型
             // 2B820 (D86E DC20)～2CEA1 (D873 DEA1)：𫤀𬨀 CJK Extension E 擴展 E 區 (Unicode 8.0)
             // 2CEB0 (D873 DEB0)～2EBE0 (D87A DFE0)：𭄣𮠀 CJK Extension F 擴展 F 區 (Unicode 10.0)
             // 30000 (D880 DC00)～3134A (D884 DF4A)：𰀀𱍊 CJK Extension F 擴展 G 區 (Unicode 13.0)
-            string s = edTextSearch.Text;
+            string s = cbTextSearch.Text;
             for (int i = 0; i < s.Length; i++) {
                 if ((s[i] == 0xD86E && s[i + 1] >= 0xDC20) || (s[i] > 0xD86E && s[i] < 0xD87A)) {
-                    edTextSearch.Font = edUnicode.Font;
+                    cbTextSearch.Font = edUnicode.Font;
                     return;
                 }
             }
-            edTextSearch.Font = edFindSutraByline.Font;
+            cbTextSearch.Font = cbFindSutraByline.Font;
         }
 
         // 自訂 tooltip 的畫面

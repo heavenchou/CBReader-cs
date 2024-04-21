@@ -30,10 +30,19 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption1 = new System.Windows.Forms.Button();
             this.pnToolBar = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
+            this.tsMain = new System.Windows.Forms.ToolStrip();
+            this.btOption = new System.Windows.Forms.ToolStripButton();
+            this.btNavWidthSwitch = new System.Windows.Forms.ToolStripButton();
+            this.btMuluWidthSwitch = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btPrevJuan = new System.Windows.Forms.ToolStripButton();
+            this.btNextJuan = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.btTheme = new System.Windows.Forms.ToolStripButton();
             this.tsSutra = new System.Windows.Forms.ToolStrip();
             this.tsbShowLine = new System.Windows.Forms.ToolStripButton();
             this.tsbShowPara = new System.Windows.Forms.ToolStripButton();
@@ -51,15 +60,6 @@ namespace CBReader
             this.tsbCBCopy = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbAddBookmark = new System.Windows.Forms.ToolStripButton();
-            this.tsMain = new System.Windows.Forms.ToolStrip();
-            this.btOption = new System.Windows.Forms.ToolStripButton();
-            this.btNavWidthSwitch = new System.Windows.Forms.ToolStripButton();
-            this.btMuluWidthSwitch = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btPrevJuan = new System.Windows.Forms.ToolStripButton();
-            this.btNextJuan = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.btTheme = new System.Windows.Forms.ToolStripButton();
             this.btTheme1 = new System.Windows.Forms.Button();
             this.btNextJuan1 = new System.Windows.Forms.Button();
             this.btPrevJuan1 = new System.Windows.Forms.Button();
@@ -98,6 +98,9 @@ namespace CBReader
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.cbFindSutraVolTo = new System.Windows.Forms.ComboBox();
+            this.cbFindSutraVolFrom = new System.Windows.Forms.ComboBox();
+            this.cbFindSutraSutraName = new System.Windows.Forms.ComboBox();
             this.btMainFuncNarrow = new System.Windows.Forms.Button();
             this.btMainFuncWide = new System.Windows.Forms.Button();
             this.btFindSutra = new System.Windows.Forms.Button();
@@ -109,12 +112,6 @@ namespace CBReader
             this.lbFindSutraSutraFrom = new System.Windows.Forms.Label();
             this.lbFindSutraVolFrom = new System.Windows.Forms.Label();
             this.lbFindSutraBookId = new System.Windows.Forms.Label();
-            this.edFindSutraByline = new System.Windows.Forms.TextBox();
-            this.edFindSutraSutraName = new System.Windows.Forms.TextBox();
-            this.edFindSutraSutraTo = new System.Windows.Forms.TextBox();
-            this.edFindSutraSutraFrom = new System.Windows.Forms.TextBox();
-            this.edFindSutraVolTo = new System.Windows.Forms.TextBox();
-            this.edFindSutraVolFrom = new System.Windows.Forms.TextBox();
             this.cbFindSutraBookId = new System.Windows.Forms.ComboBox();
             this.tpGoto = new System.Windows.Forms.TabPage();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -141,16 +138,6 @@ namespace CBReader
             this.lbGoSutra = new System.Windows.Forms.Label();
             this.btGoSutra = new System.Windows.Forms.Button();
             this.btGoBook = new System.Windows.Forms.Button();
-            this.edGoByKeyword = new System.Windows.Forms.TextBox();
-            this.edGoBookLine = new System.Windows.Forms.TextBox();
-            this.edGoBookCol = new System.Windows.Forms.TextBox();
-            this.edGoBookPage = new System.Windows.Forms.TextBox();
-            this.edGoBookVol = new System.Windows.Forms.TextBox();
-            this.edGoSutraLine = new System.Windows.Forms.TextBox();
-            this.edGoSutraCol = new System.Windows.Forms.TextBox();
-            this.edGoSutraPage = new System.Windows.Forms.TextBox();
-            this.edGoSutraJuan = new System.Windows.Forms.TextBox();
-            this.edGoSutraSutraNum = new System.Windows.Forms.TextBox();
             this.cbGoBookBookId = new System.Windows.Forms.ComboBox();
             this.cbGoSutraBookId = new System.Windows.Forms.ComboBox();
             this.tpBookmark = new System.Windows.Forms.TabPage();
@@ -179,6 +166,7 @@ namespace CBReader
             this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.cbTextSearch = new System.Windows.Forms.ComboBox();
             this.edUnicode = new System.Windows.Forms.TextBox();
             this.btMainFuncNarrow2 = new System.Windows.Forms.Button();
             this.btMainFuncWide2 = new System.Windows.Forms.Button();
@@ -194,7 +182,6 @@ namespace CBReader
             this.btTextSearch = new System.Windows.Forms.Button();
             this.cbSearchThisSutra = new System.Windows.Forms.CheckBox();
             this.cbSearchRange = new System.Windows.Forms.CheckBox();
-            this.edTextSearch = new System.Windows.Forms.TextBox();
             this.lbSearchString = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnMulu = new System.Windows.Forms.Panel();
@@ -210,11 +197,24 @@ namespace CBReader
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.saveBookmarkDialog = new System.Windows.Forms.SaveFileDialog();
             this.LoadBookmarkDialog = new System.Windows.Forms.OpenFileDialog();
+            this.cbFindSutraSutraFrom = new System.Windows.Forms.ComboBox();
+            this.cbFindSutraSutraTo = new System.Windows.Forms.ComboBox();
+            this.cbFindSutraByline = new System.Windows.Forms.ComboBox();
+            this.cbGoBookVol = new System.Windows.Forms.ComboBox();
+            this.cbGoBookPage = new System.Windows.Forms.ComboBox();
+            this.cbGoBookCol = new System.Windows.Forms.ComboBox();
+            this.cbGoBookLine = new System.Windows.Forms.ComboBox();
+            this.cbGoSutraSutraNum = new System.Windows.Forms.ComboBox();
+            this.cbGoSutraJuan = new System.Windows.Forms.ComboBox();
+            this.cbGoSutraPage = new System.Windows.Forms.ComboBox();
+            this.cbGoSutraCol = new System.Windows.Forms.ComboBox();
+            this.cbGoSutraLine = new System.Windows.Forms.ComboBox();
+            this.cbGoByKeyword = new System.Windows.Forms.ComboBox();
             this.pnToolBar.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
-            this.tsSutra.SuspendLayout();
             this.tsMain.SuspendLayout();
+            this.tsSutra.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.pnMainFunc.SuspendLayout();
             this.MainFunc.SuspendLayout();
@@ -281,10 +281,10 @@ namespace CBReader
             this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(865, 0);
             this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer.LeftToolStripPanelVisible = false;
-            this.toolStripContainer.Location = new System.Drawing.Point(0, 27);
+            this.toolStripContainer.Location = new System.Drawing.Point(0, 30);
             this.toolStripContainer.Name = "toolStripContainer";
             this.toolStripContainer.RightToolStripPanelVisible = false;
-            this.toolStripContainer.Size = new System.Drawing.Size(865, 58);
+            this.toolStripContainer.Size = new System.Drawing.Size(865, 55);
             this.toolStripContainer.TabIndex = 7;
             this.toolStripContainer.Text = "toolStripContainer1";
             // 
@@ -294,6 +294,98 @@ namespace CBReader
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsMain);
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsSutra);
             this.toolStripContainer.TopToolStripPanel.ClientSizeChanged += new System.EventHandler(this.toolStripContainer_TopToolStripPanel_ClientSizeChanged);
+            // 
+            // tsMain
+            // 
+            this.tsMain.BackColor = System.Drawing.SystemColors.Control;
+            this.tsMain.Dock = System.Windows.Forms.DockStyle.None;
+            this.tsMain.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.tsMain.ImageScalingSize = new System.Drawing.Size(30, 30);
+            this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btOption,
+            this.btNavWidthSwitch,
+            this.btMuluWidthSwitch,
+            this.toolStripSeparator1,
+            this.btPrevJuan,
+            this.btNextJuan,
+            this.toolStripSeparator5,
+            this.btTheme});
+            this.tsMain.Location = new System.Drawing.Point(4, 0);
+            this.tsMain.Name = "tsMain";
+            this.tsMain.Size = new System.Drawing.Size(229, 37);
+            this.tsMain.TabIndex = 0;
+            this.tsMain.TabStop = true;
+            this.tsMain.LocationChanged += new System.EventHandler(this.tsMain_LocationChanged);
+            // 
+            // btOption
+            // 
+            this.btOption.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btOption.Image = global::CBReader.Properties.Resources.Gear;
+            this.btOption.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.btOption.Name = "btOption";
+            this.btOption.Size = new System.Drawing.Size(34, 34);
+            this.btOption.Click += new System.EventHandler(this.btOption_Click);
+            // 
+            // btNavWidthSwitch
+            // 
+            this.btNavWidthSwitch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btNavWidthSwitch.Image = global::CBReader.Properties.Resources.MainMenu;
+            this.btNavWidthSwitch.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.btNavWidthSwitch.Name = "btNavWidthSwitch";
+            this.btNavWidthSwitch.Size = new System.Drawing.Size(34, 34);
+            this.btNavWidthSwitch.Text = "toolStripButton1";
+            this.btNavWidthSwitch.Click += new System.EventHandler(this.btNavWidthSwitch_Click);
+            // 
+            // btMuluWidthSwitch
+            // 
+            this.btMuluWidthSwitch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btMuluWidthSwitch.Image = global::CBReader.Properties.Resources.TOCMenu;
+            this.btMuluWidthSwitch.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.btMuluWidthSwitch.Name = "btMuluWidthSwitch";
+            this.btMuluWidthSwitch.Size = new System.Drawing.Size(34, 34);
+            this.btMuluWidthSwitch.Text = "toolStripButton2";
+            this.btMuluWidthSwitch.Click += new System.EventHandler(this.btMuluWidthSwitch_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 37);
+            // 
+            // btPrevJuan
+            // 
+            this.btPrevJuan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btPrevJuan.Image = global::CBReader.Properties.Resources.UpArrow;
+            this.btPrevJuan.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.btPrevJuan.Name = "btPrevJuan";
+            this.btPrevJuan.Size = new System.Drawing.Size(34, 34);
+            this.btPrevJuan.Text = "toolStripButton3";
+            this.btPrevJuan.Click += new System.EventHandler(this.btPrevJuan_Click);
+            // 
+            // btNextJuan
+            // 
+            this.btNextJuan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btNextJuan.Image = global::CBReader.Properties.Resources.DownArrow;
+            this.btNextJuan.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.btNextJuan.Name = "btNextJuan";
+            this.btNextJuan.Size = new System.Drawing.Size(34, 34);
+            this.btNextJuan.Text = "toolStripButton4";
+            this.btNextJuan.Click += new System.EventHandler(this.btNextJuan_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 37);
+            // 
+            // btTheme
+            // 
+            this.btTheme.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btTheme.Image = global::CBReader.Properties.Resources.DarkBulb;
+            this.btTheme.ImageTransparentColor = System.Drawing.Color.Transparent;
+            this.btTheme.Name = "btTheme";
+            this.btTheme.Size = new System.Drawing.Size(34, 34);
+            this.btTheme.Text = "🌞💡";
+            this.btTheme.ToolTipText = "深色模式切換";
+            this.btTheme.Click += new System.EventHandler(this.btTheme_Click);
             // 
             // tsSutra
             // 
@@ -476,98 +568,6 @@ namespace CBReader
             this.tsbAddBookmark.ToolTipText = "新增書籤";
             this.tsbAddBookmark.Click += new System.EventHandler(this.tbsAddBookmark_Click);
             // 
-            // tsMain
-            // 
-            this.tsMain.BackColor = System.Drawing.SystemColors.Control;
-            this.tsMain.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsMain.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
-            this.tsMain.ImageScalingSize = new System.Drawing.Size(30, 30);
-            this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btOption,
-            this.btNavWidthSwitch,
-            this.btMuluWidthSwitch,
-            this.toolStripSeparator1,
-            this.btPrevJuan,
-            this.btNextJuan,
-            this.toolStripSeparator5,
-            this.btTheme});
-            this.tsMain.Location = new System.Drawing.Point(4, 0);
-            this.tsMain.Name = "tsMain";
-            this.tsMain.Size = new System.Drawing.Size(229, 37);
-            this.tsMain.TabIndex = 0;
-            this.tsMain.TabStop = true;
-            this.tsMain.LocationChanged += new System.EventHandler(this.tsMain_LocationChanged);
-            // 
-            // btOption
-            // 
-            this.btOption.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btOption.Image = global::CBReader.Properties.Resources.Gear;
-            this.btOption.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.btOption.Name = "btOption";
-            this.btOption.Size = new System.Drawing.Size(34, 34);
-            this.btOption.Click += new System.EventHandler(this.btOption_Click);
-            // 
-            // btNavWidthSwitch
-            // 
-            this.btNavWidthSwitch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btNavWidthSwitch.Image = global::CBReader.Properties.Resources.MainMenu;
-            this.btNavWidthSwitch.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.btNavWidthSwitch.Name = "btNavWidthSwitch";
-            this.btNavWidthSwitch.Size = new System.Drawing.Size(34, 34);
-            this.btNavWidthSwitch.Text = "toolStripButton1";
-            this.btNavWidthSwitch.Click += new System.EventHandler(this.btNavWidthSwitch_Click);
-            // 
-            // btMuluWidthSwitch
-            // 
-            this.btMuluWidthSwitch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btMuluWidthSwitch.Image = global::CBReader.Properties.Resources.TOCMenu;
-            this.btMuluWidthSwitch.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.btMuluWidthSwitch.Name = "btMuluWidthSwitch";
-            this.btMuluWidthSwitch.Size = new System.Drawing.Size(34, 34);
-            this.btMuluWidthSwitch.Text = "toolStripButton2";
-            this.btMuluWidthSwitch.Click += new System.EventHandler(this.btMuluWidthSwitch_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 37);
-            // 
-            // btPrevJuan
-            // 
-            this.btPrevJuan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btPrevJuan.Image = global::CBReader.Properties.Resources.UpArrow;
-            this.btPrevJuan.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.btPrevJuan.Name = "btPrevJuan";
-            this.btPrevJuan.Size = new System.Drawing.Size(34, 34);
-            this.btPrevJuan.Text = "toolStripButton3";
-            this.btPrevJuan.Click += new System.EventHandler(this.btPrevJuan_Click);
-            // 
-            // btNextJuan
-            // 
-            this.btNextJuan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btNextJuan.Image = global::CBReader.Properties.Resources.DownArrow;
-            this.btNextJuan.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.btNextJuan.Name = "btNextJuan";
-            this.btNextJuan.Size = new System.Drawing.Size(34, 34);
-            this.btNextJuan.Text = "toolStripButton4";
-            this.btNextJuan.Click += new System.EventHandler(this.btNextJuan_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 37);
-            // 
-            // btTheme
-            // 
-            this.btTheme.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btTheme.Image = global::CBReader.Properties.Resources.DarkBulb;
-            this.btTheme.ImageTransparentColor = System.Drawing.Color.Transparent;
-            this.btTheme.Name = "btTheme";
-            this.btTheme.Size = new System.Drawing.Size(34, 34);
-            this.btTheme.Text = "🌞💡";
-            this.btTheme.ToolTipText = "深色模式切換";
-            this.btTheme.Click += new System.EventHandler(this.btTheme_Click);
-            // 
             // btTheme1
             // 
             this.btTheme1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -643,28 +643,28 @@ namespace CBReader
             this.miAdmin});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(865, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(865, 30);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // miOption
             // 
             this.miOption.Name = "miOption";
-            this.miOption.Size = new System.Drawing.Size(53, 23);
+            this.miOption.Size = new System.Drawing.Size(53, 26);
             this.miOption.Text = "設定";
             this.miOption.Click += new System.EventHandler(this.miOption_Click);
             // 
             // miUpdate
             // 
             this.miUpdate.Name = "miUpdate";
-            this.miUpdate.Size = new System.Drawing.Size(83, 23);
+            this.miUpdate.Size = new System.Drawing.Size(83, 26);
             this.miUpdate.Text = "更新檢查";
             this.miUpdate.Click += new System.EventHandler(this.miUpdate_Click);
             // 
             // miLanguage
             // 
             this.miLanguage.Name = "miLanguage";
-            this.miLanguage.Size = new System.Drawing.Size(133, 23);
+            this.miLanguage.Size = new System.Drawing.Size(133, 26);
             this.miLanguage.Text = "語言(Language)";
             // 
             // miToolStrip
@@ -673,7 +673,7 @@ namespace CBReader
             this.miMainToolStrip,
             this.miSutraToolStrip});
             this.miToolStrip.Name = "miToolStrip";
-            this.miToolStrip.Size = new System.Drawing.Size(68, 23);
+            this.miToolStrip.Size = new System.Drawing.Size(68, 26);
             this.miToolStrip.Text = "工具列";
             // 
             // miMainToolStrip
@@ -697,7 +697,7 @@ namespace CBReader
             // miAbout
             // 
             this.miAbout.Name = "miAbout";
-            this.miAbout.Size = new System.Drawing.Size(53, 23);
+            this.miAbout.Size = new System.Drawing.Size(53, 26);
             this.miAbout.Text = "關於";
             this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
@@ -759,7 +759,7 @@ namespace CBReader
             this.MainFunc.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.MainFunc.TabIndex = 0;
             this.MainFunc.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.MainFunc_DrawItem);
-            this.MainFunc.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
+            this.MainFunc.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
             this.MainFunc.Resize += new System.EventHandler(this.MainFunc_Resize);
             // 
             // tpCatalog
@@ -873,14 +873,14 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;
@@ -969,6 +969,12 @@ namespace CBReader
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel8.Controls.Add(this.cbFindSutraByline);
+            this.panel8.Controls.Add(this.cbFindSutraSutraTo);
+            this.panel8.Controls.Add(this.cbFindSutraSutraFrom);
+            this.panel8.Controls.Add(this.cbFindSutraVolTo);
+            this.panel8.Controls.Add(this.cbFindSutraVolFrom);
+            this.panel8.Controls.Add(this.cbFindSutraSutraName);
             this.panel8.Controls.Add(this.btMainFuncNarrow);
             this.panel8.Controls.Add(this.btMainFuncWide);
             this.panel8.Controls.Add(this.btFindSutra);
@@ -980,18 +986,45 @@ namespace CBReader
             this.panel8.Controls.Add(this.lbFindSutraSutraFrom);
             this.panel8.Controls.Add(this.lbFindSutraVolFrom);
             this.panel8.Controls.Add(this.lbFindSutraBookId);
-            this.panel8.Controls.Add(this.edFindSutraByline);
-            this.panel8.Controls.Add(this.edFindSutraSutraName);
-            this.panel8.Controls.Add(this.edFindSutraSutraTo);
-            this.panel8.Controls.Add(this.edFindSutraSutraFrom);
-            this.panel8.Controls.Add(this.edFindSutraVolTo);
-            this.panel8.Controls.Add(this.edFindSutraVolFrom);
             this.panel8.Controls.Add(this.cbFindSutraBookId);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(3, 3);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(350, 246);
             this.panel8.TabIndex = 1;
+            // 
+            // cbFindSutraVolTo
+            // 
+            this.cbFindSutraVolTo.FormattingEnabled = true;
+            this.cbFindSutraVolTo.Location = new System.Drawing.Point(230, 51);
+            this.cbFindSutraVolTo.Name = "cbFindSutraVolTo";
+            this.cbFindSutraVolTo.Size = new System.Drawing.Size(82, 33);
+            this.cbFindSutraVolTo.TabIndex = 19;
+            this.toolTip1.SetToolTip(this.cbFindSutraVolTo, "結束冊號");
+            this.cbFindSutraVolTo.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
+            this.cbFindSutraVolTo.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbFindSutraVolFrom
+            // 
+            this.cbFindSutraVolFrom.FormattingEnabled = true;
+            this.cbFindSutraVolFrom.Location = new System.Drawing.Point(84, 52);
+            this.cbFindSutraVolFrom.Name = "cbFindSutraVolFrom";
+            this.cbFindSutraVolFrom.Size = new System.Drawing.Size(82, 33);
+            this.cbFindSutraVolFrom.TabIndex = 18;
+            this.toolTip1.SetToolTip(this.cbFindSutraVolFrom, "起始冊號");
+            this.cbFindSutraVolFrom.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
+            this.cbFindSutraVolFrom.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbFindSutraSutraName
+            // 
+            this.cbFindSutraSutraName.FormattingEnabled = true;
+            this.cbFindSutraSutraName.Location = new System.Drawing.Point(84, 131);
+            this.cbFindSutraSutraName.Name = "cbFindSutraSutraName";
+            this.cbFindSutraSutraName.Size = new System.Drawing.Size(228, 33);
+            this.cbFindSutraSutraName.TabIndex = 22;
+            this.toolTip1.SetToolTip(this.cbFindSutraSutraName, "輸入要搜尋的經名或現代文獻標題");
+            this.cbFindSutraSutraName.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
+            this.cbFindSutraSutraName.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
             // 
             // btMainFuncNarrow
             // 
@@ -1114,72 +1147,6 @@ namespace CBReader
             this.lbFindSutraBookId.TabIndex = 7;
             this.lbFindSutraBookId.Text = "佛典";
             // 
-            // edFindSutraByline
-            // 
-            this.edFindSutraByline.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edFindSutraByline.Location = new System.Drawing.Point(132, 171);
-            this.edFindSutraByline.Name = "edFindSutraByline";
-            this.edFindSutraByline.Size = new System.Drawing.Size(180, 34);
-            this.edFindSutraByline.TabIndex = 6;
-            this.toolTip1.SetToolTip(this.edFindSutraByline, "輸入要搜尋的朝代及作譯者名稱");
-            this.edFindSutraByline.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
-            this.edFindSutraByline.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edFindSutraSutraName
-            // 
-            this.edFindSutraSutraName.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edFindSutraSutraName.Location = new System.Drawing.Point(84, 131);
-            this.edFindSutraSutraName.Name = "edFindSutraSutraName";
-            this.edFindSutraSutraName.Size = new System.Drawing.Size(228, 34);
-            this.edFindSutraSutraName.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.edFindSutraSutraName, "輸入要搜尋的經名或現代文獻標題");
-            this.edFindSutraSutraName.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
-            this.edFindSutraSutraName.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edFindSutraSutraTo
-            // 
-            this.edFindSutraSutraTo.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edFindSutraSutraTo.Location = new System.Drawing.Point(230, 91);
-            this.edFindSutraSutraTo.Name = "edFindSutraSutraTo";
-            this.edFindSutraSutraTo.Size = new System.Drawing.Size(82, 34);
-            this.edFindSutraSutraTo.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.edFindSutraSutraTo, "結束編號");
-            this.edFindSutraSutraTo.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
-            this.edFindSutraSutraTo.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edFindSutraSutraFrom
-            // 
-            this.edFindSutraSutraFrom.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edFindSutraSutraFrom.Location = new System.Drawing.Point(84, 91);
-            this.edFindSutraSutraFrom.Name = "edFindSutraSutraFrom";
-            this.edFindSutraSutraFrom.Size = new System.Drawing.Size(82, 34);
-            this.edFindSutraSutraFrom.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.edFindSutraSutraFrom, "起始編號");
-            this.edFindSutraSutraFrom.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
-            this.edFindSutraSutraFrom.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edFindSutraVolTo
-            // 
-            this.edFindSutraVolTo.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edFindSutraVolTo.Location = new System.Drawing.Point(230, 51);
-            this.edFindSutraVolTo.Name = "edFindSutraVolTo";
-            this.edFindSutraVolTo.Size = new System.Drawing.Size(82, 34);
-            this.edFindSutraVolTo.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.edFindSutraVolTo, "結束冊號");
-            this.edFindSutraVolTo.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
-            this.edFindSutraVolTo.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edFindSutraVolFrom
-            // 
-            this.edFindSutraVolFrom.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edFindSutraVolFrom.Location = new System.Drawing.Point(84, 51);
-            this.edFindSutraVolFrom.Name = "edFindSutraVolFrom";
-            this.edFindSutraVolFrom.Size = new System.Drawing.Size(82, 34);
-            this.edFindSutraVolFrom.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.edFindSutraVolFrom, "起始冊號");
-            this.edFindSutraVolFrom.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
-            this.edFindSutraVolFrom.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
             // cbFindSutraBookId
             // 
             this.cbFindSutraBookId.BackColor = System.Drawing.SystemColors.Window;
@@ -1218,8 +1185,8 @@ namespace CBReader
             this.cbFindSutraBookId.TabIndex = 0;
             this.cbFindSutraBookId.Tag = "han";
             this.toolTip1.SetToolTip(this.cbFindSutraBookId, "請選擇佛教典籍");
-            this.cbFindSutraBookId.Enter += new System.EventHandler(this.edFindSutraVolFrom_Enter);
-            this.cbFindSutraBookId.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
+            this.cbFindSutraBookId.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
+            this.cbFindSutraBookId.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
             // 
             // tpGoto
             // 
@@ -1235,6 +1202,16 @@ namespace CBReader
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel9.Controls.Add(this.cbGoByKeyword);
+            this.panel9.Controls.Add(this.cbGoSutraLine);
+            this.panel9.Controls.Add(this.cbGoSutraCol);
+            this.panel9.Controls.Add(this.cbGoSutraPage);
+            this.panel9.Controls.Add(this.cbGoSutraJuan);
+            this.panel9.Controls.Add(this.cbGoSutraSutraNum);
+            this.panel9.Controls.Add(this.cbGoBookLine);
+            this.panel9.Controls.Add(this.cbGoBookCol);
+            this.panel9.Controls.Add(this.cbGoBookPage);
+            this.panel9.Controls.Add(this.cbGoBookVol);
             this.panel9.Controls.Add(this.lbStar2);
             this.panel9.Controls.Add(this.lbGoSutraSutraNum);
             this.panel9.Controls.Add(this.lbGoBookVol);
@@ -1258,22 +1235,11 @@ namespace CBReader
             this.panel9.Controls.Add(this.lbGoSutra);
             this.panel9.Controls.Add(this.btGoSutra);
             this.panel9.Controls.Add(this.btGoBook);
-            this.panel9.Controls.Add(this.edGoByKeyword);
-            this.panel9.Controls.Add(this.edGoBookLine);
-            this.panel9.Controls.Add(this.edGoBookCol);
-            this.panel9.Controls.Add(this.edGoBookPage);
-            this.panel9.Controls.Add(this.edGoBookVol);
-            this.panel9.Controls.Add(this.edGoSutraLine);
-            this.panel9.Controls.Add(this.edGoSutraCol);
-            this.panel9.Controls.Add(this.edGoSutraPage);
-            this.panel9.Controls.Add(this.edGoSutraJuan);
-            this.panel9.Controls.Add(this.edGoSutraSutraNum);
             this.panel9.Controls.Add(this.cbGoBookBookId);
             this.panel9.Controls.Add(this.cbGoSutraBookId);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(3, 3);
             this.panel9.Name = "panel9";
-            this.panel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel9.Size = new System.Drawing.Size(350, 552);
             this.panel9.TabIndex = 1;
             // 
@@ -1533,135 +1499,6 @@ namespace CBReader
             this.btGoBook.UseVisualStyleBackColor = true;
             this.btGoBook.Click += new System.EventHandler(this.btGoBook_Click);
             // 
-            // edGoByKeyword
-            // 
-            this.edGoByKeyword.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edGoByKeyword.Location = new System.Drawing.Point(17, 438);
-            this.edGoByKeyword.Name = "edGoByKeyword";
-            this.edGoByKeyword.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.edGoByKeyword.Size = new System.Drawing.Size(226, 34);
-            this.edGoByKeyword.TabIndex = 13;
-            this.toolTip1.SetToolTip(this.edGoByKeyword, "可輸入行首或引用複製格式");
-            this.edGoByKeyword.Enter += new System.EventHandler(this.edGoByKeyword_Enter);
-            this.edGoByKeyword.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edGoBookLine
-            // 
-            this.edGoBookLine.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edGoBookLine.Location = new System.Drawing.Point(249, 113);
-            this.edGoBookLine.Name = "edGoBookLine";
-            this.edGoBookLine.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.edGoBookLine.Size = new System.Drawing.Size(72, 34);
-            this.edGoBookLine.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.edGoBookLine, "一頁、一欄中的行號");
-            this.edGoBookLine.TextChanged += new System.EventHandler(this.edGoBookLine_TextChanged);
-            this.edGoBookLine.Enter += new System.EventHandler(this.edGoBookVol_Enter);
-            this.edGoBookLine.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edGoBookCol
-            // 
-            this.edGoBookCol.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edGoBookCol.Location = new System.Drawing.Point(86, 113);
-            this.edGoBookCol.Name = "edGoBookCol";
-            this.edGoBookCol.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.edGoBookCol.Size = new System.Drawing.Size(72, 34);
-            this.edGoBookCol.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.edGoBookCol, "一頁中的欄號。可輸入 a,b,c 或 1,2,3");
-            this.edGoBookCol.TextChanged += new System.EventHandler(this.edGoBookCol_TextChanged);
-            this.edGoBookCol.Enter += new System.EventHandler(this.edGoBookVol_Enter);
-            this.edGoBookCol.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edGoBookPage
-            // 
-            this.edGoBookPage.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edGoBookPage.Location = new System.Drawing.Point(249, 73);
-            this.edGoBookPage.Name = "edGoBookPage";
-            this.edGoBookPage.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.edGoBookPage.Size = new System.Drawing.Size(72, 34);
-            this.edGoBookPage.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.edGoBookPage, "書本的頁碼");
-            this.edGoBookPage.TextChanged += new System.EventHandler(this.edGoBookPage_TextChanged);
-            this.edGoBookPage.Enter += new System.EventHandler(this.edGoBookVol_Enter);
-            this.edGoBookPage.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edGoBookVol
-            // 
-            this.edGoBookVol.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edGoBookVol.Location = new System.Drawing.Point(86, 73);
-            this.edGoBookVol.Name = "edGoBookVol";
-            this.edGoBookVol.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.edGoBookVol.Size = new System.Drawing.Size(72, 34);
-            this.edGoBookVol.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.edGoBookVol, "書本的冊數，大正藏則稱此為「卷」");
-            this.edGoBookVol.TextChanged += new System.EventHandler(this.edGoBookVol_TextChanged);
-            this.edGoBookVol.Enter += new System.EventHandler(this.edGoBookVol_Enter);
-            this.edGoBookVol.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edGoSutraLine
-            // 
-            this.edGoSutraLine.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edGoSutraLine.Location = new System.Drawing.Point(86, 354);
-            this.edGoSutraLine.Name = "edGoSutraLine";
-            this.edGoSutraLine.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.edGoSutraLine.Size = new System.Drawing.Size(72, 34);
-            this.edGoSutraLine.TabIndex = 11;
-            this.toolTip1.SetToolTip(this.edGoSutraLine, "一頁、一欄中的行號");
-            this.edGoSutraLine.TextChanged += new System.EventHandler(this.edGoSutraLine_TextChanged);
-            this.edGoSutraLine.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
-            this.edGoSutraLine.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edGoSutraCol
-            // 
-            this.edGoSutraCol.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edGoSutraCol.Location = new System.Drawing.Point(249, 314);
-            this.edGoSutraCol.Name = "edGoSutraCol";
-            this.edGoSutraCol.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.edGoSutraCol.Size = new System.Drawing.Size(72, 34);
-            this.edGoSutraCol.TabIndex = 10;
-            this.toolTip1.SetToolTip(this.edGoSutraCol, "一頁中的欄號。可輸入 a,b,c 或 1,2,3");
-            this.edGoSutraCol.TextChanged += new System.EventHandler(this.edGoSutraCol_TextChanged);
-            this.edGoSutraCol.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
-            this.edGoSutraCol.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edGoSutraPage
-            // 
-            this.edGoSutraPage.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edGoSutraPage.Location = new System.Drawing.Point(86, 314);
-            this.edGoSutraPage.Name = "edGoSutraPage";
-            this.edGoSutraPage.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.edGoSutraPage.Size = new System.Drawing.Size(72, 34);
-            this.edGoSutraPage.TabIndex = 9;
-            this.toolTip1.SetToolTip(this.edGoSutraPage, "書本的頁碼");
-            this.edGoSutraPage.TextChanged += new System.EventHandler(this.edGoSutraPage_TextChanged);
-            this.edGoSutraPage.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
-            this.edGoSutraPage.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edGoSutraJuan
-            // 
-            this.edGoSutraJuan.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edGoSutraJuan.Location = new System.Drawing.Point(249, 274);
-            this.edGoSutraJuan.Name = "edGoSutraJuan";
-            this.edGoSutraJuan.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.edGoSutraJuan.Size = new System.Drawing.Size(72, 34);
-            this.edGoSutraJuan.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.edGoSutraJuan, "「卷」是傳統經典中切成較小的數量單位，\r\n例如大般若經有 600 卷。\r\n現代文獻通常用「篇」或「章」來區分。");
-            this.edGoSutraJuan.TextChanged += new System.EventHandler(this.edGoSutraJuan_TextChanged);
-            this.edGoSutraJuan.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
-            this.edGoSutraJuan.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edGoSutraSutraNum
-            // 
-            this.edGoSutraSutraNum.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edGoSutraSutraNum.Location = new System.Drawing.Point(86, 274);
-            this.edGoSutraSutraNum.Name = "edGoSutraSutraNum";
-            this.edGoSutraSutraNum.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.edGoSutraSutraNum.Size = new System.Drawing.Size(72, 34);
-            this.edGoSutraSutraNum.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.edGoSutraSutraNum, "傳統經典中的「經號」，\r\n例：大正藏大般若經 T0220 即輸入 220。\r\n現代典籍則輸入其「編號」。\r\n\r\n");
-            this.edGoSutraSutraNum.TextChanged += new System.EventHandler(this.edGoSutraSutraNum_TextChanged);
-            this.edGoSutraSutraNum.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
-            this.edGoSutraSutraNum.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
             // cbGoBookBookId
             // 
             this.cbGoBookBookId.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1699,8 +1536,8 @@ namespace CBReader
             this.cbGoBookBookId.TabIndex = 0;
             this.cbGoBookBookId.Tag = "han";
             this.toolTip1.SetToolTip(this.cbGoBookBookId, "請選擇佛教典籍");
-            this.cbGoBookBookId.Enter += new System.EventHandler(this.edGoBookVol_Enter);
-            this.cbGoBookBookId.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
+            this.cbGoBookBookId.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
+            this.cbGoBookBookId.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
             // 
             // cbGoSutraBookId
             // 
@@ -1740,8 +1577,8 @@ namespace CBReader
             this.cbGoSutraBookId.TabIndex = 6;
             this.cbGoSutraBookId.Tag = "han";
             this.toolTip1.SetToolTip(this.cbGoSutraBookId, "請選擇佛教典籍");
-            this.cbGoSutraBookId.Enter += new System.EventHandler(this.edGoSutraSutraNum_Enter);
-            this.cbGoSutraBookId.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
+            this.cbGoSutraBookId.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
+            this.cbGoSutraBookId.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
             // 
             // tpBookmark
             // 
@@ -2024,6 +1861,7 @@ namespace CBReader
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel10.Controls.Add(this.cbTextSearch);
             this.panel10.Controls.Add(this.edUnicode);
             this.panel10.Controls.Add(this.btMainFuncNarrow2);
             this.panel10.Controls.Add(this.btMainFuncWide2);
@@ -2032,13 +1870,26 @@ namespace CBReader
             this.panel10.Controls.Add(this.btTextSearch);
             this.panel10.Controls.Add(this.cbSearchThisSutra);
             this.panel10.Controls.Add(this.cbSearchRange);
-            this.panel10.Controls.Add(this.edTextSearch);
             this.panel10.Controls.Add(this.lbSearchString);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel10.Location = new System.Drawing.Point(3, 3);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(350, 175);
             this.panel10.TabIndex = 1;
+            // 
+            // cbTextSearch
+            // 
+            this.cbTextSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbTextSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbTextSearch.FormattingEnabled = true;
+            this.cbTextSearch.Location = new System.Drawing.Point(11, 38);
+            this.cbTextSearch.Name = "cbTextSearch";
+            this.cbTextSearch.Size = new System.Drawing.Size(248, 33);
+            this.cbTextSearch.TabIndex = 22;
+            this.toolTip1.SetToolTip(this.cbTextSearch, "輸入要檢索的字串");
+            this.cbTextSearch.TextChanged += new System.EventHandler(this.cbTextSearch_TextChanged);
+            this.cbTextSearch.Enter += new System.EventHandler(this.cbTextSearch_Enter);
+            this.cbTextSearch.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
             // 
             // edUnicode
             // 
@@ -2174,8 +2025,8 @@ namespace CBReader
             this.cbSearchThisSutra.Text = "檢索本書：";
             this.cbSearchThisSutra.UseVisualStyleBackColor = true;
             this.cbSearchThisSutra.CheckedChanged += new System.EventHandler(this.cbSearchThisSutra_CheckedChanged);
-            this.cbSearchThisSutra.Enter += new System.EventHandler(this.edTextSearch_Enter);
-            this.cbSearchThisSutra.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
+            this.cbSearchThisSutra.Enter += new System.EventHandler(this.cbTextSearch_Enter);
+            this.cbSearchThisSutra.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
             // 
             // cbSearchRange
             // 
@@ -2187,20 +2038,8 @@ namespace CBReader
             this.cbSearchRange.Text = "指定檢索範圍";
             this.cbSearchRange.UseVisualStyleBackColor = true;
             this.cbSearchRange.CheckedChanged += new System.EventHandler(this.cbSearchRange_CheckedChanged);
-            this.cbSearchRange.Enter += new System.EventHandler(this.edTextSearch_Enter);
-            this.cbSearchRange.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
-            // 
-            // edTextSearch
-            // 
-            this.edTextSearch.Font = new System.Drawing.Font("Hanazono Mincho C Regular", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.edTextSearch.Location = new System.Drawing.Point(11, 38);
-            this.edTextSearch.Name = "edTextSearch";
-            this.edTextSearch.Size = new System.Drawing.Size(248, 28);
-            this.edTextSearch.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.edTextSearch, "輸入要檢索的字串");
-            this.edTextSearch.TextChanged += new System.EventHandler(this.edTextSearch_TextChanged);
-            this.edTextSearch.Enter += new System.EventHandler(this.edTextSearch_Enter);
-            this.edTextSearch.Leave += new System.EventHandler(this.edFindSutraVolFrom_Leave);
+            this.cbSearchRange.Enter += new System.EventHandler(this.cbTextSearch_Enter);
+            this.cbSearchRange.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
             // 
             // lbSearchString
             // 
@@ -2333,6 +2172,231 @@ namespace CBReader
             // 
             this.LoadBookmarkDialog.FileName = "openFileDialog1";
             // 
+            // cbFindSutraSutraFrom
+            // 
+            this.cbFindSutraSutraFrom.FormattingEnabled = true;
+            this.cbFindSutraSutraFrom.Location = new System.Drawing.Point(84, 91);
+            this.cbFindSutraSutraFrom.Name = "cbFindSutraSutraFrom";
+            this.cbFindSutraSutraFrom.Size = new System.Drawing.Size(82, 33);
+            this.cbFindSutraSutraFrom.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.cbFindSutraSutraFrom, "起始編號");
+            this.cbFindSutraSutraFrom.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
+            this.cbFindSutraSutraFrom.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbFindSutraSutraTo
+            // 
+            this.cbFindSutraSutraTo.FormattingEnabled = true;
+            this.cbFindSutraSutraTo.Location = new System.Drawing.Point(230, 91);
+            this.cbFindSutraSutraTo.Name = "cbFindSutraSutraTo";
+            this.cbFindSutraSutraTo.Size = new System.Drawing.Size(82, 33);
+            this.cbFindSutraSutraTo.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.cbFindSutraSutraTo, "結束編號");
+            this.cbFindSutraSutraTo.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
+            this.cbFindSutraSutraTo.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbFindSutraByline
+            // 
+            this.cbFindSutraByline.FormattingEnabled = true;
+            this.cbFindSutraByline.Location = new System.Drawing.Point(127, 171);
+            this.cbFindSutraByline.Name = "cbFindSutraByline";
+            this.cbFindSutraByline.Size = new System.Drawing.Size(185, 33);
+            this.cbFindSutraByline.TabIndex = 23;
+            this.toolTip1.SetToolTip(this.cbFindSutraByline, "輸入要搜尋的朝代及作譯者名稱");
+            this.cbFindSutraByline.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
+            this.cbFindSutraByline.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoBookVol
+            // 
+            this.cbGoBookVol.FormattingEnabled = true;
+            this.cbGoBookVol.Location = new System.Drawing.Point(86, 73);
+            this.cbGoBookVol.Name = "cbGoBookVol";
+            this.cbGoBookVol.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cbGoBookVol.Size = new System.Drawing.Size(72, 33);
+            this.cbGoBookVol.TabIndex = 35;
+            this.toolTip1.SetToolTip(this.cbGoBookVol, "書本的冊數，大正藏則稱此為「卷」");
+            this.cbGoBookVol.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
+            this.cbGoBookVol.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoBookPage
+            // 
+            this.cbGoBookPage.FormattingEnabled = true;
+            this.cbGoBookPage.Location = new System.Drawing.Point(249, 73);
+            this.cbGoBookPage.Name = "cbGoBookPage";
+            this.cbGoBookPage.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cbGoBookPage.Size = new System.Drawing.Size(72, 33);
+            this.cbGoBookPage.TabIndex = 36;
+            this.toolTip1.SetToolTip(this.cbGoBookPage, "書本的頁碼");
+            this.cbGoBookPage.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
+            this.cbGoBookPage.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoBookCol
+            // 
+            this.cbGoBookCol.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbGoBookCol.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbGoBookCol.FormattingEnabled = true;
+            this.cbGoBookCol.Items.AddRange(new object[] {
+            "a",
+            "b",
+            "c"});
+            this.cbGoBookCol.Location = new System.Drawing.Point(86, 113);
+            this.cbGoBookCol.Name = "cbGoBookCol";
+            this.cbGoBookCol.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cbGoBookCol.Size = new System.Drawing.Size(72, 33);
+            this.cbGoBookCol.TabIndex = 37;
+            this.toolTip1.SetToolTip(this.cbGoBookCol, "一頁中的欄號。可輸入 a,b,c 或 1,2,3");
+            this.cbGoBookCol.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
+            this.cbGoBookCol.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoBookLine
+            // 
+            this.cbGoBookLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbGoBookLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbGoBookLine.FormattingEnabled = true;
+            this.cbGoBookLine.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30"});
+            this.cbGoBookLine.Location = new System.Drawing.Point(249, 114);
+            this.cbGoBookLine.Name = "cbGoBookLine";
+            this.cbGoBookLine.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cbGoBookLine.Size = new System.Drawing.Size(72, 33);
+            this.cbGoBookLine.TabIndex = 38;
+            this.toolTip1.SetToolTip(this.cbGoBookLine, "一頁、一欄中的行號");
+            this.cbGoBookLine.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
+            this.cbGoBookLine.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoSutraSutraNum
+            // 
+            this.cbGoSutraSutraNum.FormattingEnabled = true;
+            this.cbGoSutraSutraNum.Location = new System.Drawing.Point(86, 274);
+            this.cbGoSutraSutraNum.Name = "cbGoSutraSutraNum";
+            this.cbGoSutraSutraNum.Size = new System.Drawing.Size(72, 33);
+            this.cbGoSutraSutraNum.TabIndex = 39;
+            this.toolTip1.SetToolTip(this.cbGoSutraSutraNum, "傳統經典中的「經號」，\r\n例：大正藏大般若經 T0220 即輸入 220。\r\n現代典籍則輸入其「編號」。\r\n");
+            this.cbGoSutraSutraNum.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
+            this.cbGoSutraSutraNum.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoSutraJuan
+            // 
+            this.cbGoSutraJuan.FormattingEnabled = true;
+            this.cbGoSutraJuan.Location = new System.Drawing.Point(249, 274);
+            this.cbGoSutraJuan.Name = "cbGoSutraJuan";
+            this.cbGoSutraJuan.Size = new System.Drawing.Size(72, 33);
+            this.cbGoSutraJuan.TabIndex = 40;
+            this.toolTip1.SetToolTip(this.cbGoSutraJuan, "「卷」是傳統經典中切成較小的數量單位，\r\n例如大般若經有 600 卷。\r\n現代文獻通常用「篇」或「章」來區分。\r\n");
+            this.cbGoSutraJuan.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
+            this.cbGoSutraJuan.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoSutraPage
+            // 
+            this.cbGoSutraPage.FormattingEnabled = true;
+            this.cbGoSutraPage.Location = new System.Drawing.Point(86, 314);
+            this.cbGoSutraPage.Name = "cbGoSutraPage";
+            this.cbGoSutraPage.Size = new System.Drawing.Size(72, 33);
+            this.cbGoSutraPage.TabIndex = 41;
+            this.toolTip1.SetToolTip(this.cbGoSutraPage, "書本的頁碼");
+            this.cbGoSutraPage.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
+            this.cbGoSutraPage.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoSutraCol
+            // 
+            this.cbGoSutraCol.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbGoSutraCol.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbGoSutraCol.FormattingEnabled = true;
+            this.cbGoSutraCol.Items.AddRange(new object[] {
+            "a",
+            "b",
+            "c"});
+            this.cbGoSutraCol.Location = new System.Drawing.Point(249, 314);
+            this.cbGoSutraCol.Name = "cbGoSutraCol";
+            this.cbGoSutraCol.Size = new System.Drawing.Size(72, 33);
+            this.cbGoSutraCol.TabIndex = 42;
+            this.toolTip1.SetToolTip(this.cbGoSutraCol, "一頁中的欄號。可輸入 a,b,c 或 1,2,3");
+            this.cbGoSutraCol.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
+            this.cbGoSutraCol.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoSutraLine
+            // 
+            this.cbGoSutraLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbGoSutraLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbGoSutraLine.FormattingEnabled = true;
+            this.cbGoSutraLine.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30"});
+            this.cbGoSutraLine.Location = new System.Drawing.Point(86, 354);
+            this.cbGoSutraLine.Name = "cbGoSutraLine";
+            this.cbGoSutraLine.Size = new System.Drawing.Size(72, 33);
+            this.cbGoSutraLine.TabIndex = 43;
+            this.toolTip1.SetToolTip(this.cbGoSutraLine, "一頁、一欄中的行號");
+            this.cbGoSutraLine.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
+            this.cbGoSutraLine.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoByKeyword
+            // 
+            this.cbGoByKeyword.FormattingEnabled = true;
+            this.cbGoByKeyword.Location = new System.Drawing.Point(17, 438);
+            this.cbGoByKeyword.Name = "cbGoByKeyword";
+            this.cbGoByKeyword.Size = new System.Drawing.Size(226, 33);
+            this.cbGoByKeyword.TabIndex = 44;
+            this.toolTip1.SetToolTip(this.cbGoByKeyword, "可輸入行首或引用複製格式");
+            this.cbGoByKeyword.Enter += new System.EventHandler(this.cbGoByKeyword_Enter);
+            this.cbGoByKeyword.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -2361,10 +2425,10 @@ namespace CBReader
             this.toolStripContainer.TopToolStripPanel.PerformLayout();
             this.toolStripContainer.ResumeLayout(false);
             this.toolStripContainer.PerformLayout();
-            this.tsSutra.ResumeLayout(false);
-            this.tsSutra.PerformLayout();
             this.tsMain.ResumeLayout(false);
             this.tsMain.PerformLayout();
+            this.tsSutra.ResumeLayout(false);
+            this.tsSutra.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnMainFunc.ResumeLayout(false);
@@ -2445,12 +2509,6 @@ namespace CBReader
         private System.Windows.Forms.Label lbFindSutraSutraFrom;
         private System.Windows.Forms.Label lbFindSutraVolFrom;
         private System.Windows.Forms.Label lbFindSutraBookId;
-        public  System.Windows.Forms.TextBox edFindSutraByline;
-        public  System.Windows.Forms.TextBox edFindSutraSutraName;
-        private System.Windows.Forms.TextBox edFindSutraSutraTo;
-        private System.Windows.Forms.TextBox edFindSutraSutraFrom;
-        private System.Windows.Forms.TextBox edFindSutraVolTo;
-        private System.Windows.Forms.TextBox edFindSutraVolFrom;
         private System.Windows.Forms.ComboBox cbFindSutraBookId;
         private System.Windows.Forms.Label lbGoByKeywordEx2;
         private System.Windows.Forms.Label lbGoByKeywordEx1;
@@ -2470,23 +2528,12 @@ namespace CBReader
         private System.Windows.Forms.Label lbGoSutra;
         private System.Windows.Forms.Button btGoSutra;
         private System.Windows.Forms.Button btGoBook;
-        private System.Windows.Forms.TextBox edGoByKeyword;
-        private System.Windows.Forms.TextBox edGoBookLine;
-        private System.Windows.Forms.TextBox edGoBookCol;
-        private System.Windows.Forms.TextBox edGoBookPage;
-        private System.Windows.Forms.TextBox edGoBookVol;
-        private System.Windows.Forms.TextBox edGoSutraLine;
-        private System.Windows.Forms.TextBox edGoSutraCol;
-        private System.Windows.Forms.TextBox edGoSutraPage;
-        private System.Windows.Forms.TextBox edGoSutraJuan;
-        private System.Windows.Forms.TextBox edGoSutraSutraNum;
         private System.Windows.Forms.ComboBox cbGoBookBookId;
         private System.Windows.Forms.ComboBox cbGoSutraBookId;
         private System.Windows.Forms.Button btBoolean;
         private System.Windows.Forms.Button btTextSearch;
         private System.Windows.Forms.CheckBox cbSearchThisSutra;
         private System.Windows.Forms.CheckBox cbSearchRange;
-        private System.Windows.Forms.TextBox edTextSearch;
         private System.Windows.Forms.Label lbSearchString;
         private System.Windows.Forms.Button btGoByKeyword;
         private System.Windows.Forms.Label lbSearchMsg;
@@ -2581,6 +2628,23 @@ namespace CBReader
         private System.Windows.Forms.SaveFileDialog saveBookmarkDialog;
         private System.Windows.Forms.Button btImportBookmark;
         private System.Windows.Forms.OpenFileDialog LoadBookmarkDialog;
+        private System.Windows.Forms.ComboBox cbTextSearch;
+        private System.Windows.Forms.ComboBox cbFindSutraSutraName;
+        private System.Windows.Forms.ComboBox cbFindSutraVolFrom;
+        private System.Windows.Forms.ComboBox cbFindSutraVolTo;
+        private System.Windows.Forms.ComboBox cbFindSutraSutraFrom;
+        private System.Windows.Forms.ComboBox cbFindSutraByline;
+        private System.Windows.Forms.ComboBox cbFindSutraSutraTo;
+        private System.Windows.Forms.ComboBox cbGoBookLine;
+        private System.Windows.Forms.ComboBox cbGoBookCol;
+        private System.Windows.Forms.ComboBox cbGoBookPage;
+        private System.Windows.Forms.ComboBox cbGoBookVol;
+        private System.Windows.Forms.ComboBox cbGoSutraSutraNum;
+        private System.Windows.Forms.ComboBox cbGoByKeyword;
+        private System.Windows.Forms.ComboBox cbGoSutraLine;
+        private System.Windows.Forms.ComboBox cbGoSutraCol;
+        private System.Windows.Forms.ComboBox cbGoSutraPage;
+        private System.Windows.Forms.ComboBox cbGoSutraJuan;
     }
 }
 
