@@ -43,8 +43,8 @@ namespace CBReader
             //GetPrivateProfileString(Section, Key, Default, RetVal, 255, FileName);
             //return RetVal.ToString();
 
-            byte[] buffer = new byte[1024];
-            int count = GetPrivateProfileString(Section, Key, u8(Default), buffer, 255, FileName);
+            byte[] buffer = new byte[10240];
+            int count = GetPrivateProfileString(Section, Key, u8(Default), buffer, 10230, FileName);
             return Encoding.GetEncoding("utf-8").GetString(buffer, 0, count).Trim();
         }
         public int ReadInteger(string Section, string Key, int Default)

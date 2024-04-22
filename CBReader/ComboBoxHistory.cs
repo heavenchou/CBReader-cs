@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -29,15 +30,6 @@ namespace CBReader
             return allHistory.Keys.ToArray();
         }
 
-        public void LoadAllHistoryFromIni()
-        {
-            // 實現從.ini文件載入所有歷史記錄的邏輯
-        }
-
-        public void SaveAllHistoryToIni()
-        {
-            // 實現儲存所有歷史記錄到.ini文件的邏輯
-        }
         public string GetHistory(string item)
         {
             return allHistory[item].GetHistory();
@@ -67,8 +59,19 @@ namespace CBReader
             if (item == "") return;
             history.Remove(item);
             history.Insert(0, item);
+            CutSize();  // 上限 30 筆就好
+
             comboBox.Items.Clear();
             comboBox.Items.AddRange (history.ToArray());
+        }
+        
+        // 上限 30 筆就好
+        private void CutSize()
+        {
+            int maxSize = 30;
+            if (history.Count > maxSize) {
+                history.RemoveRange(maxSize, history.Count - maxSize); // 從索引30開始，移除超出的元素
+            }
         }
 
         public string GetHistory()
@@ -79,14 +82,9 @@ namespace CBReader
         {
             if (str == "") return;
             history = new List<string>(str.Split('❣'));
+            CutSize();  // 上限 30 筆就好
             comboBox.Items.Clear();
             comboBox.Items.AddRange(history.ToArray());
         }
-
-        public List<string> StringToList(string input)
-        {
-            return new List<string>(input.Split('❣'));
-        }
-
     }
 }

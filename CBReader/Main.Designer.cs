@@ -30,7 +30,7 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption1 = new System.Windows.Forms.Button();
             this.pnToolBar = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
@@ -98,6 +98,9 @@ namespace CBReader
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.cbFindSutraByline = new System.Windows.Forms.ComboBox();
+            this.cbFindSutraSutraTo = new System.Windows.Forms.ComboBox();
+            this.cbFindSutraSutraFrom = new System.Windows.Forms.ComboBox();
             this.cbFindSutraVolTo = new System.Windows.Forms.ComboBox();
             this.cbFindSutraVolFrom = new System.Windows.Forms.ComboBox();
             this.cbFindSutraSutraName = new System.Windows.Forms.ComboBox();
@@ -115,6 +118,16 @@ namespace CBReader
             this.cbFindSutraBookId = new System.Windows.Forms.ComboBox();
             this.tpGoto = new System.Windows.Forms.TabPage();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.cbGoByKeyword = new System.Windows.Forms.ComboBox();
+            this.cbGoSutraLine = new System.Windows.Forms.ComboBox();
+            this.cbGoSutraCol = new System.Windows.Forms.ComboBox();
+            this.cbGoSutraPage = new System.Windows.Forms.ComboBox();
+            this.cbGoSutraJuan = new System.Windows.Forms.ComboBox();
+            this.cbGoSutraSutraNum = new System.Windows.Forms.ComboBox();
+            this.cbGoBookLine = new System.Windows.Forms.ComboBox();
+            this.cbGoBookCol = new System.Windows.Forms.ComboBox();
+            this.cbGoBookPage = new System.Windows.Forms.ComboBox();
+            this.cbGoBookVol = new System.Windows.Forms.ComboBox();
             this.lbStar2 = new System.Windows.Forms.Label();
             this.lbGoSutraSutraNum = new System.Windows.Forms.Label();
             this.lbGoBookVol = new System.Windows.Forms.Label();
@@ -197,19 +210,6 @@ namespace CBReader
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.saveBookmarkDialog = new System.Windows.Forms.SaveFileDialog();
             this.LoadBookmarkDialog = new System.Windows.Forms.OpenFileDialog();
-            this.cbFindSutraSutraFrom = new System.Windows.Forms.ComboBox();
-            this.cbFindSutraSutraTo = new System.Windows.Forms.ComboBox();
-            this.cbFindSutraByline = new System.Windows.Forms.ComboBox();
-            this.cbGoBookVol = new System.Windows.Forms.ComboBox();
-            this.cbGoBookPage = new System.Windows.Forms.ComboBox();
-            this.cbGoBookCol = new System.Windows.Forms.ComboBox();
-            this.cbGoBookLine = new System.Windows.Forms.ComboBox();
-            this.cbGoSutraSutraNum = new System.Windows.Forms.ComboBox();
-            this.cbGoSutraJuan = new System.Windows.Forms.ComboBox();
-            this.cbGoSutraPage = new System.Windows.Forms.ComboBox();
-            this.cbGoSutraCol = new System.Windows.Forms.ComboBox();
-            this.cbGoSutraLine = new System.Windows.Forms.ComboBox();
-            this.cbGoByKeyword = new System.Windows.Forms.ComboBox();
             this.pnToolBar.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
@@ -873,14 +873,14 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;
@@ -993,10 +993,51 @@ namespace CBReader
             this.panel8.Size = new System.Drawing.Size(350, 246);
             this.panel8.TabIndex = 1;
             // 
+            // cbFindSutraByline
+            // 
+            this.cbFindSutraByline.FormattingEnabled = true;
+            this.cbFindSutraByline.IntegralHeight = false;
+            this.cbFindSutraByline.Location = new System.Drawing.Point(127, 171);
+            this.cbFindSutraByline.MaxDropDownItems = 10;
+            this.cbFindSutraByline.Name = "cbFindSutraByline";
+            this.cbFindSutraByline.Size = new System.Drawing.Size(185, 33);
+            this.cbFindSutraByline.TabIndex = 23;
+            this.toolTip1.SetToolTip(this.cbFindSutraByline, "輸入要搜尋的朝代及作譯者名稱");
+            this.cbFindSutraByline.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
+            this.cbFindSutraByline.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbFindSutraSutraTo
+            // 
+            this.cbFindSutraSutraTo.FormattingEnabled = true;
+            this.cbFindSutraSutraTo.IntegralHeight = false;
+            this.cbFindSutraSutraTo.Location = new System.Drawing.Point(230, 91);
+            this.cbFindSutraSutraTo.MaxDropDownItems = 10;
+            this.cbFindSutraSutraTo.Name = "cbFindSutraSutraTo";
+            this.cbFindSutraSutraTo.Size = new System.Drawing.Size(82, 33);
+            this.cbFindSutraSutraTo.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.cbFindSutraSutraTo, "結束編號");
+            this.cbFindSutraSutraTo.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
+            this.cbFindSutraSutraTo.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbFindSutraSutraFrom
+            // 
+            this.cbFindSutraSutraFrom.FormattingEnabled = true;
+            this.cbFindSutraSutraFrom.IntegralHeight = false;
+            this.cbFindSutraSutraFrom.Location = new System.Drawing.Point(84, 91);
+            this.cbFindSutraSutraFrom.MaxDropDownItems = 10;
+            this.cbFindSutraSutraFrom.Name = "cbFindSutraSutraFrom";
+            this.cbFindSutraSutraFrom.Size = new System.Drawing.Size(82, 33);
+            this.cbFindSutraSutraFrom.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.cbFindSutraSutraFrom, "起始編號");
+            this.cbFindSutraSutraFrom.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
+            this.cbFindSutraSutraFrom.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
             // cbFindSutraVolTo
             // 
             this.cbFindSutraVolTo.FormattingEnabled = true;
+            this.cbFindSutraVolTo.IntegralHeight = false;
             this.cbFindSutraVolTo.Location = new System.Drawing.Point(230, 51);
+            this.cbFindSutraVolTo.MaxDropDownItems = 10;
             this.cbFindSutraVolTo.Name = "cbFindSutraVolTo";
             this.cbFindSutraVolTo.Size = new System.Drawing.Size(82, 33);
             this.cbFindSutraVolTo.TabIndex = 19;
@@ -1007,7 +1048,9 @@ namespace CBReader
             // cbFindSutraVolFrom
             // 
             this.cbFindSutraVolFrom.FormattingEnabled = true;
+            this.cbFindSutraVolFrom.IntegralHeight = false;
             this.cbFindSutraVolFrom.Location = new System.Drawing.Point(84, 52);
+            this.cbFindSutraVolFrom.MaxDropDownItems = 10;
             this.cbFindSutraVolFrom.Name = "cbFindSutraVolFrom";
             this.cbFindSutraVolFrom.Size = new System.Drawing.Size(82, 33);
             this.cbFindSutraVolFrom.TabIndex = 18;
@@ -1018,7 +1061,9 @@ namespace CBReader
             // cbFindSutraSutraName
             // 
             this.cbFindSutraSutraName.FormattingEnabled = true;
+            this.cbFindSutraSutraName.IntegralHeight = false;
             this.cbFindSutraSutraName.Location = new System.Drawing.Point(84, 131);
+            this.cbFindSutraSutraName.MaxDropDownItems = 10;
             this.cbFindSutraSutraName.Name = "cbFindSutraSutraName";
             this.cbFindSutraSutraName.Size = new System.Drawing.Size(228, 33);
             this.cbFindSutraSutraName.TabIndex = 22;
@@ -1242,6 +1287,218 @@ namespace CBReader
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(350, 552);
             this.panel9.TabIndex = 1;
+            // 
+            // cbGoByKeyword
+            // 
+            this.cbGoByKeyword.FormattingEnabled = true;
+            this.cbGoByKeyword.IntegralHeight = false;
+            this.cbGoByKeyword.Location = new System.Drawing.Point(17, 438);
+            this.cbGoByKeyword.MaxDropDownItems = 10;
+            this.cbGoByKeyword.Name = "cbGoByKeyword";
+            this.cbGoByKeyword.Size = new System.Drawing.Size(226, 33);
+            this.cbGoByKeyword.TabIndex = 44;
+            this.toolTip1.SetToolTip(this.cbGoByKeyword, "可輸入行首或引用複製格式");
+            this.cbGoByKeyword.Enter += new System.EventHandler(this.cbGoByKeyword_Enter);
+            this.cbGoByKeyword.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoSutraLine
+            // 
+            this.cbGoSutraLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbGoSutraLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbGoSutraLine.FormattingEnabled = true;
+            this.cbGoSutraLine.IntegralHeight = false;
+            this.cbGoSutraLine.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30"});
+            this.cbGoSutraLine.Location = new System.Drawing.Point(86, 354);
+            this.cbGoSutraLine.MaxDropDownItems = 10;
+            this.cbGoSutraLine.Name = "cbGoSutraLine";
+            this.cbGoSutraLine.Size = new System.Drawing.Size(72, 33);
+            this.cbGoSutraLine.TabIndex = 43;
+            this.toolTip1.SetToolTip(this.cbGoSutraLine, "一頁、一欄中的行號");
+            this.cbGoSutraLine.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
+            this.cbGoSutraLine.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoSutraCol
+            // 
+            this.cbGoSutraCol.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbGoSutraCol.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbGoSutraCol.FormattingEnabled = true;
+            this.cbGoSutraCol.IntegralHeight = false;
+            this.cbGoSutraCol.Items.AddRange(new object[] {
+            "a",
+            "b",
+            "c"});
+            this.cbGoSutraCol.Location = new System.Drawing.Point(249, 314);
+            this.cbGoSutraCol.MaxDropDownItems = 10;
+            this.cbGoSutraCol.Name = "cbGoSutraCol";
+            this.cbGoSutraCol.Size = new System.Drawing.Size(72, 33);
+            this.cbGoSutraCol.TabIndex = 42;
+            this.toolTip1.SetToolTip(this.cbGoSutraCol, "一頁中的欄號。可輸入 a,b,c 或 1,2,3");
+            this.cbGoSutraCol.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
+            this.cbGoSutraCol.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoSutraPage
+            // 
+            this.cbGoSutraPage.FormattingEnabled = true;
+            this.cbGoSutraPage.IntegralHeight = false;
+            this.cbGoSutraPage.Location = new System.Drawing.Point(86, 314);
+            this.cbGoSutraPage.MaxDropDownItems = 10;
+            this.cbGoSutraPage.Name = "cbGoSutraPage";
+            this.cbGoSutraPage.Size = new System.Drawing.Size(72, 33);
+            this.cbGoSutraPage.TabIndex = 41;
+            this.toolTip1.SetToolTip(this.cbGoSutraPage, "書本的頁碼");
+            this.cbGoSutraPage.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
+            this.cbGoSutraPage.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoSutraJuan
+            // 
+            this.cbGoSutraJuan.FormattingEnabled = true;
+            this.cbGoSutraJuan.IntegralHeight = false;
+            this.cbGoSutraJuan.Location = new System.Drawing.Point(249, 274);
+            this.cbGoSutraJuan.MaxDropDownItems = 10;
+            this.cbGoSutraJuan.Name = "cbGoSutraJuan";
+            this.cbGoSutraJuan.Size = new System.Drawing.Size(72, 33);
+            this.cbGoSutraJuan.TabIndex = 40;
+            this.toolTip1.SetToolTip(this.cbGoSutraJuan, "「卷」是傳統經典中切成較小的數量單位，\r\n例如大般若經有 600 卷。\r\n現代文獻通常用「篇」或「章」來區分。\r\n");
+            this.cbGoSutraJuan.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
+            this.cbGoSutraJuan.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoSutraSutraNum
+            // 
+            this.cbGoSutraSutraNum.FormattingEnabled = true;
+            this.cbGoSutraSutraNum.IntegralHeight = false;
+            this.cbGoSutraSutraNum.Location = new System.Drawing.Point(86, 274);
+            this.cbGoSutraSutraNum.MaxDropDownItems = 10;
+            this.cbGoSutraSutraNum.Name = "cbGoSutraSutraNum";
+            this.cbGoSutraSutraNum.Size = new System.Drawing.Size(72, 33);
+            this.cbGoSutraSutraNum.TabIndex = 39;
+            this.toolTip1.SetToolTip(this.cbGoSutraSutraNum, "傳統經典中的「經號」，\r\n例：大正藏大般若經 T0220 即輸入 220。\r\n現代典籍則輸入其「編號」。\r\n");
+            this.cbGoSutraSutraNum.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
+            this.cbGoSutraSutraNum.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoBookLine
+            // 
+            this.cbGoBookLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbGoBookLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbGoBookLine.FormattingEnabled = true;
+            this.cbGoBookLine.IntegralHeight = false;
+            this.cbGoBookLine.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30"});
+            this.cbGoBookLine.Location = new System.Drawing.Point(249, 114);
+            this.cbGoBookLine.MaxDropDownItems = 10;
+            this.cbGoBookLine.Name = "cbGoBookLine";
+            this.cbGoBookLine.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cbGoBookLine.Size = new System.Drawing.Size(72, 33);
+            this.cbGoBookLine.TabIndex = 38;
+            this.toolTip1.SetToolTip(this.cbGoBookLine, "一頁、一欄中的行號");
+            this.cbGoBookLine.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
+            this.cbGoBookLine.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoBookCol
+            // 
+            this.cbGoBookCol.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbGoBookCol.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbGoBookCol.FormattingEnabled = true;
+            this.cbGoBookCol.IntegralHeight = false;
+            this.cbGoBookCol.Items.AddRange(new object[] {
+            "a",
+            "b",
+            "c"});
+            this.cbGoBookCol.Location = new System.Drawing.Point(86, 113);
+            this.cbGoBookCol.MaxDropDownItems = 10;
+            this.cbGoBookCol.Name = "cbGoBookCol";
+            this.cbGoBookCol.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cbGoBookCol.Size = new System.Drawing.Size(72, 33);
+            this.cbGoBookCol.TabIndex = 37;
+            this.toolTip1.SetToolTip(this.cbGoBookCol, "一頁中的欄號。可輸入 a,b,c 或 1,2,3");
+            this.cbGoBookCol.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
+            this.cbGoBookCol.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoBookPage
+            // 
+            this.cbGoBookPage.FormattingEnabled = true;
+            this.cbGoBookPage.IntegralHeight = false;
+            this.cbGoBookPage.Location = new System.Drawing.Point(249, 73);
+            this.cbGoBookPage.MaxDropDownItems = 10;
+            this.cbGoBookPage.Name = "cbGoBookPage";
+            this.cbGoBookPage.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cbGoBookPage.Size = new System.Drawing.Size(72, 33);
+            this.cbGoBookPage.TabIndex = 36;
+            this.toolTip1.SetToolTip(this.cbGoBookPage, "書本的頁碼");
+            this.cbGoBookPage.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
+            this.cbGoBookPage.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
+            // 
+            // cbGoBookVol
+            // 
+            this.cbGoBookVol.FormattingEnabled = true;
+            this.cbGoBookVol.IntegralHeight = false;
+            this.cbGoBookVol.Location = new System.Drawing.Point(86, 73);
+            this.cbGoBookVol.MaxDropDownItems = 10;
+            this.cbGoBookVol.Name = "cbGoBookVol";
+            this.cbGoBookVol.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.cbGoBookVol.Size = new System.Drawing.Size(72, 33);
+            this.cbGoBookVol.TabIndex = 35;
+            this.toolTip1.SetToolTip(this.cbGoBookVol, "書本的冊數，大正藏則稱此為「卷」");
+            this.cbGoBookVol.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
+            this.cbGoBookVol.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
             // 
             // lbStar2
             // 
@@ -1882,7 +2139,9 @@ namespace CBReader
             this.cbTextSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cbTextSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbTextSearch.FormattingEnabled = true;
+            this.cbTextSearch.IntegralHeight = false;
             this.cbTextSearch.Location = new System.Drawing.Point(11, 38);
+            this.cbTextSearch.MaxDropDownItems = 10;
             this.cbTextSearch.Name = "cbTextSearch";
             this.cbTextSearch.Size = new System.Drawing.Size(248, 33);
             this.cbTextSearch.TabIndex = 22;
@@ -2171,231 +2430,6 @@ namespace CBReader
             // LoadBookmarkDialog
             // 
             this.LoadBookmarkDialog.FileName = "openFileDialog1";
-            // 
-            // cbFindSutraSutraFrom
-            // 
-            this.cbFindSutraSutraFrom.FormattingEnabled = true;
-            this.cbFindSutraSutraFrom.Location = new System.Drawing.Point(84, 91);
-            this.cbFindSutraSutraFrom.Name = "cbFindSutraSutraFrom";
-            this.cbFindSutraSutraFrom.Size = new System.Drawing.Size(82, 33);
-            this.cbFindSutraSutraFrom.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.cbFindSutraSutraFrom, "起始編號");
-            this.cbFindSutraSutraFrom.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
-            this.cbFindSutraSutraFrom.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
-            // 
-            // cbFindSutraSutraTo
-            // 
-            this.cbFindSutraSutraTo.FormattingEnabled = true;
-            this.cbFindSutraSutraTo.Location = new System.Drawing.Point(230, 91);
-            this.cbFindSutraSutraTo.Name = "cbFindSutraSutraTo";
-            this.cbFindSutraSutraTo.Size = new System.Drawing.Size(82, 33);
-            this.cbFindSutraSutraTo.TabIndex = 21;
-            this.toolTip1.SetToolTip(this.cbFindSutraSutraTo, "結束編號");
-            this.cbFindSutraSutraTo.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
-            this.cbFindSutraSutraTo.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
-            // 
-            // cbFindSutraByline
-            // 
-            this.cbFindSutraByline.FormattingEnabled = true;
-            this.cbFindSutraByline.Location = new System.Drawing.Point(127, 171);
-            this.cbFindSutraByline.Name = "cbFindSutraByline";
-            this.cbFindSutraByline.Size = new System.Drawing.Size(185, 33);
-            this.cbFindSutraByline.TabIndex = 23;
-            this.toolTip1.SetToolTip(this.cbFindSutraByline, "輸入要搜尋的朝代及作譯者名稱");
-            this.cbFindSutraByline.Enter += new System.EventHandler(this.cbFindSutraVolFrom_Enter);
-            this.cbFindSutraByline.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
-            // 
-            // cbGoBookVol
-            // 
-            this.cbGoBookVol.FormattingEnabled = true;
-            this.cbGoBookVol.Location = new System.Drawing.Point(86, 73);
-            this.cbGoBookVol.Name = "cbGoBookVol";
-            this.cbGoBookVol.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.cbGoBookVol.Size = new System.Drawing.Size(72, 33);
-            this.cbGoBookVol.TabIndex = 35;
-            this.toolTip1.SetToolTip(this.cbGoBookVol, "書本的冊數，大正藏則稱此為「卷」");
-            this.cbGoBookVol.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
-            this.cbGoBookVol.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
-            // 
-            // cbGoBookPage
-            // 
-            this.cbGoBookPage.FormattingEnabled = true;
-            this.cbGoBookPage.Location = new System.Drawing.Point(249, 73);
-            this.cbGoBookPage.Name = "cbGoBookPage";
-            this.cbGoBookPage.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.cbGoBookPage.Size = new System.Drawing.Size(72, 33);
-            this.cbGoBookPage.TabIndex = 36;
-            this.toolTip1.SetToolTip(this.cbGoBookPage, "書本的頁碼");
-            this.cbGoBookPage.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
-            this.cbGoBookPage.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
-            // 
-            // cbGoBookCol
-            // 
-            this.cbGoBookCol.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cbGoBookCol.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbGoBookCol.FormattingEnabled = true;
-            this.cbGoBookCol.Items.AddRange(new object[] {
-            "a",
-            "b",
-            "c"});
-            this.cbGoBookCol.Location = new System.Drawing.Point(86, 113);
-            this.cbGoBookCol.Name = "cbGoBookCol";
-            this.cbGoBookCol.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.cbGoBookCol.Size = new System.Drawing.Size(72, 33);
-            this.cbGoBookCol.TabIndex = 37;
-            this.toolTip1.SetToolTip(this.cbGoBookCol, "一頁中的欄號。可輸入 a,b,c 或 1,2,3");
-            this.cbGoBookCol.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
-            this.cbGoBookCol.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
-            // 
-            // cbGoBookLine
-            // 
-            this.cbGoBookLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cbGoBookLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbGoBookLine.FormattingEnabled = true;
-            this.cbGoBookLine.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "30"});
-            this.cbGoBookLine.Location = new System.Drawing.Point(249, 114);
-            this.cbGoBookLine.Name = "cbGoBookLine";
-            this.cbGoBookLine.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.cbGoBookLine.Size = new System.Drawing.Size(72, 33);
-            this.cbGoBookLine.TabIndex = 38;
-            this.toolTip1.SetToolTip(this.cbGoBookLine, "一頁、一欄中的行號");
-            this.cbGoBookLine.Enter += new System.EventHandler(this.cbGoBookVol_Enter);
-            this.cbGoBookLine.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
-            // 
-            // cbGoSutraSutraNum
-            // 
-            this.cbGoSutraSutraNum.FormattingEnabled = true;
-            this.cbGoSutraSutraNum.Location = new System.Drawing.Point(86, 274);
-            this.cbGoSutraSutraNum.Name = "cbGoSutraSutraNum";
-            this.cbGoSutraSutraNum.Size = new System.Drawing.Size(72, 33);
-            this.cbGoSutraSutraNum.TabIndex = 39;
-            this.toolTip1.SetToolTip(this.cbGoSutraSutraNum, "傳統經典中的「經號」，\r\n例：大正藏大般若經 T0220 即輸入 220。\r\n現代典籍則輸入其「編號」。\r\n");
-            this.cbGoSutraSutraNum.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
-            this.cbGoSutraSutraNum.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
-            // 
-            // cbGoSutraJuan
-            // 
-            this.cbGoSutraJuan.FormattingEnabled = true;
-            this.cbGoSutraJuan.Location = new System.Drawing.Point(249, 274);
-            this.cbGoSutraJuan.Name = "cbGoSutraJuan";
-            this.cbGoSutraJuan.Size = new System.Drawing.Size(72, 33);
-            this.cbGoSutraJuan.TabIndex = 40;
-            this.toolTip1.SetToolTip(this.cbGoSutraJuan, "「卷」是傳統經典中切成較小的數量單位，\r\n例如大般若經有 600 卷。\r\n現代文獻通常用「篇」或「章」來區分。\r\n");
-            this.cbGoSutraJuan.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
-            this.cbGoSutraJuan.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
-            // 
-            // cbGoSutraPage
-            // 
-            this.cbGoSutraPage.FormattingEnabled = true;
-            this.cbGoSutraPage.Location = new System.Drawing.Point(86, 314);
-            this.cbGoSutraPage.Name = "cbGoSutraPage";
-            this.cbGoSutraPage.Size = new System.Drawing.Size(72, 33);
-            this.cbGoSutraPage.TabIndex = 41;
-            this.toolTip1.SetToolTip(this.cbGoSutraPage, "書本的頁碼");
-            this.cbGoSutraPage.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
-            this.cbGoSutraPage.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
-            // 
-            // cbGoSutraCol
-            // 
-            this.cbGoSutraCol.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cbGoSutraCol.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbGoSutraCol.FormattingEnabled = true;
-            this.cbGoSutraCol.Items.AddRange(new object[] {
-            "a",
-            "b",
-            "c"});
-            this.cbGoSutraCol.Location = new System.Drawing.Point(249, 314);
-            this.cbGoSutraCol.Name = "cbGoSutraCol";
-            this.cbGoSutraCol.Size = new System.Drawing.Size(72, 33);
-            this.cbGoSutraCol.TabIndex = 42;
-            this.toolTip1.SetToolTip(this.cbGoSutraCol, "一頁中的欄號。可輸入 a,b,c 或 1,2,3");
-            this.cbGoSutraCol.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
-            this.cbGoSutraCol.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
-            // 
-            // cbGoSutraLine
-            // 
-            this.cbGoSutraLine.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cbGoSutraLine.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbGoSutraLine.FormattingEnabled = true;
-            this.cbGoSutraLine.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "30"});
-            this.cbGoSutraLine.Location = new System.Drawing.Point(86, 354);
-            this.cbGoSutraLine.Name = "cbGoSutraLine";
-            this.cbGoSutraLine.Size = new System.Drawing.Size(72, 33);
-            this.cbGoSutraLine.TabIndex = 43;
-            this.toolTip1.SetToolTip(this.cbGoSutraLine, "一頁、一欄中的行號");
-            this.cbGoSutraLine.Enter += new System.EventHandler(this.cbGoSutraSutraNum_Enter);
-            this.cbGoSutraLine.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
-            // 
-            // cbGoByKeyword
-            // 
-            this.cbGoByKeyword.FormattingEnabled = true;
-            this.cbGoByKeyword.Location = new System.Drawing.Point(17, 438);
-            this.cbGoByKeyword.Name = "cbGoByKeyword";
-            this.cbGoByKeyword.Size = new System.Drawing.Size(226, 33);
-            this.cbGoByKeyword.TabIndex = 44;
-            this.toolTip1.SetToolTip(this.cbGoByKeyword, "可輸入行首或引用複製格式");
-            this.cbGoByKeyword.Enter += new System.EventHandler(this.cbGoByKeyword_Enter);
-            this.cbGoByKeyword.Leave += new System.EventHandler(this.cbFindSutraVolFrom_Leave);
             // 
             // MainForm
             // 
