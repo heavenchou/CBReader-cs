@@ -341,6 +341,10 @@ namespace CBReader
         .wavy {text-decoration-style:wavy;}
         .border {border:1px black solid;}
         .no-border {border:0;}
+        .invert {
+            filter: invert(1);
+            background-color: white;
+        }
         .circle {
             display: inline-block;
             position: relative;
@@ -373,7 +377,7 @@ namespace CBReader
         .no-marker {list-style:none;}
         .circle-above {text-emphasize:circle-above;}
         #AIPuncRemind {color:#ffffff; background: #d80000;}
-        #SearchHead {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C','TH-Tshyn-P1';}
+        #SearchHead {font-family:'Times New Roman','FSung-2','FSung-3','Jigmo2','Jigmo3','TH-Tshyn-P2','TH-Tshyn-P1','Hanazono Mincho B','Hanazono Mincho C';}
         a.SearchWord0 {color:#0000ff; background: #ffff66;}
         a.SearchWord1 {color:#0000ff; background: #a0ffff;}
         a.SearchWord2 {color:#0000ff; background: #99ff99;}
@@ -391,7 +395,7 @@ namespace CBReader
         .preformat {font-family:細明體,MingLiU,NSimSun,'Songti TC', Shobhika; font-size:21px;}
         .preformat .kaiti {font-family:DFKai-SB,標楷體,STKaiti,'Kaiti TC';}
         .preformat .foreign {font-family:'Courier New'; font-size:17.5px;}
-        .gaiji {font-family:'Times New Roman','Hanazono Mincho B','Hanazono Mincho C','TH-Tshyn-P1';}
+        .gaiji {font-family:'Times New Roman','FSung-2','FSung-3','Jigmo2','Jigmo3','TH-Tshyn-P2','TH-Tshyn-P1','Hanazono Mincho B','Hanazono Mincho C';}
         .juannum  {color:#008000; font-size:21px;}
         .juanname {color:#0000FF; font-weight: bold; font-size:24px;}
         .xu {color:#0000A0; font-size:21px;}
