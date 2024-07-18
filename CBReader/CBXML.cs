@@ -376,7 +376,7 @@ namespace CBReader
         .xx-large {font-size:xx-large;}
         .no-marker {list-style:none;}
         .circle-above {text-emphasize:circle-above;}
-        #AIPuncRemind {color:#ffffff; background: #d80000;}
+        #AIPuncRemind {color:#ffffff; background: #9f5000;}
         #SearchHead {font-family:'Times New Roman','FSung-2','FSung-3','Jigmo2','Jigmo3','TH-Tshyn-P2','TH-Tshyn-P1','Hanazono Mincho B','Hanazono Mincho C';}
         a.SearchWord0 {color:#0000ff; background: #ffff66;}
         a.SearchWord1 {color:#0000ff; background: #a0ffff;}
@@ -545,7 +545,7 @@ namespace CBReader
             string sEdition = NodeEdition.InnerXml;
             if(sEdition.Contains("AI 標點")) {
                 IsAIPunc = true;
-                sHtml += "<div><span id='AIPuncRemind'>【案：此資料標點由AI標點引擎提供，可從「設定/經文格式」選擇是否呈現。】</span></div>\n";
+                sHtml += "<div><span id='AIPuncRemind'>【案：本資料標點由古籍酷 AI 自動標點引擎提供（可從「設定/經文格式」選擇是否呈現），CBETA 後續會再進行人工新式標點校讀。】</span></div>\n";
             }
 
             // 遍歷 XML
