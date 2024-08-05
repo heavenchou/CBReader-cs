@@ -33,6 +33,7 @@ namespace CBReader
             this.btOK = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.llbDonate = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.llbCBETAWeb = new System.Windows.Forms.LinkLabel();
             this.llbCBETAEmail = new System.Windows.Forms.LinkLabel();
@@ -90,6 +91,7 @@ namespace CBReader
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.llbDonate);
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.llbCBETAWeb);
             this.panel5.Controls.Add(this.llbCBETAEmail);
@@ -103,6 +105,18 @@ namespace CBReader
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(411, 276);
             this.panel5.TabIndex = 1;
+            // 
+            // llbDonate
+            // 
+            this.llbDonate.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.llbDonate.Location = new System.Drawing.Point(252, 171);
+            this.llbDonate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.llbDonate.Name = "llbDonate";
+            this.llbDonate.Size = new System.Drawing.Size(151, 25);
+            this.llbDonate.TabIndex = 7;
+            this.llbDonate.TabStop = true;
+            this.llbDonate.Text = "【🫰護持捐款】";
+            this.llbDonate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbDonate_LinkClicked);
             // 
             // label4
             // 
@@ -133,7 +147,7 @@ namespace CBReader
             this.llbCBETAEmail.Location = new System.Drawing.Point(16, 171);
             this.llbCBETAEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbCBETAEmail.Name = "llbCBETAEmail";
-            this.llbCBETAEmail.Size = new System.Drawing.Size(387, 25);
+            this.llbCBETAEmail.Size = new System.Drawing.Size(212, 25);
             this.llbCBETAEmail.TabIndex = 1;
             this.llbCBETAEmail.TabStop = true;
             this.llbCBETAEmail.Text = "📧 service@cbeta.org";
@@ -192,7 +206,7 @@ namespace CBReader
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(333, 25);
             this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "CBReader 2X  v0.9.3　2024-07-18";
+            this.lbTitle.Text = "CBReader 2X  v0.9.3　2024-08-07";
             // 
             // panel4
             // 
@@ -305,5 +319,6 @@ namespace CBReader
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.TextBox edReadme;
+        private System.Windows.Forms.LinkLabel llbDonate;
     }
 }

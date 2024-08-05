@@ -33,5 +33,10 @@ namespace CBReader
         {
             System.Diagnostics.Process.Start("mailto:service@cbeta.org");
         }
+
+        private void llbDonate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.cbeta.org/donate/?utm_source=cbreader");
+        }
     }
 }

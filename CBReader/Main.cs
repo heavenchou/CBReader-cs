@@ -303,7 +303,7 @@ namespace CBReader
             SpineID = -1;   // 初值表示沒開啟
 
             if (iBookcaseCount != 0) {
-                string URL = "file:///" + Bookcase.CBETA.Dir + "help/index.htm";
+                string URL = "file:///" + Bookcase.CBETA.Dir + "help/index.html";
                 OpenURL(URL);
             }
 
@@ -491,9 +491,22 @@ namespace CBReader
             string userDataFolder = CGlobalVal.MySettingPath + "CBReader.exe.WebView2";
             var webView2Environment = await CoreWebView2Environment.CreateAsync(null, userDataFolder);
             await webView.EnsureCoreWebView2Async(webView2Environment);
-
+            // 檢查是否開啟 target="_blank" 的網址
+            webView.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
+            
             // 向網頁提供可呼叫的類別 WebViewClass，第一個參數是名稱，第二個參數是類別實體
             webView.CoreWebView2.AddHostObjectToScript("webViewBridge", new WebViewBridge());
+        }
+
+        // 檢查是否開啟 target="_blank" 的網址
+        private void CoreWebView2_NewWindowRequested(object sender, CoreWebView2NewWindowRequestedEventArgs e)
+        {
+            // 阻止 WebView2 開啟新視窗
+            e.Handled = true;
+            // 取得網址
+            string newWindowUri = e.Uri;
+            // 使用系統預設瀏覽器開啟網址
+            System.Diagnostics.Process.Start(newWindowUri);
         }
 
         // 將檔案載入導覽樹
