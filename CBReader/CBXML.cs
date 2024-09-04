@@ -412,6 +412,11 @@ namespace CBReader
         .lg {color:#008040; font-size:21px;}
         .corr {color:#FF0000; }
         .note {color:#9F5000; font-size:18px;}
+        .note-focus {background-color:lightpink;}
+        #div_notearea_box {position:fixed; border:1px; margin:10px; padding:10px; background-color:rgb(31, 119, 29); right:0px; bottom:0px; width:655px; height:150px; writing-mode: lr-tb; display:none;}
+        #div_notearea_close {background-color:#ff8585;}
+        #div_notearea {position:fixed; border:1px; margin:10px; padding:10px; background-color:#bedebd; right:2px; bottom:2px; width:600px; height:146px; overflow:auto;}
+        #cbeta-copyright {margin:15px; padding: 25px; border-radius: 20px; background-color: rgb(200, 234, 198); display:block; box-shadow:inset -3px -3px 10px #9bbc99;}        
         table {border-collapse: collapse; margin: 20px; border: 1px solid black;}
         th, td { padding: 0.5em; border: 1px solid black;}
         table.no-border td, table.no-border th {border: 0px solid black;}
@@ -4192,7 +4197,7 @@ namespace CBReader
             sSutraName = CCBSutraUtil.CutJuanAfterSutraName(SutraName);
 	        sPublishDate = Series.PublishDate;
 
-	        sVerInfo = "<br><br><span style='margin:15px; padding: 25px; border-radius: 20px; background-color: rgb(200, 234, 198); display:block; box-shadow:inset -3px -3px 10px #9bbc99'>\n";
+	        sVerInfo = "<br><br><span id='cbeta-copyright'>\n";
 	        sVerInfo += "【典籍資訊】" ;
 	        sVerInfo += sBookName + "第 " + sVolNum + " 冊 No. " + sSutraNum + "《" + sSutraName + "》<br>\n";
 	        sVerInfo += "【版本記錄】發行日期：" + sPublishDate;
