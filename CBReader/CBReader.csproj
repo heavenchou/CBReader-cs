@@ -326,6 +326,7 @@
     <Compile Include="SearchRange.Designer.cs">
       <DependentUpon>SearchRange.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchResultFile.cs" />
     <Compile Include="SearchWord.cs" />
     <Compile Include="Series.cs" />
     <Compile Include="Setting.cs" />

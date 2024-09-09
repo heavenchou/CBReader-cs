@@ -27,6 +27,7 @@ using System.IO.Packaging;
 using System.Text.Json;
 using System.Globalization;
 using System.Windows.Controls.Primitives;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace CBReader
 {
@@ -91,6 +92,10 @@ namespace CBReader
         // ComboBox 的歷史記錄
 
         AllComboBoxHistory allComboBoxHistory = new AllComboBoxHistory();
+
+        // Search Result File
+
+        SearchResultFile searchResultFile = new SearchResultFile();
 
         public MainForm()
         {
@@ -666,6 +671,7 @@ namespace CBReader
                 if (cbSearchRange.Visible) {
                     cbSearchRange.Checked = false;
                 }
+                cbSearchResulFile.Checked = false;
 
                 // 取出本經
                 string sThisBookId = Bookcase.CBETA.Spine.BookID[SpineID];
@@ -1034,6 +1040,7 @@ namespace CBReader
                     cbSearchRange.Checked = false;
                 } else {
                     cbSearchThisSutra.Checked = false;
+                    cbSearchResulFile.Checked = false;
                 }
             }
         }
@@ -1461,8 +1468,15 @@ namespace CBReader
             GoByKeyword(cbGoByKeyword.Text);
         }
 
-
         private void btTextSearch_Click(object sender, EventArgs e)
+        {
+            // 手動執行全文檢索時，cbSearchResultFile 要取消
+            cbSearchResulFile.Checked = false;
+            searchResultFile.FileName = "";
+            TextSearch();
+        }
+
+        private void TextSearch()
         {
             SearchSentence = cbTextSearch.Text;
             allComboBoxHistory.AddHistory(cbTextSearch);
@@ -1486,7 +1500,7 @@ namespace CBReader
 
             DateTime t1 = DateTime.Now;
             bool bHasRange = false;     // 有範圍就要設定
-            if (cbSearchRange.Checked || cbSearchThisSutra.Checked) {
+            if (cbSearchRange.Checked || cbSearchThisSutra.Checked || cbSearchResulFile.Checked) {
                 bHasRange = true;
             }
 
@@ -2690,5 +2704,286 @@ namespace CBReader
             }
             return input;
         }
+
+        // 由全文檢索結果開啟經文
+        private void miOpenThisSutra_Click(object sender, EventArgs e)
+        {
+            if (sgTextSearch.SelectedRows.Count > 0) {
+                int iRow = sgTextSearch.SelectedRows[0].Index;
+                int iIndex = Convert.ToInt32(sgTextSearch[8, iRow].Value);
+                string sFile = Bookcase.CBETA.Spine.Files[iIndex];
+                // 要塗色
+                ShowCBXML(sFile, true, Bookcase.CBETA);
+            }
+        }
+
+        // 載入 Search Result File
+        private void miLoadSearchResultFile_Click(object sender, EventArgs e)
+        {
+            if (loadSearchResultFileDialog.ShowDialog() == DialogResult.OK) {
+                // 檢查是新版或舊版
+                byte[] fileBytes = File.ReadAllBytes(loadSearchResultFileDialog.FileName);
+
+                if (fileBytes[0] == '<' && fileBytes[9] == '>') {
+                    // 舊版 SRF 格式
+                    LoadOldVersionSearchResultFile(loadSearchResultFileDialog.FileName);
+                } else {
+                    // 新版 SRF 格式
+                    LoadNewVersionSearchResultFile(loadSearchResultFileDialog.FileName);
+                }
+                searchResultFile.FileName = loadSearchResultFileDialog.FileName;
+                // 執行搜尋
+                SearchByResultFile();
+            }
+        }
+
+        // 處理舊版的 Search Result File 格式
+
+        /*
+        舊版格式
+        <檔案描述> CBReader Search Result File
+        <檔案版本>3
+        <原始字串>&6709;&70BA;&6CD5;&0020;&002B;&0020;&5922;&5E7B;&6CE1;&5F71;
+        <處理字串>有為法 + 夢幻泡影
+        <樣版字串> S+S
+        <字詞個數>2
+        <W>有為法
+        <W> 夢幻泡影
+        <列表數量>190
+        <C>1
+        <B>T
+        <V>08
+        <N>0235
+        <J>1
+        */
+        void LoadOldVersionSearchResultFile(string fileName)
+        {
+            string[] readText = File.ReadAllLines(fileName, Encoding.GetEncoding("big5"));
+
+            string s = readText[2];
+            if (!s.Contains("<原始字串>")) {
+                // 不是舊版格式
+                MessageBox.Show("載入的 SRF 格式有問題。");
+                return;
+            }
+
+            s = s.Substring(6);
+
+            searchResultFile = new SearchResultFile(DecodeHtmlEntities(s));
+
+            int iIndex = 0;
+            for (int i = 0; i < readText.Length; i++) {
+                string sTitle = readText[i];
+                if (sTitle.Contains("<C>")) {
+                    iIndex = i;
+                    break;
+                } 
+            }
+
+            for (int i = iIndex; i < readText.Length; i = i+5) {
+                string sId = "";
+                string sTitle = readText[i + 1];
+                if (sTitle.Contains("<B>")) {
+                    sId += sTitle.Substring(3) + ",";
+                }
+                sTitle = readText[i + 2];
+                if (sTitle.Contains("<V>")) {
+                    sId += sTitle.Substring(3) + ",";
+                }
+                sTitle = readText[i + 3];
+                if (sTitle.Contains("<N>")) {
+                    sId += sTitle.Substring(3) + ",";
+                }
+                sTitle = readText[i + 4];
+                if (sTitle.Contains("<J>")) {
+                    sId += sTitle.Substring(3);
+                }
+                searchResultFile.AddSutra(sId);
+            }
+        }
+
+        // 處理新版的 Search Result File 格式
+        void LoadNewVersionSearchResultFile(string fileName)
+        {
+            string json = File.ReadAllText(loadSearchResultFileDialog.FileName);
+            
+            SearchResultFile newSRF;
+            newSRF = JsonSerializer.Deserialize<SearchResultFile>(json);
+            searchResultFile = newSRF;
+        }
+
+        // 由 Search Result File 執行檢索
+        void SearchByResultFile()
+        {
+            cbTextSearch.Text = searchResultFile.SearchString;
+            cbSearchRange.Checked = false;
+            cbSearchThisSutra.Checked = false;
+            cbSearchResulFile.Checked = true;
+
+            Bookcase.CBETA.SearchEngine_CB.BuildFileList.NoneSearch();
+            Bookcase.CBETA.SearchEngine_orig.BuildFileList.NoneSearch();
+
+            // 將記錄的各經卷加入搜尋名單
+            foreach (string sutra in searchResultFile.SearchSutra) {
+                var array = sutra.Split(',');
+                int juan = 0;
+                bool success = int.TryParse(array[3], out juan);
+                if (success) {
+                    Bookcase.CBETA.SearchEngine_CB.BuildFileList.SearchThisSutra(array[0], array[2], juan);
+                    Bookcase.CBETA.SearchEngine_orig.BuildFileList.SearchThisSutra(array[0], array[2], juan);
+                }
+            }
+
+            TextSearch();
+        }
+
+        // 儲存 Search Result File
+        private void miSaveSearchResultFile_Click(object sender, EventArgs e)
+        {
+            if(searchResultFile.FileName == "") {
+                saveSearchResultFileDialog.FileName = cbTextSearch.Text + ".srf";
+                // 匯出
+                if (saveSearchResultFileDialog.ShowDialog() == DialogResult.OK) {
+                    searchResultFile.FileName = saveSearchResultFileDialog.FileName;
+                } else {
+                    return;
+                }
+            } 
+            // 直接存檔
+            SaveSearchResultFile(searchResultFile.FileName);
+        }
+
+
+        private void miSaveAsSearchResultFile_Click(object sender, EventArgs e)
+        {
+            saveSearchResultFileDialog.FileName = cbTextSearch.Text + ".srf";
+            // 匯出
+            if (saveSearchResultFileDialog.ShowDialog() == DialogResult.OK) {
+                SaveSearchResultFile(saveSearchResultFileDialog.FileName);
+            }
+        }
+
+
+        void SaveSearchResultFile(string fileName)
+        {
+            if (cbTextSearch.Text.Length == 0) {
+                MessageBox.Show(t("搜尋字串不能為空白", "01033"));
+                cbTextSearch.Focus();
+                return;
+            }
+
+            searchResultFile = new SearchResultFile(cbTextSearch.Text);
+            searchResultFile.FileName = fileName;
+
+            // 將搜尋到的經號及卷加入 SearchResultFile 中
+            for (int i = 0; i < sgTextSearch.Rows.Count; i++) {
+                string sId = "";
+                sId = sgTextSearch.Rows[i].Cells[1].Value.ToString() + ",";
+                sId += sgTextSearch.Rows[i].Cells[2].Value.ToString() + ",";
+                sId += sgTextSearch.Rows[i].Cells[3].Value.ToString() + ",";
+                sId += sgTextSearch.Rows[i].Cells[5].Value.ToString();
+                searchResultFile.AddSutra(sId);
+            }
+            // 匯出
+            searchResultFile.SaveToFile(fileName);
+            MessageBox.Show("OK");
+        }
+
+        // 儲存所選取的部份
+        private void miSaveSelectSutra_Click(object sender, EventArgs e)
+        {
+            if (cbTextSearch.Text.Length == 0) {
+                MessageBox.Show(t("搜尋字串不能為空白", "01033"));
+                cbTextSearch.Focus();
+                return;
+            }
+
+            SearchResultFile mySearchResultFile = new SearchResultFile(cbTextSearch.Text);
+
+            // 將搜尋到的經號及卷加入 SearchResultFile 中
+            for (int i = 0; i < sgTextSearch.SelectedRows.Count; i++) {
+                string sId = "";
+                sId = sgTextSearch.SelectedRows[i].Cells[1].Value.ToString() + ",";
+                sId += sgTextSearch.SelectedRows[i].Cells[2].Value.ToString() + ",";
+                sId += sgTextSearch.SelectedRows[i].Cells[3].Value.ToString() + ",";
+                sId += sgTextSearch.SelectedRows[i].Cells[5].Value.ToString();
+                mySearchResultFile.AddSutra(sId);
+            }
+
+            saveSearchResultFileDialog.FileName = cbTextSearch.Text + ".srf";
+
+            // 匯出
+            if (saveSearchResultFileDialog.ShowDialog() == DialogResult.OK) {
+                mySearchResultFile.SaveToFile(saveSearchResultFileDialog.FileName);
+                MessageBox.Show("OK");
+            }
+        }
+
+        // 處理全文檢索結果列表上，按下滑鼠右鍵的處理方式
+        // 若該列沒有選擇，則取消其它並選擇此列。此列若已有選擇，就不動。popup menu 會自動呈現。
+        private void sgTextSearch_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // 確保點擊在有效的行上
+            if (e.Button == MouseButtons.Right) { // 
+                if (e.RowIndex >= 0) {
+                    // 檢查右鍵單擊的行是否已經被選中
+                    if (!sgTextSearch.Rows[e.RowIndex].Selected) {
+                        // 如果該行未被選中，則清除原有選擇並選中該行
+                        sgTextSearch.ClearSelection();
+                        sgTextSearch.Rows[e.RowIndex].Selected = true;
+                        //sgTextSearch.CurrentCell = sgTextSearch.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                        sgTextSearch.CurrentCell = sgTextSearch.Rows[e.RowIndex].Cells[0];
+                    }
+                    // 顯示 ContextMenuStrip
+                    // 底下不用寫，設定 contextMenuStrip 屬性後會自動呈現 
+                    // cmSearchResultFile.Show(Cursor.Position);
+                }
+            }
+        }
+
+        // 判斷全文檢索結果的 popup menu 有哪些選項要 disable
+        private void cmSearchResultFile_Opening(object sender, CancelEventArgs e)
+        {
+            // 例如檢查目前選中的行是否符合某個條件
+            if (sgTextSearch.SelectedRows.Count == 0) {
+                // 禁用某個選項
+                miSaveSelectSutra.Enabled = false;
+                miOpenThisSutra.Enabled = false;
+                miDeleteSelectSutra.Enabled = false;
+            } else {
+                // 否則啟用該選項
+                miOpenThisSutra.Enabled = true;
+                miSaveSelectSutra.Enabled = true;
+                miDeleteSelectSutra.Enabled = true;
+            }
+
+            if(sgTextSearch.Rows.Count == 0) {
+                miSaveSearchResultFile.Enabled = false;
+                miSaveAsSearchResultFile.Enabled = false;
+            } else {
+                miSaveSearchResultFile.Enabled = true;
+                miSaveAsSearchResultFile.Enabled = true;
+            }
+
+            if(searchResultFile.FileName != "") {
+                var array = miSaveSearchResultFile.Text.Split(' ');
+                miSaveSearchResultFile.Text = array[0] + " " + Path.GetFileName(searchResultFile.FileName);
+            }
+        }
+
+        // 刪除所選擇的列
+        private void miDeleteSelectSutra_Click(object sender, EventArgs e)
+        {
+            // 從後往前刪除，避免索引錯誤
+            for (int i = sgTextSearch.SelectedRows.Count - 1; i >= 0; i--) {
+                // 取得當前選中的行
+                DataGridViewRow selectedRow = sgTextSearch.SelectedRows[i];
+
+                // 然後從 DataGridView 中移除該行
+                sgTextSearch.Rows.RemoveAt(selectedRow.Index);
+            }
+        }
+
+
     }
 }

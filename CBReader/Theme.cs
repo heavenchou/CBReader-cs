@@ -326,10 +326,13 @@ namespace CBReader
 
         void EachMenuItems(string formName, ToolStripItemCollection items)
         {
-            foreach (ToolStripMenuItem item in items) {
-                ChangeMenuItemLang(formName, item);
-                if (item.HasDropDownItems) {
-                    EachMenuItems(formName, item.DropDownItems);
+            //foreach (ToolStripMenuItem item in items) { // 有 ToolStripSeparator 會出錯
+            foreach (var item in items) {
+                if (item is ToolStripMenuItem menuItem) {
+                    ChangeMenuItemLang(formName, menuItem);
+                    if (menuItem.HasDropDownItems) {
+                        EachMenuItems(formName, menuItem.DropDownItems);
+                    }
                 }
             }
         }
