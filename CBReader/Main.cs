@@ -658,35 +658,6 @@ namespace CBReader
             language.ChangeComponentLang(this, btMuluWidthSwitch1);
         }
 
-        // 檢索本經
-        void cbSearchThisSutraChange()
-        {
-            if (cbSearchThisSutra.Checked) {
-                // 設定檢索此經
-                if (SpineID == -1) {
-                    cbSearchThisSutra.Checked = false;
-                    return;
-                }
-
-                if (cbSearchRange.Visible) {
-                    cbSearchRange.Checked = false;
-                }
-                cbSearchResulFile.Checked = false;
-
-                // 取出本經
-                string sThisBookId = Bookcase.CBETA.Spine.BookID[SpineID];
-                string sThisSutra = Bookcase.CBETA.Spine.Sutra[SpineID];
-
-                if (Bookcase.CBETA.SearchEngine_CB != null) {
-                    Bookcase.CBETA.SearchEngine_CB.BuildFileList.NoneSearch();
-                    Bookcase.CBETA.SearchEngine_CB.BuildFileList.SearchThisSutra(sThisBookId, sThisSutra);
-                }
-                if (Bookcase.CBETA.SearchEngine_orig != null) {
-                    Bookcase.CBETA.SearchEngine_orig.BuildFileList.NoneSearch();
-                    Bookcase.CBETA.SearchEngine_orig.BuildFileList.SearchThisSutra(sThisBookId, sThisSutra);
-                }
-            }
-        }
 
         // 檢查有沒有更新程式, bShowNoUpdate : 沒更新時要不要秀訊息
         void CheckUpdate(bool bShowNoUpdate)
@@ -1040,8 +1011,67 @@ namespace CBReader
                     cbSearchRange.Checked = false;
                 } else {
                     cbSearchThisSutra.Checked = false;
+                    cbSearchFindList.Checked = false;
+                    cbSearchPreList.Checked = false;
                     cbSearchResulFile.Checked = false;
                 }
+            }
+        }
+
+        private void cbSearchThisSutra_CheckedChanged(object sender, EventArgs e)
+        {
+            cbSearchThisSutraChange();
+        }
+
+        // 檢索本經
+        void cbSearchThisSutraChange()
+        {
+            if (cbSearchThisSutra.Checked) {
+                // 設定檢索此經
+                if (SpineID == -1) {
+                    cbSearchThisSutra.Checked = false;
+                    return;
+                }
+
+                if (cbSearchRange.Visible) {
+                    cbSearchRange.Checked = false;
+                }
+                cbSearchFindList.Checked = false;
+                cbSearchPreList.Checked = false;
+                cbSearchResulFile.Checked = false;
+
+                // 取出本經
+                string sThisBookId = Bookcase.CBETA.Spine.BookID[SpineID];
+                string sThisSutra = Bookcase.CBETA.Spine.Sutra[SpineID];
+
+                if (Bookcase.CBETA.SearchEngine_CB != null) {
+                    Bookcase.CBETA.SearchEngine_CB.BuildFileList.NoneSearch();
+                    Bookcase.CBETA.SearchEngine_CB.BuildFileList.SearchThisSutra(sThisBookId, sThisSutra);
+                }
+                if (Bookcase.CBETA.SearchEngine_orig != null) {
+                    Bookcase.CBETA.SearchEngine_orig.BuildFileList.NoneSearch();
+                    Bookcase.CBETA.SearchEngine_orig.BuildFileList.SearchThisSutra(sThisBookId, sThisSutra);
+                }
+            }
+        }
+
+        private void cbSearchFindList_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbSearchFindList.Checked) {
+                cbSearchRange.Checked = false;
+                cbSearchThisSutra.Checked = false;
+                cbSearchPreList.Checked = false;
+                cbSearchResulFile.Checked = false;
+            }
+        }
+
+        private void cbSearchPreList_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbSearchPreList.Checked) {
+                cbSearchRange.Checked = false;
+                cbSearchThisSutra.Checked = false;
+                cbSearchFindList.Checked = false;
+                cbSearchResulFile.Checked = false;
             }
         }
 
@@ -1499,8 +1529,40 @@ namespace CBReader
             Cursor = Cursors.WaitCursor;
 
             DateTime t1 = DateTime.Now;
+
+            // 若有搜尋「查詢書目」或「前次結果」，要在這裡處理
+
+            // 檢索查詢到的書目
+            if (cbSearchFindList.Checked) {
+
+                Bookcase.CBETA.SearchEngine_CB.BuildFileList.NoneSearch();
+                Bookcase.CBETA.SearchEngine_orig.BuildFileList.NoneSearch();
+
+                for(int i=0; i<sgFindSutra.RowCount; i++) {
+                    string sBook = sgFindSutra.Rows[i].Cells[0].Value.ToString();
+                    string sSutra = sgFindSutra.Rows[i].Cells[2].Value.ToString();
+                    Bookcase.CBETA.SearchEngine_CB.BuildFileList.SearchThisSutra(sBook, sSutra);
+                    Bookcase.CBETA.SearchEngine_orig.BuildFileList.SearchThisSutra(sBook, sSutra);
+                }
+            } else if (cbSearchPreList.Checked) {
+                // 檢索之前搜尋到的資料
+
+                Bookcase.CBETA.SearchEngine_CB.BuildFileList.NoneSearch();
+                Bookcase.CBETA.SearchEngine_orig.BuildFileList.NoneSearch();
+
+                for (int i = 0; i < sgTextSearch.RowCount; i++) {
+                    string sBook = sgTextSearch.Rows[i].Cells[1].Value.ToString();
+                    string sSutra = sgTextSearch.Rows[i].Cells[3].Value.ToString();
+                    string sJuan = sgTextSearch.Rows[i].Cells[5].Value.ToString();
+                    int iJuan = 0;
+                    int.TryParse(sJuan, out iJuan);
+                    Bookcase.CBETA.SearchEngine_CB.BuildFileList.SearchThisSutra(sBook, sSutra, iJuan);
+                    Bookcase.CBETA.SearchEngine_orig.BuildFileList.SearchThisSutra(sBook, sSutra, iJuan);
+                }
+            }
+
             bool bHasRange = false;     // 有範圍就要設定
-            if (cbSearchRange.Checked || cbSearchThisSutra.Checked || cbSearchResulFile.Checked) {
+            if (cbSearchRange.Checked || cbSearchThisSutra.Checked || cbSearchFindList.Checked || cbSearchPreList.Checked || cbSearchResulFile.Checked) {
                 bHasRange = true;
             }
 
@@ -1668,11 +1730,6 @@ namespace CBReader
                     e.Handled = true;
                 }
             }
-        }
-
-        private void cbSearchThisSutra_CheckedChanged(object sender, EventArgs e)
-        {
-            cbSearchThisSutraChange();
         }
 
 
@@ -2818,6 +2875,8 @@ namespace CBReader
             cbTextSearch.Text = searchResultFile.SearchString;
             cbSearchRange.Checked = false;
             cbSearchThisSutra.Checked = false;
+            cbSearchFindList.Checked = false;
+            cbSearchPreList.Checked = false;
             cbSearchResulFile.Checked = true;
 
             Bookcase.CBETA.SearchEngine_CB.BuildFileList.NoneSearch();
@@ -2992,7 +3051,5 @@ namespace CBReader
                 sgTextSearch.Rows.RemoveAt(selectedRow.Index);
             }
         }
-
-
     }
 }

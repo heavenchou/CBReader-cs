@@ -30,7 +30,7 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption1 = new System.Windows.Forms.Button();
             this.pnToolBar = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
@@ -222,6 +222,8 @@ namespace CBReader
             this.LoadBookmarkDialog = new System.Windows.Forms.OpenFileDialog();
             this.loadSearchResultFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveSearchResultFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.cbSearchFindList = new System.Windows.Forms.CheckBox();
+            this.cbSearchPreList = new System.Windows.Forms.CheckBox();
             this.pnToolBar.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
@@ -291,13 +293,13 @@ namespace CBReader
             // 
             // toolStripContainer.ContentPanel
             // 
-            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(865, 0);
+            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(865, 18);
             this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer.LeftToolStripPanelVisible = false;
-            this.toolStripContainer.Location = new System.Drawing.Point(0, 27);
+            this.toolStripContainer.Location = new System.Drawing.Point(0, 30);
             this.toolStripContainer.Name = "toolStripContainer";
             this.toolStripContainer.RightToolStripPanelVisible = false;
-            this.toolStripContainer.Size = new System.Drawing.Size(865, 58);
+            this.toolStripContainer.Size = new System.Drawing.Size(865, 55);
             this.toolStripContainer.TabIndex = 7;
             this.toolStripContainer.Text = "toolStripContainer1";
             // 
@@ -423,9 +425,9 @@ namespace CBReader
             this.tsbCBCopy,
             this.toolStripSeparator6,
             this.tsbAddBookmark});
-            this.tsSutra.Location = new System.Drawing.Point(4, 37);
+            this.tsSutra.Location = new System.Drawing.Point(248, 0);
             this.tsSutra.Name = "tsSutra";
-            this.tsSutra.Size = new System.Drawing.Size(445, 37);
+            this.tsSutra.Size = new System.Drawing.Size(484, 37);
             this.tsSutra.TabIndex = 1;
             this.tsSutra.LocationChanged += new System.EventHandler(this.tsSutra_LocationChanged);
             // 
@@ -656,28 +658,28 @@ namespace CBReader
             this.miAdmin});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(865, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(865, 30);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // miOption
             // 
             this.miOption.Name = "miOption";
-            this.miOption.Size = new System.Drawing.Size(53, 23);
+            this.miOption.Size = new System.Drawing.Size(53, 26);
             this.miOption.Text = "設定";
             this.miOption.Click += new System.EventHandler(this.miOption_Click);
             // 
             // miUpdate
             // 
             this.miUpdate.Name = "miUpdate";
-            this.miUpdate.Size = new System.Drawing.Size(83, 23);
+            this.miUpdate.Size = new System.Drawing.Size(83, 26);
             this.miUpdate.Text = "更新檢查";
             this.miUpdate.Click += new System.EventHandler(this.miUpdate_Click);
             // 
             // miLanguage
             // 
             this.miLanguage.Name = "miLanguage";
-            this.miLanguage.Size = new System.Drawing.Size(133, 23);
+            this.miLanguage.Size = new System.Drawing.Size(133, 26);
             this.miLanguage.Text = "語言(Language)";
             // 
             // miToolStrip
@@ -686,7 +688,7 @@ namespace CBReader
             this.miMainToolStrip,
             this.miSutraToolStrip});
             this.miToolStrip.Name = "miToolStrip";
-            this.miToolStrip.Size = new System.Drawing.Size(68, 23);
+            this.miToolStrip.Size = new System.Drawing.Size(68, 26);
             this.miToolStrip.Text = "工具列";
             // 
             // miMainToolStrip
@@ -710,7 +712,7 @@ namespace CBReader
             // miAbout
             // 
             this.miAbout.Name = "miAbout";
-            this.miAbout.Size = new System.Drawing.Size(53, 23);
+            this.miAbout.Size = new System.Drawing.Size(53, 26);
             this.miAbout.Text = "關於";
             this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
@@ -886,14 +888,14 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;
@@ -2010,9 +2012,9 @@ namespace CBReader
             // 
             this.panel11.Controls.Add(this.sgTextSearch);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel11.Location = new System.Drawing.Point(3, 181);
+            this.panel11.Location = new System.Drawing.Point(3, 240);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(350, 374);
+            this.panel11.Size = new System.Drawing.Size(350, 315);
             this.panel11.TabIndex = 3;
             // 
             // sgTextSearch
@@ -2040,7 +2042,7 @@ namespace CBReader
             this.sgTextSearch.RowHeadersWidth = 51;
             this.sgTextSearch.RowTemplate.Height = 27;
             this.sgTextSearch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.sgTextSearch.Size = new System.Drawing.Size(350, 374);
+            this.sgTextSearch.Size = new System.Drawing.Size(350, 315);
             this.sgTextSearch.TabIndex = 6;
             this.sgTextSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sgTextSearch_CellDoubleClick);
             this.sgTextSearch.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.sgTextSearch_CellMouseDown);
@@ -2191,7 +2193,7 @@ namespace CBReader
             // splitter4
             // 
             this.splitter4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter4.Location = new System.Drawing.Point(3, 178);
+            this.splitter4.Location = new System.Drawing.Point(3, 237);
             this.splitter4.Name = "splitter4";
             this.splitter4.Size = new System.Drawing.Size(350, 3);
             this.splitter4.TabIndex = 2;
@@ -2200,6 +2202,8 @@ namespace CBReader
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel10.Controls.Add(this.cbSearchPreList);
+            this.panel10.Controls.Add(this.cbSearchFindList);
             this.panel10.Controls.Add(this.cbSearchResulFile);
             this.panel10.Controls.Add(this.cbTextSearch);
             this.panel10.Controls.Add(this.edUnicode);
@@ -2214,7 +2218,7 @@ namespace CBReader
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel10.Location = new System.Drawing.Point(3, 3);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(350, 175);
+            this.panel10.Size = new System.Drawing.Size(350, 234);
             this.panel10.TabIndex = 1;
             // 
             // cbSearchResulFile
@@ -2257,7 +2261,7 @@ namespace CBReader
             // 
             this.btMainFuncNarrow2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btMainFuncNarrow2.Font = new System.Drawing.Font("細明體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btMainFuncNarrow2.Location = new System.Drawing.Point(289, 147);
+            this.btMainFuncNarrow2.Location = new System.Drawing.Point(289, 202);
             this.btMainFuncNarrow2.Name = "btMainFuncNarrow2";
             this.btMainFuncNarrow2.Size = new System.Drawing.Size(29, 25);
             this.btMainFuncNarrow2.TabIndex = 20;
@@ -2271,7 +2275,7 @@ namespace CBReader
             // 
             this.btMainFuncWide2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btMainFuncWide2.Font = new System.Drawing.Font("新細明體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btMainFuncWide2.Location = new System.Drawing.Point(318, 147);
+            this.btMainFuncWide2.Location = new System.Drawing.Point(318, 202);
             this.btMainFuncWide2.Name = "btMainFuncWide2";
             this.btMainFuncWide2.Size = new System.Drawing.Size(29, 25);
             this.btMainFuncWide2.TabIndex = 19;
@@ -2284,7 +2288,7 @@ namespace CBReader
             // lbSearchMsg
             // 
             this.lbSearchMsg.AutoSize = true;
-            this.lbSearchMsg.Location = new System.Drawing.Point(6, 145);
+            this.lbSearchMsg.Location = new System.Drawing.Point(6, 202);
             this.lbSearchMsg.Name = "lbSearchMsg";
             this.lbSearchMsg.Size = new System.Drawing.Size(94, 25);
             this.lbSearchMsg.TabIndex = 18;
@@ -2371,7 +2375,7 @@ namespace CBReader
             // cbSearchThisSutra
             // 
             this.cbSearchThisSutra.AutoSize = true;
-            this.cbSearchThisSutra.Location = new System.Drawing.Point(10, 113);
+            this.cbSearchThisSutra.Location = new System.Drawing.Point(10, 112);
             this.cbSearchThisSutra.Name = "cbSearchThisSutra";
             this.cbSearchThisSutra.Size = new System.Drawing.Size(134, 29);
             this.cbSearchThisSutra.TabIndex = 4;
@@ -2384,7 +2388,7 @@ namespace CBReader
             // cbSearchRange
             // 
             this.cbSearchRange.AutoSize = true;
-            this.cbSearchRange.Location = new System.Drawing.Point(10, 78);
+            this.cbSearchRange.Location = new System.Drawing.Point(10, 82);
             this.cbSearchRange.Name = "cbSearchRange";
             this.cbSearchRange.Size = new System.Drawing.Size(154, 29);
             this.cbSearchRange.TabIndex = 3;
@@ -2533,6 +2537,28 @@ namespace CBReader
             // saveSearchResultFileDialog
             // 
             this.saveSearchResultFileDialog.Filter = "Search Result Files (*.srf)|*.srf|All Files (*.*)|*.*";
+            // 
+            // cbSearchFindList
+            // 
+            this.cbSearchFindList.AutoSize = true;
+            this.cbSearchFindList.Location = new System.Drawing.Point(10, 142);
+            this.cbSearchFindList.Name = "cbSearchFindList";
+            this.cbSearchFindList.Size = new System.Drawing.Size(154, 29);
+            this.cbSearchFindList.TabIndex = 24;
+            this.cbSearchFindList.Text = "檢索查詢書目";
+            this.cbSearchFindList.UseVisualStyleBackColor = true;
+            this.cbSearchFindList.CheckedChanged += new System.EventHandler(this.cbSearchFindList_CheckedChanged);
+            // 
+            // cbSearchPreList
+            // 
+            this.cbSearchPreList.AutoSize = true;
+            this.cbSearchPreList.Location = new System.Drawing.Point(10, 172);
+            this.cbSearchPreList.Name = "cbSearchPreList";
+            this.cbSearchPreList.Size = new System.Drawing.Size(154, 29);
+            this.cbSearchPreList.TabIndex = 25;
+            this.cbSearchPreList.Text = "檢索前次結果";
+            this.cbSearchPreList.UseVisualStyleBackColor = true;
+            this.cbSearchPreList.CheckedChanged += new System.EventHandler(this.cbSearchPreList_CheckedChanged);
             // 
             // MainForm
             // 
@@ -2795,6 +2821,8 @@ namespace CBReader
         private System.Windows.Forms.ToolStripMenuItem miSaveSelectSutra;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem miDeleteSelectSutra;
+        private System.Windows.Forms.CheckBox cbSearchPreList;
+        private System.Windows.Forms.CheckBox cbSearchFindList;
     }
 }
 

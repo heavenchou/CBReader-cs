@@ -147,7 +147,7 @@ namespace CBReader
             this.llbCBETAEmail.Location = new System.Drawing.Point(16, 171);
             this.llbCBETAEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbCBETAEmail.Name = "llbCBETAEmail";
-            this.llbCBETAEmail.Size = new System.Drawing.Size(212, 25);
+            this.llbCBETAEmail.Size = new System.Drawing.Size(233, 25);
             this.llbCBETAEmail.TabIndex = 1;
             this.llbCBETAEmail.TabStop = true;
             this.llbCBETAEmail.Text = "📧 service@cbeta.org";
@@ -206,7 +206,7 @@ namespace CBReader
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(333, 25);
             this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "CBReader 2X  v0.9.4　2024-09-10";
+            this.lbTitle.Text = "CBReader 2X  v0.9.4　2024-09-12";
             // 
             // panel4
             // 
