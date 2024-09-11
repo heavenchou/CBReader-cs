@@ -2841,7 +2841,7 @@ namespace CBReader
         private void miSaveSearchResultFile_Click(object sender, EventArgs e)
         {
             if(searchResultFile.FileName == "") {
-                saveSearchResultFileDialog.FileName = cbTextSearch.Text + ".srf";
+                saveSearchResultFileDialog.FileName = FileNameNormalize(cbTextSearch.Text) + ".srf";
                 // 匯出
                 if (saveSearchResultFileDialog.ShowDialog() == DialogResult.OK) {
                     searchResultFile.FileName = saveSearchResultFileDialog.FileName;
@@ -2856,7 +2856,7 @@ namespace CBReader
 
         private void miSaveAsSearchResultFile_Click(object sender, EventArgs e)
         {
-            saveSearchResultFileDialog.FileName = cbTextSearch.Text + ".srf";
+            saveSearchResultFileDialog.FileName = FileNameNormalize(cbTextSearch.Text) + ".srf";
             // 匯出
             if (saveSearchResultFileDialog.ShowDialog() == DialogResult.OK) {
                 SaveSearchResultFile(saveSearchResultFileDialog.FileName);
@@ -2917,6 +2917,15 @@ namespace CBReader
                 mySearchResultFile.SaveToFile(saveSearchResultFileDialog.FileName);
                 MessageBox.Show("OK");
             }
+        }
+
+        // 檔名正規化，去除空格，特殊符號換成大寫
+        string FileNameNormalize(string filename)
+        {
+            filename = filename.Replace(" ", "");
+            filename = filename.Replace("*", "＊");
+            filename = filename.Replace("?", "？");
+            return filename;
         }
 
         // 處理全文檢索結果列表上，按下滑鼠右鍵的處理方式

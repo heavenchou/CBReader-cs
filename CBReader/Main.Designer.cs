@@ -2530,6 +2530,10 @@ namespace CBReader
             this.loadSearchResultFileDialog.DefaultExt = "srf";
             this.loadSearchResultFileDialog.Filter = "Search Result Files (*.srf)|*.srf|All Files (*.*)|*.*";
             // 
+            // saveSearchResultFileDialog
+            // 
+            this.saveSearchResultFileDialog.Filter = "Search Result Files (*.srf)|*.srf|All Files (*.*)|*.*";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
