@@ -99,7 +99,7 @@ namespace CBReader
 
         public void SaveToFile(string filename)
         {
-            using (StreamWriter sw = new StreamWriter(filename, false, Encoding.UTF8)) {
+            using (StreamWriter sw = new StreamWriter(filename, false, new UTF8Encoding(false))) {
                 sw.Write(ToString());
             }
         }

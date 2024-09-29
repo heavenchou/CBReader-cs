@@ -53,6 +53,7 @@ namespace CBReader
         static public string MyDesktopPath = "";  // 桌面目錄
         static public string MyBookmarkPath = "";  // 書籤目錄
         static public string MyBookmarkBackupPath = "";  // 書籤備份目錄
+        static public string MyUserDataPath = "";  // 個人資料目錄，主要用來放置 srf, slr 檔案
         static public string SettingFile = "";    // 設定檔
         static public string BookmarkFile = "";    // 書籤檔
         static public string BookmarkBackupFile = "";    // 書籤備份檔
@@ -118,6 +119,13 @@ namespace CBReader
             MyBookmarkBackupPath = MySettingPath + "Bookmark_Backup\\";
             if (!Directory.Exists(MyBookmarkBackupPath)) {
                 Directory.CreateDirectory(MyBookmarkBackupPath);
+            }
+
+            // 個人資料目錄
+
+            MyUserDataPath = MySettingPath + "User_Data\\";
+            if (!Directory.Exists(MyUserDataPath)) {
+                Directory.CreateDirectory(MyUserDataPath);
             }
 
             // 書籤檔

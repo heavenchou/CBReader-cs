@@ -320,6 +320,7 @@
     </Compile>
     <Compile Include="RendAttr.cs" />
     <Compile Include="ScreenDPIHelper.cs" />
+    <Compile Include="SearchLimitedRange.cs" />
     <Compile Include="SearchRange.cs">
       <SubType>Form</SubType>
     </Compile>

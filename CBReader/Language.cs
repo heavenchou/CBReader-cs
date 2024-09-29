@@ -141,6 +141,8 @@ namespace CBReader
 
         }
 
+
+
         // 取得語系檔所有 [Messages] Section 裡面的資料, 放到 Messages 裡面
         void GetAllMessages()
         {
@@ -493,6 +495,19 @@ namespace CBReader
                 controlName = UserIniFile.ReadString(formName, $"{listViewName}Column{i + 1}", controlName);
                 if (controlName != "") {
                     items[i].Text = controlName;
+                }
+            }
+        }
+
+        // 處理 ContextMenuStrip 語系
+        public void ContextMenuStripLanguage(string langName, Form form, ContextMenuStrip cms)
+        {
+            string formName = form.Name;
+            foreach (var i in cms.Items) {
+                if (i is ToolStripMenuItem item) {
+                    string controlName = IniFile.ReadString(formName, $"{item.Name}", item.Text);
+                    controlName = UserIniFile.ReadString(formName, $"{item.Name}", controlName);
+                    item.Text = controlName;
                 }
             }
         }

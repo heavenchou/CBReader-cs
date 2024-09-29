@@ -42,6 +42,8 @@ namespace CBReader
 
             public Color TreeViewBack;
             public Color TreeViewText;
+            public Color TreeViewCheckedBack;
+            public Color TreeViewMixBack;
 
             public Color DataGridViewBack;
             public Color DataGridViewText;
@@ -65,8 +67,8 @@ namespace CBReader
             public Color ToolStripBack;
         }
 
-        myColors darkColors;
-        myColors lightColors;
+        public myColors darkColors;
+        public myColors lightColors;
 
         public Theme() // 建構函式, 傳入語系檔目錄
         {
@@ -92,6 +94,8 @@ namespace CBReader
 
             lightColors.TreeViewBack = SystemColors.Window;
             lightColors.TreeViewText = SystemColors.WindowText;
+            lightColors.TreeViewCheckedBack = Color.LightBlue;
+            lightColors.TreeViewMixBack = Color.LightGray;
 
             lightColors.DataGridViewBack = SystemColors.AppWorkspace;
             lightColors.DataGridViewText = SystemColors.WindowText;
@@ -131,6 +135,8 @@ namespace CBReader
 
             darkColors.TreeViewBack = Color.FromArgb(30, 30, 30);
             darkColors.TreeViewText = Color.FromArgb(220, 220, 220);
+            darkColors.TreeViewCheckedBack = Color.Blue;
+            darkColors.TreeViewMixBack = Color.DimGray;
 
             darkColors.DataGridViewBack = Color.FromArgb(50, 50, 50);
             darkColors.DataGridViewText = Color.FromArgb(220, 220, 220);
@@ -230,6 +236,9 @@ namespace CBReader
                 }
                 if (c.ForeColor == oldColors.TreeViewText) {
                     c.ForeColor = newColors.TreeViewText;
+                }
+                if (formName == "SearchRangeForm" && (c as TreeView).Name == "tvSutra") {
+                    EachTreeviewNodes((c as TreeView).Nodes);
                 }
             } else if (c is ListView) {
                 if (c.BackColor == oldColors.TreeViewBack) {
@@ -335,6 +344,30 @@ namespace CBReader
                     }
                 }
             }
+        }
+
+        void EachTreeviewNodes(TreeNodeCollection nodes)
+        {
+                foreach (TreeNode node in nodes) {
+                    if (IsDarkMode) {
+                        if ((int)node.Tag == 1) {   // checked
+                            node.BackColor = darkColors.TreeViewCheckedBack;
+                        } else if ((int)node.Tag == 2) {    // mix
+                            node.BackColor = darkColors.TreeViewMixBack;
+                        }
+                    } else {
+                        if ((int)node.Tag == 1) {
+                            node.BackColor = lightColors.TreeViewCheckedBack;
+                        } else if ((int)node.Tag == 2) {
+                            node.BackColor = lightColors.TreeViewMixBack;
+                        }
+                    }
+
+                    if (node.Nodes.Count > 0) {
+                        EachTreeviewNodes(node.Nodes);
+                    }
+                }
+            
         }
 
         // 更新選單的語系

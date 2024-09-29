@@ -126,8 +126,18 @@ namespace Monster
 			}
 		}
 
-		// 檢索這一冊的這些經
-		public void SearchThisVol(string sBook, int iVolNum, int iStartSutra = 0, int iEndSutra = 0)   
+        // 檢索這一經 T0001
+        public void SearchThisSutraId(string sSutraId)
+        {
+            for (int i = 0; i < FileCount; i++) {
+                if (Book[i] + SutraNum[i] == sSutraId) {
+                    SearchMe[i] = true;
+                }
+            }
+        }
+
+        // 檢索這一冊的這些經
+        public void SearchThisVol(string sBook, int iVolNum, int iStartSutra = 0, int iEndSutra = 0)   
         {
 			if(iEndSutra == 0) {
 				iEndSutra = iStartSutra;

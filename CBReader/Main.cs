@@ -351,6 +351,9 @@ namespace CBReader
         {
             if (language.FileNames.ContainsKey(langName)) {
                 language.ChangeLanguage(langName, this, optionForm, searchrangeForm, updateForm, aboutForm, bookmarkForm, bookmarkEditorForm, bookmarkFolderEditorForm);
+                // 處理 ContextMenuStrip 語系
+                language.ContextMenuStripLanguage(langName, this, cmSearchResultFile);
+
                 // 調整 mainForm 按鈕位置，以適應不同語言。
                 resizeComponent();
             }
@@ -2777,6 +2780,10 @@ namespace CBReader
         // 載入 Search Result File
         private void miLoadSearchResultFile_Click(object sender, EventArgs e)
         {
+            // 設定預設目錄
+            if (loadSearchResultFileDialog.InitialDirectory == "") {
+                loadSearchResultFileDialog.InitialDirectory = CGlobalVal.MyUserDataPath;
+            }
             if (loadSearchResultFileDialog.ShowDialog() == DialogResult.OK) {
                 // 檢查是新版或舊版
                 byte[] fileBytes = File.ReadAllBytes(loadSearchResultFileDialog.FileName);
@@ -2862,7 +2869,7 @@ namespace CBReader
         // 處理新版的 Search Result File 格式
         void LoadNewVersionSearchResultFile(string fileName)
         {
-            string json = File.ReadAllText(loadSearchResultFileDialog.FileName);
+            string json = File.ReadAllText(fileName);
             
             SearchResultFile newSRF;
             newSRF = JsonSerializer.Deserialize<SearchResultFile>(json);
@@ -2901,6 +2908,10 @@ namespace CBReader
         {
             if(searchResultFile.FileName == "") {
                 saveSearchResultFileDialog.FileName = FileNameNormalize(cbTextSearch.Text) + ".srf";
+                // 設定預設目錄
+                if(saveSearchResultFileDialog.InitialDirectory == "") {
+                    saveSearchResultFileDialog.InitialDirectory = CGlobalVal.MyUserDataPath;
+                }
                 // 匯出
                 if (saveSearchResultFileDialog.ShowDialog() == DialogResult.OK) {
                     searchResultFile.FileName = saveSearchResultFileDialog.FileName;
@@ -2916,6 +2927,10 @@ namespace CBReader
         private void miSaveAsSearchResultFile_Click(object sender, EventArgs e)
         {
             saveSearchResultFileDialog.FileName = FileNameNormalize(cbTextSearch.Text) + ".srf";
+            // 設定預設目錄
+            if (saveSearchResultFileDialog.InitialDirectory == "") {
+                saveSearchResultFileDialog.InitialDirectory = CGlobalVal.MyUserDataPath;
+            }
             // 匯出
             if (saveSearchResultFileDialog.ShowDialog() == DialogResult.OK) {
                 SaveSearchResultFile(saveSearchResultFileDialog.FileName);
@@ -2970,7 +2985,10 @@ namespace CBReader
             }
 
             saveSearchResultFileDialog.FileName = cbTextSearch.Text + ".srf";
-
+            // 設定預設目錄
+            if (saveSearchResultFileDialog.InitialDirectory == "") {
+                saveSearchResultFileDialog.InitialDirectory = CGlobalVal.MyUserDataPath;
+            }
             // 匯出
             if (saveSearchResultFileDialog.ShowDialog() == DialogResult.OK) {
                 mySearchResultFile.SaveToFile(saveSearchResultFileDialog.FileName);
@@ -3050,6 +3068,11 @@ namespace CBReader
                 // 然後從 DataGridView 中移除該行
                 sgTextSearch.Rows.RemoveAt(selectedRow.Index);
             }
+        }
+
+        private void btSearchListMenu_Click(object sender, EventArgs e)
+        {
+            cmSearchResultFile.Show(btSearchListMenu, 0, btSearchListMenu.Height + 2);
         }
     }
 }
