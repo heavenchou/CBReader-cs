@@ -409,7 +409,7 @@ namespace CBReader
         .linehead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';font-style:normal;}
         .parahead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';font-style:normal;}
         .pts_head {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';font-style:normal;}
-        .lg {color:#008040; font-size:21px;}
+        .lg {color:#008040;}
         .corr {color:#FF0000; }
         .note {color:#9F5000; font-size:18px;}
         .note-focus {background-color:lightpink;}
