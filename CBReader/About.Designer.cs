@@ -90,6 +90,7 @@ namespace CBReader
             // 
             // panel5
             // 
+            this.panel5.BackColor = System.Drawing.SystemColors.Control;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel5.Controls.Add(this.llbDonate);
             this.panel5.Controls.Add(this.label4);
@@ -109,6 +110,7 @@ namespace CBReader
             // llbDonate
             // 
             this.llbDonate.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.llbDonate.LinkColor = System.Drawing.Color.DodgerBlue;
             this.llbDonate.Location = new System.Drawing.Point(252, 171);
             this.llbDonate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbDonate.Name = "llbDonate";
@@ -132,6 +134,7 @@ namespace CBReader
             // llbCBETAWeb
             // 
             this.llbCBETAWeb.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.llbCBETAWeb.LinkColor = System.Drawing.Color.DodgerBlue;
             this.llbCBETAWeb.Location = new System.Drawing.Point(16, 137);
             this.llbCBETAWeb.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbCBETAWeb.Name = "llbCBETAWeb";
@@ -144,6 +147,7 @@ namespace CBReader
             // llbCBETAEmail
             // 
             this.llbCBETAEmail.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.llbCBETAEmail.LinkColor = System.Drawing.Color.DodgerBlue;
             this.llbCBETAEmail.Location = new System.Drawing.Point(16, 171);
             this.llbCBETAEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbCBETAEmail.Name = "llbCBETAEmail";
@@ -206,7 +210,7 @@ namespace CBReader
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(333, 25);
             this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "CBReader 2X  v0.9.4　2024-09-20";
+            this.lbTitle.Text = "CBReader 2X  v0.9.4　2024-10-07";
             // 
             // panel4
             // 

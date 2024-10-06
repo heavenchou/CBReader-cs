@@ -410,6 +410,7 @@ namespace CBReader
         .parahead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';font-style:normal;}
         .pts_head {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';font-style:normal;}
         .lg {color:#008040;}
+        .entry .form {font-weight: bold;}
         .corr {color:#FF0000; }
         .note {color:#9F5000; font-size:18px;}
         .note-focus {background-color:lightpink;}
@@ -597,8 +598,9 @@ namespace CBReader
                 else if(sTagName == "biblScope") { sHtml = tagBiblScope(node); }
                 else if(sTagName == "byline") { sHtml = tagByline(node); }
                 else if(sTagName == "caesura") { sHtml = tagCaesura(node); }
-                else if(sTagName == "cell") { sHtml = tagCell(node); }
-                else if(sTagName == "cb:div") { sHtml = tagDiv(node); }
+                else if(sTagName == "cell") { sHtml = tagCell(node); } 
+                else if (sTagName == "cb:def") { sHtml = tagDef(node); } 
+                else if (sTagName == "cb:div") { sHtml = tagDiv(node); } 
                 else if(sTagName == "cb:docNumber") { sHtml = tagDocNumber(node); }
                 else if(sTagName == "entry") { sHtml = tagEntry(node); }
                 else if(sTagName == "figDesc") { sHtml = tagFigdesc(node); }
@@ -991,6 +993,28 @@ namespace CBReader
             return sHtml;
         }
 
+        // <entry><form>...</form><cb:def>...</cb:def></entry>
+        string tagDef(XmlNode node)
+        {
+            string sHtml = "";
+
+            if (Setting.ShowLineFormat) {
+                sHtml += "<span class='def' data-tagname='div'>";
+            } else {
+                sHtml += "<div class='def' data-tagname='div'>";
+            }
+
+            sHtml += parseChild(node); // 處理內容
+
+            if (Setting.ShowLineFormat) {
+                sHtml += "</span>";
+            } else {
+                sHtml += "</div>";
+            }
+
+            return sHtml;
+        }
+
         // 附文: <cb:div type="w"><p xml:id="pT02p0029b2201"><anchor xml:id="nkr_note_orig_0029009" n="0029009"/>
         // 序: <cb:div type="xu"><cb:mulu level="1" type="序">序</cb:mulu><anchor xml:id="nkr_note_orig_0001001" n="0001001"/><head><title>長阿含經</title>序</head>
         string tagDiv(XmlNode node)
@@ -1235,11 +1259,11 @@ namespace CBReader
         {
             string sHtml = "";
             if (Setting.ShowLineFormat) {
-                sHtml = "<span data-tagname='p'>";
+                sHtml = "<span class='form' data-tagname='p'>";
                 sHtml += parseChild(node); // 處理內容
                 sHtml += "</span>";
             } else {
-                sHtml = "<p data-tagname='p'>";
+                sHtml = "<p class='form' data-tagname='p'>";
                 sHtml += parseChild(node); // 處理內容
                 sHtml += "</p>";
             }
