@@ -28,54 +28,54 @@ namespace CBReader
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode241 = new System.Windows.Forms.TreeNode("阿含部類");
-            System.Windows.Forms.TreeNode treeNode242 = new System.Windows.Forms.TreeNode("本緣部類");
-            System.Windows.Forms.TreeNode treeNode243 = new System.Windows.Forms.TreeNode("般若部類");
-            System.Windows.Forms.TreeNode treeNode244 = new System.Windows.Forms.TreeNode("法華部類");
-            System.Windows.Forms.TreeNode treeNode245 = new System.Windows.Forms.TreeNode("華嚴部類");
-            System.Windows.Forms.TreeNode treeNode246 = new System.Windows.Forms.TreeNode("寶積部類");
-            System.Windows.Forms.TreeNode treeNode247 = new System.Windows.Forms.TreeNode("涅槃部類");
-            System.Windows.Forms.TreeNode treeNode248 = new System.Windows.Forms.TreeNode("大集部類");
-            System.Windows.Forms.TreeNode treeNode249 = new System.Windows.Forms.TreeNode("經集部類");
-            System.Windows.Forms.TreeNode treeNode250 = new System.Windows.Forms.TreeNode("密教部類");
-            System.Windows.Forms.TreeNode treeNode251 = new System.Windows.Forms.TreeNode("律部類");
-            System.Windows.Forms.TreeNode treeNode252 = new System.Windows.Forms.TreeNode("毘曇部類");
-            System.Windows.Forms.TreeNode treeNode253 = new System.Windows.Forms.TreeNode("中觀部類");
-            System.Windows.Forms.TreeNode treeNode254 = new System.Windows.Forms.TreeNode("瑜伽部類");
-            System.Windows.Forms.TreeNode treeNode255 = new System.Windows.Forms.TreeNode("論集部類");
-            System.Windows.Forms.TreeNode treeNode256 = new System.Windows.Forms.TreeNode("淨土宗部類");
-            System.Windows.Forms.TreeNode treeNode257 = new System.Windows.Forms.TreeNode("禪宗部類");
-            System.Windows.Forms.TreeNode treeNode258 = new System.Windows.Forms.TreeNode("史傳部類");
-            System.Windows.Forms.TreeNode treeNode259 = new System.Windows.Forms.TreeNode("事彙部類");
-            System.Windows.Forms.TreeNode treeNode260 = new System.Windows.Forms.TreeNode("敦煌寫本部類");
-            System.Windows.Forms.TreeNode treeNode261 = new System.Windows.Forms.TreeNode("國圖善本部類");
-            System.Windows.Forms.TreeNode treeNode262 = new System.Windows.Forms.TreeNode("南傳大藏經部類");
-            System.Windows.Forms.TreeNode treeNode263 = new System.Windows.Forms.TreeNode("新編部類");
-            System.Windows.Forms.TreeNode treeNode264 = new System.Windows.Forms.TreeNode("T 大正新脩大藏經");
-            System.Windows.Forms.TreeNode treeNode265 = new System.Windows.Forms.TreeNode("X 卍新纂大日本續藏經");
-            System.Windows.Forms.TreeNode treeNode266 = new System.Windows.Forms.TreeNode("A 趙城金藏");
-            System.Windows.Forms.TreeNode treeNode267 = new System.Windows.Forms.TreeNode("B 大藏經補編");
-            System.Windows.Forms.TreeNode treeNode268 = new System.Windows.Forms.TreeNode("C 中華大藏經（中華書局版）");
-            System.Windows.Forms.TreeNode treeNode269 = new System.Windows.Forms.TreeNode("CC CBETA 選集");
-            System.Windows.Forms.TreeNode treeNode270 = new System.Windows.Forms.TreeNode("D 國家圖書館善本佛典");
-            System.Windows.Forms.TreeNode treeNode271 = new System.Windows.Forms.TreeNode("F 房山石經");
-            System.Windows.Forms.TreeNode treeNode272 = new System.Windows.Forms.TreeNode("G 佛教大藏經");
-            System.Windows.Forms.TreeNode treeNode273 = new System.Windows.Forms.TreeNode("GA 中國佛寺史志彙刊");
-            System.Windows.Forms.TreeNode treeNode274 = new System.Windows.Forms.TreeNode("GB 中國佛寺志叢刊");
-            System.Windows.Forms.TreeNode treeNode275 = new System.Windows.Forms.TreeNode("I 北朝佛教石刻拓片百品");
-            System.Windows.Forms.TreeNode treeNode276 = new System.Windows.Forms.TreeNode("J 嘉興大藏經（新文豐版）");
-            System.Windows.Forms.TreeNode treeNode277 = new System.Windows.Forms.TreeNode("K 高麗大藏經（新文豐版）");
-            System.Windows.Forms.TreeNode treeNode278 = new System.Windows.Forms.TreeNode("L 乾隆大藏經（新文豐版）");
-            System.Windows.Forms.TreeNode treeNode279 = new System.Windows.Forms.TreeNode("LC 呂澂佛學著作集");
-            System.Windows.Forms.TreeNode treeNode280 = new System.Windows.Forms.TreeNode("M 卍正藏經（新文豐版）");
-            System.Windows.Forms.TreeNode treeNode281 = new System.Windows.Forms.TreeNode("N 漢譯南傳大藏經（元亨寺版）");
-            System.Windows.Forms.TreeNode treeNode282 = new System.Windows.Forms.TreeNode("P 永樂北藏");
-            System.Windows.Forms.TreeNode treeNode283 = new System.Windows.Forms.TreeNode("S 宋藏遺珍（新文豐版）");
-            System.Windows.Forms.TreeNode treeNode284 = new System.Windows.Forms.TreeNode("TX 太虛大師全書");
-            System.Windows.Forms.TreeNode treeNode285 = new System.Windows.Forms.TreeNode("U 洪武南藏");
-            System.Windows.Forms.TreeNode treeNode286 = new System.Windows.Forms.TreeNode("Y 印順法師佛學著作集");
-            System.Windows.Forms.TreeNode treeNode287 = new System.Windows.Forms.TreeNode("ZS 正史佛教資料類編");
-            System.Windows.Forms.TreeNode treeNode288 = new System.Windows.Forms.TreeNode("ZW 藏外佛教文獻");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("阿含部類");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("本緣部類");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("般若部類");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("法華部類");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("華嚴部類");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("寶積部類");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("涅槃部類");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("大集部類");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("經集部類");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("密教部類");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("律部類");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("毘曇部類");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("中觀部類");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("瑜伽部類");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("論集部類");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("淨土宗部類");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("禪宗部類");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("史傳部類");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("事彙部類");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("敦煌寫本部類");
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("國圖善本部類");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("南傳大藏經部類");
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("新編部類");
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("T 大正新脩大藏經");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("X 卍新纂大日本續藏經");
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("A 趙城金藏");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("B 大藏經補編");
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("C 中華大藏經（中華書局版）");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("CC CBETA 選集");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("D 國家圖書館善本佛典");
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("F 房山石經");
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("G 佛教大藏經");
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("GA 中國佛寺史志彙刊");
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("GB 中國佛寺志叢刊");
+            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("I 北朝佛教石刻拓片百品");
+            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("J 嘉興大藏經（新文豐版）");
+            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("K 高麗大藏經（新文豐版）");
+            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("L 乾隆大藏經（新文豐版）");
+            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("LC 呂澂佛學著作集");
+            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("M 卍正藏經（新文豐版）");
+            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("N 漢譯南傳大藏經（元亨寺版）");
+            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("P 永樂北藏");
+            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("S 宋藏遺珍（新文豐版）");
+            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("TX 太虛大師全書");
+            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("U 洪武南藏");
+            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Y 印順法師佛學著作集");
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("ZS 正史佛教資料類編");
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("ZW 藏外佛教文獻");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchRangeForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.listBox = new System.Windows.Forms.ListBox();
@@ -278,76 +278,76 @@ namespace CBReader
             this.tvBulei.Location = new System.Drawing.Point(10, 10);
             this.tvBulei.Margin = new System.Windows.Forms.Padding(5);
             this.tvBulei.Name = "tvBulei";
-            treeNode241.Name = "Node0";
-            treeNode241.Text = "阿含部類";
-            treeNode242.Name = "Node1";
-            treeNode242.Text = "本緣部類";
-            treeNode243.Name = "Node2";
-            treeNode243.Text = "般若部類";
-            treeNode244.Name = "Node3";
-            treeNode244.Text = "法華部類";
-            treeNode245.Name = "Node4";
-            treeNode245.Text = "華嚴部類";
-            treeNode246.Name = "Node5";
-            treeNode246.Text = "寶積部類";
-            treeNode247.Name = "Node6";
-            treeNode247.Text = "涅槃部類";
-            treeNode248.Name = "Node7";
-            treeNode248.Text = "大集部類";
-            treeNode249.Name = "Node8";
-            treeNode249.Text = "經集部類";
-            treeNode250.Name = "Node9";
-            treeNode250.Text = "密教部類";
-            treeNode251.Name = "Node10";
-            treeNode251.Text = "律部類";
-            treeNode252.Name = "Node11";
-            treeNode252.Text = "毘曇部類";
-            treeNode253.Name = "Node12";
-            treeNode253.Text = "中觀部類";
-            treeNode254.Name = "Node13";
-            treeNode254.Text = "瑜伽部類";
-            treeNode255.Name = "Node14";
-            treeNode255.Text = "論集部類";
-            treeNode256.Name = "Node15";
-            treeNode256.Text = "淨土宗部類";
-            treeNode257.Name = "Node16";
-            treeNode257.Text = "禪宗部類";
-            treeNode258.Name = "Node17";
-            treeNode258.Text = "史傳部類";
-            treeNode259.Name = "Node18";
-            treeNode259.Text = "事彙部類";
-            treeNode260.Name = "Node19";
-            treeNode260.Text = "敦煌寫本部類";
-            treeNode261.Name = "Node20";
-            treeNode261.Text = "國圖善本部類";
-            treeNode262.Name = "Node21";
-            treeNode262.Text = "南傳大藏經部類";
-            treeNode263.Name = "Node22";
-            treeNode263.Text = "新編部類";
+            treeNode1.Name = "Node0";
+            treeNode1.Text = "阿含部類";
+            treeNode2.Name = "Node1";
+            treeNode2.Text = "本緣部類";
+            treeNode3.Name = "Node2";
+            treeNode3.Text = "般若部類";
+            treeNode4.Name = "Node3";
+            treeNode4.Text = "法華部類";
+            treeNode5.Name = "Node4";
+            treeNode5.Text = "華嚴部類";
+            treeNode6.Name = "Node5";
+            treeNode6.Text = "寶積部類";
+            treeNode7.Name = "Node6";
+            treeNode7.Text = "涅槃部類";
+            treeNode8.Name = "Node7";
+            treeNode8.Text = "大集部類";
+            treeNode9.Name = "Node8";
+            treeNode9.Text = "經集部類";
+            treeNode10.Name = "Node9";
+            treeNode10.Text = "密教部類";
+            treeNode11.Name = "Node10";
+            treeNode11.Text = "律部類";
+            treeNode12.Name = "Node11";
+            treeNode12.Text = "毘曇部類";
+            treeNode13.Name = "Node12";
+            treeNode13.Text = "中觀部類";
+            treeNode14.Name = "Node13";
+            treeNode14.Text = "瑜伽部類";
+            treeNode15.Name = "Node14";
+            treeNode15.Text = "論集部類";
+            treeNode16.Name = "Node15";
+            treeNode16.Text = "淨土宗部類";
+            treeNode17.Name = "Node16";
+            treeNode17.Text = "禪宗部類";
+            treeNode18.Name = "Node17";
+            treeNode18.Text = "史傳部類";
+            treeNode19.Name = "Node18";
+            treeNode19.Text = "事彙部類";
+            treeNode20.Name = "Node19";
+            treeNode20.Text = "敦煌寫本部類";
+            treeNode21.Name = "Node20";
+            treeNode21.Text = "國圖善本部類";
+            treeNode22.Name = "Node21";
+            treeNode22.Text = "南傳大藏經部類";
+            treeNode23.Name = "Node22";
+            treeNode23.Text = "新編部類";
             this.tvBulei.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode241,
-            treeNode242,
-            treeNode243,
-            treeNode244,
-            treeNode245,
-            treeNode246,
-            treeNode247,
-            treeNode248,
-            treeNode249,
-            treeNode250,
-            treeNode251,
-            treeNode252,
-            treeNode253,
-            treeNode254,
-            treeNode255,
-            treeNode256,
-            treeNode257,
-            treeNode258,
-            treeNode259,
-            treeNode260,
-            treeNode261,
-            treeNode262,
-            treeNode263});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12,
+            treeNode13,
+            treeNode14,
+            treeNode15,
+            treeNode16,
+            treeNode17,
+            treeNode18,
+            treeNode19,
+            treeNode20,
+            treeNode21,
+            treeNode22,
+            treeNode23});
             this.tvBulei.ShowLines = false;
             this.tvBulei.Size = new System.Drawing.Size(407, 686);
             this.tvBulei.TabIndex = 2;
@@ -375,82 +375,82 @@ namespace CBReader
             this.tvBook.Location = new System.Drawing.Point(10, 10);
             this.tvBook.Margin = new System.Windows.Forms.Padding(5);
             this.tvBook.Name = "tvBook";
-            treeNode264.Name = "Node1";
-            treeNode264.Text = "T 大正新脩大藏經";
-            treeNode265.Name = "Node2";
-            treeNode265.Text = "X 卍新纂大日本續藏經";
-            treeNode266.Name = "Node3";
-            treeNode266.Text = "A 趙城金藏";
-            treeNode267.Name = "Node4";
-            treeNode267.Text = "B 大藏經補編";
-            treeNode268.Name = "Node5";
-            treeNode268.Text = "C 中華大藏經（中華書局版）";
-            treeNode269.Name = "Node0";
-            treeNode269.Text = "CC CBETA 選集";
-            treeNode270.Name = "Node6";
-            treeNode270.Text = "D 國家圖書館善本佛典";
-            treeNode271.Name = "Node7";
-            treeNode271.Text = "F 房山石經";
-            treeNode272.Name = "Node8";
-            treeNode272.Text = "G 佛教大藏經";
-            treeNode273.Name = "Node9";
-            treeNode273.Text = "GA 中國佛寺史志彙刊";
-            treeNode274.Name = "Node10";
-            treeNode274.Text = "GB 中國佛寺志叢刊";
-            treeNode275.Name = "Node11";
-            treeNode275.Text = "I 北朝佛教石刻拓片百品";
-            treeNode276.Name = "Node12";
-            treeNode276.Text = "J 嘉興大藏經（新文豐版）";
-            treeNode277.Name = "Node13";
-            treeNode277.Text = "K 高麗大藏經（新文豐版）";
-            treeNode278.Name = "Node14";
-            treeNode278.Text = "L 乾隆大藏經（新文豐版）";
-            treeNode279.Name = "Node15";
-            treeNode279.Text = "LC 呂澂佛學著作集";
-            treeNode280.Name = "Node16";
-            treeNode280.Text = "M 卍正藏經（新文豐版）";
-            treeNode281.Name = "Node17";
-            treeNode281.Text = "N 漢譯南傳大藏經（元亨寺版）";
-            treeNode282.Name = "Node18";
-            treeNode282.Text = "P 永樂北藏";
-            treeNode283.Name = "Node19";
-            treeNode283.Text = "S 宋藏遺珍（新文豐版）";
-            treeNode284.Name = "Node20";
-            treeNode284.Text = "TX 太虛大師全書";
-            treeNode285.Name = "Node21";
-            treeNode285.Text = "U 洪武南藏";
-            treeNode286.Name = "Node22";
-            treeNode286.Text = "Y 印順法師佛學著作集";
-            treeNode287.Name = "Node23";
-            treeNode287.Text = "ZS 正史佛教資料類編";
-            treeNode288.Name = "Node24";
-            treeNode288.Text = "ZW 藏外佛教文獻";
+            treeNode24.Name = "Node1";
+            treeNode24.Text = "T 大正新脩大藏經";
+            treeNode25.Name = "Node2";
+            treeNode25.Text = "X 卍新纂大日本續藏經";
+            treeNode26.Name = "Node3";
+            treeNode26.Text = "A 趙城金藏";
+            treeNode27.Name = "Node4";
+            treeNode27.Text = "B 大藏經補編";
+            treeNode28.Name = "Node5";
+            treeNode28.Text = "C 中華大藏經（中華書局版）";
+            treeNode29.Name = "Node0";
+            treeNode29.Text = "CC CBETA 選集";
+            treeNode30.Name = "Node6";
+            treeNode30.Text = "D 國家圖書館善本佛典";
+            treeNode31.Name = "Node7";
+            treeNode31.Text = "F 房山石經";
+            treeNode32.Name = "Node8";
+            treeNode32.Text = "G 佛教大藏經";
+            treeNode33.Name = "Node9";
+            treeNode33.Text = "GA 中國佛寺史志彙刊";
+            treeNode34.Name = "Node10";
+            treeNode34.Text = "GB 中國佛寺志叢刊";
+            treeNode35.Name = "Node11";
+            treeNode35.Text = "I 北朝佛教石刻拓片百品";
+            treeNode36.Name = "Node12";
+            treeNode36.Text = "J 嘉興大藏經（新文豐版）";
+            treeNode37.Name = "Node13";
+            treeNode37.Text = "K 高麗大藏經（新文豐版）";
+            treeNode38.Name = "Node14";
+            treeNode38.Text = "L 乾隆大藏經（新文豐版）";
+            treeNode39.Name = "Node15";
+            treeNode39.Text = "LC 呂澂佛學著作集";
+            treeNode40.Name = "Node16";
+            treeNode40.Text = "M 卍正藏經（新文豐版）";
+            treeNode41.Name = "Node17";
+            treeNode41.Text = "N 漢譯南傳大藏經（元亨寺版）";
+            treeNode42.Name = "Node18";
+            treeNode42.Text = "P 永樂北藏";
+            treeNode43.Name = "Node19";
+            treeNode43.Text = "S 宋藏遺珍（新文豐版）";
+            treeNode44.Name = "Node20";
+            treeNode44.Text = "TX 太虛大師全書";
+            treeNode45.Name = "Node21";
+            treeNode45.Text = "U 洪武南藏";
+            treeNode46.Name = "Node22";
+            treeNode46.Text = "Y 印順法師佛學著作集";
+            treeNode47.Name = "Node23";
+            treeNode47.Text = "ZS 正史佛教資料類編";
+            treeNode48.Name = "Node24";
+            treeNode48.Text = "ZW 藏外佛教文獻";
             this.tvBook.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode264,
-            treeNode265,
-            treeNode266,
-            treeNode267,
-            treeNode268,
-            treeNode269,
-            treeNode270,
-            treeNode271,
-            treeNode272,
-            treeNode273,
-            treeNode274,
-            treeNode275,
-            treeNode276,
-            treeNode277,
-            treeNode278,
-            treeNode279,
-            treeNode280,
-            treeNode281,
-            treeNode282,
-            treeNode283,
-            treeNode284,
-            treeNode285,
-            treeNode286,
-            treeNode287,
-            treeNode288});
+            treeNode24,
+            treeNode25,
+            treeNode26,
+            treeNode27,
+            treeNode28,
+            treeNode29,
+            treeNode30,
+            treeNode31,
+            treeNode32,
+            treeNode33,
+            treeNode34,
+            treeNode35,
+            treeNode36,
+            treeNode37,
+            treeNode38,
+            treeNode39,
+            treeNode40,
+            treeNode41,
+            treeNode42,
+            treeNode43,
+            treeNode44,
+            treeNode45,
+            treeNode46,
+            treeNode47,
+            treeNode48});
             this.tvBook.ShowLines = false;
             this.tvBook.Size = new System.Drawing.Size(407, 706);
             this.tvBook.TabIndex = 3;
@@ -472,12 +472,12 @@ namespace CBReader
             // 
             // tvSutra
             // 
-            this.tvSutra.CheckBoxes = true;
             this.tvSutra.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.tvSutra.Location = new System.Drawing.Point(3, 6);
             this.tvSutra.Name = "tvSutra";
             this.tvSutra.Size = new System.Drawing.Size(420, 714);
             this.tvSutra.TabIndex = 0;
+            this.tvSutra.Tag = "han";
             this.tvSutra.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvSutra_AfterCheck);
             this.tvSutra.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.tvSutra_DrawNode);
             this.tvSutra.VisibleChanged += new System.EventHandler(this.tvSutra_VisibleChanged);

@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 //using System.Windows;
 using System.Windows.Forms;
@@ -76,7 +77,7 @@ namespace CBReader
                     }
                 }
             } catch (Exception ex) {
-                MessageBox.Show("載入 JSON 檔案時發生錯誤：" + ex.Message);
+                MessageBox.Show(t("載入 JSON 檔案時發生錯誤：","04005") + ex.Message, "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -115,8 +116,6 @@ namespace CBReader
             }
             e.Node.BackColor = Color.Empty;
             // Redraw the node to reflect the new state
-            // 後來發現可以不用寫，也會觸發重繪節點
-            // tvSutra.Invalidate(e.Node.Bounds);
 
             // 避免重入，當節點變化時阻止其他操作
             if (e.Action != TreeViewAction.Unknown) {
@@ -125,6 +124,11 @@ namespace CBReader
                 // 然後向上處理父節點的勾選狀態
                 UpdateParentNodes(e.Node);
             }
+            // 觸發重繪節點，範圍包括 checkbox （要向左 15 個px，否則 checkbox 不會即時更新）
+            Rectangle bounds = e.Node.Bounds;
+            bounds.X -= 15;
+            bounds.Width += 15;
+            tvSutra.Invalidate(bounds);
         }
 
         // 設置子節點的勾選狀態
@@ -173,12 +177,13 @@ namespace CBReader
                 childNode.Parent.Tag = NodeCheckState.Mix;
                 //childNode.Parent.BackColor = themeColor.TreeViewMixBack; // 部分子節點勾選，設置父節點為中間狀態
             }
-
             // 後來發現可以不用寫，也會觸發重繪節點
-            // tvSutra.Invalidate(childNode.Bounds);
-            
+            //tvSutra.Invalidate(childNode.Bounds);
+
             // 向上遞迴處理父節點
             UpdateParentNodes(childNode.Parent);
+            // 後來發現可以不用寫，也會觸發重繪節點
+            //tvSutra.Invalidate(childNode.Bounds);
         }
 
         // 處理部類
@@ -437,7 +442,7 @@ namespace CBReader
                     if (readText[1].Contains("ActivePage") && readText[1].Contains("tsSearchByBuleiSingle")) {
                         LoadOldVersionSearchLimitedRangeFile(readText);
                     } else {
-                        MessageBox.Show(t("舊版 slr 格式不支援。", "04001"));
+                        MessageBox.Show(t("舊版格式不支援，有需要者請聯絡CBETA。", "04001"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 } else {
                     // 新版 Search Limited Range File 格式
@@ -454,7 +459,7 @@ namespace CBReader
             // 載入舊格式
             oldSLRF.LoadFromOldFile(lines);
             SLRMapToTreeview(oldSLRF, tvSutra);
-            MessageBox.Show("OK");
+            MessageBox.Show(t("載入成功", "04003"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         void LoadNewVersionSearchLimitedRangeFile(string filename)
@@ -464,7 +469,7 @@ namespace CBReader
             SearchLimitedRangeFile newSLR;
             newSLR = JsonSerializer.Deserialize<SearchLimitedRangeFile>(json);
             SLRMapToTreeview(newSLR, tvSutra);
-            MessageBox.Show("OK");
+            MessageBox.Show(t("載入成功", "04003"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // 將 SLR 的資料填入 Treeview 中
@@ -570,7 +575,7 @@ namespace CBReader
 
             if (!bHasClick)
             {
-                MessageBox.Show("沒有勾選任何典籍");
+                MessageBox.Show(t("沒有勾選任何典籍","04002"),"CBReader",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 return;
             }
             // 設定預設目錄
@@ -583,6 +588,7 @@ namespace CBReader
                 searchLimitedRangeFile.Initial();
                 searchLimitedRangeFileGetData(tvSutra.Nodes, searchLimitedRangeFile);
                 searchLimitedRangeFile.SaveToFile(saveFileDialog.FileName);
+                MessageBox.Show(t("儲存成功", "04004"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -622,25 +628,34 @@ namespace CBReader
         private void tvSutra_DrawNode(object sender, DrawTreeNodeEventArgs e)
         {
             // 自行繪製 checkbox 的範圍，剛好蓋住原來的 checkbox
-            Rectangle checkboxRect = new Rectangle(e.Bounds.X - 15, e.Bounds.Y + 6, 17, 17);
+            // 後來發現不用畫了，只有在 mix 時塗上灰色方塊就好了
+            // Rectangle checkboxRect = new Rectangle(e.Bounds.X - 15, e.Bounds.Y + (e.Bounds.Height - 16) / 2, 16, 16);
+
             // 中間狀態在 checkbox 中間的灰色方塊
-            Rectangle smallBox = new Rectangle(e.Bounds.X - 11, e.Bounds.Y + 10, 9, 9);
+            // checkbox 固定 16 * 16，高度為文字的中間
+            // 灰色為中間 8 * 8。
+            // 例：
+            // e.Bounds 的 (x,y) 為 （15,0), 高為 28, e.Bounds 的 X 等於 checkbox 最右邊線
+            // checkbox 的 (x,y) 為 (0,6) - (15,21)
+            // checkbox 中間的灰色為 (4,10) - (11,17) (8*8)
+            Rectangle smallBox = new Rectangle(e.Bounds.X - 15 + 4, e.Bounds.Y + 4 + (e.Bounds.Height - 16 )/2 , 8, 8);
 
             var themeColor = mainForm.IsDarkTheme ? theme.darkColors : theme.lightColors;
 
-            // Draw the checkbox based on the state
+            // 根據狀態，判斷是否畫出灰色方塊及文字
             switch ((NodeCheckState) e.Node.Tag) {
                 case NodeCheckState.Checked:
-                    ControlPaint.DrawCheckBox(e.Graphics, checkboxRect, ButtonState.Checked);
+                    // 可以自行畫 checkbox 或方框，也可以都不畫了
+                    // ControlPaint.DrawCheckBox(e.Graphics, checkboxRect, ButtonState.Checked);
+                    // ControlPaint.DrawBorder(e.Graphics, checkboxRect, Color.Black, ButtonBorderStyle.Solid);
                     TextRenderer.DrawText(e.Graphics, e.Node.Text, tvSutra.Font, e.Bounds, tvSutra.ForeColor, themeColor.TreeViewCheckedBack);
                     break;
                 case NodeCheckState.Mix:
-                    ControlPaint.DrawCheckBox(e.Graphics, checkboxRect, ButtonState.Normal);
+                    // 畫出灰色範圍
+                    e.Graphics.FillRectangle(new SolidBrush(Color.Gray), smallBox);
                     TextRenderer.DrawText(e.Graphics, e.Node.Text, tvSutra.Font, e.Bounds, tvSutra.ForeColor, themeColor.TreeViewMixBack);
-                    e.Graphics.FillRectangle(new SolidBrush(Color.DarkGray), smallBox);
                     break;
                 default:
-                    ControlPaint.DrawCheckBox(e.Graphics, checkboxRect, ButtonState.Normal);
                     TextRenderer.DrawText(e.Graphics, e.Node.Text, tvSutra.Font, e.Bounds, tvSutra.ForeColor);
                     break;
             }

@@ -47,7 +47,7 @@ namespace CBReader
 
             if (validateData) {
                 if (edTitle.Text == "") {
-                    MessageBox.Show(t("名稱不可以空白。", "03008"));
+                    MessageBox.Show(t("名稱不可以空白。", "03008"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     edTitle.Focus();
                     e.Cancel = true;
                 }

@@ -116,7 +116,7 @@ namespace CBReader
 			if (sStr1.Substring(0, 2) == "ok") {
 				// 表示沒有更新資料
 				if (IsShowMessage) {
-					MessageBox.Show(t("您的 CBReader 是最新的!","02001"));
+					MessageBox.Show(t("您的 CBReader 是最新的!","02001"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				}
 			} else if (sStr1.StartsWith("message=")) {
 
@@ -134,7 +134,7 @@ namespace CBReader
 				}
 			} else {
 				// 呈現其它訊息
-				MessageBox.Show(string.Join("\n",slReceive));
+				MessageBox.Show(string.Join("\n",slReceive), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 		}
 
@@ -162,7 +162,7 @@ namespace CBReader
 						timer1.Stop();
 						fileStream.Close();
 					} catch (HttpRequestException ex) {
-						MessageBox.Show(ex.Message.ToString());
+						MessageBox.Show(ex.Message.ToString(), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Information);
 					}
 				}
 			}
@@ -347,7 +347,7 @@ namespace CBReader
             }
 			lbMessage.Text = t("更新完成","02010");
 			IsDownloadOK = false;
-			MessageBox.Show(t("更新完成，按下「確定」後會重啟程式。","02011"));
+			MessageBox.Show(t("更新完成，按下「確定」後會重啟程式。","02011"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			CGlobalVal.restart = true;
 			mainForm.Close();
         }

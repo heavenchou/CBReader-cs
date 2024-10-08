@@ -88,7 +88,7 @@ namespace CBReader
 			node = Document.DocumentElement.GetElementsByTagName("body")[0];
 
 			if (node.ChildNodes.Count == 0) {
-				MessageBox.Show("錯誤：導覽文件找不到 body 標記。");
+				MessageBox.Show("錯誤：導覽文件找不到 body 標記。", "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			} else {
 				ParseNode(node);
 				if (ThisItem.Level != -1) {

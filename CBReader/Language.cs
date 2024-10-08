@@ -114,7 +114,7 @@ namespace CBReader
 
             if (!File.Exists(sFileName)) {
                 string sMessage = "Language : File " + FileName + " is not exist.";
-                MessageBox.Show(sMessage);
+                MessageBox.Show(sMessage, "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

@@ -62,11 +62,11 @@ namespace CBReader
 
             if (validateData) {
                 if (edTitle.Text == "") {
-                    MessageBox.Show(t("名稱不可以空白。", "03008"));
+                    MessageBox.Show(t("名稱不可以空白。", "03008"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     edTitle.Focus();
                     e.Cancel = true;
                 } else if (edLocation.Text == "") {
-                    MessageBox.Show(t("位置不可以空白。", "03009"));
+                    MessageBox.Show(t("位置不可以空白。", "03009"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     edLocation.Focus();
                     e.Cancel = true;
                 }

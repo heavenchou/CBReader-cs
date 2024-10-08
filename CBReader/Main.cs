@@ -270,7 +270,7 @@ namespace CBReader
             // 都沒有就詢問使用者
             if (!Directory.Exists(sBookcasePath)) {
 
-                MessageBox.Show(t("沒有找到您的 Bookcase 書櫃目錄，請手動選擇目錄所在位置。", "01001"));
+                MessageBox.Show(t("沒有找到您的 Bookcase 書櫃目錄，請手動選擇目錄所在位置。", "01001"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 // 使用指定目錄
 
                 folderBrowserDialog1.Description = t("選擇 Bookcase 目錄所在位置", "01002");
@@ -299,7 +299,7 @@ namespace CBReader
                     OpenCBETABook();    // ???? 取消上面, 因為這一版要直接開啟 CBETA
                 }
             } catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             //???? MuluTree = 0;
@@ -440,7 +440,7 @@ namespace CBReader
                     return;
                 }
             }
-            MessageBox.Show(t("找不到 CBETA 資料", "01004"));
+            MessageBox.Show(t("找不到 CBETA 資料", "01004"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -530,7 +530,7 @@ namespace CBReader
         void ShowCBXML(string sFile, bool bShowHighlight = false, CSeries sSeries = null)
         {
             if (sFile == "") {
-                MessageBox.Show(t("沒有找到正確檔案", "01005"));
+                MessageBox.Show(t("沒有找到正確檔案", "01005"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (sSeries == null) {
@@ -546,7 +546,7 @@ namespace CBReader
                 sLink = sFile.Substring(iPos + 1);
                 sFile = sFile.Substring(0, iPos);
                 if (sFile == "") {
-                    MessageBox.Show(t("沒有找到正確檔案", "01005"));
+                    MessageBox.Show(t("沒有找到正確檔案", "01005"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
@@ -1115,7 +1115,7 @@ namespace CBReader
             // 逐一秀出錯誤訊息
             string sErrorMsg = CGlobalMessage.pop();
             while (sErrorMsg != "") {
-                MessageBox.Show(sErrorMsg);
+                MessageBox.Show(sErrorMsg, "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 sErrorMsg = CGlobalMessage.pop();
             }
 
@@ -1206,7 +1206,7 @@ namespace CBReader
                     }
                 }
             }
-            MessageBox.Show(t("目前已是第一卷/篇章。", "01006"));
+            MessageBox.Show(t("目前已是第一卷/篇章。", "01006"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // 下一卷
@@ -1237,7 +1237,7 @@ namespace CBReader
                     }
                 }
             }
-            MessageBox.Show(t("目前已是最後一卷/篇章。", "01007"));
+            MessageBox.Show(t("目前已是最後一卷/篇章。", "01007"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btNavWidthSwitch_Click(object sender, EventArgs e)
@@ -1382,7 +1382,7 @@ namespace CBReader
                 language.ChangeComponentLang(this, lbFindSutraCount);
 
                 if (iGridIndex == 0) {
-                    MessageBox.Show(t("沒有滿足此條件的資料", "01009"));
+                    MessageBox.Show(t("沒有滿足此條件的資料", "01009"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -1444,7 +1444,7 @@ namespace CBReader
             allComboBoxHistory.AddHistory(cbGoSutraPage);
 
             if (sSutraNum == "") {
-                MessageBox.Show(t("請輸入經號", "01010"));
+                MessageBox.Show(t("請輸入經號", "01010"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cbGoSutraSutraNum.Focus();
                 return;
             }
@@ -1475,7 +1475,7 @@ namespace CBReader
             allComboBoxHistory.AddHistory(cbGoBookPage);
 
             if (sVol == "") {
-                MessageBox.Show(t("請輸入冊數", "01011"));
+                MessageBox.Show(t("請輸入冊數", "01011"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cbGoBookVol.Focus();
                 return;
             }
@@ -1572,7 +1572,7 @@ namespace CBReader
             // 選擇全文檢索引擎, 若某一方為 0 , 則選另一方 (全 0 就不管了)
             SearchEngine = Bookcase.CBETA.getSearchEngine(Setting.CollationType);
             if (SearchEngine == null) {
-                MessageBox.Show(t("沒有可用的全文檢索引擎", "01012"));
+                MessageBox.Show(t("沒有可用的全文檢索引擎", "01012"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -1664,10 +1664,10 @@ namespace CBReader
 
             if (bFindOK) {
                 if (sgTextSearch.RowCount == 0) {
-                    MessageBox.Show(t("找不到任何資料", "01013"));
+                    MessageBox.Show(t("找不到任何資料", "01013"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             } else {
-                MessageBox.Show(t("查詢字串語法有問題，請再檢查看看。", "01014"));
+                MessageBox.Show(t("查詢字串語法有問題，請再檢查看看。", "01014"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2161,7 +2161,7 @@ namespace CBReader
 
             } catch (Exception ex) {
                 // 處理異常，例如記錄錯誤訊息或顯示用戶提示
-                MessageBox.Show(t("錯誤訊息：", "01032") + ex.Message);
+                MessageBox.Show(t("錯誤訊息：", "01032") + ex.Message, "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             int iPos = sBookmark.IndexOf('║');
 
@@ -2707,7 +2707,7 @@ namespace CBReader
             string s = readText[0];
             if(!s.Contains("<筆數>")) {
                 // 不是舊版書籤格式
-                MessageBox.Show("載入的書籤格式有問題。");
+                MessageBox.Show(t("載入的書籤格式有問題。", "03003"),"CBReader", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             s = s.Substring(4);
@@ -2715,7 +2715,7 @@ namespace CBReader
             int.TryParse(s, out count);
 
             if(count == 0) {
-                MessageBox.Show(t("書籤筆數為 0。", "03004"));
+                MessageBox.Show(t("書籤筆數為 0。", "03004"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -2827,7 +2827,7 @@ namespace CBReader
             string s = readText[2];
             if (!s.Contains("<原始字串>")) {
                 // 不是舊版格式
-                MessageBox.Show("載入的 SRF 格式有問題。");
+                MessageBox.Show(t("載入的 SRF 格式有問題。","01035"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -2941,7 +2941,7 @@ namespace CBReader
         void SaveSearchResultFile(string fileName)
         {
             if (cbTextSearch.Text.Length == 0) {
-                MessageBox.Show(t("搜尋字串不能為空白", "01033"));
+                MessageBox.Show(t("搜尋字串不能為空白", "01033"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cbTextSearch.Focus();
                 return;
             }
@@ -2960,14 +2960,14 @@ namespace CBReader
             }
             // 匯出
             searchResultFile.SaveToFile(fileName);
-            MessageBox.Show("OK");
+            MessageBox.Show(t("儲存成功", "01034"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // 儲存所選取的部份
         private void miSaveSelectSutra_Click(object sender, EventArgs e)
         {
             if (cbTextSearch.Text.Length == 0) {
-                MessageBox.Show(t("搜尋字串不能為空白", "01033"));
+                MessageBox.Show(t("搜尋字串不能為空白", "01033"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cbTextSearch.Focus();
                 return;
             }
@@ -2992,7 +2992,7 @@ namespace CBReader
             // 匯出
             if (saveSearchResultFileDialog.ShowDialog() == DialogResult.OK) {
                 mySearchResultFile.SaveToFile(saveSearchResultFileDialog.FileName);
-                MessageBox.Show("OK");
+                MessageBox.Show(t("儲存成功", "01034"), "CBReader",MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -3052,6 +3052,7 @@ namespace CBReader
             }
 
             if(searchResultFile.FileName != "") {
+                // 功能表中的儲存要加上檔名
                 var array = miSaveSearchResultFile.Text.Split(' ');
                 miSaveSearchResultFile.Text = array[0] + " " + Path.GetFileName(searchResultFile.FileName);
             }
