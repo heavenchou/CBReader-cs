@@ -19,6 +19,8 @@ namespace CBReader
             InitializeComponent();
             mainForm = main;
             Setting = mainForm.Setting;
+
+            selectContentStylesFileDialog.InitialDirectory = CGlobalVal.MyContentStylesPath;
         }
 
         // 由設定載入
@@ -436,6 +438,14 @@ namespace CBReader
             // 不要 Disable，因為暗色系會看不到
 
             // cbShowCollationCF.Enabled = cbShowCollation.Checked;
+        }
+
+        private void btSelectContentStyles_Click(object sender, EventArgs e)
+        {
+            if (selectContentStylesFileDialog.ShowDialog() == DialogResult.OK) {
+                edCSSFileName.Text = selectContentStylesFileDialog.FileName;
+                cbUseCSSFile.Checked = true;
+            }
         }
     }
 }

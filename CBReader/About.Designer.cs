@@ -111,10 +111,10 @@ namespace CBReader
             // 
             this.llbDonate.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.llbDonate.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.llbDonate.Location = new System.Drawing.Point(252, 171);
+            this.llbDonate.Location = new System.Drawing.Point(224, 171);
             this.llbDonate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbDonate.Name = "llbDonate";
-            this.llbDonate.Size = new System.Drawing.Size(151, 25);
+            this.llbDonate.Size = new System.Drawing.Size(154, 25);
             this.llbDonate.TabIndex = 7;
             this.llbDonate.TabStop = true;
             this.llbDonate.Text = "【🫰護持捐款】";
@@ -124,7 +124,7 @@ namespace CBReader
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(17, 239);
+            this.label4.Location = new System.Drawing.Point(10, 239);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(376, 20);
@@ -135,7 +135,7 @@ namespace CBReader
             // 
             this.llbCBETAWeb.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.llbCBETAWeb.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.llbCBETAWeb.Location = new System.Drawing.Point(16, 137);
+            this.llbCBETAWeb.Location = new System.Drawing.Point(9, 137);
             this.llbCBETAWeb.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbCBETAWeb.Name = "llbCBETAWeb";
             this.llbCBETAWeb.Size = new System.Drawing.Size(387, 25);
@@ -148,7 +148,7 @@ namespace CBReader
             // 
             this.llbCBETAEmail.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.llbCBETAEmail.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.llbCBETAEmail.Location = new System.Drawing.Point(16, 171);
+            this.llbCBETAEmail.Location = new System.Drawing.Point(9, 171);
             this.llbCBETAEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbCBETAEmail.Name = "llbCBETAEmail";
             this.llbCBETAEmail.Size = new System.Drawing.Size(233, 25);
@@ -161,7 +161,7 @@ namespace CBReader
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label6.Location = new System.Drawing.Point(16, 214);
+            this.label6.Location = new System.Drawing.Point(9, 214);
             this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(272, 25);
@@ -172,7 +172,7 @@ namespace CBReader
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(16, 103);
+            this.label5.Location = new System.Drawing.Point(9, 103);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(369, 25);
@@ -183,7 +183,7 @@ namespace CBReader
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(16, 72);
+            this.label3.Location = new System.Drawing.Point(9, 72);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(305, 25);
@@ -194,7 +194,7 @@ namespace CBReader
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(16, 37);
+            this.label2.Location = new System.Drawing.Point(9, 37);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(308, 25);
@@ -205,12 +205,12 @@ namespace CBReader
             // 
             this.lbTitle.AutoSize = true;
             this.lbTitle.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lbTitle.Location = new System.Drawing.Point(16, 6);
+            this.lbTitle.Location = new System.Drawing.Point(9, 6);
             this.lbTitle.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(333, 25);
             this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "CBReader 2X  v0.9.4　2024-10-08";
+            this.lbTitle.Text = "CBReader 2X  v0.9.4　2024-11-11";
             // 
             // panel4
             // 

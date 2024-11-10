@@ -346,7 +346,6 @@ namespace CBReader
             background-color: white;
         }
         .circle {
-            display: inline-block;
             position: relative;
             line-height: 1;
         }
@@ -365,15 +364,15 @@ namespace CBReader
         .text-left {text-align:left;}
         .text-center {text-align:center; text-indent:0em !important; margin-left:0em !important;}
         .text-right {text-align:right;}
-        .larger {font-size:larger;}
-        .smaller {font-size:smaller;}
-        .xx-small {font-size:xx-small;}
-        .x-small {font-size:x-small;}
-        .small {font-size:small;}
-        .medium {font-size:medium;}
-        .large {font-size:large;}
-        .x-large {font-size:x-large;}
-        .xx-large {font-size:xx-large;}
+        .larger {font-size:120%;}
+        .smaller {font-size:80%;}
+        .xx-small {font-size:14px;}
+        .x-small {font-size:16px;}
+        .small {font-size:18px;}
+        .medium {font-size:21px;}
+        .large {font-size:24px;}
+        .x-large {font-size:28px;}
+        .xx-large {font-size:36px;}
         .no-marker {list-style:none;}
         .circle-above {text-emphasize:circle-above;}
         #AIPuncRemind {color:#ffffff; background: #9f5000;}
@@ -396,6 +395,7 @@ namespace CBReader
         .preformat .kaiti {font-family:DFKai-SB,標楷體,STKaiti,'Kaiti TC';}
         .preformat .foreign {font-family:'Courier New'; font-size:17.5px;}
         .gaiji {font-family:'Times New Roman','FSung-2','FSung-3','Jigmo2','Jigmo3','TH-Tshyn-P2','TH-Tshyn-P1','Hanazono Mincho B','Hanazono Mincho C';}
+        .gaiji img {width: 1.1em; height: 1.1em; vertical-align: text-bottom; object-fit: contain;}        
         .juannum  {color:#008000; font-size:21px;}
         .juanname {color:#0000FF; font-weight: bold; font-size:24px;}
         .xu {color:#0000A0; font-size:21px;}

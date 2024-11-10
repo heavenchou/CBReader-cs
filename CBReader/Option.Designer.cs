@@ -35,6 +35,7 @@ namespace CBReader
             this.btSave = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gbViewShow = new System.Windows.Forms.GroupBox();
+            this.btSelectContentStyles = new System.Windows.Forms.Button();
             this.edCSSFileName = new System.Windows.Forms.TextBox();
             this.cbUseCSSFile = new System.Windows.Forms.CheckBox();
             this.gbGaijiFormat = new System.Windows.Forms.GroupBox();
@@ -60,6 +61,7 @@ namespace CBReader
             this.cbShowPunc = new System.Windows.Forms.CheckBox();
             this.cbShowLineHead = new System.Windows.Forms.CheckBox();
             this.cbShowLineFormat = new System.Windows.Forms.CheckBox();
+            this.selectContentStylesFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.gbViewShow.SuspendLayout();
@@ -135,6 +137,7 @@ namespace CBReader
             // 
             // gbViewShow
             // 
+            this.gbViewShow.Controls.Add(this.btSelectContentStyles);
             this.gbViewShow.Controls.Add(this.edCSSFileName);
             this.gbViewShow.Controls.Add(this.cbUseCSSFile);
             this.gbViewShow.Location = new System.Drawing.Point(286, 396);
@@ -146,12 +149,22 @@ namespace CBReader
             this.gbViewShow.TabStop = false;
             this.gbViewShow.Text = "畫面呈現";
             // 
+            // btSelectContentStyles
+            // 
+            this.btSelectContentStyles.Location = new System.Drawing.Point(277, 73);
+            this.btSelectContentStyles.Name = "btSelectContentStyles";
+            this.btSelectContentStyles.Size = new System.Drawing.Size(35, 34);
+            this.btSelectContentStyles.TabIndex = 11;
+            this.btSelectContentStyles.Text = "...";
+            this.btSelectContentStyles.UseVisualStyleBackColor = true;
+            this.btSelectContentStyles.Click += new System.EventHandler(this.btSelectContentStyles_Click);
+            // 
             // edCSSFileName
             // 
             this.edCSSFileName.Location = new System.Drawing.Point(34, 73);
             this.edCSSFileName.Margin = new System.Windows.Forms.Padding(4);
             this.edCSSFileName.Name = "edCSSFileName";
-            this.edCSSFileName.Size = new System.Drawing.Size(278, 34);
+            this.edCSSFileName.Size = new System.Drawing.Size(236, 34);
             this.edCSSFileName.TabIndex = 10;
             // 
             // cbUseCSSFile
@@ -442,6 +455,10 @@ namespace CBReader
             this.cbShowLineFormat.Text = "依原書格式呈現";
             this.cbShowLineFormat.UseVisualStyleBackColor = true;
             // 
+            // selectContentStylesFileDialog
+            // 
+            this.selectContentStylesFileDialog.Filter = "CSS files (*.css)|*.css|All files (*.*)|*.*";
+            // 
             // OptionForm
             // 
             this.AcceptButton = this.btOK;
@@ -511,5 +528,7 @@ namespace CBReader
         private System.Windows.Forms.RadioButton rbGaijiUniExtFirst;
         private System.Windows.Forms.CheckBox cbShowCollationCF;
         private System.Windows.Forms.Label lbIncludeTextNoteSearch;
+        private System.Windows.Forms.Button btSelectContentStyles;
+        private System.Windows.Forms.OpenFileDialog selectContentStylesFileDialog;
     }
 }
