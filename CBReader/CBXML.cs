@@ -3384,7 +3384,17 @@ namespace CBReader
                 }
             }
 
+            // <rdg> 不呈現 note cf. 
+            // 不過因為有這種在 lem 底下的校注的 rdg 也有 cf
+            // <lem>...<app><rdg>...<note type="cf">...</note></rdg></app></lem>
+            // 所以 rdg 的 cf 還是要先清掉，以免被算在上一層的 lem 頭上
+
+            string NoteCFOld = NoteCF;
+            NoteCF = "";    // 先清空
+            
             string sRdgText = parseChild(node); // 處理內容
+
+            NoteCF = NoteCFOld;
 
             if (bShowRdgText) {
                 sHtml += sRdgText;
