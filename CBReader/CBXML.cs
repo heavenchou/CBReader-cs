@@ -4247,12 +4247,18 @@ namespace CBReader
             sVerInfo += "<br>\n";
 
             string sSourceName = sBookName;
-            // 二個特例
+            // CC 的特例
             if (BookId == "CC") {
                 if (sVolNum == "1") {
                     sSourceName = "《比丘尼傳暨續比丘尼傳》（大千出版社，2006）";
                 } else if (sVolNum == "2") {
                     sSourceName = "《敦博本六祖壇經校釋》（萬卷樓，2006）";
+                } else if (sVolNum == "3") {
+                    sSourceName = "《解深密經疏（下冊）》（佛陀教育基金會，2010）";
+                } else if (sVolNum == "4") {
+                    sSourceName = "《成唯識論測疏》（金陵刻經處，2014）";
+                } else if (sVolNum == "5") {
+                    sSourceName = "《般若融心論》（文明書局，1940）";
                 }
             } 
 

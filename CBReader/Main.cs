@@ -736,6 +736,8 @@ namespace CBReader
                 } else {
                     OpenURL("file:///" + sSeries.Dir + sURL);
                 }
+                // 清空書目
+                ClearMuluTree();
             } else if (iType == ENavItemType.nit_NavLink) {
                 // 目錄連結
                 LoadNavTree(sSeries.Dir + sURL);
@@ -2446,24 +2448,30 @@ namespace CBReader
 
             if (sURL.Length >= 5 && (sURL.Substring(0, 4) == "http" || sURL.Substring(0, 5) == "file:")) {
                 OpenURL(sURL);
-                // 檢查書目區是不是縮到最小
-                if (pnMulu.Width != 0) {
-                    btMuluWidthSwitchClick();
-                }
+                // 清空書目
+                ClearMuluTree();
             } else if (File.Exists(sURL)) {
                 OpenURL(sURL);
-                // 檢查書目區是不是縮到最小
-                if (pnMulu.Width != 0) {
-                    btMuluWidthSwitchClick();
-                }
+                // 清空書目
+                ClearMuluTree();
             } else if (Directory.Exists(sURL)) {
                 OpenURL("file:///" + sURL);
-                // 檢查書目區是不是縮到最小
-                if (pnMulu.Width != 0) {
-                    btMuluWidthSwitchClick();
-                }
+                // 清空書目
+                ClearMuluTree();
             } else {
                 GoByKeyword(sURL);
+            }
+        }
+
+        // 清空書目
+        void ClearMuluTree()
+        {
+            // 清空書目
+            MuluTree = null;
+            tvMuluTree.Nodes.Clear();
+            // 檢查書目區是不是縮到最小
+            if (pnMulu.Width != 0) {
+                btMuluWidthSwitchClick();
             }
         }
 

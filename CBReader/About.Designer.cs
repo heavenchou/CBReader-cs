@@ -210,7 +210,7 @@ namespace CBReader
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(333, 25);
             this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "CBReader 2X  v0.9.4　2024-11-12";
+            this.lbTitle.Text = "CBReader 2X  v0.9.4　2024-11-25";
             // 
             // panel4
             // 
