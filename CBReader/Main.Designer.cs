@@ -30,7 +30,7 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption1 = new System.Windows.Forms.Button();
             this.pnToolBar = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
@@ -294,13 +294,13 @@ namespace CBReader
             // 
             // toolStripContainer.ContentPanel
             // 
-            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(865, 18);
+            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(865, 0);
             this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer.LeftToolStripPanelVisible = false;
-            this.toolStripContainer.Location = new System.Drawing.Point(0, 30);
+            this.toolStripContainer.Location = new System.Drawing.Point(0, 27);
             this.toolStripContainer.Name = "toolStripContainer";
             this.toolStripContainer.RightToolStripPanelVisible = false;
-            this.toolStripContainer.Size = new System.Drawing.Size(865, 55);
+            this.toolStripContainer.Size = new System.Drawing.Size(865, 58);
             this.toolStripContainer.TabIndex = 7;
             this.toolStripContainer.Text = "toolStripContainer1";
             // 
@@ -323,7 +323,7 @@ namespace CBReader
             this.btMuluWidthSwitch,
             this.toolStripSeparator1,
             this.btTheme});
-            this.tsMain.Location = new System.Drawing.Point(4, 0);
+            this.tsMain.Location = new System.Drawing.Point(4, 37);
             this.tsMain.Name = "tsMain";
             this.tsMain.Size = new System.Drawing.Size(155, 37);
             this.tsMain.TabIndex = 0;
@@ -404,9 +404,9 @@ namespace CBReader
             this.tsbCBCopy,
             this.toolStripSeparator6,
             this.tsbAddBookmark});
-            this.tsSutra.Location = new System.Drawing.Point(182, 0);
+            this.tsSutra.Location = new System.Drawing.Point(4, 0);
             this.tsSutra.Name = "tsSutra";
-            this.tsSutra.Size = new System.Drawing.Size(558, 37);
+            this.tsSutra.Size = new System.Drawing.Size(519, 37);
             this.tsSutra.TabIndex = 1;
             this.tsSutra.LocationChanged += new System.EventHandler(this.tsSutra_LocationChanged);
             // 
@@ -664,7 +664,7 @@ namespace CBReader
             this.miAdmin});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(865, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(865, 27);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -894,14 +894,14 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;

@@ -362,7 +362,7 @@ namespace CBReader
             z-index: -1;
         }
         .text-left {text-align:left;}
-        .text-center {text-align:center; text-indent:0em !important; margin-left:0em !important;}
+        .text-center {text-align:center; text-indent:0em !important; margin-inline-start:0em !important;}
         .text-right {text-align:right;}
         .larger {font-size:120%;}
         .smaller {font-size:80%;}
@@ -414,28 +414,28 @@ namespace CBReader
         .corr {color:#FF0000; }
         .note {color:#9F5000; font-size:18px;}
         .note-focus {background-color:lightpink;}
-        #div_notearea_box {position:fixed; border:1px; margin:10px; padding:10px; background-color:rgb(31, 119, 29); right:0px; bottom:0px; width:655px; height:150px; writing-mode: lr-tb; display:none;}
+        #div_notearea_box {position:fixed; border:1px; margin:10px; padding:10px; background-color:rgb(31, 119, 29); right:0px; bottom:0px; width:655px; height:150px; writing-mode: horizontal-tb; display:none;}
         #div_notearea_close {background-color:#ff8585;}
         #div_notearea {position:fixed; border:1px; margin:10px; padding:10px; background-color:#bedebd; right:2px; bottom:2px; width:600px; height:146px; overflow:auto;}
         #cbeta-copyright {margin:15px; padding: 25px; border-radius: 20px; background-color: rgb(200, 234, 198); display:block; box-shadow:inset -3px -3px 10px #9bbc99;}        
         table {border-collapse: collapse; margin: 20px; border: 1px solid black;}
         th, td { padding: 0.5em; border: 1px solid black;}
         table.no-border td, table.no-border th {border: 0px solid black;}
-        table td.border-top {border-top:1px black solid;}
-        table td.border-bottom {border-bottom:1px black solid;}
-        table td.border-left {border-left:1px black solid;}
-        table td.border-right {border-right:1px black solid;}
-        td.pl-1 { padding-left: 1.5em; }
-        td.pl-2 { padding-left: 2.5em; }
-        td.pl-3 { padding-left: 3.5em; }
-        td.pl-4 { padding-left: 4.5em; }
-        td.pl-5 { padding-left: 5.5em; }
-        td.pl-6 { padding-left: 6.5em; }
-        td.pl-7 { padding-left: 7.5em; }
-        td.pl-8 { padding-left: 8.5em; }";
+        table td.border-top {border-block-start:1px black solid;}
+        table td.border-bottom {border-block-end:1px black solid;}
+        table td.border-left {border-inline-start:1px black solid;}
+        table td.border-right {border-inline-end:1px black solid;}
+        td.pl-1 { padding-inline-start: 1.5em; }
+        td.pl-2 { padding-inline-start: 2.5em; }
+        td.pl-3 { padding-inline-start: 3.5em; }
+        td.pl-4 { padding-inline-start: 4.5em; }
+        td.pl-5 { padding-inline-start: 5.5em; }
+        td.pl-6 { padding-inline-start: 6.5em; }
+        td.pl-7 { padding-inline-start: 7.5em; }
+        td.pl-8 { padding-inline-start: 8.5em; }";
 
             if (Setting.VerticalMode) {
-                sHtml += "      body {writing-mode: tb-rl;}\n";
+                sHtml += "      body {writing-mode: vertical-rl;}\n";
             }
 
             // 行首格式
@@ -448,11 +448,11 @@ namespace CBReader
         #div_notearea_box p {display:block;}
         br.lb_br {display:inline;}
         br.para_br  {display:none;}
-        p.juannum   {display:inline; margin-left:0em;}
-        p.headname2 {display:inline; margin-left:0em;}
-        p.headname3 {display:inline; margin-left:0em;}
-        p.headname4 {display:inline; margin-left:0em;}
-        p.byline    {display:inline; margin-left:0em;}
+        p.juannum   {display:inline; margin-inline-start:0em;}
+        p.headname2 {display:inline; margin-inline-start:0em;}
+        p.headname3 {display:inline; margin-inline-start:0em;}
+        p.headname4 {display:inline; margin-inline-start:0em;}
+        p.byline    {display:inline; margin-inline-start:0em;}
         table-bak {border-style: none;}
         td-bak {padding: 0px;}
         #div_notearea_box table {border-style:solid; border-collapse:collapse;}
@@ -466,10 +466,10 @@ namespace CBReader
         p {display:block;}
         br.lb_br {display:none;}
         br.para_br {display:inline;}
-        p.juannum   {display:block; margin-left:2em;}
-        p.headname2 {display:block; margin-left:2em;}
-        p.headname3 {display:block; margin-left:3em;}
-        p.headname4 {display:block; margin-left:4em;}
+        p.juannum   {display:block; margin-inline-start:2em;}
+        p.headname2 {display:block; margin-inline-start:2em;}
+        p.headname3 {display:block; margin-inline-start:3em;}
+        p.headname4 {display:block; margin-inline-start:4em;}
         p.byline    {display:block; text-align:right;}
         p.byline.text-center    {display:block; text-align:center;}
         p.byline.text-left    {display:block; text-align:left;}
@@ -1058,10 +1058,10 @@ namespace CBReader
                         "<span class='line_space'>　</span>";
                     } else {
                         if (!InNoteOrig && !InNoteMod && !InNoteAdd) {
-                            sHtml += "<div data-margin-left='1em' style='margin-left: 1em' data-tagname='div'>" +
+                            sHtml += "<div data-margin-left='1em' style='margin-inline-start: 1em' data-tagname='div'>" +
                         "<span class='line_space' style='display:none'>　</span>";
                         } else {
-                            sHtml += "<div data-margin-left='1em' style='margin-left: 1em'>" +
+                            sHtml += "<div data-margin-left='1em' style='margin-inline-start: 1em'>" +
                         "<span class='line_space' style='display:none'>　</span>";
                         }
                     }
@@ -1881,7 +1881,11 @@ namespace CBReader
         string tagJuan(XmlNode node)
         {
             string sHtml = "";
-            sHtml = "<span class='juanname'>";
+            if (Setting.ShowLineFormat) {
+                sHtml = "<span class='juanname' data-tagname='p'>";
+            } else {
+                sHtml = "<p class='juanname' data-tagname='p'>";
+            }
             string sPlace = GetAttr(node, "place");
             if (sPlace == "inline") {
                 if (Setting.ShowLineFormat) {
@@ -1891,7 +1895,11 @@ namespace CBReader
                 }
             }
             sHtml += parseChild(node); // 處理內容
-            sHtml += "</span>";
+            if (Setting.ShowLineFormat) {
+                sHtml += "</span>";
+            } else {
+                sHtml += "</p>";
+            }
             return sHtml;
         }
 
@@ -2467,7 +2475,7 @@ namespace CBReader
                 // 沒有 abnormal 這種格式了, 所以底下不會再使用了
                 // ==============================================
 
-                // 如果是不依原書, 且不是 normal 偈頌, 且指定用段落的方式 (LgTYpe = 1), 則處理成 <p style="margin-left::2em;text-indent:xxem;"><lg class="lg"> 這種格式
+                // 如果是不依原書, 且不是 normal 偈頌, 且指定用段落的方式 (LgTYpe = 1), 則處理成 <p style="margin-left:2em;text-indent:xxem;"><lg class="lg"> 這種格式
                 if (iMarginLeft != 0 || iTextIndent != 0) {
                     if (Setting.ShowLineFormat) {
                         sHtml += "<span style='";
@@ -2490,7 +2498,7 @@ namespace CBReader
                     } else {
                         sHtml += "<p style='";
                         if (iMarginLeft != 0) {
-                            sHtml += "margin-left:";
+                            sHtml += "margin-inline-start:";
                             sHtml += iMarginLeft.ToString();
                             sHtml += "em;";
                         }
@@ -3181,9 +3189,9 @@ namespace CBReader
                 // 出現在校注需要把 p 換成 span 嗎？（答：不用）
                 sHtml += "<p style='text-indent: ";
                 sHtml += iTextIndent.ToString();
-                sHtml += "em; margin-left: ";
+                sHtml += "em; margin-inline-start: ";
                 sHtml += iMarginLeft.ToString();
-                sHtml += "em; margin-top: 5px; margin-bottom: 0em;";
+                sHtml += "em; margin-block-start: 5px; margin-block-end: 0em;";
                 sHtml += myStyle.NewStyle;
                 sHtml += "'";
                 if (myRend.NewClass != "") {
@@ -3236,7 +3244,7 @@ namespace CBReader
                 } else {
                     sHtml += "<p style='text-indent: ";
                     sHtml += iTextIndent.ToString();
-                    sHtml += "em; margin-left: ";
+                    sHtml += "em; margin-inline-start: ";
                     sHtml += iMarginLeft.ToString();
                     sHtml += "em;";
                     sHtml += myStyle.NewStyle;
@@ -3273,6 +3281,7 @@ namespace CBReader
                     iTextIndent++;
                     if (bHasLg) iTextIndent++;
                 }
+                // margin-left 出現負數
                 if (iMarginLeft >= 0) {
                     MarginLeft += StringRepeat("　", iMarginLeft);
                 } else {
@@ -4246,8 +4255,10 @@ namespace CBReader
             }
             sVerInfo += "<br>\n";
 
-            string sSourceName = sBookName;
+            string sSourceName = sBookName; // 最原始的
+            
             // CC 的特例
+            /*
             if (BookId == "CC") {
                 if (sVolNum == "1") {
                     sSourceName = "《比丘尼傳暨續比丘尼傳》（大千出版社，2006）";
@@ -4260,7 +4271,12 @@ namespace CBReader
                 } else if (sVolNum == "5") {
                     sSourceName = "《般若融心論》（文明書局，1940）";
                 }
-            } 
+            }*/
+
+            // 2025.R1 新的格式
+            if (Document.DocumentElement["teiHeader"]["fileDesc"]["sourceDesc"]["bibl"]["title"] == null) {
+                sSourceName = Document.DocumentElement["teiHeader"]["fileDesc"]["sourceDesc"]["bibl"].InnerText;
+            }
 
             sVerInfo += "【編輯說明】本資料庫由財團法人佛教電子佛典基金會（CBETA）依「" + sSourceName + "」所編輯<br>\n";
             //不管什麼版本, 都要列出版權宣告比較好
