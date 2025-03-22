@@ -307,8 +307,8 @@ namespace CBReader
             // toolStripContainer.TopToolStripPanel
             // 
             this.toolStripContainer.TopToolStripPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsMain);
             this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsSutra);
+            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsMain);
             this.toolStripContainer.TopToolStripPanel.ClientSizeChanged += new System.EventHandler(this.toolStripContainer_TopToolStripPanel_ClientSizeChanged);
             // 
             // tsMain
