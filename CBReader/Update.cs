@@ -22,7 +22,7 @@ namespace CBReader
 
 		// string DestFile;
 
-		string ServerURL = "http://www.cbeta.org/cbreader/update.php?";  // 要檢查更新的網頁目錄
+		string ServerURL = "http://archive2.cbeta.org/cbreader/update.php?";  // 要檢查更新的網頁目錄
 		public bool UseLocalhostURL = false;  // 使用 localhost 的測試網址
 		string LocalhostURL = "http://localhost/cbreader/update.php?";    // 內部測試的網址
 
@@ -85,7 +85,7 @@ namespace CBReader
 			}
 
 			try {
-				//sURL = "https://www.cbeta.org/cbreader/update.php?cbr=0.5.5.0&data=0.5.4.0&os=win";
+				//sURL = "https://archive2.cbeta.org/cbreader/update.php?cbr=0.5.5.0&data=0.5.4.0&os=win";
 				string responseBody = httpClient.GetStringAsync(sURL).Result;
 				slReceive.Clear();
 				slReceive = responseBody.Split('\n').ToList();

@@ -125,7 +125,7 @@ namespace CBReader
 
                 if (result == DialogResult.Yes) {
                     // 選擇 Yes
-                    Process.Start(@"https://www.cbeta.org/CBReader2X_FAQ.php#Q12");	// 指定程式開啟文件
+                    Process.Start(@"https://archive2.cbeta.org/CBReader2X_FAQ.php#Q12");	// 指定程式開啟文件
                 }
             }
 

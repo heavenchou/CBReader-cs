@@ -109,7 +109,7 @@ namespace CBReader
             // 
             // llbDonate
             // 
-            this.llbDonate.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.llbDonate.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.llbDonate.LinkColor = System.Drawing.Color.DodgerBlue;
             this.llbDonate.Location = new System.Drawing.Point(224, 171);
             this.llbDonate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -117,7 +117,7 @@ namespace CBReader
             this.llbDonate.Size = new System.Drawing.Size(154, 25);
             this.llbDonate.TabIndex = 7;
             this.llbDonate.TabStop = true;
-            this.llbDonate.Text = "【🫰護持捐款】";
+            this.llbDonate.Text = "【❤️護持捐款】";
             this.llbDonate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbDonate_LinkClicked);
             // 
             // label4
@@ -210,7 +210,7 @@ namespace CBReader
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(333, 25);
             this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "CBReader 2X  v0.9.5　2025-03-22";
+            this.lbTitle.Text = "CBReader 2X  v0.9.5　2025-04-26";
             // 
             // panel4
             // 

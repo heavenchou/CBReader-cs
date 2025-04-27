@@ -394,7 +394,7 @@ namespace CBReader
         .preformat {font-family:細明體,MingLiU,NSimSun,'Songti TC', Shobhika; font-size:21px;}
         .preformat .kaiti {font-family:DFKai-SB,標楷體,STKaiti,'Kaiti TC';}
         .preformat .foreign {font-family:'Courier New'; font-size:17.5px;}
-        .gaiji {font-family:'Times New Roman','FSung-2','FSung-3','Jigmo2','Jigmo3','TH-Tshyn-P2','TH-Tshyn-P1','Hanazono Mincho B','Hanazono Mincho C';}
+        .gaiji {font-family:'Times New Roman','FSung-2','FSung-3','Jigmo2','Jigmo3','TH-Tshyn-P2','TH-Tshyn-P1','SimSun-ExtB','SimSun-ExtG','Hanazono Mincho B','Hanazono Mincho C';}
         .gaiji img {width: 1.1em; height: 1.1em; vertical-align: text-bottom; object-fit: contain;}        
         .juannum  {color:#008000; font-size:21px;}
         .juanname {color:#0000FF; font-weight: bold; font-size:24px;}
@@ -4240,7 +4240,11 @@ namespace CBReader
             sSutraName = CCBSutraUtil.CutJuanAfterSutraName(SutraName);
 	        sPublishDate = Series.PublishDate;
 
-	        sVerInfo = "<br><br><span id='cbeta-copyright'>\n";
+            if (sVolNum == "") {
+                sVolNum = "0";
+            }
+
+            sVerInfo = "<br><br><span id='cbeta-copyright'>\n";
 	        sVerInfo += "【典籍資訊】" ;
 	        sVerInfo += sBookName + "第 " + sVolNum + " 冊 No. " + sSutraNum + "《" + sSutraName + "》<br>\n";
 	        sVerInfo += "【版本記錄】發行日期：" + sPublishDate;
@@ -4283,7 +4287,7 @@ namespace CBReader
             //if(Application->Title == u"CBReader")
             {
                 sVerInfo += "【資料說明】" + sSourceFrom + "<br>\n";
-                sVerInfo += "【版權宣告】詳細說明請參閱【<a href='https://www.cbeta.org/copyright.php' target='_blank'>財團法人佛教電子佛典基金會資料庫版權宣告</a>】<br>\n";
+                sVerInfo += "【版權宣告】詳細說明請參閱【<a href='https://cbeta.org/copyright' target='_blank'>財團法人佛教電子佛典基金會資料庫版權宣告</a>】<br>\n";
             }
             sVerInfo += "</span><br>\n";
 

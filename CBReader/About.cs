@@ -26,7 +26,7 @@ namespace CBReader
 
         private void llbCBETAWeb_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.cbeta.org/copyright.php");
+            System.Diagnostics.Process.Start("https://cbeta.org");
         }
 
         private void llbCBETAEmail_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -36,7 +36,7 @@ namespace CBReader
 
         private void llbDonate_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.cbeta.org/donate/?utm_source=cbreader");
+            System.Diagnostics.Process.Start("https://cbeta.org/donate/?utm_source=cbreader");
         }
     }
 }

@@ -250,11 +250,12 @@ namespace CBReader
             this.tabControl.Controls.Add(this.tpBulei);
             this.tabControl.Controls.Add(this.tpBook);
             this.tabControl.Controls.Add(this.tpSutra);
-            this.tabControl.Location = new System.Drawing.Point(5, 0);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Margin = new System.Windows.Forms.Padding(5);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(437, 764);
+            this.tabControl.Size = new System.Drawing.Size(452, 769);
             this.tabControl.TabIndex = 1;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -265,7 +266,7 @@ namespace CBReader
             this.tpBulei.Margin = new System.Windows.Forms.Padding(5);
             this.tpBulei.Name = "tpBulei";
             this.tpBulei.Padding = new System.Windows.Forms.Padding(5);
-            this.tpBulei.Size = new System.Drawing.Size(429, 726);
+            this.tpBulei.Size = new System.Drawing.Size(444, 731);
             this.tpBulei.TabIndex = 0;
             this.tpBulei.Text = "tabPage1";
             this.tpBulei.UseVisualStyleBackColor = true;
@@ -273,9 +274,10 @@ namespace CBReader
             // tvBulei
             // 
             this.tvBulei.CheckBoxes = true;
+            this.tvBulei.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvBulei.FullRowSelect = true;
             this.tvBulei.HideSelection = false;
-            this.tvBulei.Location = new System.Drawing.Point(10, 10);
+            this.tvBulei.Location = new System.Drawing.Point(5, 5);
             this.tvBulei.Margin = new System.Windows.Forms.Padding(5);
             this.tvBulei.Name = "tvBulei";
             treeNode1.Name = "Node0";
@@ -349,7 +351,7 @@ namespace CBReader
             treeNode22,
             treeNode23});
             this.tvBulei.ShowLines = false;
-            this.tvBulei.Size = new System.Drawing.Size(407, 686);
+            this.tvBulei.Size = new System.Drawing.Size(434, 721);
             this.tvBulei.TabIndex = 2;
             this.tvBulei.Tag = "han";
             this.tvBulei.VisibleChanged += new System.EventHandler(this.tvBulei_VisibleChanged);
@@ -363,7 +365,7 @@ namespace CBReader
             this.tpBook.Margin = new System.Windows.Forms.Padding(5);
             this.tpBook.Name = "tpBook";
             this.tpBook.Padding = new System.Windows.Forms.Padding(5);
-            this.tpBook.Size = new System.Drawing.Size(429, 726);
+            this.tpBook.Size = new System.Drawing.Size(444, 731);
             this.tpBook.TabIndex = 1;
             this.tpBook.Text = "tabPage2";
             this.tpBook.UseVisualStyleBackColor = true;
@@ -371,8 +373,9 @@ namespace CBReader
             // tvBook
             // 
             this.tvBook.CheckBoxes = true;
+            this.tvBook.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvBook.FullRowSelect = true;
-            this.tvBook.Location = new System.Drawing.Point(10, 10);
+            this.tvBook.Location = new System.Drawing.Point(5, 5);
             this.tvBook.Margin = new System.Windows.Forms.Padding(5);
             this.tvBook.Name = "tvBook";
             treeNode24.Name = "Node1";
@@ -452,7 +455,7 @@ namespace CBReader
             treeNode47,
             treeNode48});
             this.tvBook.ShowLines = false;
-            this.tvBook.Size = new System.Drawing.Size(407, 706);
+            this.tvBook.Size = new System.Drawing.Size(434, 721);
             this.tvBook.TabIndex = 3;
             this.tvBook.Tag = "han";
             this.tvBook.VisibleChanged += new System.EventHandler(this.tvBook_VisibleChanged);
@@ -465,17 +468,18 @@ namespace CBReader
             this.tpSutra.Location = new System.Drawing.Point(4, 34);
             this.tpSutra.Name = "tpSutra";
             this.tpSutra.Padding = new System.Windows.Forms.Padding(3);
-            this.tpSutra.Size = new System.Drawing.Size(429, 726);
+            this.tpSutra.Size = new System.Drawing.Size(444, 731);
             this.tpSutra.TabIndex = 2;
             this.tpSutra.Text = "tabPage3";
             this.tpSutra.UseVisualStyleBackColor = true;
             // 
             // tvSutra
             // 
+            this.tvSutra.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvSutra.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.tvSutra.Location = new System.Drawing.Point(3, 6);
+            this.tvSutra.Location = new System.Drawing.Point(3, 3);
             this.tvSutra.Name = "tvSutra";
-            this.tvSutra.Size = new System.Drawing.Size(420, 714);
+            this.tvSutra.Size = new System.Drawing.Size(438, 725);
             this.tvSutra.TabIndex = 0;
             this.tvSutra.Tag = "han";
             this.tvSutra.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvSutra_AfterCheck);
@@ -500,7 +504,6 @@ namespace CBReader
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "SearchRangeForm";
