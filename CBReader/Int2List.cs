@@ -165,9 +165,10 @@ namespace Monster
 					tpPtr2 = ilTarget.Int2s[j];
 
 					// 找到一組
-					if((tpPtr2.x - tpPtr1.x > 0) && (tpPtr2.x - tpPtr1.y <= BeforeNum)) {
-						(int x, int y) tpNew = (tpPtr1.x, Math.Max(tpPtr1.y, tpPtr2.y));
-						tlResult.Add(tpNew);
+					if((tpPtr2.x - tpPtr1.y >= 0) && (tpPtr2.x - tpPtr1.y <= BeforeNum)) {
+                        // (int x, int y) tpNew = (tpPtr1.x, Math.Max(tpPtr1.y, tpPtr2.y));
+                        (int x, int y) tpNew = (tpPtr1.x, tpPtr2.y);
+                        tlResult.Add(tpNew);
 					} else {
 						if(tpPtr2.x - tpPtr1.y > BeforeNum) {
 							break;    // 找不到了, 換下一組

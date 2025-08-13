@@ -4286,6 +4286,10 @@ namespace CBReader
             //不管什麼版本, 都要列出版權宣告比較好
             //if(Application->Title == u"CBReader")
             {
+                // 如果 sSourceFrom 最後為 "，其他" 就改成 "，以及其他來源"
+                if (sSourceFrom.EndsWith("，其他")) {
+                    sSourceFrom = sSourceFrom.Substring(0, sSourceFrom.Length - 3) + "，以及其他來源";
+                }
                 sVerInfo += "【資料說明】" + sSourceFrom + "<br>\n";
                 sVerInfo += "【版權宣告】詳細說明請參閱【<a href='https://cbeta.org/copyright' target='_blank'>財團法人佛教電子佛典基金會資料庫版權宣告</a>】<br>\n";
             }
