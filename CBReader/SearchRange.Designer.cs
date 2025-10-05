@@ -74,8 +74,9 @@ namespace CBReader
             System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("TX 太虛大師全書");
             System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("U 洪武南藏");
             System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Y 印順法師佛學著作集");
-            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("ZS 正史佛教資料類編");
-            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("ZW 藏外佛教文獻");
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("YP 演培法師全集");
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("ZS 正史佛教資料類編");
+            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("ZW 藏外佛教文獻");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchRangeForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.listBox = new System.Windows.Forms.ListBox();
@@ -425,9 +426,11 @@ namespace CBReader
             treeNode46.Name = "Node22";
             treeNode46.Text = "Y 印順法師佛學著作集";
             treeNode47.Name = "Node23";
-            treeNode47.Text = "ZS 正史佛教資料類編";
+            treeNode47.Text = "YP 演培法師全集";
             treeNode48.Name = "Node24";
-            treeNode48.Text = "ZW 藏外佛教文獻";
+            treeNode48.Text = "ZS 正史佛教資料類編";
+            treeNode49.Name = "Node0";
+            treeNode49.Text = "ZW 藏外佛教文獻";
             this.tvBook.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode24,
             treeNode25,
@@ -453,7 +456,8 @@ namespace CBReader
             treeNode45,
             treeNode46,
             treeNode47,
-            treeNode48});
+            treeNode48,
+            treeNode49});
             this.tvBook.ShowLines = false;
             this.tvBook.Size = new System.Drawing.Size(434, 721);
             this.tvBook.TabIndex = 3;

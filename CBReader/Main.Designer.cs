@@ -30,7 +30,7 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption1 = new System.Windows.Forms.Button();
             this.pnToolBar = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
@@ -894,14 +894,14 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;
@@ -1244,7 +1244,9 @@ namespace CBReader
             "GB 中國佛寺志叢刊",
             "Y  印順法師佛學著作集",
             "LC 呂澂佛學著作集",
-            "TX 太虛大師全書"});
+            "TX 太虛大師全書",
+            "YP 演培法師全集",
+            "CC CBETA 選集"});
             this.cbFindSutraBookId.Location = new System.Drawing.Point(84, 12);
             this.cbFindSutraBookId.Name = "cbFindSutraBookId";
             this.cbFindSutraBookId.Size = new System.Drawing.Size(228, 33);
@@ -1806,7 +1808,9 @@ namespace CBReader
             "GB 中國佛寺志叢刊",
             "Y  印順法師佛學著作集",
             "LC 呂澂佛學著作集",
-            "TX 太虛大師全書"});
+            "TX 太虛大師全書",
+            "YP 演培法師全集",
+            "CC CBETA 選集"});
             this.cbGoBookBookId.Location = new System.Drawing.Point(86, 31);
             this.cbGoBookBookId.Name = "cbGoBookBookId";
             this.cbGoBookBookId.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1847,7 +1851,9 @@ namespace CBReader
             "GB 中國佛寺志叢刊",
             "Y  印順法師佛學著作集",
             "LC 呂澂佛學著作集",
-            "TX 太虛大師全書"});
+            "TX 太虛大師全書",
+            "YP 演培法師全集",
+            "CC CBETA 選集"});
             this.cbGoSutraBookId.Location = new System.Drawing.Point(86, 235);
             this.cbGoSutraBookId.Name = "cbGoSutraBookId";
             this.cbGoSutraBookId.RightToLeft = System.Windows.Forms.RightToLeft.No;
