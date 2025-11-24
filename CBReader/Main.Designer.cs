@@ -30,7 +30,7 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption1 = new System.Windows.Forms.Button();
             this.pnToolBar = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
@@ -215,8 +215,8 @@ namespace CBReader
             this.panel5 = new System.Windows.Forms.Panel();
             this.lbToc = new System.Windows.Forms.Label();
             this.splitter2 = new System.Windows.Forms.Splitter();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.WebPanel = new System.Windows.Forms.Panel();
+            this.tcWeb = new System.Windows.Forms.TabControl();
             this.tpWeb = new System.Windows.Forms.TabPage();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
@@ -253,8 +253,8 @@ namespace CBReader
             this.cmBoolean.SuspendLayout();
             this.pnMulu.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.tabControl2.SuspendLayout();
+            this.WebPanel.SuspendLayout();
+            this.tcWeb.SuspendLayout();
             this.tpWeb.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -894,14 +894,14 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;
@@ -2515,27 +2515,27 @@ namespace CBReader
             this.splitter2.TabIndex = 5;
             this.splitter2.TabStop = false;
             // 
-            // panel4
+            // WebPanel
             // 
-            this.panel4.Controls.Add(this.tabControl2);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(567, 85);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(298, 592);
-            this.panel4.TabIndex = 6;
+            this.WebPanel.Controls.Add(this.tcWeb);
+            this.WebPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.WebPanel.Location = new System.Drawing.Point(567, 85);
+            this.WebPanel.Name = "WebPanel";
+            this.WebPanel.Size = new System.Drawing.Size(298, 592);
+            this.WebPanel.TabIndex = 6;
             // 
-            // tabControl2
+            // tcWeb
             // 
-            this.tabControl2.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabControl2.Controls.Add(this.tpWeb);
-            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl2.ItemSize = new System.Drawing.Size(0, 1);
-            this.tabControl2.Location = new System.Drawing.Point(0, 0);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(298, 592);
-            this.tabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabControl2.TabIndex = 0;
+            this.tcWeb.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tcWeb.Controls.Add(this.tpWeb);
+            this.tcWeb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcWeb.ItemSize = new System.Drawing.Size(0, 1);
+            this.tcWeb.Location = new System.Drawing.Point(0, 0);
+            this.tcWeb.Name = "tcWeb";
+            this.tcWeb.SelectedIndex = 0;
+            this.tcWeb.Size = new System.Drawing.Size(298, 592);
+            this.tcWeb.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tcWeb.TabIndex = 0;
             // 
             // tpWeb
             // 
@@ -2593,7 +2593,7 @@ namespace CBReader
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(865, 677);
-            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.WebPanel);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.pnMulu);
             this.Controls.Add(this.splitter1);
@@ -2648,8 +2648,8 @@ namespace CBReader
             this.pnMulu.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
+            this.WebPanel.ResumeLayout(false);
+            this.tcWeb.ResumeLayout(false);
             this.tpWeb.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -2670,8 +2670,8 @@ namespace CBReader
         private System.Windows.Forms.TreeView tvMuluTree;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Splitter splitter2;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.Panel WebPanel;
+        private System.Windows.Forms.TabControl tcWeb;
         private System.Windows.Forms.TabPage tpWeb;
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Button btNextJuan1;

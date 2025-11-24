@@ -293,7 +293,7 @@ namespace CBReader
         }}
         @font-face {{
             font-family: CBFont;
-            unicode-range: U+2500-25ff;
+            unicode-range: U+2500-25ff, U+3000-301F;
             src: local(MingLiU), local(細明體), local(NSimSun), local('Songti TC');
         }}
         @font-face {{
@@ -413,6 +413,8 @@ namespace CBReader
         .entry .form {font-weight: bold;}
         .corr {color:#FF0000; }
         .note {color:#9F5000; font-size:18px;}
+        .inlinenote {color:#9F5000; font-size:18px;}
+        .inlinenote .lg {color:#9F5000; font-size:18px;}
         .note-focus {background-color:lightpink;}
         #div_notearea_box {position:fixed; border:1px; margin:10px; padding:10px; background-color:rgb(31, 119, 29); right:0px; bottom:0px; width:655px; height:150px; writing-mode: horizontal-tb; display:none;}
         #div_notearea_close {background-color:#ff8585;}
