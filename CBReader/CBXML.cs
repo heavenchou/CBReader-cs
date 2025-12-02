@@ -2407,7 +2407,7 @@ namespace CBReader
 
             //if(sType == "normal") LgNormal = true;		// lg 的 type 是 normal
             //if(sType == "abnormal") LgNormal = false;    // 因為舊版有 type=inline
-            if (sSubType == "note1" || sSubType == "note2") {   // 在偈誦前後要加小括號
+            if (sSubType == "note1" || sSubType == "note2" || sRend.IndexOf("inlinenote") >= 0) {   // 在偈誦前後要加小括號
                 //LgNormal = true;
                 bIsNote = true;
             }
@@ -2538,12 +2538,12 @@ namespace CBReader
                 }
             }
 
-            sHtml += "<span class='lg'";// 偈頌折行
+            sHtml += "<span class='lg";// 偈頌折行
             if (!bIsNote) {
-                sHtml += ">";
+                sHtml += "'>";
             } else {
                 // type 是 note1 or note2 要在偈誦前後要加括號以及變成小字
-                sHtml += " style='font-size:18px;'>(";
+                sHtml += " inlinenote'>(";
             }
 
             // -----------------------------------
