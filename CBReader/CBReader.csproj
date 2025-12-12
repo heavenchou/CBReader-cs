@@ -336,11 +336,25 @@
     <Compile Include="StyleAttr.cs" />
     <Compile Include="SubUtil.cs" />
     <Compile Include="Theme.cs" />
+    <Compile Include="ToolBoxItem.cs" />
+    <Compile Include="ToolBoxManager.cs" />
     <Compile Include="Update.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Update.Designer.cs">
       <DependentUpon>Update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebView2Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WebView2Form.Designer.cs">
+      <DependentUpon>WebView2Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebView2Host.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WebView2Host.Designer.cs">
+      <DependentUpon>WebView2Host.cs</DependentUpon>
     </Compile>
     <Compile Include="WebViewBridge.cs" />
     <Compile Include="WordData.cs" />
@@ -379,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Update.resx">
       <DependentUpon>Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WebView2Form.resx">
+      <DependentUpon>WebView2Form.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="packages.config" />

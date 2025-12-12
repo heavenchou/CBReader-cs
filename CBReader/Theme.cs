@@ -220,14 +220,17 @@ namespace CBReader
                     c.ForeColor = newColors.GroupBoxText;   //???? 不知有些沒變色？所以才用此行
                 }
             } else if (c is TabControl) {
+                if (IsDarkMode) {
+                    ((TabControl)c).DrawMode = TabDrawMode.OwnerDrawFixed;
+                } else {
+                    ((TabControl)c).DrawMode = TabDrawMode.Normal;
+                }
                 for (int i = 0; i < ((TabControl)c).TabCount; i++) {
                     TabPage tp = ((TabControl)c).TabPages[i];
                     if(IsDarkMode) {
                         tp.BackColor = darkColors.TabPageBack;
-                        ((TabControl)c).DrawMode = TabDrawMode.OwnerDrawFixed;
                     } else {
                         tp.BackColor = lightColors.TabPageBack;
-                        ((TabControl)c).DrawMode = TabDrawMode.Normal;
                     }
                 }
             } else if (c is TreeView) {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -66,6 +67,9 @@ namespace CBReader
 
         static public float scaleFactor = 1.0f;        // windows 縮放比
 
+        // WebView2 的環境
+        public static CoreWebView2Environment ShareEnv;
+        public static MainForm MainForm;
 
         // 設定目錄初值
         static public void initialPath()

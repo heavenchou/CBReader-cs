@@ -30,7 +30,7 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption1 = new System.Windows.Forms.Button();
             this.pnToolBar = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
@@ -165,6 +165,9 @@ namespace CBReader
             this.btEditBookmark = new System.Windows.Forms.Button();
             this.btAddBookmark = new System.Windows.Forms.Button();
             this.btAddBookmarkFolder = new System.Windows.Forms.Button();
+            this.tpToolbox = new System.Windows.Forms.TabPage();
+            this.pnToolbox = new System.Windows.Forms.Panel();
+            this.btChangeCardSize = new System.Windows.Forms.Button();
             this.tpSearch = new System.Windows.Forms.TabPage();
             this.panel11 = new System.Windows.Forms.Panel();
             this.sgTextSearch = new System.Windows.Forms.DataGridView();
@@ -219,6 +222,8 @@ namespace CBReader
             this.tcWeb = new System.Windows.Forms.TabControl();
             this.tpWeb = new System.Windows.Forms.TabPage();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.webSplitter = new System.Windows.Forms.Splitter();
+            this.tcToolbox = new System.Windows.Forms.TabControl();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.saveBookmarkDialog = new System.Windows.Forms.SaveFileDialog();
@@ -245,6 +250,8 @@ namespace CBReader
             this.tpBookmark.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tpToolbox.SuspendLayout();
+            this.pnToolbox.SuspendLayout();
             this.tpSearch.SuspendLayout();
             this.panel11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sgTextSearch)).BeginInit();
@@ -285,7 +292,7 @@ namespace CBReader
             this.pnToolBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnToolBar.Location = new System.Drawing.Point(0, 0);
             this.pnToolBar.Name = "pnToolBar";
-            this.pnToolBar.Size = new System.Drawing.Size(865, 85);
+            this.pnToolBar.Size = new System.Drawing.Size(1075, 85);
             this.pnToolBar.TabIndex = 1;
             // 
             // toolStripContainer
@@ -294,13 +301,13 @@ namespace CBReader
             // 
             // toolStripContainer.ContentPanel
             // 
-            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(865, 0);
+            this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(1075, 0);
             this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer.LeftToolStripPanelVisible = false;
             this.toolStripContainer.Location = new System.Drawing.Point(0, 30);
             this.toolStripContainer.Name = "toolStripContainer";
             this.toolStripContainer.RightToolStripPanelVisible = false;
-            this.toolStripContainer.Size = new System.Drawing.Size(865, 55);
+            this.toolStripContainer.Size = new System.Drawing.Size(1075, 55);
             this.toolStripContainer.TabIndex = 7;
             this.toolStripContainer.Text = "toolStripContainer1";
             // 
@@ -593,7 +600,7 @@ namespace CBReader
             // 
             this.btTheme1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btTheme1.Font = new System.Drawing.Font("新細明體", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btTheme1.Location = new System.Drawing.Point(811, 74);
+            this.btTheme1.Location = new System.Drawing.Point(1021, 74);
             this.btTheme1.Name = "btTheme1";
             this.btTheme1.Size = new System.Drawing.Size(47, 40);
             this.btTheme1.TabIndex = 6;
@@ -664,28 +671,28 @@ namespace CBReader
             this.miAdmin});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(865, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1075, 30);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // miOption
             // 
             this.miOption.Name = "miOption";
-            this.miOption.Size = new System.Drawing.Size(53, 26);
+            this.miOption.Size = new System.Drawing.Size(53, 23);
             this.miOption.Text = "設定";
             this.miOption.Click += new System.EventHandler(this.miOption_Click);
             // 
             // miUpdate
             // 
             this.miUpdate.Name = "miUpdate";
-            this.miUpdate.Size = new System.Drawing.Size(83, 26);
+            this.miUpdate.Size = new System.Drawing.Size(83, 23);
             this.miUpdate.Text = "更新檢查";
             this.miUpdate.Click += new System.EventHandler(this.miUpdate_Click);
             // 
             // miLanguage
             // 
             this.miLanguage.Name = "miLanguage";
-            this.miLanguage.Size = new System.Drawing.Size(133, 26);
+            this.miLanguage.Size = new System.Drawing.Size(133, 23);
             this.miLanguage.Text = "語言(Language)";
             // 
             // miToolStrip
@@ -694,7 +701,7 @@ namespace CBReader
             this.miMainToolStrip,
             this.miSutraToolStrip});
             this.miToolStrip.Name = "miToolStrip";
-            this.miToolStrip.Size = new System.Drawing.Size(68, 26);
+            this.miToolStrip.Size = new System.Drawing.Size(68, 23);
             this.miToolStrip.Text = "工具列";
             // 
             // miMainToolStrip
@@ -718,7 +725,7 @@ namespace CBReader
             // miAbout
             // 
             this.miAbout.Name = "miAbout";
-            this.miAbout.Size = new System.Drawing.Size(53, 26);
+            this.miAbout.Size = new System.Drawing.Size(53, 23);
             this.miAbout.Text = "關於";
             this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
@@ -760,7 +767,7 @@ namespace CBReader
             this.pnMainFunc.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnMainFunc.Location = new System.Drawing.Point(0, 85);
             this.pnMainFunc.Name = "pnMainFunc";
-            this.pnMainFunc.Size = new System.Drawing.Size(364, 592);
+            this.pnMainFunc.Size = new System.Drawing.Size(431, 592);
             this.pnMainFunc.TabIndex = 2;
             // 
             // MainFunc
@@ -769,6 +776,7 @@ namespace CBReader
             this.MainFunc.Controls.Add(this.tpBibl);
             this.MainFunc.Controls.Add(this.tpGoto);
             this.MainFunc.Controls.Add(this.tpBookmark);
+            this.MainFunc.Controls.Add(this.tpToolbox);
             this.MainFunc.Controls.Add(this.tpSearch);
             this.MainFunc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainFunc.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -776,7 +784,7 @@ namespace CBReader
             this.MainFunc.Location = new System.Drawing.Point(0, 0);
             this.MainFunc.Name = "MainFunc";
             this.MainFunc.SelectedIndex = 0;
-            this.MainFunc.Size = new System.Drawing.Size(364, 592);
+            this.MainFunc.Size = new System.Drawing.Size(431, 592);
             this.MainFunc.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.MainFunc.TabIndex = 0;
             this.MainFunc.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.MainFunc_DrawItem);
@@ -791,7 +799,7 @@ namespace CBReader
             this.tpCatalog.Location = new System.Drawing.Point(4, 30);
             this.tpCatalog.Name = "tpCatalog";
             this.tpCatalog.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCatalog.Size = new System.Drawing.Size(356, 558);
+            this.tpCatalog.Size = new System.Drawing.Size(423, 558);
             this.tpCatalog.TabIndex = 0;
             this.tpCatalog.Text = "目錄";
             // 
@@ -801,7 +809,7 @@ namespace CBReader
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(3, 53);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(350, 502);
+            this.panel7.Size = new System.Drawing.Size(417, 502);
             this.panel7.TabIndex = 1;
             // 
             // tvNavTree
@@ -815,7 +823,7 @@ namespace CBReader
             this.tvNavTree.Name = "tvNavTree";
             this.tvNavTree.SelectedImageKey = "openbook.ico";
             this.tvNavTree.ShowNodeToolTips = true;
-            this.tvNavTree.Size = new System.Drawing.Size(350, 502);
+            this.tvNavTree.Size = new System.Drawing.Size(417, 502);
             this.tvNavTree.TabIndex = 1;
             this.tvNavTree.Tag = "han";
             this.tvNavTree.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvNavTree_KeyDown);
@@ -837,7 +845,7 @@ namespace CBReader
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(3, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(350, 50);
+            this.panel6.Size = new System.Drawing.Size(417, 50);
             this.panel6.TabIndex = 0;
             // 
             // btOpenNav
@@ -861,7 +869,7 @@ namespace CBReader
             this.tpBibl.Location = new System.Drawing.Point(4, 30);
             this.tpBibl.Name = "tpBibl";
             this.tpBibl.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBibl.Size = new System.Drawing.Size(356, 558);
+            this.tpBibl.Size = new System.Drawing.Size(423, 558);
             this.tpBibl.TabIndex = 1;
             this.tpBibl.Text = "書目";
             // 
@@ -871,7 +879,7 @@ namespace CBReader
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel12.Location = new System.Drawing.Point(3, 252);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(350, 303);
+            this.panel12.Size = new System.Drawing.Size(417, 303);
             this.panel12.TabIndex = 3;
             // 
             // sgFindSutra
@@ -894,19 +902,19 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;
             this.sgFindSutra.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.sgFindSutra.Size = new System.Drawing.Size(350, 303);
+            this.sgFindSutra.Size = new System.Drawing.Size(417, 303);
             this.sgFindSutra.TabIndex = 8;
             this.sgFindSutra.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sgFindSutra_CellDoubleClick);
             this.sgFindSutra.Paint += new System.Windows.Forms.PaintEventHandler(this.sgFindSutra_Paint);
@@ -983,7 +991,7 @@ namespace CBReader
             this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter3.Location = new System.Drawing.Point(3, 249);
             this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(350, 3);
+            this.splitter3.Size = new System.Drawing.Size(417, 3);
             this.splitter3.TabIndex = 2;
             this.splitter3.TabStop = false;
             // 
@@ -1011,7 +1019,7 @@ namespace CBReader
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(3, 3);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(350, 246);
+            this.panel8.Size = new System.Drawing.Size(417, 246);
             this.panel8.TabIndex = 1;
             // 
             // cbFindSutraByline
@@ -1096,7 +1104,7 @@ namespace CBReader
             // 
             this.btMainFuncNarrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btMainFuncNarrow.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btMainFuncNarrow.Location = new System.Drawing.Point(284, 211);
+            this.btMainFuncNarrow.Location = new System.Drawing.Point(351, 211);
             this.btMainFuncNarrow.Name = "btMainFuncNarrow";
             this.btMainFuncNarrow.Size = new System.Drawing.Size(28, 29);
             this.btMainFuncNarrow.TabIndex = 16;
@@ -1110,7 +1118,7 @@ namespace CBReader
             // 
             this.btMainFuncWide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btMainFuncWide.Font = new System.Drawing.Font("微軟正黑體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btMainFuncWide.Location = new System.Drawing.Point(318, 211);
+            this.btMainFuncWide.Location = new System.Drawing.Point(385, 211);
             this.btMainFuncWide.Name = "btMainFuncWide";
             this.btMainFuncWide.Size = new System.Drawing.Size(28, 29);
             this.btMainFuncWide.TabIndex = 15;
@@ -1263,7 +1271,7 @@ namespace CBReader
             this.tpGoto.Location = new System.Drawing.Point(4, 30);
             this.tpGoto.Name = "tpGoto";
             this.tpGoto.Padding = new System.Windows.Forms.Padding(3);
-            this.tpGoto.Size = new System.Drawing.Size(356, 558);
+            this.tpGoto.Size = new System.Drawing.Size(423, 558);
             this.tpGoto.TabIndex = 2;
             this.tpGoto.Text = "前往";
             // 
@@ -1308,7 +1316,7 @@ namespace CBReader
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(3, 3);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(350, 552);
+            this.panel9.Size = new System.Drawing.Size(417, 552);
             this.panel9.TabIndex = 1;
             // 
             // cbGoByKeyword
@@ -1577,7 +1585,7 @@ namespace CBReader
             this.panel3.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.panel3.Location = new System.Drawing.Point(2, 393);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(340, 10);
+            this.panel3.Size = new System.Drawing.Size(407, 10);
             this.panel3.TabIndex = 32;
             // 
             // panel2
@@ -1588,7 +1596,7 @@ namespace CBReader
             this.panel2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.panel2.Location = new System.Drawing.Point(2, 193);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(340, 10);
+            this.panel2.Size = new System.Drawing.Size(407, 10);
             this.panel2.TabIndex = 31;
             // 
             // btGoByKeyword
@@ -1871,7 +1879,7 @@ namespace CBReader
             this.tpBookmark.Location = new System.Drawing.Point(4, 30);
             this.tpBookmark.Name = "tpBookmark";
             this.tpBookmark.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBookmark.Size = new System.Drawing.Size(356, 558);
+            this.tpBookmark.Size = new System.Drawing.Size(423, 558);
             this.tpBookmark.TabIndex = 4;
             this.tpBookmark.Text = "書籤";
             this.tpBookmark.UseVisualStyleBackColor = true;
@@ -1882,7 +1890,7 @@ namespace CBReader
             this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel13.Location = new System.Drawing.Point(3, 51);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(350, 504);
+            this.panel13.Size = new System.Drawing.Size(417, 504);
             this.panel13.TabIndex = 1;
             // 
             // tvBookmark
@@ -1896,7 +1904,7 @@ namespace CBReader
             this.tvBookmark.Location = new System.Drawing.Point(0, 0);
             this.tvBookmark.Name = "tvBookmark";
             this.tvBookmark.SelectedImageIndex = 0;
-            this.tvBookmark.Size = new System.Drawing.Size(350, 504);
+            this.tvBookmark.Size = new System.Drawing.Size(417, 504);
             this.tvBookmark.TabIndex = 0;
             this.tvBookmark.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tvBookmark_ItemDrag);
             this.tvBookmark.DragDrop += new System.Windows.Forms.DragEventHandler(this.tvBookmark_DragDrop);
@@ -1927,7 +1935,7 @@ namespace CBReader
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(350, 48);
+            this.panel1.Size = new System.Drawing.Size(417, 48);
             this.panel1.TabIndex = 0;
             // 
             // btImportBookmark
@@ -2007,6 +2015,38 @@ namespace CBReader
             this.btAddBookmarkFolder.UseVisualStyleBackColor = true;
             this.btAddBookmarkFolder.Click += new System.EventHandler(this.btAddBookmarkFolder_Click);
             // 
+            // tpToolbox
+            // 
+            this.tpToolbox.AutoScroll = true;
+            this.tpToolbox.Controls.Add(this.pnToolbox);
+            this.tpToolbox.Location = new System.Drawing.Point(4, 30);
+            this.tpToolbox.Name = "tpToolbox";
+            this.tpToolbox.Padding = new System.Windows.Forms.Padding(3);
+            this.tpToolbox.Size = new System.Drawing.Size(423, 558);
+            this.tpToolbox.TabIndex = 5;
+            this.tpToolbox.Text = "工具箱";
+            this.tpToolbox.UseVisualStyleBackColor = true;
+            // 
+            // pnToolbox
+            // 
+            this.pnToolbox.Controls.Add(this.btChangeCardSize);
+            this.pnToolbox.Location = new System.Drawing.Point(3, 3);
+            this.pnToolbox.Name = "pnToolbox";
+            this.pnToolbox.Size = new System.Drawing.Size(417, 42);
+            this.pnToolbox.TabIndex = 0;
+            // 
+            // btChangeCardSize
+            // 
+            this.btChangeCardSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btChangeCardSize.Location = new System.Drawing.Point(380, 4);
+            this.btChangeCardSize.Name = "btChangeCardSize";
+            this.btChangeCardSize.Size = new System.Drawing.Size(34, 33);
+            this.btChangeCardSize.TabIndex = 0;
+            this.btChangeCardSize.Text = "🛠️";
+            this.toolTip1.SetToolTip(this.btChangeCardSize, "調整尺寸");
+            this.btChangeCardSize.UseVisualStyleBackColor = true;
+            this.btChangeCardSize.Click += new System.EventHandler(this.btChangeCardSize_Click);
+            // 
             // tpSearch
             // 
             this.tpSearch.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -2016,7 +2056,7 @@ namespace CBReader
             this.tpSearch.Location = new System.Drawing.Point(4, 30);
             this.tpSearch.Name = "tpSearch";
             this.tpSearch.Padding = new System.Windows.Forms.Padding(3);
-            this.tpSearch.Size = new System.Drawing.Size(356, 558);
+            this.tpSearch.Size = new System.Drawing.Size(423, 558);
             this.tpSearch.TabIndex = 3;
             this.tpSearch.Text = "全文檢索";
             // 
@@ -2026,7 +2066,7 @@ namespace CBReader
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel11.Location = new System.Drawing.Point(3, 240);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(350, 315);
+            this.panel11.Size = new System.Drawing.Size(417, 315);
             this.panel11.TabIndex = 3;
             // 
             // sgTextSearch
@@ -2054,7 +2094,7 @@ namespace CBReader
             this.sgTextSearch.RowHeadersWidth = 51;
             this.sgTextSearch.RowTemplate.Height = 27;
             this.sgTextSearch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.sgTextSearch.Size = new System.Drawing.Size(350, 315);
+            this.sgTextSearch.Size = new System.Drawing.Size(417, 315);
             this.sgTextSearch.TabIndex = 6;
             this.sgTextSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.sgTextSearch_CellDoubleClick);
             this.sgTextSearch.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.sgTextSearch_CellMouseDown);
@@ -2207,7 +2247,7 @@ namespace CBReader
             this.splitter4.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitter4.Location = new System.Drawing.Point(3, 237);
             this.splitter4.Name = "splitter4";
-            this.splitter4.Size = new System.Drawing.Size(350, 3);
+            this.splitter4.Size = new System.Drawing.Size(417, 3);
             this.splitter4.TabIndex = 2;
             this.splitter4.TabStop = false;
             // 
@@ -2231,14 +2271,14 @@ namespace CBReader
             this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel10.Location = new System.Drawing.Point(3, 3);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(350, 234);
+            this.panel10.Size = new System.Drawing.Size(417, 234);
             this.panel10.TabIndex = 1;
             // 
             // btSearchListMenu
             // 
             this.btSearchListMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btSearchListMenu.Font = new System.Drawing.Font("細明體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btSearchListMenu.Location = new System.Drawing.Point(258, 202);
+            this.btSearchListMenu.Location = new System.Drawing.Point(325, 202);
             this.btSearchListMenu.Name = "btSearchListMenu";
             this.btSearchListMenu.Size = new System.Drawing.Size(29, 25);
             this.btSearchListMenu.TabIndex = 26;
@@ -2310,7 +2350,7 @@ namespace CBReader
             // 
             this.btMainFuncNarrow2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btMainFuncNarrow2.Font = new System.Drawing.Font("細明體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btMainFuncNarrow2.Location = new System.Drawing.Point(289, 202);
+            this.btMainFuncNarrow2.Location = new System.Drawing.Point(356, 202);
             this.btMainFuncNarrow2.Name = "btMainFuncNarrow2";
             this.btMainFuncNarrow2.Size = new System.Drawing.Size(29, 25);
             this.btMainFuncNarrow2.TabIndex = 20;
@@ -2324,7 +2364,7 @@ namespace CBReader
             // 
             this.btMainFuncWide2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btMainFuncWide2.Font = new System.Drawing.Font("新細明體", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btMainFuncWide2.Location = new System.Drawing.Point(318, 202);
+            this.btMainFuncWide2.Location = new System.Drawing.Point(385, 202);
             this.btMainFuncWide2.Name = "btMainFuncWide2";
             this.btMainFuncWide2.Size = new System.Drawing.Size(29, 25);
             this.btMainFuncWide2.TabIndex = 19;
@@ -2458,7 +2498,7 @@ namespace CBReader
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(364, 85);
+            this.splitter1.Location = new System.Drawing.Point(431, 85);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(3, 592);
             this.splitter1.TabIndex = 3;
@@ -2469,7 +2509,7 @@ namespace CBReader
             this.pnMulu.Controls.Add(this.tvMuluTree);
             this.pnMulu.Controls.Add(this.panel5);
             this.pnMulu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnMulu.Location = new System.Drawing.Point(367, 85);
+            this.pnMulu.Location = new System.Drawing.Point(434, 85);
             this.pnMulu.Name = "pnMulu";
             this.pnMulu.Size = new System.Drawing.Size(197, 592);
             this.pnMulu.TabIndex = 4;
@@ -2509,7 +2549,7 @@ namespace CBReader
             // 
             // splitter2
             // 
-            this.splitter2.Location = new System.Drawing.Point(564, 85);
+            this.splitter2.Location = new System.Drawing.Point(631, 85);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(3, 592);
             this.splitter2.TabIndex = 5;
@@ -2518,10 +2558,12 @@ namespace CBReader
             // WebPanel
             // 
             this.WebPanel.Controls.Add(this.tcWeb);
+            this.WebPanel.Controls.Add(this.webSplitter);
+            this.WebPanel.Controls.Add(this.tcToolbox);
             this.WebPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.WebPanel.Location = new System.Drawing.Point(567, 85);
+            this.WebPanel.Location = new System.Drawing.Point(634, 85);
             this.WebPanel.Name = "WebPanel";
-            this.WebPanel.Size = new System.Drawing.Size(298, 592);
+            this.WebPanel.Size = new System.Drawing.Size(441, 592);
             this.WebPanel.TabIndex = 6;
             // 
             // tcWeb
@@ -2533,7 +2575,7 @@ namespace CBReader
             this.tcWeb.Location = new System.Drawing.Point(0, 0);
             this.tcWeb.Name = "tcWeb";
             this.tcWeb.SelectedIndex = 0;
-            this.tcWeb.Size = new System.Drawing.Size(298, 592);
+            this.tcWeb.Size = new System.Drawing.Size(339, 592);
             this.tcWeb.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcWeb.TabIndex = 0;
             // 
@@ -2543,7 +2585,7 @@ namespace CBReader
             this.tpWeb.Location = new System.Drawing.Point(4, 5);
             this.tpWeb.Name = "tpWeb";
             this.tpWeb.Padding = new System.Windows.Forms.Padding(3);
-            this.tpWeb.Size = new System.Drawing.Size(290, 583);
+            this.tpWeb.Size = new System.Drawing.Size(331, 583);
             this.tpWeb.TabIndex = 1;
             this.tpWeb.Text = "tabPage4";
             this.tpWeb.UseVisualStyleBackColor = true;
@@ -2554,9 +2596,33 @@ namespace CBReader
             this.webBrowser.Location = new System.Drawing.Point(3, 3);
             this.webBrowser.MinimumSize = new System.Drawing.Size(24, 27);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(284, 577);
+            this.webBrowser.Size = new System.Drawing.Size(325, 577);
             this.webBrowser.TabIndex = 0;
             this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_DocumentCompleted);
+            // 
+            // webSplitter
+            // 
+            this.webSplitter.Dock = System.Windows.Forms.DockStyle.Right;
+            this.webSplitter.Location = new System.Drawing.Point(339, 0);
+            this.webSplitter.Name = "webSplitter";
+            this.webSplitter.Size = new System.Drawing.Size(3, 592);
+            this.webSplitter.TabIndex = 1;
+            this.webSplitter.TabStop = false;
+            this.webSplitter.Visible = false;
+            // 
+            // tcToolbox
+            // 
+            this.tcToolbox.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tcToolbox.Location = new System.Drawing.Point(342, 0);
+            this.tcToolbox.Name = "tcToolbox";
+            this.tcToolbox.SelectedIndex = 0;
+            this.tcToolbox.Size = new System.Drawing.Size(99, 592);
+            this.tcToolbox.TabIndex = 2;
+            this.tcToolbox.Visible = false;
+            this.tcToolbox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.MainFunc_DrawItem);
+            this.tcToolbox.VisibleChanged += new System.EventHandler(this.tcToolbox_VisibleChanged);
+            this.tcToolbox.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.tcToolbox_ControlAdded);
+            this.tcToolbox.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.tcToolbox_ControlRemoved);
             // 
             // toolTip1
             // 
@@ -2592,7 +2658,7 @@ namespace CBReader
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(865, 677);
+            this.ClientSize = new System.Drawing.Size(1075, 677);
             this.Controls.Add(this.WebPanel);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.pnMulu);
@@ -2638,6 +2704,8 @@ namespace CBReader
             this.tpBookmark.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.tpToolbox.ResumeLayout(false);
+            this.pnToolbox.ResumeLayout(false);
             this.tpSearch.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sgTextSearch)).EndInit();
@@ -2851,6 +2919,11 @@ namespace CBReader
         private System.Windows.Forms.ToolStripButton btPrevJuan;
         private System.Windows.Forms.ToolStripButton btNextJuan;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.TabControl tcToolbox;
+        private System.Windows.Forms.Splitter webSplitter;
+        private System.Windows.Forms.TabPage tpToolbox;
+        private System.Windows.Forms.Panel pnToolbox;
+        private System.Windows.Forms.Button btChangeCardSize;
     }
 }
 

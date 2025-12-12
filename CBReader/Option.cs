@@ -442,6 +442,17 @@ namespace CBReader
 
         private void btSelectContentStyles_Click(object sender, EventArgs e)
         {
+            selectContentStylesFileDialog.InitialDirectory = CGlobalVal.MyContentStylesPath;
+
+            // 如果 edCSSFileName.Text 有值，就從該目錄開始選擇
+            if (edCSSFileName.Text != "") {
+                string path = System.IO.Path.GetDirectoryName(edCSSFileName.Text);
+                // 判斷 path 是否存在
+                if (System.IO.Directory.Exists(path)) {
+                    selectContentStylesFileDialog.InitialDirectory = path;
+                }
+            }
+
             if (selectContentStylesFileDialog.ShowDialog() == DialogResult.OK) {
                 edCSSFileName.Text = selectContentStylesFileDialog.FileName;
                 cbUseCSSFile.Checked = true;
