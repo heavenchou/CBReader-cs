@@ -443,16 +443,20 @@ namespace CBReader
                             .ToArray();
 
             // 暫時停止版面更新，以減少閃爍
-            tpToolbox.SuspendLayout();
+            pnToolboxClient.SuspendLayout();
 
-            tpToolbox.Controls.Clear();
+            pnToolboxClient.Controls.Clear();
             int i = 0;
             foreach (var g in groups.Reverse()) { // 修正：加上括號呼叫 Reverse() 方法
-                var groupPanel = new FlowLayoutPanel { Name = $"group_{i}", AutoSize = true, WrapContents = true };
+                var groupPanel = new FlowLayoutPanel { 
+                    Name = $"group_{i}", 
+                    AutoSize = true, 
+                    WrapContents = true
+                };
                 // 建立標題
                 var lblGroupTitle = new Label {
                     AutoSize = false,
-                    Width = tpToolbox.Width - 20,
+                    Width = pnToolboxClient.Width - 20,
                     Height = 30,
                     Text = g,
                     Font = new Font(SystemFonts.DefaultFont.FontFamily, 12, FontStyle.Bold),
@@ -462,7 +466,7 @@ namespace CBReader
                     //BackColor = SystemColors.ButtonHighlight
                 };
                 var pnGroupTitle = new Panel {
-                    Width = tpToolbox.Width - 20,
+                    Width = pnToolboxClient.Width - 20,
                     Height = 30,
                     Dock = DockStyle.Top,
                     BackColor = Color.LightGray
@@ -472,17 +476,16 @@ namespace CBReader
                     var card = DrawToolboxCard(item); // 圖示、名稱、說明、釘選開關、顯示位置開關、測試按鈕
                     groupPanel.Controls.Add(card);
                 }
-                tpToolbox.Controls.Add(groupPanel);
+                pnToolboxClient.Controls.Add(groupPanel);
                 groupPanel.Dock = DockStyle.Top;
-                //tpToolbox.Controls.Add(lblGroupTitle);
+                //pnToolboxClient.Controls.Add(lblGroupTitle);
                 //lblGroupTitle.Dock = DockStyle.Top;
-                tpToolbox.Controls.Add(pnGroupTitle);
+                pnToolboxClient.Controls.Add(pnGroupTitle);
                 pnGroupTitle.Controls.Add(lblGroupTitle);
                 lblGroupTitle.Dock = DockStyle.Fill;
+                toolTip1.SetToolTip(groupPanel, "【開啟工具箱方式】\nClick:開啟並列視窗\n+Shift:開啟小視窗\n+Ctrl:開啟內建瀏覽器");
             }
-            pnToolbox.Dock = DockStyle.Top;
-            tpToolbox.Controls.Add(pnToolbox);
-            tpToolbox.ResumeLayout();
+            pnToolboxClient.ResumeLayout();
         }
 
         // ----- 卡片建構 -----
@@ -1040,7 +1043,8 @@ window.onload=function(){{
             await webView.EnsureCoreWebView2Async(webView2Environment);
             // 檢查是否開啟 target="_blank" 的網址
             webView.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
-            
+            // 右鍵選單事件
+            webView.CoreWebView2.ContextMenuRequested += CoreWebView2_ContextMenuRequested;
             // 向網頁提供可呼叫的類別 WebViewClass，第一個參數是名稱，第二個參數是類別實體
             webView.CoreWebView2.AddHostObjectToScript("webViewBridge", new WebViewBridge());
         }
@@ -1055,6 +1059,99 @@ window.onload=function(){{
             // 使用系統預設瀏覽器開啟網址
             System.Diagnostics.Process.Start(newWindowUri);
         }
+
+        // 自訂右鍵選單
+        private void CoreWebView2_ContextMenuRequested(object sender, CoreWebView2ContextMenuRequestedEventArgs e)
+        {
+            // 建立一個自訂選單項目（例：搜尋選取文字）
+            if (e.ContextMenuTarget.HasSelection) {
+                // -----------------------------------------------
+                // 引用複製功能
+                var searchItem = webView.CoreWebView2.Environment.CreateContextMenuItem(
+                    "引用複製",
+                    null,
+                    CoreWebView2ContextMenuItemKind.Command);
+                searchItem.CustomItemSelected += async (s, ev) => {
+                    _ = webView.CoreWebView2.ExecuteScriptAsync("CBCopy.go()");
+                };
+                e.MenuItems.Insert(0, searchItem);
+
+                // -----------------------------------------------
+                // 書籤功能
+                searchItem = webView.CoreWebView2.Environment.CreateContextMenuItem(
+                    "加入書籤",
+                    null,
+                    CoreWebView2ContextMenuItemKind.Command);
+                searchItem.CustomItemSelected += async (s, ev) => {
+                    tbsAddBookmark_Click(s, null);
+                };
+                e.MenuItems.Insert(0, searchItem);
+
+                // -----------------------------------------------
+                // 底下順序要反過來加，因為是插入到最前面
+                AddContextMenuItem(e, "--", "--");
+                AddContextMenuItem(e, "線上討論與問題回報", "討論與回報");
+                AddContextMenuItem(e, "古籍酷 AI 自動標點", "AI 自動標點");
+                AddContextMenuItem(e, "Dharmamitra 白話翻譯", "Dharmamitra");
+                AddContextMenuItem(e, "--", "--");
+                AddContextMenuItem(e, "開啟大正藏圖檔", "大正藏圖檔");
+                AddContextMenuItem(e, "開啟 CBETA Online", "CBETA Online");
+                AddContextMenuItem(e, "--", "--");
+                AddContextMenuItem(e, "查詢異體字字典", "異體字字典");
+                AddContextMenuItem(e, "查詢一行辭典", "一行辭典");
+                AddContextMenuItem(e, "查詢佛光大辭典", "佛光大辭典");
+
+            } else {
+                // 沒選文字時
+                // 底下順序要反過來加，因為是插入到最前面
+                AddContextMenuItem(e, "--", "--");
+                AddContextMenuItem(e, "護持正法佛典永續", "護持佛典永續");
+                AddContextMenuItem(e, "線上討論與問題回報", "討論與回報");
+                AddContextMenuItem(e, "--", "--");
+                AddContextMenuItem(e, "本經相關書目", "本經相關書目");
+                AddContextMenuItem(e, "本經相關論文", "本經相關論文");
+                AddContextMenuItem(e, "開啟大正藏圖檔", "大正藏圖檔");
+                AddContextMenuItem(e, "開啟 CBETA Online", "CBETA Online");
+                AddContextMenuItem(e, "--", "--");
+                AddContextMenuItem(e, "開啟異體字字典", "異體字字典");
+                AddContextMenuItem(e, "開啟一行辭典", "一行辭典");
+                AddContextMenuItem(e, "開啟佛光大辭典", "佛光大辭典");
+
+            }
+        }
+
+        // 將加入選單項目獨立成方法
+        private void AddContextMenuItem(CoreWebView2ContextMenuRequestedEventArgs e, string itemTitle, string toolTitle)
+        {
+            // 如果 itemTitle 是 "--" ，表示加入分隔線
+            if (itemTitle == "--") {
+                var separator = webView.CoreWebView2.Environment.CreateContextMenuItem(
+                    "",
+                    null,
+                    CoreWebView2ContextMenuItemKind.Separator);
+                e.MenuItems.Insert(0, separator);
+                return;
+            }
+
+            // 先判斷 toolboxManager.toolbox 有沒有 "佛光大辭典"
+            if (toolboxManager.toolbox.Any(x => x.Title == toolTitle)) {
+                var searchItem = webView.CoreWebView2.Environment.CreateContextMenuItem(
+                    itemTitle,
+                    null,
+                    CoreWebView2ContextMenuItemKind.Command);
+                searchItem.CustomItemSelected += async (s, ev) => {
+                    // mode 是目前按下的鍵
+                    var mode = ModifierKeys;
+                    openToolCard(
+                        toolboxManager.toolbox.First(x => x.Title == toolTitle),
+                        mode);
+                };
+                // 加到原生選單前面或後面都可以
+                e.MenuItems.Insert(0, searchItem);
+            }
+        }
+
+
 
         // 將檔案載入導覽樹
         void LoadNavTree(string sFile)
@@ -3636,7 +3733,7 @@ window.onload=function(){{
         // 更換卡片大小
         public void changeToolboxCardSize(int size)
         {
-            tpToolbox.SuspendLayout();
+            pnToolboxClient.SuspendLayout();
             foreach (var card in toolboxManager.toolbox) {
                 if (size == 3) {
                     card.panel.Width = 300;
@@ -3674,7 +3771,7 @@ window.onload=function(){{
                     card.lbDescription.Visible = false;
                 }
             }
-            tpToolbox.ResumeLayout();
+            pnToolboxClient.ResumeLayout();
         }
 
         private void tcToolbox_VisibleChanged(object sender, EventArgs e)

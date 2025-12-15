@@ -66,9 +66,11 @@ namespace WebLink
 
 
             btClose = new Button {
-                Text = "X",
+                Text = "╳",
                 Width = 30,
                 Height = 30,
+                BackColor = System.Drawing.Color.Red,
+                ForeColor = System.Drawing.Color.White,
                 Left = this.ClientSize.Width - Width,
                 Top = 0,
                 Anchor = AnchorStyles.Top | AnchorStyles.Right

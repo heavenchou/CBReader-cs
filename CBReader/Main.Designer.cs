@@ -30,7 +30,7 @@ namespace CBReader
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btOption1 = new System.Windows.Forms.Button();
             this.pnToolBar = new System.Windows.Forms.Panel();
             this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
@@ -230,6 +230,7 @@ namespace CBReader
             this.LoadBookmarkDialog = new System.Windows.Forms.OpenFileDialog();
             this.loadSearchResultFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveSearchResultFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.pnToolboxClient = new System.Windows.Forms.Panel();
             this.pnToolBar.SuspendLayout();
             this.toolStripContainer.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer.SuspendLayout();
@@ -678,21 +679,21 @@ namespace CBReader
             // miOption
             // 
             this.miOption.Name = "miOption";
-            this.miOption.Size = new System.Drawing.Size(53, 23);
+            this.miOption.Size = new System.Drawing.Size(53, 26);
             this.miOption.Text = "設定";
             this.miOption.Click += new System.EventHandler(this.miOption_Click);
             // 
             // miUpdate
             // 
             this.miUpdate.Name = "miUpdate";
-            this.miUpdate.Size = new System.Drawing.Size(83, 23);
+            this.miUpdate.Size = new System.Drawing.Size(83, 26);
             this.miUpdate.Text = "更新檢查";
             this.miUpdate.Click += new System.EventHandler(this.miUpdate_Click);
             // 
             // miLanguage
             // 
             this.miLanguage.Name = "miLanguage";
-            this.miLanguage.Size = new System.Drawing.Size(133, 23);
+            this.miLanguage.Size = new System.Drawing.Size(133, 26);
             this.miLanguage.Text = "語言(Language)";
             // 
             // miToolStrip
@@ -701,7 +702,7 @@ namespace CBReader
             this.miMainToolStrip,
             this.miSutraToolStrip});
             this.miToolStrip.Name = "miToolStrip";
-            this.miToolStrip.Size = new System.Drawing.Size(68, 23);
+            this.miToolStrip.Size = new System.Drawing.Size(68, 26);
             this.miToolStrip.Text = "工具列";
             // 
             // miMainToolStrip
@@ -725,7 +726,7 @@ namespace CBReader
             // miAbout
             // 
             this.miAbout.Name = "miAbout";
-            this.miAbout.Size = new System.Drawing.Size(53, 23);
+            this.miAbout.Size = new System.Drawing.Size(53, 26);
             this.miAbout.Text = "關於";
             this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
@@ -902,14 +903,14 @@ namespace CBReader
             this.sgFindSutra.MultiSelect = false;
             this.sgFindSutra.Name = "sgFindSutra";
             this.sgFindSutra.ReadOnly = true;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.sgFindSutra.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.sgFindSutra.RowHeadersVisible = false;
             this.sgFindSutra.RowHeadersWidth = 44;
             this.sgFindSutra.RowTemplate.Height = 27;
@@ -2018,6 +2019,7 @@ namespace CBReader
             // tpToolbox
             // 
             this.tpToolbox.AutoScroll = true;
+            this.tpToolbox.Controls.Add(this.pnToolboxClient);
             this.tpToolbox.Controls.Add(this.pnToolbox);
             this.tpToolbox.Location = new System.Drawing.Point(4, 30);
             this.tpToolbox.Name = "tpToolbox";
@@ -2029,7 +2031,9 @@ namespace CBReader
             // 
             // pnToolbox
             // 
+            this.pnToolbox.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pnToolbox.Controls.Add(this.btChangeCardSize);
+            this.pnToolbox.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnToolbox.Location = new System.Drawing.Point(3, 3);
             this.pnToolbox.Name = "pnToolbox";
             this.pnToolbox.Size = new System.Drawing.Size(417, 42);
@@ -2653,6 +2657,16 @@ namespace CBReader
             // 
             this.saveSearchResultFileDialog.Filter = "Search Result Files (*.srf)|*.srf|All Files (*.*)|*.*";
             // 
+            // pnToolboxClient
+            // 
+            this.pnToolboxClient.AutoScroll = true;
+            this.pnToolboxClient.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnToolboxClient.Location = new System.Drawing.Point(3, 45);
+            this.pnToolboxClient.Name = "pnToolboxClient";
+            this.pnToolboxClient.Size = new System.Drawing.Size(417, 510);
+            this.pnToolboxClient.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.pnToolboxClient, "預設:內嵌開啟工具箱  +Ctrl:開啟內建瀏覽器  +Shift:開啟小視窗 ");
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -2924,6 +2938,7 @@ namespace CBReader
         private System.Windows.Forms.TabPage tpToolbox;
         private System.Windows.Forms.Panel pnToolbox;
         private System.Windows.Forms.Button btChangeCardSize;
+        private System.Windows.Forms.Panel pnToolboxClient;
     }
 }
 
