@@ -406,6 +406,25 @@ namespace CBReader
         .headname2 {color:#0000A0; font-weight: bold; font-size:24px;}
         .headname3 {color:#0000A0; font-weight: bold; font-size:24px;}
         .headname4 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname5 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname6 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname7 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname8 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname9 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname10 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname11 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname12 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname13 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname14 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname15 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname16 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname17 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname18 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname19 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname20 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname21 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname22 {color:#0000A0; font-weight: bold; font-size:24px;}
+        .headname23 {color:#0000A0; font-weight: bold; font-size:24px;}
         .linehead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';font-style:normal;}
         .parahead {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';font-style:normal;}
         .pts_head {color:#0000A0; font-weight: normal; font-size:18px;font-family:MingLiU,細明體,NSimSun,'Songti TC';font-style:normal;}
@@ -454,6 +473,25 @@ namespace CBReader
         p.headname2 {display:inline; margin-inline-start:0em;}
         p.headname3 {display:inline; margin-inline-start:0em;}
         p.headname4 {display:inline; margin-inline-start:0em;}
+        p.headname5 {display:inline; margin-inline-start:0em;}
+        p.headname6 {display:inline; margin-inline-start:0em;}
+        p.headname7 {display:inline; margin-inline-start:0em;}
+        p.headname8 {display:inline; margin-inline-start:0em;}
+        p.headname9 {display:inline; margin-inline-start:0em;}
+        p.headname10 {display:inline; margin-inline-start:0em;}
+        p.headname11 {display:inline; margin-inline-start:0em;}
+        p.headname12 {display:inline; margin-inline-start:0em;}
+        p.headname13 {display:inline; margin-inline-start:0em;}
+        p.headname14 {display:inline; margin-inline-start:0em;}
+        p.headname15 {display:inline; margin-inline-start:0em;}
+        p.headname16 {display:inline; margin-inline-start:0em;}
+        p.headname17 {display:inline; margin-inline-start:0em;}
+        p.headname18 {display:inline; margin-inline-start:0em;}
+        p.headname19 {display:inline; margin-inline-start:0em;}
+        p.headname20 {display:inline; margin-inline-start:0em;}
+        p.headname21 {display:inline; margin-inline-start:0em;}
+        p.headname22 {display:inline; margin-inline-start:0em;}
+        p.headname23 {display:inline; margin-inline-start:0em;}
         p.byline    {display:inline; margin-inline-start:0em;}
         table-bak {border-style: none;}
         td-bak {padding: 0px;}
@@ -472,6 +510,25 @@ namespace CBReader
         p.headname2 {display:block; margin-inline-start:2em;}
         p.headname3 {display:block; margin-inline-start:3em;}
         p.headname4 {display:block; margin-inline-start:4em;}
+        p.headname5 {display:block; margin-inline-start:5em;}
+        p.headname6 {display:block; margin-inline-start:6em;}
+        p.headname7 {display:block; margin-inline-start:7em;}
+        p.headname8 {display:block; margin-inline-start:8em;}
+        p.headname9 {display:block; margin-inline-start:9em;}
+        p.headname10 {display:block; margin-inline-start:10em;}
+        p.headname11 {display:block; margin-inline-start:11em;}
+        p.headname12 {display:block; margin-inline-start:12em;}
+        p.headname13 {display:block; margin-inline-start:13em;}
+        p.headname14 {display:block; margin-inline-start:14em;}
+        p.headname15 {display:block; margin-inline-start:15em;}
+        p.headname16 {display:block; margin-inline-start:16em;}
+        p.headname17 {display:block; margin-inline-start:17em;}
+        p.headname18 {display:block; margin-inline-start:18em;}
+        p.headname19 {display:block; margin-inline-start:19em;}
+        p.headname20 {display:block; margin-inline-start:20em;}
+        p.headname21 {display:block; margin-inline-start:21em;}
+        p.headname22 {display:block; margin-inline-start:22em;}
+        p.headname23 {display:block; margin-inline-start:23em;}
         p.byline    {display:block; text-align:right;}
         p.byline.text-center    {display:block; text-align:center;}
         p.byline.text-left    {display:block; text-align:left;}
@@ -1587,34 +1644,37 @@ namespace CBReader
                 // Q1 ==> 空2格
                 // Q2 ==> 空3格
                 // Q3 ==> 空4格
-                // Q4 ==> 空2格
-                // Q5 ==> 空3格
-                // Q6 ==> 空4格
-                // Q7 ==> 空2格
-                // Q8 ==> 空3格
+                // ...
+                // Q22 ==> 空23格 (上限是 Q22)
 
                 // 原本不應該有 0 , 但有時 head 不在 div 中, 就會有 0 了
                 if (Setting.ShowLineFormat) {
-                    if (DivCount == 0 || DivCount % 3 == 1) {
+                    if (DivCount == 0 || DivCount == 1) {
                         sHtml += "<span class='line_space'>　　</span>" +
                         $"<span class='headname2 {sNewClass}'{sNewStyle} data-tagname='p'>";
-                    } else if (DivCount % 3 == 2) {
-                        sHtml += "<span class='line_space'>　　　</span>" +
-                        $"<span class='headname3 {sNewClass}'{sNewStyle} data-tagname='p'>";
-                    } else if (DivCount % 3 == 0) {
-                        sHtml += "<span class='line_space'>　　　　</span>" +
-                        $"<span class='headname4 {sNewClass}'{sNewStyle} data-tagname='p'>";
+                    } else {
+                        // 空格數是 DivCount + 1, 上限是 23
+                        int iSpaces = DivCount + 1;
+                        if (iSpaces > 23) {
+                            iSpaces = 23;
+                        }
+                        string sSpaces = StringRepeat("　", iSpaces);
+                        sHtml += $"<span class='line_space'>{sSpaces}</span>" +
+                        $"<span class='headname{iSpaces} {sNewClass}'{sNewStyle} data-tagname='p'>";
                     }
                 } else {
-                    if (DivCount == 0 || DivCount % 3 == 1) {
+                    if (DivCount == 0 || DivCount == 1) {
                         sHtml += "<span class='line_space' style='display:none'>　　</span>" +
                         $"<p class='headname2 {sNewClass}'{sNewStyle} data-tagname='p'>";
-                    } else if (DivCount % 3 == 2) {
-                        sHtml += "<span class='line_space' style='display:none'>　　　</span>" +
-                        $"<p class='headname3 {sNewClass}'{sNewStyle} data-tagname='p'>";
-                    } else if (DivCount % 3 == 0) {
-                        sHtml += "<span class='line_space' style='display:none'>　　　　</span>" +
-                        $"<p class='headname4 {sNewClass}'{sNewStyle} data-tagname='p'>";
+                    } else {
+                        // 空格數是 DivCount + 1, 上限是 23
+                        int iSpaces = DivCount + 1;
+                        if (iSpaces > 23) {
+                            iSpaces = 23;
+                        }
+                        string sSpaces = StringRepeat("　", iSpaces);
+                        sHtml += $"<span class='line_space' style='display:none'>{sSpaces}</span>" +
+                        $"<p class='headname{iSpaces} {sNewClass}'{sNewStyle} data-tagname='p'>";
                     }
                 }
             }
