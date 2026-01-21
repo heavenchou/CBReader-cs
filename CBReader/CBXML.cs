@@ -293,7 +293,7 @@ namespace CBReader
         }}
         @font-face {{
             font-family: CBFont;
-            unicode-range: U+2500-25ff, U+3000-301F;
+            unicode-range: U+2500-25ff, U+3000-301F, U+FF01-FFEF;
             src: local(MingLiU), local(細明體), local(NSimSun), local('Songti TC');
         }}
         @font-face {{
