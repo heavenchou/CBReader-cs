@@ -64,7 +64,7 @@ namespace CBReader
             this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(600, 59);
-            this.panel1.TabIndex = 0;
+            this.panel1.TabIndex = 2;
             // 
             // btOK
             // 
@@ -73,7 +73,7 @@ namespace CBReader
             this.btOK.Margin = new System.Windows.Forms.Padding(4);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(79, 39);
-            this.btOK.TabIndex = 2;
+            this.btOK.TabIndex = 0;
             this.btOK.Text = "OK";
             this.btOK.UseVisualStyleBackColor = true;
             // 
@@ -86,7 +86,7 @@ namespace CBReader
             this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(600, 304);
-            this.panel2.TabIndex = 1;
+            this.panel2.TabIndex = 0;
             // 
             // panel5
             // 
@@ -115,7 +115,7 @@ namespace CBReader
             this.llbDonate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbDonate.Name = "llbDonate";
             this.llbDonate.Size = new System.Drawing.Size(154, 25);
-            this.llbDonate.TabIndex = 7;
+            this.llbDonate.TabIndex = 6;
             this.llbDonate.TabStop = true;
             this.llbDonate.Text = "【❤️護持捐款】";
             this.llbDonate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbDonate_LinkClicked);
@@ -128,7 +128,7 @@ namespace CBReader
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(376, 20);
-            this.label4.TabIndex = 6;
+            this.label4.TabIndex = 8;
             this.label4.Text = "Non-commercial use and distribution are welcome!";
             // 
             // llbCBETAWeb
@@ -139,7 +139,7 @@ namespace CBReader
             this.llbCBETAWeb.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbCBETAWeb.Name = "llbCBETAWeb";
             this.llbCBETAWeb.Size = new System.Drawing.Size(387, 25);
-            this.llbCBETAWeb.TabIndex = 0;
+            this.llbCBETAWeb.TabIndex = 4;
             this.llbCBETAWeb.TabStop = true;
             this.llbCBETAWeb.Text = "財團法人佛教電子佛典基金會🌐cbeta.org";
             this.llbCBETAWeb.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbCBETAWeb_LinkClicked);
@@ -152,7 +152,7 @@ namespace CBReader
             this.llbCBETAEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.llbCBETAEmail.Name = "llbCBETAEmail";
             this.llbCBETAEmail.Size = new System.Drawing.Size(233, 25);
-            this.llbCBETAEmail.TabIndex = 1;
+            this.llbCBETAEmail.TabIndex = 5;
             this.llbCBETAEmail.TabStop = true;
             this.llbCBETAEmail.Text = "📧 service@cbeta.org";
             this.llbCBETAEmail.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbCBETAEmail_LinkClicked);
@@ -165,7 +165,7 @@ namespace CBReader
             this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(272, 25);
-            this.label6.TabIndex = 5;
+            this.label6.TabIndex = 7;
             this.label6.Text = "歡迎非商業用途之傳播使用！";
             // 
             // label5
@@ -176,7 +176,7 @@ namespace CBReader
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(369, 25);
-            this.label5.TabIndex = 4;
+            this.label5.TabIndex = 3;
             this.label5.Text = "Copyright © 2001-2026 Heaven Chou";
             // 
             // label3
@@ -208,9 +208,9 @@ namespace CBReader
             this.lbTitle.Location = new System.Drawing.Point(9, 6);
             this.lbTitle.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lbTitle.Name = "lbTitle";
-            this.lbTitle.Size = new System.Drawing.Size(333, 25);
+            this.lbTitle.Size = new System.Drawing.Size(350, 25);
             this.lbTitle.TabIndex = 0;
-            this.lbTitle.Text = "CBReader 2X  v0.9.9　2026-01-21";
+            this.lbTitle.Text = "CBReader 2X  v0.9.9.2　2026-08-31";
             // 
             // panel4
             // 
@@ -255,10 +255,11 @@ namespace CBReader
             this.panel6.Location = new System.Drawing.Point(14, 3);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(574, 387);
-            this.panel6.TabIndex = 3;
+            this.panel6.TabIndex = 0;
             // 
             // edReadme
             // 
+            this.edReadme.AccessibleName = "關於 CBReader 說明";
             this.edReadme.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -271,8 +272,7 @@ namespace CBReader
             this.edReadme.ReadOnly = true;
             this.edReadme.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.edReadme.Size = new System.Drawing.Size(556, 356);
-            this.edReadme.TabIndex = 3;
-            this.edReadme.TabStop = false;
+            this.edReadme.TabIndex = 0;
             this.edReadme.Text = resources.GetString("edReadme.Text");
             // 
             // AboutForm

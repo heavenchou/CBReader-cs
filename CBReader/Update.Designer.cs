@@ -50,6 +50,7 @@ namespace CBReader
             // 
             // Memo
             // 
+            this.Memo.AccessibleName = "更新說明";
             this.Memo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -73,15 +74,16 @@ namespace CBReader
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(183, 491);
-            this.panel1.TabIndex = 1;
+            this.panel1.TabIndex = 2;
             // 
             // btUpdate
             // 
+            this.btUpdate.AccessibleName = "更新及重啟";
             this.btUpdate.Enabled = false;
             this.btUpdate.Location = new System.Drawing.Point(6, 80);
             this.btUpdate.Name = "btUpdate";
             this.btUpdate.Size = new System.Drawing.Size(165, 55);
-            this.btUpdate.TabIndex = 3;
+            this.btUpdate.TabIndex = 1;
             this.btUpdate.Text = "🆕 更新及重啟";
             this.btUpdate.UseVisualStyleBackColor = true;
             this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
@@ -94,8 +96,9 @@ namespace CBReader
             this.cbUseChinaServer.Name = "cbUseChinaServer";
             this.cbUseChinaServer.Size = new System.Drawing.Size(174, 54);
             this.cbUseChinaServer.TabIndex = 2;
-            this.cbUseChinaServer.Text = "中國大陸分站";
+            this.cbUseChinaServer.Text = "中國大陸分站(X)";
             this.cbUseChinaServer.UseVisualStyleBackColor = true;
+            this.cbUseChinaServer.Visible = false;
             // 
             // lbUseChineseSite
             // 
@@ -103,11 +106,13 @@ namespace CBReader
             this.lbUseChineseSite.Location = new System.Drawing.Point(0, 214);
             this.lbUseChineseSite.Name = "lbUseChineseSite";
             this.lbUseChineseSite.Size = new System.Drawing.Size(180, 198);
-            this.lbUseChineseSite.TabIndex = 1;
-            this.lbUseChineseSite.Text = "使用中國大陸分站的主機進行更新";
+            this.lbUseChineseSite.TabIndex = 3;
+            this.lbUseChineseSite.Text = "（中國分站已長久關閉）使用中國大陸分站的主機進行更新";
+            this.lbUseChineseSite.Visible = false;
             // 
             // btDownload
             // 
+            this.btDownload.AccessibleName = "下載更新檔";
             this.btDownload.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btDownload.Location = new System.Drawing.Point(6, 18);
             this.btDownload.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -129,7 +134,7 @@ namespace CBReader
             this.plMessage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.plMessage.Name = "plMessage";
             this.plMessage.Size = new System.Drawing.Size(541, 127);
-            this.plMessage.TabIndex = 2;
+            this.plMessage.TabIndex = 1;
             // 
             // lbMessage
             // 
@@ -138,7 +143,7 @@ namespace CBReader
             this.lbMessage.Location = new System.Drawing.Point(12, 13);
             this.lbMessage.Name = "lbMessage";
             this.lbMessage.Size = new System.Drawing.Size(72, 25);
-            this.lbMessage.TabIndex = 3;
+            this.lbMessage.TabIndex = 0;
             this.lbMessage.Text = "訊息：";
             // 
             // lbBookcasePath
@@ -153,6 +158,7 @@ namespace CBReader
             // 
             // progressBar1
             // 
+            this.progressBar1.AccessibleName = "下載進度";
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar1.Location = new System.Drawing.Point(15, 42);
@@ -163,6 +169,7 @@ namespace CBReader
             // 
             // edBookcasePath
             // 
+            this.edBookcasePath.AccessibleName = "書櫃目錄路徑";
             this.edBookcasePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.edBookcasePath.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -171,7 +178,7 @@ namespace CBReader
             this.edBookcasePath.Name = "edBookcasePath";
             this.edBookcasePath.ReadOnly = true;
             this.edBookcasePath.Size = new System.Drawing.Size(426, 34);
-            this.edBookcasePath.TabIndex = 0;
+            this.edBookcasePath.TabIndex = 3;
             // 
             // panel3
             // 
@@ -181,7 +188,7 @@ namespace CBReader
             this.panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(541, 364);
-            this.panel3.TabIndex = 3;
+            this.panel3.TabIndex = 0;
             // 
             // timer1
             // 

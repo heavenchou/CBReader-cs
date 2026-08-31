@@ -62,6 +62,7 @@
             // 
             // treeViewFolder
             // 
+            this.treeViewFolder.AccessibleName = "書籤目錄樹";
             this.treeViewFolder.AllowDrop = true;
             this.treeViewFolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewFolder.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -119,6 +120,7 @@
             // 
             // lvBookmarkList
             // 
+            this.lvBookmarkList.AccessibleName = "書籤目錄樹";
             this.lvBookmarkList.AllowDrop = true;
             this.lvBookmarkList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
@@ -170,6 +172,7 @@
             // 
             // btDeleteBookmark
             // 
+            this.btDeleteBookmark.AccessibleName = "刪除選取的書籤或目錄";
             this.btDeleteBookmark.Image = global::CBReader.Properties.Resources.BookmarkDelete;
             this.btDeleteBookmark.Location = new System.Drawing.Point(142, 5);
             this.btDeleteBookmark.Name = "btDeleteBookmark";
@@ -181,6 +184,7 @@
             // 
             // btEditBookmark
             // 
+            this.btEditBookmark.AccessibleName = "編輯選取的書籤或目錄";
             this.btEditBookmark.Image = global::CBReader.Properties.Resources.BookmarkEdit;
             this.btEditBookmark.Location = new System.Drawing.Point(100, 5);
             this.btEditBookmark.Name = "btEditBookmark";
@@ -192,6 +196,7 @@
             // 
             // btAddBookmark
             // 
+            this.btAddBookmark.AccessibleName = "新增書籤";
             this.btAddBookmark.Image = global::CBReader.Properties.Resources.NewBookmark;
             this.btAddBookmark.Location = new System.Drawing.Point(49, 5);
             this.btAddBookmark.Name = "btAddBookmark";
@@ -203,6 +208,7 @@
             // 
             // btAddBookmarkFolder
             // 
+            this.btAddBookmarkFolder.AccessibleName = "新增書籤目錄";
             this.btAddBookmarkFolder.Image = global::CBReader.Properties.Resources.NewFolder;
             this.btAddBookmarkFolder.Location = new System.Drawing.Point(7, 5);
             this.btAddBookmarkFolder.Name = "btAddBookmarkFolder";

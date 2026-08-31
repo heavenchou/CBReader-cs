@@ -298,8 +298,8 @@ namespace CBReader
 			btUpdate.Focus();
 			string msg = t("更新檔案下載完成。", "02007") + "\n\n" +
 				t("按下「是」會自動進行更新，更新期間無法操作 CBReader。", "02012") + "\n\n" +
-				t("您也可以稍候選擇按下「更新」按鈕進行更新。", "02013");
-            var result = MessageBox.Show(msg, t("是否進行更新？", "02008"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+				t("您也可以稍候選擇按下「更新及重啟」按鈕進行更新。", "02013");
+            var result = MessageBox.Show(this, msg, t("是否進行更新？", "02008"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 			if (result == DialogResult.Yes) {
 				btUpdate_Click(this, null);
 			}

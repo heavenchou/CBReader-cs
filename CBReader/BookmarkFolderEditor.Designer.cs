@@ -47,7 +47,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(627, 44);
-            this.panel1.TabIndex = 3;
+            this.panel1.TabIndex = 0;
             // 
             // lbTitle
             // 
@@ -65,16 +65,17 @@
             this.panel2.Location = new System.Drawing.Point(0, 44);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(627, 44);
-            this.panel2.TabIndex = 4;
+            this.panel2.TabIndex = 1;
             // 
             // edTitle
             // 
+            this.edTitle.AccessibleName = "書籤目錄名稱";
             this.edTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.edTitle.Location = new System.Drawing.Point(12, 5);
             this.edTitle.Name = "edTitle";
             this.edTitle.Size = new System.Drawing.Size(601, 34);
-            this.edTitle.TabIndex = 2;
+            this.edTitle.TabIndex = 0;
             // 
             // panel5
             // 
@@ -84,7 +85,7 @@
             this.panel5.Location = new System.Drawing.Point(0, 88);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(627, 51);
-            this.panel5.TabIndex = 7;
+            this.panel5.TabIndex = 2;
             // 
             // btCancel
             // 

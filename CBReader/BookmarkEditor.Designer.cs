@@ -57,12 +57,13 @@
             // 
             // edLocation
             // 
+            this.edLocation.AccessibleName = "書籤位置";
             this.edLocation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.edLocation.Location = new System.Drawing.Point(12, 4);
             this.edLocation.Name = "edLocation";
             this.edLocation.Size = new System.Drawing.Size(602, 34);
-            this.edLocation.TabIndex = 1;
+            this.edLocation.TabIndex = 0;
             this.edLocation.Enter += new System.EventHandler(this.edLocation_Enter);
             // 
             // panel1
@@ -72,7 +73,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(628, 44);
-            this.panel1.TabIndex = 2;
+            this.panel1.TabIndex = 0;
             // 
             // panel2
             // 
@@ -81,16 +82,17 @@
             this.panel2.Location = new System.Drawing.Point(0, 44);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(628, 44);
-            this.panel2.TabIndex = 3;
+            this.panel2.TabIndex = 1;
             // 
             // edTitle
             // 
+            this.edTitle.AccessibleName = "書籤名稱";
             this.edTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.edTitle.Location = new System.Drawing.Point(12, 5);
             this.edTitle.Name = "edTitle";
             this.edTitle.Size = new System.Drawing.Size(602, 34);
-            this.edTitle.TabIndex = 2;
+            this.edTitle.TabIndex = 0;
             this.edTitle.Enter += new System.EventHandler(this.edTitle_Enter);
             this.edTitle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edTitle_KeyDown);
             // 
@@ -101,7 +103,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 88);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(628, 44);
-            this.panel3.TabIndex = 4;
+            this.panel3.TabIndex = 2;
             // 
             // lbLocation
             // 
@@ -109,7 +111,7 @@
             this.lbLocation.Location = new System.Drawing.Point(12, 9);
             this.lbLocation.Name = "lbLocation";
             this.lbLocation.Size = new System.Drawing.Size(52, 25);
-            this.lbLocation.TabIndex = 1;
+            this.lbLocation.TabIndex = 0;
             this.lbLocation.Text = "位置";
             // 
             // panel4
@@ -119,7 +121,7 @@
             this.panel4.Location = new System.Drawing.Point(0, 132);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(628, 44);
-            this.panel4.TabIndex = 5;
+            this.panel4.TabIndex = 3;
             // 
             // panel5
             // 
@@ -129,7 +131,7 @@
             this.panel5.Location = new System.Drawing.Point(0, 176);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(628, 52);
-            this.panel5.TabIndex = 3;
+            this.panel5.TabIndex = 4;
             // 
             // btCancel
             // 

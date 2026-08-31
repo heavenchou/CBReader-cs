@@ -50,6 +50,7 @@ namespace CBReader
             tabControl.Appearance = TabAppearance.FlatButtons;
             tabControl.ItemSize = new Size(0, 1);
             tabControl.SizeMode = TabSizeMode.Fixed;
+            tabControl.TabStop = false;
         }
 
         // 讀取 JSON 並顯示在 TreeView

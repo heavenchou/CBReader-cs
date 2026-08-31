@@ -332,10 +332,10 @@ namespace CBReader
 
             Text = CGlobalVal.ProgramTitle;
             Text = Text + " v" + CGlobalVal.Version;
-            Text = Text.Remove(Text.LastIndexOf('.'));
-            if (Text.Last() == '0') {
-                Text = Text.Remove(Text.LastIndexOf('.'));
-            }
+            //Text = Text.Remove(Text.LastIndexOf('.'));
+            //if (Text.Last() == '0') {
+            //    Text = Text.Remove(Text.LastIndexOf('.'));
+            //}
 
             // 西蓮淨苑 SLReader 專用
             // 檢索範圍要加上西蓮
@@ -374,6 +374,8 @@ namespace CBReader
 
                 // 調整 mainForm 按鈕位置，以適應不同語言。
                 resizeComponent();
+                aboutForm.Text = aboutForm.Text + " " + CGlobalVal.ApplicationTitle + " 2X v" + CGlobalVal.Version;
+
             }
         }
 
@@ -2019,6 +2021,10 @@ window.onload=function(){{
 
                 language.ChangeComponentLang(this, lbFindSutraCount);
 
+                // NVDA 念出找到的筆數
+                sgFindSutra.AccessibleName = lbFindSutraCount.Text;
+                sgFindSutra.Focus();
+
                 if (iGridIndex == 0) {
                     MessageBox.Show(t("沒有滿足此條件的資料", "01009"), "CBReader", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -2232,6 +2238,10 @@ window.onload=function(){{
             //lbSearchMsg.Text = lbSearchMsg.Text.Replace("%f", $"{searchTimeDiff}");
 
             language.ChangeComponentLang(this, lbSearchMsg);
+
+            // NVDA 念出找到的筆數及花費時間
+            sgTextSearch.AccessibleName = lbSearchMsg.Text;
+            sgTextSearch.Focus();
 
             int iTotalSearchFileNum = 0;
             bool bShowAll = false;

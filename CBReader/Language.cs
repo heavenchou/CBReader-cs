@@ -407,8 +407,8 @@ namespace CBReader
             if(item.Name == "miLanguage") {
                 if(controlName == "") {
                     controlName = "Language";
-                } else if(controlName.ToUpper() != "LANGUAGE") {
-                    controlName = controlName + " (Language)";
+                } else if(controlName.ToUpper() != "&LANGUAGE") {
+                    controlName = controlName + " (&Language)";
                 } 
             }
             if (controlName != "") {
@@ -425,9 +425,13 @@ namespace CBReader
             string controlName = IniFile.ReadString(formName, c.Name, "");
             controlName = UserIniFile.ReadString(formName, c.Name, controlName);
 
+            if (controlName != "") {
+                c.Text = controlName;
+            }
+
             // 設定 tooltip
             //if (formName == "MainForm") {
-                string controlTooltip = IniFile.ReadString(formName, c.Name + "_tip", "");
+            string controlTooltip = IniFile.ReadString(formName, c.Name + "_tip", "");
                 controlTooltip = UserIniFile.ReadString(formName, c.Name + "_tip", controlTooltip);
                 if (controlTooltip != "") {
                     controlTooltip = controlTooltip.Replace("\\r", "\r");

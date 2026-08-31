@@ -120,6 +120,7 @@ namespace CBReader
             // 
             // listBox
             // 
+            this.listBox.AccessibleName = "檢索範圍選擇方式";
             this.listBox.Font = new System.Drawing.Font("微軟正黑體", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.listBox.FormattingEnabled = true;
             this.listBox.ItemHeight = 29;
@@ -149,14 +150,14 @@ namespace CBReader
             this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(185, 769);
-            this.panel2.TabIndex = 1;
+            this.panel2.TabIndex = 2;
             // 
             // btSave
             // 
             this.btSave.Location = new System.Drawing.Point(24, 577);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(145, 59);
-            this.btSave.TabIndex = 11;
+            this.btSave.TabIndex = 7;
             this.btSave.Text = "儲存";
             this.btSave.UseVisualStyleBackColor = true;
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
@@ -166,7 +167,7 @@ namespace CBReader
             this.btLoad.Location = new System.Drawing.Point(24, 508);
             this.btLoad.Name = "btLoad";
             this.btLoad.Size = new System.Drawing.Size(145, 59);
-            this.btLoad.TabIndex = 10;
+            this.btLoad.TabIndex = 6;
             this.btLoad.Text = "載入";
             this.btLoad.UseVisualStyleBackColor = true;
             this.btLoad.Click += new System.EventHandler(this.btLoad_Click);
@@ -176,7 +177,7 @@ namespace CBReader
             this.btTreeviewCollapse.Location = new System.Drawing.Point(24, 425);
             this.btTreeviewCollapse.Name = "btTreeviewCollapse";
             this.btTreeviewCollapse.Size = new System.Drawing.Size(145, 59);
-            this.btTreeviewCollapse.TabIndex = 9;
+            this.btTreeviewCollapse.TabIndex = 5;
             this.btTreeviewCollapse.Text = "全部收合";
             this.btTreeviewCollapse.UseVisualStyleBackColor = true;
             this.btTreeviewCollapse.Click += new System.EventHandler(this.btTreeviewCollapse_Click);
@@ -186,7 +187,7 @@ namespace CBReader
             this.btTreeviewExpand.Location = new System.Drawing.Point(24, 356);
             this.btTreeviewExpand.Name = "btTreeviewExpand";
             this.btTreeviewExpand.Size = new System.Drawing.Size(145, 59);
-            this.btTreeviewExpand.TabIndex = 8;
+            this.btTreeviewExpand.TabIndex = 4;
             this.btTreeviewExpand.Text = "全部展開";
             this.btTreeviewExpand.UseVisualStyleBackColor = true;
             this.btTreeviewExpand.Click += new System.EventHandler(this.btTreeviewExpand_Click);
@@ -197,7 +198,7 @@ namespace CBReader
             this.btUnCheckAll.Margin = new System.Windows.Forms.Padding(5);
             this.btUnCheckAll.Name = "btUnCheckAll";
             this.btUnCheckAll.Size = new System.Drawing.Size(145, 59);
-            this.btUnCheckAll.TabIndex = 7;
+            this.btUnCheckAll.TabIndex = 3;
             this.btUnCheckAll.Text = "全部不選取";
             this.btUnCheckAll.UseVisualStyleBackColor = true;
             this.btUnCheckAll.Click += new System.EventHandler(this.btUnCheckAll_Click);
@@ -208,7 +209,7 @@ namespace CBReader
             this.btCheckAll.Margin = new System.Windows.Forms.Padding(5);
             this.btCheckAll.Name = "btCheckAll";
             this.btCheckAll.Size = new System.Drawing.Size(145, 59);
-            this.btCheckAll.TabIndex = 6;
+            this.btCheckAll.TabIndex = 2;
             this.btCheckAll.Text = "全部選取";
             this.btCheckAll.UseVisualStyleBackColor = true;
             this.btCheckAll.Click += new System.EventHandler(this.btCheckAll_Click);
@@ -220,7 +221,7 @@ namespace CBReader
             this.btCancel.Margin = new System.Windows.Forms.Padding(5);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(145, 59);
-            this.btCancel.TabIndex = 5;
+            this.btCancel.TabIndex = 1;
             this.btCancel.Text = "取消";
             this.btCancel.UseVisualStyleBackColor = true;
             // 
@@ -231,7 +232,7 @@ namespace CBReader
             this.btOK.Margin = new System.Windows.Forms.Padding(5);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(145, 59);
-            this.btOK.TabIndex = 4;
+            this.btOK.TabIndex = 0;
             this.btOK.Text = "確定";
             this.btOK.UseVisualStyleBackColor = true;
             this.btOK.Click += new System.EventHandler(this.btOK_Click);
@@ -244,7 +245,7 @@ namespace CBReader
             this.panel3.Margin = new System.Windows.Forms.Padding(5);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(452, 769);
-            this.panel3.TabIndex = 2;
+            this.panel3.TabIndex = 1;
             // 
             // tabControl
             // 
@@ -257,7 +258,7 @@ namespace CBReader
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(452, 769);
-            this.tabControl.TabIndex = 1;
+            this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tpBulei
@@ -269,11 +270,12 @@ namespace CBReader
             this.tpBulei.Padding = new System.Windows.Forms.Padding(5);
             this.tpBulei.Size = new System.Drawing.Size(444, 731);
             this.tpBulei.TabIndex = 0;
-            this.tpBulei.Text = "tabPage1";
+            this.tpBulei.Text = "依部類選擇";
             this.tpBulei.UseVisualStyleBackColor = true;
             // 
             // tvBulei
             // 
+            this.tvBulei.AccessibleName = "部類選擇清單";
             this.tvBulei.CheckBoxes = true;
             this.tvBulei.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvBulei.FullRowSelect = true;
@@ -368,11 +370,12 @@ namespace CBReader
             this.tpBook.Padding = new System.Windows.Forms.Padding(5);
             this.tpBook.Size = new System.Drawing.Size(444, 731);
             this.tpBook.TabIndex = 1;
-            this.tpBook.Text = "tabPage2";
+            this.tpBook.Text = "依藏經選擇";
             this.tpBook.UseVisualStyleBackColor = true;
             // 
             // tvBook
             // 
+            this.tvBook.AccessibleName = "藏經選擇清單";
             this.tvBook.CheckBoxes = true;
             this.tvBook.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvBook.FullRowSelect = true;
@@ -474,11 +477,12 @@ namespace CBReader
             this.tpSutra.Padding = new System.Windows.Forms.Padding(3);
             this.tpSutra.Size = new System.Drawing.Size(444, 731);
             this.tpSutra.TabIndex = 2;
-            this.tpSutra.Text = "tabPage3";
+            this.tpSutra.Text = "依單經選擇";
             this.tpSutra.UseVisualStyleBackColor = true;
             // 
             // tvSutra
             // 
+            this.tvSutra.AccessibleName = "單經選擇清單";
             this.tvSutra.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvSutra.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.tvSutra.Location = new System.Drawing.Point(3, 3);

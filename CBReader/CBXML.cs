@@ -1094,9 +1094,9 @@ namespace CBReader
 
             DivCount++;
 
-            if (sType != "") {
+            //if (sType != "") {
                 DivType[DivCount] = sType.ToLower();    // 都變成小寫
-            }
+            //}
 
             if (DivType[DivCount] == "w") { 		// 附文
                 FuWenCount++;
